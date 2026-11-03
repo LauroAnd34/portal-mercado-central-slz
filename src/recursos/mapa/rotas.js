@@ -60,18 +60,51 @@ export function traduzirInstrucao(passo) {
 }
 
 /**
- * Busca a rota entre dois pontos.
- * Devolve { coordenadas: [lat,lon][], distanciaKm, minutos, passos, aproximada }.
- * @param {[number,number]} origem @param {[number,number]} destino @param {'a-pe'|'carro'} modo
+ * Converte os trechos (formato compacto: tipo, lado, rua, distância) em
+ * instruções em português. Usado pelas rotas já calculadas e pelas buscadas.
+ */
+export function montarPassos(trechos, nomesDasParadas = []) {
+  const ultimo = trechos.length - 1;
+  return trechos.flatMap((passos, i) =>
+    passos
+      .filter((p) => !(p.tipo === 'depart' && i > 0)) // só uma "saída"
+      .map((p) => {
+        const chegada = p.tipo === 'arrive';
+        const nome = nomesDasParadas[i];
+        const texto =
+          chegada && i < ultimo
+            ? `Chegada: ${nome ?? `parada ${i + 1}`}`
+            : chegada && nome
+              ? `Você chegou: ${nome}`
+              : traduzirInstrucao({
+                  maneuver: { type: p.tipo, modifier: p.lado, exit: p.saida },
+                  name: p.rua,
+                });
+        return { texto, distanciaM: p.distancia, parada: chegada };
+      }),
+  );
+}
+
+/** Rota guardada em src/dados/rotas-calculadas.json → objeto usado pelo mapa. */
+export function converterRotaGuardada(guardada, nomesDasParadas = []) {
+  return {
+    coordenadas: guardada.coordenadas,
+    distanciaKm: guardada.distancia / 1000,
+    minutos: guardada.duracao / 60,
+    passos: montarPassos(guardada.trechos, nomesDasParadas),
+    aproximada: false,
+  };
+}
+
+/**
+ * Busca a rota entre dois pontos no serviço (usado só quando não há rota
+ * guardada). Devolve { coordenadas: [lat,lon][], distanciaKm, minutos, passos, aproximada }.
  */
 export function buscarRota(origem, destino, modo, opcoes) {
   return buscarRotaPorPontos([origem, destino], modo, opcoes);
 }
 
-/**
- * Rota passando por vários pontos, em ordem (usada nos roteiros).
- * `nomesDasParadas` (opcional) personaliza o aviso de chegada de cada trecho.
- */
+/** Rota passando por vários pontos, em ordem. */
 export async function buscarRotaPorPontos(
   pontos,
   modo,
@@ -87,31 +120,23 @@ export async function buscarRotaPorPontos(
     const dados = await resposta.json();
     const rota = dados.routes?.[0];
     if (!rota) throw new Error('sem rota');
-    const ultimoTrecho = rota.legs.length - 1;
-    return {
-      coordenadas: rota.geometry.coordinates.map(([lon, lat]) => [lat, lon]),
-      distanciaKm: rota.distance / 1000,
-      minutos: rota.duration / 60,
-      passos: rota.legs.flatMap((trecho, i) =>
-        trecho.steps
-          .filter((passo) => !(passo.maneuver.type === 'depart' && i > 0)) // só uma "saída"
-          .map((passo) => {
-            const chegada = passo.maneuver.type === 'arrive';
-            const nome = nomesDasParadas[i];
-            return {
-              texto:
-                chegada && i < ultimoTrecho
-                  ? `Chegada: ${nome ?? `parada ${i + 1}`}`
-                  : chegada && nome
-                    ? `Você chegou: ${nome}`
-                    : traduzirInstrucao(passo),
-              distanciaM: Math.round(passo.distance),
-              parada: chegada,
-            };
-          }),
-      ),
-      aproximada: false,
-    };
+    return converterRotaGuardada(
+      {
+        distancia: rota.distance,
+        duracao: rota.duration,
+        coordenadas: rota.geometry.coordinates.map(([lon, lat]) => [lat, lon]),
+        trechos: rota.legs.map((perna) =>
+          perna.steps.map((s) => ({
+            tipo: s.maneuver.type,
+            lado: s.maneuver.modifier,
+            saida: s.maneuver.exit,
+            rua: s.name,
+            distancia: Math.round(s.distance),
+          })),
+        ),
+      },
+      nomesDasParadas,
+    );
   } finally {
     clearTimeout(tempo);
   }

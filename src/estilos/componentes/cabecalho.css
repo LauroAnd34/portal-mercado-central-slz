@@ -1,19 +1,21 @@
 /* ---------- Faixa de demonstração ---------- */
 .faixa-demonstracao {
-  padding: var(--e-2) var(--e-4);
-  background: repeating-linear-gradient(-45deg, #faea25 0 14px, #f2d900 14px 28px);
-  color: #2a2400;
+  padding: 6px var(--e-4);
+  background: #071d31;
+  color: #b9d6ea;
   font-family: var(--fonte-ui);
-  font-size: var(--texto-sm);
+  font-size: var(--texto-xs);
+  letter-spacing: 0.02em;
   text-align: center;
+  border-bottom: 1px solid rgb(255 255 255 / 0.08);
 }
 .faixa-demonstracao[data-mostrar='false'],
 .faixa-demonstracao[data-mostrar=''] {
   display: none;
 }
 :root[data-contraste='alto'] .faixa-demonstracao {
-  background: #ffff00 !important;
-  color: #000;
+  background: #000;
+  color: #fff;
 }
 
 /* ---------- Barra gov (atalhos eMAG) ---------- */
@@ -135,26 +137,45 @@ kbd {
   color: var(--cor-titulo);
 }
 .marca__logo {
-  width: 52px;
+  display: block;
+  width: auto;
   height: 52px;
 }
-.marca__texto {
-  display: flex;
-  flex-direction: column;
-  line-height: 1;
-  font-family: var(--fonte-ui);
+.marca__logo--branca {
+  display: none;
 }
-.marca__orgao {
+:root[data-tema='escuro'] .marca__logo--cor,
+:root[data-contraste='alto'] .marca__logo--cor {
+  display: none;
+}
+:root[data-tema='escuro'] .marca__logo--branca,
+:root[data-contraste='alto'] .marca__logo--branca {
+  display: block;
+}
+.marca__separador {
+  width: 2px;
+  height: 36px;
+  border-radius: 2px;
+  background: var(--faixa);
+  background: linear-gradient(to bottom, var(--faixa-1), var(--faixa-4), var(--faixa-7));
+}
+.marca__portal {
+  font-family: var(--fonte-ui);
   font-size: var(--texto-xs);
-  font-weight: 600;
+  font-weight: 700;
+  line-height: 1.25;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.08em;
   color: var(--cor-texto-suave);
 }
-.marca__cidade {
-  font-size: 1.6rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+@media (max-width: 480px) {
+  .marca__logo {
+    height: 40px;
+  }
+  .marca__separador,
+  .marca__portal {
+    display: none;
+  }
 }
 
 .menu__lista {

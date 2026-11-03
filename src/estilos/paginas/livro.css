@@ -783,3 +783,26 @@ mark {
   max-width: none;
   margin-left: 0;
 }
+
+/* controles de voz se reorganizam em telas estreitas */
+.campo--linha {
+  flex-wrap: wrap;
+  min-width: 0;
+}
+.campo--linha select {
+  max-width: 100%;
+  min-width: 0;
+}
+@media (max-width: 480px) {
+  .leitor__voz .campo--linha {
+    width: 100%;
+    margin-left: 0;
+  }
+  .leitor__voz .campo--linha select {
+    flex: 1;
+  }
+}
+
+.pagina-livro .cabecalho-pagina {
+  --foto-topo: url('../../imagens/historia/mercado-1941-cartao-foto-londres.jpg');
+}

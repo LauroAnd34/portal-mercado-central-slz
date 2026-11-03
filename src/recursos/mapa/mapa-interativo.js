@@ -5,6 +5,14 @@
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { criarIconeDeCategoria, criarIconeDoMercado } from './icones.js';
+import { caminhoDoPonto } from './rotas-guardadas.js';
+
+/** Caminho pelas ruas do Mercado até o ponto (ou linha reta, se não houver). */
+const caminhoAte = (mercado, ponto) =>
+  caminhoDoPonto(ponto.id, ponto.modoSugerido ?? 'a-pe') ?? [
+    mercado.coordenadas,
+    ponto.coordenadas,
+  ];
 
 /**
  * Mapa de fundo: OpenStreetMap padrão (gratuito, exige a atribuição abaixo).
@@ -90,11 +98,11 @@ export function criarMapaInterativo(elemento, { mercado, pontos, categorias, aoS
     const ids = emRoteiro || (selecionadoId && selecionadoId !== mercado.id) ? [] : idsVisiveis;
     for (const id of ids) {
       const { ponto, categoria } = marcadores.get(id);
-      L.polyline([mercado.coordenadas, ponto.coordenadas], {
+      L.polyline(caminhoAte(mercado, ponto), {
         color: categoria.cor,
-        weight: 2,
-        opacity: 0.45,
-        dashArray: '4 8',
+        weight: 3,
+        opacity: 0.55,
+        lineJoin: 'round',
         interactive: false,
         className: 'mapa__raio',
       }).addTo(camadaRaios);
@@ -135,15 +143,18 @@ export function criarMapaInterativo(elemento, { mercado, pontos, categorias, aoS
       rotularMarcador(marcador, `${ponto.nome} — ${categoria.nome}, selecionado`);
       desenharRaios();
       // linha destacada Mercado → ponto, até a rota real chegar
-      L.polyline([mercado.coordenadas, ponto.coordenadas], {
+      const caminho = caminhoAte(mercado, ponto);
+      L.polyline(caminho, { color: '#ffffff', weight: 9, opacity: 0.9, lineJoin: 'round' }).addTo(
+        camadaRota,
+      );
+      L.polyline(caminho, {
         color: categoria.cor,
-        weight: 4,
-        dashArray: '2 10',
-        lineCap: 'round',
-        className: 'mapa__linha-selecionada',
+        weight: 5,
+        lineJoin: 'round',
+        className: 'mapa__rota',
       }).addTo(camadaRota);
       if (mover) {
-        mapa.flyToBounds(L.latLngBounds([mercado.coordenadas, ponto.coordenadas]), {
+        mapa.flyToBounds(L.latLngBounds(caminho), {
           padding: [70, 70],
           maxZoom: 17,
           duration: document.documentElement.dataset.movimento ? 0 : 0.8,

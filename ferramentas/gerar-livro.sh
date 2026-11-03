@@ -15,7 +15,7 @@ NOME="mercado-central-sao-luis"
 TITULO=$(python3 -c "import json;print(json.load(open('$ORIGEM/livro.json'))['titulo'])")
 SUBTITULO=$(python3 -c "import json;print(json.load(open('$ORIGEM/livro.json'))['subtitulo'])")
 AUTORIA=$(python3 -c "import json;print(json.load(open('$ORIGEM/livro.json'))['autoria'])")
-AVISO=$(python3 -c "import json;print(json.load(open('$ORIGEM/livro.json'))['aviso'])")
+EDICAO=$(python3 -c "import json;print(json.load(open('$ORIGEM/livro.json')).get('edicao',''))")
 mkdir -p "$DESTINO"
 CAPITULOS=$(ls "$ORIGEM"/[0-9]*.md | sort)
 TMP=$(mktemp -d)
@@ -30,15 +30,15 @@ pandoc "$TMP/meta.md" $CAPITULOS \
   -o "$DESTINO/$NOME.epub"
 
 # --- TXT
-{ echo "$TITULO — $SUBTITULO"; echo "$AUTORIA"; echo; echo "[$AVISO]"; echo;
+{ echo "$TITULO — $SUBTITULO"; echo "$AUTORIA"; echo; echo "$EDICAO"; echo;
   pandoc $CAPITULOS -t plain --wrap=auto --columns=80; } > "$DESTINO/$NOME.txt"
 
 # --- PDF (HTML intermediário + CSS de impressão)
 pandoc $CAPITULOS --resource-path="$ORIGEM" -s --toc --toc-depth=1 \
   -M lang=pt-BR -M title="$TITULO" -M subtitle="$SUBTITULO" -M author="$AUTORIA" \
-  -M aviso="$AVISO" --template=ferramentas/modelo-livro.html \
+  -M aviso="$EDICAO" --template=ferramentas/modelo-livro.html \
   -o "$TMP/livro.html"
-cp "$ORIGEM"/*.svg "$TMP/" 2>/dev/null || true
+cp "$ORIGEM"/*.svg "$ORIGEM"/*.jpg "$ORIGEM"/*.png "$TMP/" 2>/dev/null || true
 weasyprint --pdf-variant pdf/ua-1 -s ferramentas/livro-pdf.css "$TMP/livro.html" "$DESTINO/$NOME.pdf"
 
 rm -rf "$TMP"

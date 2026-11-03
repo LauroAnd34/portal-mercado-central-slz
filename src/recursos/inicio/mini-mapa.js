@@ -1,7 +1,9 @@
 /**
- * Desenho decorativo da página inicial: o Mercado no centro e linhas até os
- * pontos turísticos, nas posições geográficas reais (projeção simples).
+ * Desenho decorativo da página inicial: o Mercado no centro e os caminhos
+ * REAIS pelas ruas até cada ponto turístico (projeção simples).
  */
+import { caminhoDoPonto } from '../mapa/rotas-guardadas.js';
+import { calcularDistanciaKm, sugerirModo } from '../mapa/geografia.js';
 export function desenharMiniMapa(svg, { mercado, pontos, categorias }) {
   const largura = 400;
   const altura = 300;
@@ -30,7 +32,17 @@ export function desenharMiniMapa(svg, { mercado, pontos, categorias }) {
       .map((p, i) => {
         const [x, y] = projetar(p.coordenadas);
         const cor = categorias[p.categoria].cor;
-        return `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="${cor}" stroke-width="2" stroke-dasharray="4 4" class="mini-mapa__linha" style="animation-delay:${i * 60}ms"/>
+        const modo = sugerirModo(calcularDistanciaKm(mercado.coordenadas, p.coordenadas));
+        const caminho = caminhoDoPonto(p.id, modo) ?? [mercado.coordenadas, p.coordenadas];
+        const d = caminho
+          .map(
+            (c, k) =>
+              `${k ? 'L' : 'M'}${projetar(c)
+                .map((n) => n.toFixed(1))
+                .join(' ')}`,
+          )
+          .join('');
+        return `<path d="${d}" pathLength="1" fill="none" stroke="${cor}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" class="mini-mapa__linha" style="animation-delay:${i * 60}ms"/>
           <circle cx="${x}" cy="${y}" r="5" fill="${cor}" stroke="#fff" stroke-width="2" class="mini-mapa__ponto" style="animation-delay:${i * 60}ms"/>`;
       })
       .join('')}

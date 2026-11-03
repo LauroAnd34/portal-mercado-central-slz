@@ -7,6 +7,7 @@ import { iniciarLinhaDoTempo } from '../recursos/inicio/linha-do-tempo.js';
 import { desenharMiniMapa } from '../recursos/inicio/mini-mapa.js';
 import { montarSetores, montarSabores } from '../recursos/inicio/sabores-e-setores.js';
 import { SETORES, SABORES } from '../dados/mercado.js';
+import { iniciarComparador } from '../recursos/inicio/comparador.js';
 
 iniciarPaginaComum();
 
@@ -29,3 +30,5 @@ const setores = document.querySelector('[data-setores]');
 if (setores) montarSetores(setores, SETORES);
 const sabores = document.querySelector('[data-sabores]');
 if (sabores) montarSabores(sabores, SABORES);
+
+document.querySelectorAll('[data-comparador]').forEach(iniciarComparador);

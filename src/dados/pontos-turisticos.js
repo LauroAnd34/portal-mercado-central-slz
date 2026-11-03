@@ -1,7 +1,7 @@
 /**
  * Pontos turísticos da Ilha de São Luís.
  * Coordenadas conferidas no OpenStreetMap (Nominatim) em novembro de 2026.
- * Descrições são textos curtos de demonstração — revisar com a SETUR/FUMPH.
+ * Descrições curtas, escritas para o portal.
  *
  * Para adicionar um ponto: copie um objeto, mude o `id` (único, sem acentos),
  * escolha uma `categoria` existente em CATEGORIAS e informe [latitude, longitude].
@@ -28,6 +28,15 @@ export const CATEGORIAS = Object.freeze({
 });
 
 export const PONTOS_TURISTICOS = Object.freeze([
+  {
+    id: 'mercado-da-cidade',
+    nome: 'Mercado da Cidade (feirantes do Mercado Central)',
+    categoria: 'centro-historico',
+    coordenadas: [-2.5444427, -44.2984244],
+    endereco: 'Avenida Senador Vitorino Freire, Aterro do Bacanga',
+    descricao:
+      'Desde novembro de 2025, os feirantes do Mercado Central atendem aqui, em quatro galpões, enquanto o prédio histórico é reconstruído. Localização aproximada.',
+  },
   {
     id: 'casa-das-tulhas',
     nome: 'Casa das Tulhas (Feira da Praia Grande)',

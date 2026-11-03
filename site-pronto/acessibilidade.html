@@ -50,16 +50,16 @@
       content="Recursos de acessibilidade do portal do Mercado Central: atalhos de teclado, alto contraste, VLibras, leitura em voz alta e mais."
     />
     <meta property="og:url" content="https://www.saoluis.ma.gov.br/mercado-central/acessibilidade.html" />
-    <script type="module" crossorigin src="./assets/acessibilidade-2fbMBdRy.js"></script>
-    <link rel="modulepreload" crossorigin href="./assets/modulos-Bhtwam2X.js">
-    <link rel="stylesheet" crossorigin href="./assets/modulos-VR-Wvvhm.css">
-    <link rel="stylesheet" crossorigin href="./assets/acessibilidade-DG-tSo7h.css">
+    <script type="module" crossorigin src="./assets/acessibilidade-D2spSTqW.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/modulos-18mMoEpE.js">
+    <link rel="stylesheet" crossorigin href="./assets/modulos-B2EM1sqW.css">
+    <link rel="stylesheet" crossorigin href="./assets/acessibilidade-C1EIVrbJ.css">
   </head>
   <body class="pagina-acessibilidade">
-    <!-- Faixa "versão de demonstração": aparece quando VITE_DEMONSTRACAO=true (ex.: GitHub Pages) -->
+    <!-- Aviso discreto de "versão de apresentação": aparece quando VITE_DEMONSTRACAO=true (ex.: GitHub Pages) -->
 <div class="faixa-demonstracao" data-mostrar="false" role="note">
-  <strong>Versão de demonstração.</strong> Este não é o site oficial da Prefeitura de São Luís — o
-  conteúdo é provisório.
+  Proposta de portal para o Mercado Central · versão de apresentação, não é o site oficial da
+  Prefeitura
 </div>
 <!-- Barra superior no padrão eMAG: atalhos de teclado + acessibilidade rápida -->
 <div class="barra-gov nao-imprimir">
@@ -129,27 +129,26 @@
 
 <header class="cabecalho" id="topo">
   <div class="container cabecalho__conteudo">
-    <a
-      class="marca"
-      href="./index.html"
-      aria-label="Prefeitura de São Luís — página inicial do portal do Mercado Central"
-    >
-      <!--
-        ESPAÇO RESERVADO PARA A LOGOMARCA OFICIAL.
-        Substitua o arquivo public/img/logo-prefeitura.svg pelo logo oficial
-        fornecido pela SECOM (mantenha o mesmo nome ou altere o src abaixo).
-      -->
+    <a class="marca" href="./index.html">
+      <!-- Logomarca oficial (portal saoluis.ma.gov.br). A versão branca aparece no modo escuro e no alto contraste. -->
       <img
-        class="marca__logo manter-cores"
-        src="./img/logo-prefeitura.svg"
-        alt=""
-        width="52"
-        height="52"
+        class="marca__logo marca__logo--cor manter-cores"
+        src="./img/oficial/logo_mobile.png"
+        alt="Prefeitura de São Luís"
+        width="278"
+        height="76"
       />
-      <span class="marca__texto">
-        <span class="marca__orgao">Prefeitura de</span>
-        <span class="marca__cidade">São Luís</span>
-      </span>
+      <img
+        class="marca__logo marca__logo--branca manter-cores"
+        src="./img/oficial/logo_branca.png"
+        alt="Prefeitura de São Luís"
+        width="278"
+        height="76"
+      />
+      <span class="marca__separador" aria-hidden="true"></span>
+      <span class="marca__portal"
+        ><span class="somente-leitor">, </span>Portal do<br />Mercado Central</span
+      >
     </a>
 
     <button type="button" class="menu-botao" aria-expanded="false" aria-controls="menu-principal">
@@ -815,10 +814,10 @@
                 />
               </svg>
               <p>
-                <strong>Encontrou alguma barreira?</strong> Fale com a Prefeitura pelos canais
-                oficiais de atendimento
-                <span class="marcador-pendente">[inserir e-mail ou canal da Ouvidoria]</span>,
-                informando a página e o problema. Sua mensagem ajuda a melhorar o site.
+                <strong>Encontrou alguma barreira?</strong> Fale com a Ouvidoria pelo
+                <a href="https://www.saoluis.ma.gov.br" rel="noopener" target="_blank"
+                  >portal da Prefeitura<span class="somente-leitor"> (abre em nova aba)</span></a
+                >, informando a página e o problema. Sua mensagem ajuda a melhorar o site.
               </p>
             </div>
             <p>
@@ -837,21 +836,18 @@
     </main>
 
     <footer class="rodape" id="rodape" tabindex="-1">
-  <div class="faixa-marca" aria-hidden="true"></div>
+  <div class="faixa-azulejo" aria-hidden="true"></div>
   <div class="container rodape__grade">
     <div class="rodape__marca">
       <img
-        class="manter-cores"
-        src="./img/logo-prefeitura-branca.svg"
-        alt=""
-        width="56"
-        height="56"
+        class="rodape__logo manter-cores"
+        src="./img/oficial/logo_rodape.png"
+        alt="Prefeitura de São Luís — por uma cidade melhor"
+        width="344"
+        height="94"
       />
-      <p><strong>Prefeitura de São Luís</strong><br />Portal do Mercado Central</p>
-      <p class="rodape__nota">
-        Conteúdo de demonstração. Textos, logomarca e dados de contato serão substituídos pelos
-        oficiais.
-      </p>
+      <p>Portal do Mercado Central</p>
+      <p class="rodape__nota">Memória, sabores e gente da nossa ilha.</p>
     </div>
     <nav aria-label="Mapa do site">
       <h2 class="rodape__titulo">Navegue</h2>
@@ -865,10 +861,10 @@
     <div>
       <h2 class="rodape__titulo">Mercado Central</h2>
       <address>
-        Rua de São João, Centro<br />
-        São Luís – MA<br />
-        Seg. a sáb., das 6h às 18h<br />
-        <span class="rodape__nota">(horário ilustrativo)</span>
+        Prédio histórico: Rua de São João, Centro<br />
+        Durante a obra: Mercado da Cidade,<br />
+        Av. Senador Vitorino Freire – Aterro do Bacanga<br />
+        São Luís – MA
       </address>
     </div>
     <div>

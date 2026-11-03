@@ -187,8 +187,10 @@
   gap: var(--e-6);
   padding-block: var(--e-7);
 }
-.rodape__marca img {
-  width: 56px;
+.rodape__logo {
+  width: 100%;
+  max-width: 240px;
+  height: auto;
 }
 .rodape__titulo {
   color: #fff;

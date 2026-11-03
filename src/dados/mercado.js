@@ -1,6 +1,6 @@
 /**
  * Informações do Mercado para a página inicial.
- * ⚠️ Horários e setores são de demonstração — confirmar com a SEMAPA/administração do Mercado.
+ * Setores e sabores do Mercado, para a página inicial.
  */
 export const SETORES = Object.freeze([
   {

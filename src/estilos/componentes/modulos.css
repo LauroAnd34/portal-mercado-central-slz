@@ -5,45 +5,75 @@
    ========================================================================= */
 
 .titulo-modulo {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: var(--e-2) var(--e-4);
-  padding: var(--e-3) var(--e-5);
-  margin-bottom: var(--e-6);
-  border-radius: var(--raio);
-  background: var(--marca-marinho-700);
-  color: #fff;
   position: relative;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  gap: var(--e-2);
+  margin-bottom: var(--e-7);
+  padding-bottom: var(--e-4);
 }
 .titulo-modulo::after {
   content: '';
   position: absolute;
-  inset: auto 0 0 0;
-  height: 4px;
+  left: 0;
+  bottom: 0;
+  width: 112px;
+  height: 6px;
+  border-radius: 3px;
   background: var(--faixa);
 }
 .titulo-modulo h2 {
-  color: #fff;
-  font-size: var(--texto-xl);
   margin: 0;
+  max-width: 22ch;
+  color: var(--cor-titulo);
+  font-size: clamp(1.9rem, 1.3rem + 2.4vw, 3rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
 }
 .titulo-modulo__sub {
-  margin-left: auto;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-2);
+  font-family: var(--fonte-ui);
   font-size: var(--texto-xs);
-  font-weight: 700;
-  color: #d6ebf7;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--marca-azul-600);
 }
-:root[data-contraste='alto'] .titulo-modulo {
-  background: #000;
-  border: 2px solid #fff;
+.titulo-modulo__sub::before {
+  /* mini azulejo como marcador */
+  content: '';
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  background: url('../../imagens/azulejo-colorido.svg') center / cover;
+  box-shadow: 0 0 0 1px rgb(29 79 143 / 0.25);
 }
-:root[data-contraste='alto'] .titulo-modulo h2,
-:root[data-contraste='alto'] .titulo-modulo__sub {
+:root[data-tema='escuro'] .titulo-modulo__sub {
+  color: #8fd0f2;
+}
+:root[data-contraste='alto'] .titulo-modulo h2 {
   color: #ffff00;
+}
+:root[data-contraste='alto'] .titulo-modulo__sub {
+  color: #fff;
+}
+:root[data-contraste='alto'] .titulo-modulo::after {
+  background: #ffff00;
+}
+
+/* faixa de azulejos (separador decorativo) */
+.faixa-azulejo {
+  height: 28px;
+  background: url('../../imagens/azulejo-colorido.svg') 0 0 / 28px 28px repeat-x;
+  border-top: 3px solid var(--faixa-3);
+}
+:root[data-contraste='alto'] .faixa-azulejo {
+  background: #ffff00;
+  height: 4px;
+  border: 0;
 }
 
 /* Cartões de acesso (padrão "Acesso rápido" do portal) */
@@ -63,7 +93,8 @@
   height: 100%;
   padding: var(--e-6) var(--e-5) var(--e-5);
   border: 1px solid var(--cor-borda);
-  border-radius: var(--raio-md);
+  border-radius: var(--raio-lg);
+  overflow: hidden;
   background: var(--cor-superficie);
   box-shadow: var(--sombra-1);
   transition:
@@ -71,12 +102,17 @@
     box-shadow var(--transicao);
 }
 .cartao::before {
+  /* canto com azulejo */
   content: '';
   position: absolute;
-  inset: 0 0 auto 0;
-  height: 6px;
-  border-radius: var(--raio-md) var(--raio-md) 0 0;
-  background: var(--degrade-marca);
+  top: -1px;
+  right: -1px;
+  width: 92px;
+  height: 92px;
+  background: url('../../imagens/azulejo-colorido.svg') 0 0 / 46px 46px;
+  opacity: 0.55;
+  mask-image: linear-gradient(225deg, #000 30%, transparent 70%);
+  border-top-right-radius: var(--raio-lg);
 }
 .cartao:hover,
 .cartao:focus-within {
@@ -86,11 +122,19 @@
 .cartao__icone {
   display: grid;
   place-items: center;
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: var(--cor-fundo-destaque);
-  color: var(--cor-titulo);
+  width: 68px;
+  height: 68px;
+  border-radius: 18px;
+  background: var(--marca-marinho-700);
+  color: var(--faixa-3);
+  box-shadow:
+    0 0 0 6px var(--cor-fundo-destaque),
+    0 14px 24px -14px rgb(11 42 69 / 0.6);
+}
+:root[data-contraste='alto'] .cartao__icone {
+  background: #000;
+  color: #ffff00;
+  box-shadow: 0 0 0 2px #ffff00;
 }
 .cartao h3 {
   margin: 0;
@@ -110,7 +154,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: var(--raio-md);
+  border-radius: var(--raio-lg);
 }
 .cartao__link:focus-visible {
   outline: none;
@@ -135,10 +179,23 @@
 /* Cabeçalho interno de página (páginas Livro, Mapa, Acessibilidade) */
 .cabecalho-pagina {
   position: relative;
-  background-color: var(--marca-marinho-700);
-  background-image: url('../../imagens/azulejo.svg');
+  background-color: var(--marca-marinho-800);
+  background-image:
+    linear-gradient(
+      100deg,
+      rgb(11 42 69 / 0.97) 0%,
+      rgb(20 70 112 / 0.88) 55%,
+      rgb(20 70 112 / 0.55) 100%
+    ),
+    var(--foto-topo, url('../../imagens/azulejo.svg'));
+  background-size: cover;
+  background-position: center 60%;
   color: #fff;
-  padding-block: var(--e-7) var(--e-6);
+  padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(2rem, 5vw, 3.5rem);
+}
+.cabecalho-pagina h1 {
+  font-size: clamp(2.2rem, 1.5rem + 3vw, 3.6rem) !important;
+  letter-spacing: -0.03em;
 }
 .cabecalho-pagina {
   overflow: hidden;
