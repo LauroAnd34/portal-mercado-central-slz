@@ -1,0 +1,6 @@
+site-pronto/
+node_modules/
+publico/livro/
+testes/fixture-rota.json
+ferramentas/modelo-livro.html
+conteudo/

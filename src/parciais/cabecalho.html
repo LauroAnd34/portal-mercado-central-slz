@@ -1,0 +1,56 @@
+<!-- @include barra-gov.html -->
+<header class="cabecalho" id="topo">
+  <div class="container cabecalho__conteudo">
+    <a
+      class="marca"
+      href="./index.html"
+      aria-label="Prefeitura de São Luís — página inicial do portal do Mercado Central"
+    >
+      <!--
+        ESPAÇO RESERVADO PARA A LOGOMARCA OFICIAL.
+        Substitua o arquivo public/img/logo-prefeitura.svg pelo logo oficial
+        fornecido pela SECOM (mantenha o mesmo nome ou altere o src abaixo).
+      -->
+      <img
+        class="marca__logo manter-cores"
+        src="./img/logo-prefeitura.svg"
+        alt=""
+        width="52"
+        height="52"
+      />
+      <span class="marca__texto">
+        <span class="marca__orgao">Prefeitura de</span>
+        <span class="marca__cidade">São Luís</span>
+      </span>
+    </a>
+
+    <button type="button" class="menu-botao" aria-expanded="false" aria-controls="menu-principal">
+      <span class="menu-botao__icone" aria-hidden="true"
+        ><span></span><span></span><span></span
+      ></span>
+      <span class="menu-botao__rotulo">Menu</span>
+    </button>
+
+    <nav class="menu" id="menu-principal" aria-label="Menu principal" tabindex="-1">
+      <ul class="menu__lista">
+        <li><a class="menu__link" href="./index.html" data-menu="inicio">Início</a></li>
+        <li><a class="menu__link" href="./livro.html" data-menu="livro">O Livro</a></li>
+        <li><a class="menu__link" href="./mapa.html" data-menu="mapa">Mapa turístico</a></li>
+        <li>
+          <a class="menu__link" href="./acessibilidade.html" data-menu="acessibilidade"
+            >Acessibilidade</a
+          >
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="faixa-marca" aria-hidden="true"></div>
+</header>
+<!-- @include painel-acessibilidade.html -->
+<div
+  class="anunciador somente-leitor"
+  role="status"
+  aria-live="polite"
+  aria-atomic="true"
+  id="anunciador"
+></div>

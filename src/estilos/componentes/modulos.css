@@ -1,0 +1,251 @@
+/* =========================================================================
+   MÓDULOS — padrões de seção inspirados no portal saoluis.ma.gov.br:
+   barra de título (título à esquerda + subtítulo em maiúsculas à direita),
+   cartões de "acesso rápido" e faixas institucionais.
+   ========================================================================= */
+
+.titulo-modulo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--e-2) var(--e-4);
+  padding: var(--e-3) var(--e-5);
+  margin-bottom: var(--e-6);
+  border-radius: var(--raio);
+  background: var(--marca-marinho-700);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.titulo-modulo::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 4px;
+  background: var(--faixa);
+}
+.titulo-modulo h2 {
+  color: #fff;
+  font-size: var(--texto-xl);
+  margin: 0;
+}
+.titulo-modulo__sub {
+  margin-left: auto;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: var(--texto-xs);
+  font-weight: 700;
+  color: #d6ebf7;
+}
+:root[data-contraste='alto'] .titulo-modulo {
+  background: #000;
+  border: 2px solid #fff;
+}
+:root[data-contraste='alto'] .titulo-modulo h2,
+:root[data-contraste='alto'] .titulo-modulo__sub {
+  color: #ffff00;
+}
+
+/* Cartões de acesso (padrão "Acesso rápido" do portal) */
+.cartoes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--e-5);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.cartao {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-3);
+  height: 100%;
+  padding: var(--e-6) var(--e-5) var(--e-5);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-md);
+  background: var(--cor-superficie);
+  box-shadow: var(--sombra-1);
+  transition:
+    transform var(--transicao),
+    box-shadow var(--transicao);
+}
+.cartao::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 6px;
+  border-radius: var(--raio-md) var(--raio-md) 0 0;
+  background: var(--degrade-marca);
+}
+.cartao:hover,
+.cartao:focus-within {
+  transform: translateY(-5px); /* mesmo efeito do portal oficial */
+  box-shadow: var(--sombra-2);
+}
+.cartao__icone {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--cor-fundo-destaque);
+  color: var(--cor-titulo);
+}
+.cartao h3 {
+  margin: 0;
+  font-size: var(--texto-lg);
+}
+.cartao p {
+  margin: 0;
+  color: var(--cor-texto-suave);
+  flex: 1;
+}
+/* o link do título cobre o cartão inteiro (área de clique grande) */
+.cartao__link {
+  color: inherit;
+  text-decoration: none;
+}
+.cartao__link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--raio-md);
+}
+.cartao__link:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+.cartao:has(.cartao__link:focus-visible) {
+  outline: 3px solid var(--cor-foco);
+  outline-offset: 3px;
+}
+.cartao__acao {
+  font-weight: 700;
+  color: var(--cor-link);
+  font-size: var(--texto-sm);
+}
+:root[data-contraste='alto'] .cartao {
+  border: 2px solid #fff;
+}
+:root[data-contraste='alto'] .cartao::before {
+  background: #ffff00;
+}
+
+/* Cabeçalho interno de página (páginas Livro, Mapa, Acessibilidade) */
+.cabecalho-pagina {
+  position: relative;
+  background-color: var(--marca-marinho-700);
+  background-image: url('../../imagens/azulejo.svg');
+  color: #fff;
+  padding-block: var(--e-7) var(--e-6);
+}
+.cabecalho-pagina {
+  overflow: hidden;
+}
+.cabecalho-pagina .container {
+  position: relative;
+  z-index: 1;
+}
+.cabecalho-pagina__icone {
+  position: absolute;
+  right: max(2rem, calc((100vw - var(--largura-max)) / 2));
+  top: 50%;
+  width: clamp(110px, 16vw, 210px);
+  height: auto;
+  transform: translateY(-50%) rotate(-8deg);
+  color: var(--faixa-3);
+  opacity: 0.35;
+  pointer-events: none;
+}
+@media (max-width: 720px) {
+  .cabecalho-pagina__icone {
+    right: -20px;
+    opacity: 0.18;
+  }
+}
+:root[data-contraste='alto'] .cabecalho-pagina__icone {
+  display: none;
+}
+.cabecalho-pagina h1 {
+  color: #fff;
+  font-size: var(--texto-2xl);
+  margin-bottom: var(--e-2);
+}
+.cabecalho-pagina p {
+  color: #d6ebf7;
+  max-width: 62ch;
+  margin: 0;
+  font-size: var(--texto-lg);
+}
+.cabecalho-pagina::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 6px;
+  background: var(--faixa);
+}
+:root[data-contraste='alto'] .cabecalho-pagina {
+  background: #000;
+  border-bottom: 2px solid #fff;
+}
+:root[data-contraste='alto'] .cabecalho-pagina h1 {
+  color: #ffff00;
+}
+:root[data-contraste='alto'] .cabecalho-pagina p {
+  color: #fff;
+}
+
+/* trilha de navegação */
+.trilha ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e-2);
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--e-4);
+  font-size: var(--texto-sm);
+}
+.trilha li + li::before {
+  content: '›';
+  margin-right: var(--e-2);
+  color: #d6ebf7;
+}
+.trilha a {
+  color: #fff;
+}
+.trilha [aria-current] {
+  color: #d6ebf7;
+}
+:root[data-contraste='alto'] .trilha a {
+  color: #ffff00;
+}
+
+.aviso-provisorio {
+  display: flex;
+  gap: var(--e-3);
+  align-items: flex-start;
+  padding: var(--e-3) var(--e-4);
+  border-left: 6px solid var(--ouro-500);
+  background: #fff8db;
+  color: #3d3300;
+  border-radius: var(--raio);
+  font-size: var(--texto-sm);
+}
+:root[data-tema='escuro'] .aviso-provisorio {
+  background: #2e2a12;
+  color: #fff3b0;
+}
+:root[data-contraste='alto'] .aviso-provisorio {
+  background: #000;
+  color: #fff;
+  border: 2px solid #ffff00;
+}
+
+.marcador-pendente {
+  background: #fff3a8;
+  color: #3d3300;
+  padding: 0 4px;
+  border-radius: 3px;
+  font-weight: 600;
+}

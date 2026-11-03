@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.saoluis.ma.gov.br/mercado-central/sitemap.xml

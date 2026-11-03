@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <!-- Em subpastas (ex.: /mercado-central/qualquer/coisa), faz os links e arquivos partirem da raiz do site -->
+    <base href="%VITE_CAMINHO_BASE%" />
+    <!-- @include cabeca.html -->
+    <title>Página não encontrada | Portal do Mercado Central — Prefeitura de São Luís</title>
+    <meta name="robots" content="noindex" />
+  </head>
+  <body class="pagina-404">
+    <!-- @include cabecalho.html pagina=nenhuma -->
+    <main id="conteudo" tabindex="-1">
+      <section class="secao erro-404" aria-labelledby="erro-titulo">
+        <div class="container erro-404__grade">
+          <div class="erro-404__texto">
+            <p class="erro-404__codigo"><span class="somente-leitor">Erro </span>404</p>
+            <h1 id="erro-titulo">Parece que este caminho não leva a lugar nenhum</h1>
+            <p class="lead">
+              A página que você procura não existe, mudou de endereço ou o link está digitado
+              errado. Mas não se preocupe: todo bom passeio por São Luís começa no Mercado Central.
+            </p>
+            <div class="erro-404__acoes">
+              <a class="botao" href="./index.html">
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24">
+                  <path
+                    d="M3 11 12 4l9 7v9h-6v-6H9v6H3z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                Voltar ao início
+              </a>
+              <button type="button" class="botao botao--contorno" data-voltar>
+                <span aria-hidden="true">←</span> Página anterior
+              </button>
+            </div>
+            <p class="erro-404__dica">
+              Sem internet? As páginas que você já visitou continuam disponíveis neste aparelho.
+            </p>
+          </div>
+          <figure class="erro-404__ilustracao">
+            <img
+              class="ilustracao"
+              src="./src/imagens/ilustracao-404.svg"
+              width="520"
+              height="400"
+              alt="Ilustração de um mapa da ilha: uma trilha tracejada sai do Mercado Central, dá voltas e termina em um marcador vermelho com um ponto de interrogação."
+            />
+          </figure>
+        </div>
+      </section>
+
+      <section class="secao secao--suave" aria-labelledby="sugestoes-titulo">
+        <div class="container">
+          <header class="titulo-modulo">
+            <h2 id="sugestoes-titulo">Talvez você esteja procurando</h2>
+            <span class="titulo-modulo__sub">Os caminhos principais</span>
+          </header>
+          <ul class="cartoes">
+            <li>
+              <article class="cartao">
+                <span class="cartao__icone" aria-hidden="true"
+                  ><svg width="32" height="32" viewBox="0 0 24 24">
+                    <path
+                      d="M4 5c3-1.5 5.5-1.5 8 0 2.5-1.5 5-1.5 8 0v14c-3-1.5-5.5-1.5-8 0-2.5-1.5-5-1.5-8 0z"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linejoin="round"
+                    />
+                    <path d="M12 5v14" stroke="currentColor" stroke-width="1.8" /></svg
+                ></span>
+                <h3><a class="cartao__link" href="./livro.html">O livro do Mercado</a></h3>
+                <p>Leia, ouça ou baixe a história do Mercado Central.</p>
+                <span class="cartao__acao" aria-hidden="true">Abrir →</span>
+              </article>
+            </li>
+            <li>
+              <article class="cartao">
+                <span class="cartao__icone" aria-hidden="true"
+                  ><svg width="32" height="32" viewBox="0 0 24 24">
+                    <path
+                      d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2zM9 4v14M15 6v14"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linejoin="round"
+                    /></svg
+                ></span>
+                <h3><a class="cartao__link" href="./mapa.html">Mapa turístico</a></h3>
+                <p>Do Mercado para os pontos turísticos da ilha, com roteiros prontos.</p>
+                <span class="cartao__acao" aria-hidden="true">Explorar →</span>
+              </article>
+            </li>
+            <li>
+              <article class="cartao">
+                <span class="cartao__icone" aria-hidden="true"
+                  ><svg width="32" height="32" viewBox="0 0 24 24">
+                    <circle cx="12" cy="4" r="2" fill="currentColor" />
+                    <path
+                      d="M4 8l8 1.5L20 8M12 9.5V15m0 0l-3.5 6M12 15l3.5 6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                    /></svg
+                ></span>
+                <h3><a class="cartao__link" href="./acessibilidade.html">Acessibilidade</a></h3>
+                <p>Recursos para ler, ouvir e navegar do seu jeito.</p>
+                <span class="cartao__acao" aria-hidden="true">Conhecer →</span>
+              </article>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </main>
+    <!-- @include rodape.html -->
+    <script type="module" src="./src/paginas/nao-encontrada.js"></script>
+  </body>
+</html>

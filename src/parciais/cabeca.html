@@ -1,0 +1,33 @@
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#144670" />
+<meta name="author" content="Prefeitura Municipal de São Luís" />
+<link rel="icon" href="./icone.svg" type="image/svg+xml" />
+<link rel="manifest" href="./manifest.webmanifest" />
+<meta property="og:site_name" content="Prefeitura de São Luís — Portal do Mercado Central" />
+<meta property="og:locale" content="pt_BR" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="%VITE_ENDERECO_SITE%img/compartilhar.png" />
+<meta
+  property="og:image:alt"
+  content="Ilustração da fachada do Mercado Central de São Luís com a faixa colorida da Prefeitura"
+/>
+<meta name="twitter:card" content="summary_large_image" />
+<script>
+  /* Aplica as preferências de acessibilidade ANTES da pintura da página
+     (evita "piscar" o tema claro para quem usa alto contraste ou modo escuro). */
+  (function () {
+    try {
+      var p = JSON.parse(localStorage.getItem('slz-mercado:preferencias') || '{}');
+      var r = document.documentElement;
+      if (p.escala) r.style.setProperty('--escala-fonte', p.escala);
+      if (p.cores === 'escuro') r.setAttribute('data-tema', 'escuro');
+      if (p.cores === 'alto') r.setAttribute('data-contraste', 'alto');
+      if (p.fonte && p.fonte !== 'padrao') r.setAttribute('data-fonte', p.fonte);
+      if (p.espacamento) r.setAttribute('data-espacamento', 'amplo');
+      if (p.links) r.setAttribute('data-links', 'destacados');
+      if (p.movimento) r.setAttribute('data-movimento', 'reduzido');
+      if (p.cursor) r.setAttribute('data-cursor', 'grande');
+    } catch (e) {}
+  })();
+</script>

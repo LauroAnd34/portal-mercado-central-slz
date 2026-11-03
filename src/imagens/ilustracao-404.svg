@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 400">
+  <!-- Ilustração original: um caminho que sai do Mercado, se perde e termina num marcador com "?" -->
+  <defs>
+    <linearGradient id="mar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe3f5"/><stop offset="1" stop-color="#e3f2fb"/></linearGradient>
+    <linearGradient id="ilha" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d9ebb0"/><stop offset="1" stop-color="#bfe0c9"/></linearGradient>
+  </defs>
+  <rect width="520" height="400" rx="28" fill="url(#mar)"/>
+  <g fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity=".8">
+    <path d="M30 60q20-10 40 0t40 0"/><path d="M400 340q20-10 40 0t40 0"/><path d="M420 50q15-8 30 0t30 0"/>
+  </g>
+  <path d="M70 250c-10-60 40-120 110-140 60-17 90-60 160-50 80 12 120 70 110 140-9 66-70 110-150 110-60 0-80-30-140-30-50 0-80 30-90-30z" fill="url(#ilha)" stroke="#9ac670" stroke-width="4"/>
+  <!-- caminho que se perde -->
+  <path d="M150 270c40-10 50-60 100-60s60 60 110 40 10-80-30-90-80 30-60 60 90 10 110-30" fill="none" stroke="#144670" stroke-width="5" stroke-dasharray="2 12" stroke-linecap="round"/>
+  <!-- Mercado (início) -->
+  <g transform="translate(118 240)">
+    <circle r="30" fill="#bbd050" stroke="#144670" stroke-width="5"/>
+    <path d="M-15 -4h30l-3-9h-24zM-13 -4v15h26v-15M-4 11v-8h8v8" fill="none" stroke="#144670" stroke-width="3.5" stroke-linejoin="round"/>
+  </g>
+  <!-- marcador com ? -->
+  <g transform="translate(372 108)">
+    <ellipse cx="0" cy="96" rx="26" ry="8" fill="#144670" opacity=".18"/>
+    <path d="M0 92C0 92-38 48-38 22a38 38 0 0 1 76 0c0 26-38 70-38 70z" fill="#c32146" stroke="#fff" stroke-width="5"/>
+    <text x="0" y="38" font-family="Montserrat, Arial, sans-serif" font-size="44" font-weight="800" fill="#fff" text-anchor="middle">?</text>
+  </g>
+  <!-- bússola -->
+  <g transform="translate(450 330)">
+    <circle r="34" fill="#fff" stroke="#144670" stroke-width="4"/>
+    <path d="M0-24 7 0 0 24-7 0z" fill="#144670"/><path d="M0-24 7 0H-7z" fill="#c32146"/>
+    <text y="-38" font-family="Montserrat, Arial" font-size="13" font-weight="800" fill="#144670" text-anchor="middle">N</text>
+  </g>
+  <!-- faixa -->
+  <g transform="translate(0 388)">
+    <rect width="74.3" height="12" fill="#faea25"/><rect x="74.3" width="74.3" height="12" fill="#dadb32"/><rect x="148.6" width="74.3" height="12" fill="#bbd050"/><rect x="222.9" width="74.3" height="12" fill="#9ac670"/><rect x="297.2" width="74.3" height="12" fill="#79c096"/><rect x="371.5" width="74.3" height="12" fill="#56b2b8"/><rect x="445.8" width="74.2" height="12" fill="#39a6de"/>
+  </g>
+</svg>

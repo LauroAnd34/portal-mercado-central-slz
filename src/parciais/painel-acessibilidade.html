@@ -1,0 +1,169 @@
+<!-- Painel completo de acessibilidade (dialog nativo: prende o foco e fecha com Esc) -->
+<dialog
+  class="painel-acessibilidade"
+  id="painel-acessibilidade"
+  aria-labelledby="painel-acessibilidade-titulo"
+>
+  <div class="painel-acessibilidade__topo">
+    <h2 id="painel-acessibilidade-titulo">Acessibilidade</h2>
+    <button
+      type="button"
+      class="botao-icone"
+      data-fecha-painel
+      aria-label="Fechar painel de acessibilidade"
+    >
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22">
+        <path
+          d="M6 6l12 12M18 6L6 18"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+        />
+      </svg>
+    </button>
+  </div>
+  <p class="painel-acessibilidade__ajuda">
+    Suas escolhas ficam salvas neste navegador e valem para todo o site, inclusive para o livro.
+  </p>
+
+  <form class="painel-acessibilidade__form" data-formulario-acessibilidade>
+    <fieldset class="opcao-grupo">
+      <legend>Tamanho do texto</legend>
+      <div class="opcao-escala">
+        <button type="button" class="botao botao--contorno" data-acao="fonte-menor">
+          A−<span class="somente-leitor"> diminuir texto</span>
+        </button>
+        <output class="opcao-escala__valor" data-saida="escala" aria-live="polite">100%</output>
+        <button type="button" class="botao botao--contorno" data-acao="fonte-maior">
+          A+<span class="somente-leitor"> aumentar texto</span>
+        </button>
+      </div>
+    </fieldset>
+
+    <fieldset class="opcao-grupo">
+      <legend>Cores</legend>
+      <div class="opcao-cartoes">
+        <label class="opcao-cartao"
+          ><input type="radio" name="cores" value="padrao" /><span
+            class="amostra amostra--padrao"
+            aria-hidden="true"
+            >Aa</span
+          >Padrão</label
+        >
+        <label class="opcao-cartao"
+          ><input type="radio" name="cores" value="escuro" /><span
+            class="amostra amostra--escuro"
+            aria-hidden="true"
+            >Aa</span
+          >Escuro</label
+        >
+        <label class="opcao-cartao"
+          ><input type="radio" name="cores" value="alto" /><span
+            class="amostra amostra--alto"
+            aria-hidden="true"
+            >Aa</span
+          >Alto contraste</label
+        >
+      </div>
+    </fieldset>
+
+    <fieldset class="opcao-grupo">
+      <legend>Fonte</legend>
+      <div class="opcao-cartoes">
+        <label class="opcao-cartao"
+          ><input type="radio" name="fonte" value="padrao" /><span
+            class="amostra"
+            aria-hidden="true"
+            style="font-family: Montserrat"
+            >Aa</span
+          >Padrão</label
+        >
+        <label class="opcao-cartao"
+          ><input type="radio" name="fonte" value="legivel" /><span
+            class="amostra"
+            aria-hidden="true"
+            style="font-family: 'Atkinson Hyperlegible'"
+            >Aa</span
+          >Alta legibilidade</label
+        >
+        <label class="opcao-cartao"
+          ><input type="radio" name="fonte" value="dislexia" /><span
+            class="amostra"
+            aria-hidden="true"
+            style="font-family: OpenDyslexic"
+            >Aa</span
+          >Dislexia</label
+        >
+      </div>
+    </fieldset>
+
+    <fieldset class="opcao-grupo">
+      <legend>Leitura e navegação</legend>
+      <label class="interruptor"
+        ><input type="checkbox" role="switch" name="espacamento" /><span
+          class="interruptor__trilho"
+          aria-hidden="true"
+        ></span
+        >Aumentar espaçamento do texto</label
+      >
+      <label class="interruptor"
+        ><input type="checkbox" role="switch" name="links" /><span
+          class="interruptor__trilho"
+          aria-hidden="true"
+        ></span
+        >Destacar links</label
+      >
+      <label class="interruptor"
+        ><input type="checkbox" role="switch" name="regua" /><span
+          class="interruptor__trilho"
+          aria-hidden="true"
+        ></span
+        >Régua de leitura (acompanha o mouse ou o teclado)</label
+      >
+      <label class="interruptor"
+        ><input type="checkbox" role="switch" name="movimento" /><span
+          class="interruptor__trilho"
+          aria-hidden="true"
+        ></span
+        >Pausar animações</label
+      >
+      <label class="interruptor"
+        ><input type="checkbox" role="switch" name="cursor" /><span
+          class="interruptor__trilho"
+          aria-hidden="true"
+        ></span
+        >Cursor grande</label
+      >
+      <label class="interruptor"
+        ><input type="checkbox" role="switch" name="leitorSelecao" /><span
+          class="interruptor__trilho"
+          aria-hidden="true"
+        ></span
+        >Ler em voz alta o texto que eu selecionar</label
+      >
+    </fieldset>
+
+    <fieldset class="opcao-grupo">
+      <legend>Libras</legend>
+      <label class="interruptor"
+        ><input type="checkbox" role="switch" name="vlibras" /><span
+          class="interruptor__trilho"
+          aria-hidden="true"
+        ></span
+        >Mostrar o botão do VLibras (tradutor de Libras do Governo Federal)</label
+      >
+      <p class="opcao-nota">
+        Ativado por padrão. Clique no botão azul com as mãos, no canto direito da tela, e depois
+        selecione um texto para o avatar traduzir para Libras. Requer internet.
+      </p>
+    </fieldset>
+
+    <div class="painel-acessibilidade__rodape">
+      <button type="button" class="botao botao--contorno" data-acao="redefinir">
+        Restaurar padrão
+      </button>
+      <a class="botao botao--texto" href="./acessibilidade.html">Atalhos e recursos</a>
+    </div>
+  </form>
+</dialog>
+<div class="regua-leitura" aria-hidden="true" hidden></div>

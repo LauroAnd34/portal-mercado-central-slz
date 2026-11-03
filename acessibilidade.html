@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <!-- @include cabeca.html -->
+    <title>Acessibilidade — Mercado Central de São Luís | Prefeitura de São Luís</title>
+    <meta
+      name="description"
+      content="Recursos de acessibilidade do portal do Mercado Central: atalhos de teclado, alto contraste, VLibras, leitura em voz alta e mais."
+    />
+    <link rel="canonical" href="%VITE_ENDERECO_SITE%acessibilidade.html" />
+    <meta
+      property="og:title"
+      content="Acessibilidade — Mercado Central de São Luís | Prefeitura de São Luís"
+    />
+    <meta
+      property="og:description"
+      content="Recursos de acessibilidade do portal do Mercado Central: atalhos de teclado, alto contraste, VLibras, leitura em voz alta e mais."
+    />
+    <meta property="og:url" content="%VITE_ENDERECO_SITE%acessibilidade.html" />
+  </head>
+  <body class="pagina-acessibilidade">
+    <!-- @include cabecalho.html pagina=acessibilidade -->
+
+    <main id="conteudo" tabindex="-1">
+      <div class="cabecalho-pagina">
+        <svg class="cabecalho-pagina__icone" aria-hidden="true" viewBox="0 0 64 64">
+          <circle cx="32" cy="10" r="5" fill="currentColor" />
+          <path
+            d="M10 20l22 4 22-4M32 24v16m0 0-9 16M32 40l9 16"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="4"
+            stroke-linecap="round"
+          />
+          <circle
+            cx="32"
+            cy="32"
+            r="29"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            opacity=".6"
+          />
+        </svg>
+        <div class="container">
+          <nav class="trilha" aria-label="Você está em">
+            <ol>
+              <li><a href="./index.html">Início</a></li>
+              <li><span aria-current="page">Acessibilidade</span></li>
+            </ol>
+          </nav>
+          <h1>Acessibilidade</h1>
+          <p>
+            Ajuste o site do seu jeito: letras maiores, outras cores, Libras, leitura em voz alta e
+            mais.
+          </p>
+        </div>
+      </div>
+
+      <div class="secao">
+        <div class="container conteudo-texto">
+          <section aria-labelledby="recursos-titulo">
+            <header class="titulo-modulo">
+              <h2 id="recursos-titulo">Recursos disponíveis</h2>
+              <span class="titulo-modulo__sub">Em todas as páginas</span>
+            </header>
+            <ul class="recursos-grade">
+              <li class="recurso">
+                <span class="recurso__icone" aria-hidden="true"
+                  ><svg viewBox="0 0 24 24" width="30" height="30">
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="9"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    />
+                    <path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" /></svg
+                ></span>
+                <h3 class="recurso__titulo">Alto contraste</h3>
+                <p>Preto, branco e amarelo, como pede o eMAG. Também há modo escuro no painel.</p>
+                <button
+                  type="button"
+                  class="botao botao--pequeno botao--contorno recurso__botao"
+                  data-alternar-preferencia="cores"
+                  data-valor="alto"
+                  aria-pressed="false"
+                >
+                  Experimentar<span class="somente-leitor">: Alto contraste</span>
+                </button>
+              </li>
+              <li class="recurso">
+                <span class="recurso__icone" aria-hidden="true"
+                  ><svg viewBox="0 0 24 24" width="30" height="30">
+                    <text
+                      x="1"
+                      y="18"
+                      font-size="15"
+                      font-weight="800"
+                      fill="currentColor"
+                      font-family="Arial"
+                    >
+                      A
+                    </text>
+                    <text
+                      x="12"
+                      y="18"
+                      font-size="10"
+                      font-weight="800"
+                      fill="currentColor"
+                      font-family="Arial"
+                    >
+                      A
+                    </text>
+                    <path
+                      d="M19 5v6M16 8h6"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    /></svg
+                ></span>
+                <h3 class="recurso__titulo">Tamanho do texto</h3>
+                <p>Aumente até 200% sem quebrar a página. Use A− e A+ no topo.</p>
+                <button
+                  type="button"
+                  class="botao botao--pequeno botao--contorno recurso__botao"
+                  data-acao="fonte-maior"
+                >
+                  Aumentar agora<span class="somente-leitor"> o texto</span>
+                </button>
+              </li>
+              <li class="recurso">
+                <span class="recurso__icone" aria-hidden="true"
+                  ><svg viewBox="0 0 24 24" width="30" height="30">
+                    <path
+                      d="M5 19 11 5l6 14M7.5 14h7"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M18 19h3"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    /></svg
+                ></span>
+                <h3 class="recurso__titulo">Fonte para dislexia</h3>
+                <p>OpenDyslexic, ou Atkinson Hyperlegible para baixa visão.</p>
+                <button
+                  type="button"
+                  class="botao botao--pequeno botao--contorno recurso__botao"
+                  data-alternar-preferencia="fonte"
+                  data-valor="dislexia"
+                  aria-pressed="false"
+                >
+                  Experimentar<span class="somente-leitor">: Fonte para dislexia</span>
+                </button>
+              </li>
+              <li class="recurso">
+                <span class="recurso__icone" aria-hidden="true"
+                  ><svg viewBox="0 0 24 24" width="30" height="30">
+                    <path
+                      d="M4 6h16M4 12h16M4 18h16"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M2 9l2-3 2 3M2 15l2 3 2-3"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                    /></svg
+                ></span>
+                <h3 class="recurso__titulo">Espaçamento ampliado</h3>
+                <p>Mais espaço entre linhas, letras, palavras e parágrafos.</p>
+                <button
+                  type="button"
+                  class="botao botao--pequeno botao--contorno recurso__botao"
+                  data-alternar-preferencia="espacamento"
+                  aria-pressed="false"
+                >
+                  Experimentar<span class="somente-leitor">: Espaçamento ampliado</span>
+                </button>
+              </li>
+              <li class="recurso">
+                <span class="recurso__icone" aria-hidden="true"
+                  ><svg viewBox="0 0 24 24" width="30" height="30">
+                    <rect
+                      x="2"
+                      y="9"
+                      width="20"
+                      height="6"
+                      rx="1"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    />
+                    <path
+                      d="M2 5h20M2 19h20"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      opacity=".4"
+                    /></svg
+                ></span>
+                <h3 class="recurso__titulo">Régua de leitura</h3>
+                <p>Uma faixa clara acompanha o mouse ou o teclado e escurece o resto.</p>
+                <button
+                  type="button"
+                  class="botao botao--pequeno botao--contorno recurso__botao"
+                  data-alternar-preferencia="regua"
+                  aria-pressed="false"
+                >
+                  Experimentar<span class="somente-leitor">: Régua de leitura</span>
+                </button>
+              </li>
+              <li class="recurso">
+                <span class="recurso__icone" aria-hidden="true"
+                  ><svg viewBox="0 0 24 24" width="30" height="30">
+                    <path
+                      d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    /></svg
+                ></span>
+                <h3 class="recurso__titulo">Destaque de links</h3>
+                <p>Todos os links ficam sublinhados e marcados em amarelo.</p>
+                <button
+                  type="button"
+                  class="botao botao--pequeno botao--contorno recurso__botao"
+                  data-alternar-preferencia="links"
+                  aria-pressed="false"
+                >
+                  Experimentar<span class="somente-leitor">: Destaque de links</span>
+                </button>
+              </li>
+              <li class="recurso">
+                <span class="recurso__icone" aria-hidden="true"
+                  ><svg viewBox="0 0 24 24" width="30" height="30">
+                    <rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor" />
+                    <rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor" /></svg
+                ></span>
+                <h3 class="recurso__titulo">Pausar animações</h3>
+                <p>Para quem se incomoda com movimento na tela.</p>
+                <button
+                  type="button"
+                  class="botao botao--pequeno botao--contorno recurso__botao"
+                  data-alternar-preferencia="movimento"
+                  aria-pressed="false"
+                >
+                  Experimentar<span class="somente-leitor">: Pausar animações</span>
+                </button>
+              </li>
+              <li class="recurso">
+                <span class="recurso__icone" aria-hidden="true"
+                  ><svg viewBox="0 0 24 24" width="30" height="30">
+                    <path d="M5 3l14 9-6 1 3 7-3 1-3-7-5 4z" fill="currentColor" /></svg
+                ></span>
+                <h3 class="recurso__titulo">Cursor grande</h3>
+                <p>Ponteiro do mouse maior e com contorno.</p>
+                <button
+                  type="button"
+                  class="botao botao--pequeno botao--contorno recurso__botao"
+                  data-alternar-preferencia="cursor"
+                  aria-pressed="false"
+                >
+                  Experimentar<span class="somente-leitor">: Cursor grande</span>
+                </button>
+              </li>
+              <li class="recurso">
+                <span class="recurso__icone" aria-hidden="true"
+                  ><svg viewBox="0 0 24 24" width="30" height="30">
+                    <path
+                      d="M4 9v6h4l5 4V5L8 9zm12-1a5 5 0 0 1 0 8m2.5-10.5a8.5 8.5 0 0 1 0 13"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg
+                ></span>
+                <h3 class="recurso__titulo">Ouvir textos</h3>
+                <p>O livro inteiro em voz alta, ou qualquer texto que você selecionar.</p>
+                <button
+                  type="button"
+                  class="botao botao--pequeno botao--contorno recurso__botao"
+                  data-alternar-preferencia="leitorSelecao"
+                  aria-pressed="false"
+                >
+                  Experimentar<span class="somente-leitor">: Ouvir textos</span>
+                </button>
+              </li>
+              <li class="recurso">
+                <span class="recurso__icone" aria-hidden="true"
+                  ><svg viewBox="0 0 24 24" width="30" height="30">
+                    <path
+                      d="M8 13V6a1.5 1.5 0 0 1 3 0v5M11 11V4.5a1.5 1.5 0 0 1 3 0V11M14 11V6a1.5 1.5 0 0 1 3 0v7c0 4-2.5 7-6 7-2.5 0-4-1.5-5.5-4L4 13a1.5 1.5 0 0 1 2.5-1.5L8 13"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg
+                ></span>
+                <h3 class="recurso__titulo">VLibras</h3>
+                <p>
+                  Tradutor de Português para Libras do Governo Federal, ativo em todas as páginas.
+                </p>
+                <button
+                  type="button"
+                  class="botao botao--pequeno botao--contorno recurso__botao"
+                  data-alternar-preferencia="vlibras"
+                  aria-pressed="false"
+                >
+                  Experimentar<span class="somente-leitor">: VLibras</span>
+                </button>
+              </li>
+              <li class="recurso">
+                <span class="recurso__icone" aria-hidden="true"
+                  ><svg viewBox="0 0 24 24" width="30" height="30">
+                    <path
+                      d="M12 4v11m0 0-4-4m4 4 4-4M5 19h14"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg
+                ></span>
+                <h3 class="recurso__titulo">Livro em vários formatos</h3>
+                <p>PDF acessível, EPUB e TXT, compatíveis com leitores de tela e linha braile.</p>
+                <a class="botao botao--pequeno botao--contorno recurso__botao" href="./livro.html"
+                  >Ver<span class="somente-leitor"> Livro em vários formatos</span></a
+                >
+              </li>
+              <li class="recurso">
+                <span class="recurso__icone" aria-hidden="true"
+                  ><svg viewBox="0 0 24 24" width="30" height="30">
+                    <path
+                      d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    />
+                    <path
+                      d="M9 9h6M9 12h4"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                    /></svg
+                ></span>
+                <h3 class="recurso__titulo">Mapa em texto</h3>
+                <p>Lista de pontos e rotas descritas em palavras, além do mapa visual.</p>
+                <a class="botao botao--pequeno botao--contorno recurso__botao" href="./mapa.html"
+                  >Ver<span class="somente-leitor"> Mapa em texto</span></a
+                >
+              </li>
+            </ul>
+          </section>
+
+          <section aria-labelledby="atalhos-titulo">
+            <header class="titulo-modulo">
+              <h2 id="atalhos-titulo">Atalhos de teclado</h2>
+              <span class="titulo-modulo__sub">Para quem usa só o teclado</span>
+            </header>
+            <p>
+              Dá para usar o site inteiro sem mouse. Use a tecla <kbd>Alt</kbd> junto com um número
+              (no Mac, a tecla <kbd>Option</kbd>).
+            </p>
+            <div class="tabela-rolagem" tabindex="0" role="region" aria-labelledby="atalhos-titulo">
+              <table class="tabela">
+                <caption class="somente-leitor">
+                  Atalhos de teclado do portal
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Atalho</th>
+                    <th scope="col">O que faz</th>
+                    <th scope="col">Onde</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><kbd>Alt</kbd> + <kbd>1</kbd></td>
+                    <td>Ir para o conteúdo principal</td>
+                    <td>Todas as páginas</td>
+                  </tr>
+                  <tr>
+                    <td><kbd>Alt</kbd> + <kbd>2</kbd></td>
+                    <td>Ir para o menu</td>
+                    <td>Todas as páginas</td>
+                  </tr>
+                  <tr>
+                    <td><kbd>Alt</kbd> + <kbd>4</kbd></td>
+                    <td>Ir para o rodapé</td>
+                    <td>Todas as páginas</td>
+                  </tr>
+                  <tr>
+                    <td><kbd>Alt</kbd> + <kbd>5</kbd></td>
+                    <td>Abrir o painel de acessibilidade</td>
+                    <td>Todas as páginas</td>
+                  </tr>
+                  <tr>
+                    <td><kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>→</kbd> / <kbd>←</kbd></td>
+                    <td>Próximo / anterior capítulo</td>
+                    <td>Livro</td>
+                  </tr>
+                  <tr>
+                    <td><kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>L</kbd></td>
+                    <td>Ouvir ou pausar a leitura</td>
+                    <td>Livro</td>
+                  </tr>
+                  <tr>
+                    <td>Clicar duas vezes em um parágrafo</td>
+                    <td>Começar a ouvir daquele ponto</td>
+                    <td>Livro</td>
+                  </tr>
+                  <tr>
+                    <td><kbd>Tab</kbd> e <kbd>Enter</kbd></td>
+                    <td>Passar pelos pontos do mapa e escolher um</td>
+                    <td>Mapa</td>
+                  </tr>
+                  <tr>
+                    <td><kbd>+</kbd> / <kbd>−</kbd> e setas</td>
+                    <td>Aproximar, afastar e mover o mapa</td>
+                    <td>Mapa (com o mapa em foco)</td>
+                  </tr>
+                  <tr>
+                    <td><kbd>Esc</kbd></td>
+                    <td>Fechar painéis e sair do modo foco</td>
+                    <td>Todas as páginas</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section aria-labelledby="conformidade-titulo">
+            <header class="titulo-modulo">
+              <h2 id="conformidade-titulo">Nosso compromisso</h2>
+              <span class="titulo-modulo__sub">Um site para todas as pessoas</span>
+            </header>
+            <ul class="selos">
+              <li class="selo">
+                <strong>Regras do governo</strong
+                ><span>Segue o eMAG, o guia de acessibilidade dos sites públicos do Brasil.</span>
+              </li>
+              <li class="selo">
+                <strong>Padrão mundial</strong
+                ><span
+                  >Segue as recomendações internacionais de acessibilidade na internet (WCAG).</span
+                >
+              </li>
+              <li class="selo">
+                <strong>Lei de Inclusão</strong
+                ><span>Cumpre a Lei Brasileira de Inclusão da Pessoa com Deficiência.</span>
+              </li>
+              <li class="selo">
+                <strong>Cores fáceis de ler</strong
+                ><span>Todos os textos têm contraste suficiente para quem enxerga pouco.</span>
+              </li>
+            </ul>
+            <div class="contato-barreira">
+              <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24">
+                <path
+                  d="M4 5h16v11H8l-4 4z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M8 9h8M8 12h5"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+              <p>
+                <strong>Encontrou alguma barreira?</strong> Fale com a Prefeitura pelos canais
+                oficiais de atendimento
+                <span class="marcador-pendente">[inserir e-mail ou canal da Ouvidoria]</span>,
+                informando a página e o problema. Sua mensagem ajuda a melhorar o site.
+              </p>
+            </div>
+            <p>
+              <button
+                type="button"
+                class="botao"
+                data-abre-painel-acessibilidade
+                aria-haspopup="dialog"
+              >
+                Abrir painel de acessibilidade
+              </button>
+            </p>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- @include rodape.html -->
+    <script type="module" src="./src/paginas/acessibilidade.js"></script>
+  </body>
+</html>

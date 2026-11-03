@@ -1,0 +1,42 @@
+{
+  "name": "portal-mercado-central-slz",
+  "version": "1.0.0",
+  "description": "Portal acessível do Mercado Central de São Luís — livro digital e mapa turístico (Prefeitura de São Luís)",
+  "scripts": {
+    "iniciar": "vite --open",
+    "construir": "vite build",
+    "visualizar": "vite preview --open",
+    "testar": "vitest run",
+    "testar:observar": "vitest",
+    "verificar": "eslint src testes",
+    "formatar": "prettier --write src testes ferramentas",
+    "gerar-livro": "bash ferramentas/gerar-livro.sh",
+    "dev": "vite --open",
+    "build": "vite build",
+    "auditar": "node ferramentas/auditar-acessibilidade.mjs"
+  },
+  "dependencies": {
+    "@fontsource/atkinson-hyperlegible": "^5.3.0",
+    "@fontsource/merriweather": "^5.3.0",
+    "@fontsource/montserrat": "^5.3.0",
+    "@fontsource/opendyslexic": "^5.3.0",
+    "leaflet": "^1.9.4",
+    "marked": "^14.1.4"
+  },
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@eslint/js": "^9.39.5",
+    "eslint": "^9.39.5",
+    "globals": "^17.14.0",
+    "jsdom": "^25.0.1",
+    "playwright": "^1.63.0",
+    "prettier": "^3.9.10",
+    "vite": "^6.4.5",
+    "vitest": "^3.2.7"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#144670" />
+<meta name="author" content="Prefeitura Municipal de São Luís" />
+<link rel="icon" href="./icone.svg" type="image/svg+xml" />
+<link rel="manifest" href="./manifest.webmanifest" />
+<meta property="og:site_name" content="Prefeitura de São Luís — Portal do Mercado Central" />
+<meta property="og:locale" content="pt_BR" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="https://www.saoluis.ma.gov.br/mercado-central/img/compartilhar.png" />
+<meta
+  property="og:image:alt"
+  content="Ilustração da fachada do Mercado Central de São Luís com a faixa colorida da Prefeitura"
+/>
+<meta name="twitter:card" content="summary_large_image" />
+<script>
+  /* Aplica as preferências de acessibilidade ANTES da pintura da página
+     (evita "piscar" o tema claro para quem usa alto contraste ou modo escuro). */
+  (function () {
+    try {
+      var p = JSON.parse(localStorage.getItem('slz-mercado:preferencias') || '{}');
+      var r = document.documentElement;
+      if (p.escala) r.style.setProperty('--escala-fonte', p.escala);
+      if (p.cores === 'escuro') r.setAttribute('data-tema', 'escuro');
+      if (p.cores === 'alto') r.setAttribute('data-contraste', 'alto');
+      if (p.fonte && p.fonte !== 'padrao') r.setAttribute('data-fonte', p.fonte);
+      if (p.espacamento) r.setAttribute('data-espacamento', 'amplo');
+      if (p.links) r.setAttribute('data-links', 'destacados');
+      if (p.movimento) r.setAttribute('data-movimento', 'reduzido');
+      if (p.cursor) r.setAttribute('data-cursor', 'grande');
+    } catch (e) {}
+  })();
+</script>
+
+    <title>Mapa turístico — Mercado Central de São Luís | Prefeitura de São Luís</title>
+    <meta
+      name="description"
+      content="Mapa interativo e acessível: a partir do Mercado Central, descubra os pontos turísticos da Ilha de São Luís."
+    />
+    <link rel="canonical" href="https://www.saoluis.ma.gov.br/mercado-central/mapa.html" />
+    <meta
+      property="og:title"
+      content="Mapa turístico — Mercado Central de São Luís | Prefeitura de São Luís"
+    />
+    <meta
+      property="og:description"
+      content="Mapa interativo e acessível: a partir do Mercado Central, descubra os pontos turísticos da Ilha de São Luís."
+    />
+    <meta property="og:url" content="https://www.saoluis.ma.gov.br/mercado-central/mapa.html" />
+    <script type="module" crossorigin src="./assets/mapa-CAOPbytP.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/modulos-D9ixZTVa.js">
+    <link rel="modulepreload" crossorigin href="./assets/pontos-turisticos-BWk8hFS6.js">
+    <link rel="stylesheet" crossorigin href="./assets/modulos-Dye-sCMR.css">
+    <link rel="stylesheet" crossorigin href="./assets/mapa-BW4Btd27.css">
+  </head>
+  <body class="pagina-mapa">
+    <!-- Faixa "versão de demonstração": aparece quando VITE_DEMONSTRACAO=true (ex.: GitHub Pages) -->
+<div class="faixa-demonstracao" data-mostrar="false" role="note">
+  <strong>Versão de demonstração.</strong> Este não é o site oficial da Prefeitura de São Luís — o
+  conteúdo é provisório.
+</div>
+<!-- Barra superior no padrão eMAG: atalhos de teclado + acessibilidade rápida -->
+<div class="barra-gov nao-imprimir">
+  <div class="container barra-gov__conteudo">
+    <nav class="barra-gov__atalhos" aria-label="Atalhos de acessibilidade">
+      <ul>
+        <li>
+          <a href="#conteudo">Ir para o conteúdo <kbd>1</kbd></a>
+        </li>
+        <li>
+          <a href="#menu-principal">Ir para o menu <kbd>2</kbd></a>
+        </li>
+        <li>
+          <a href="#rodape">Ir para o rodapé <kbd>4</kbd></a>
+        </li>
+      </ul>
+    </nav>
+    <ul class="barra-gov__acoes" aria-label="Ajustes rápidos">
+      <li>
+        <a href="./acessibilidade.html" data-menu="acessibilidade-link">Acessibilidade</a>
+      </li>
+      <li>
+        <button type="button" class="barra-gov__botao" data-acao="contraste" aria-pressed="false">
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18">
+            <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2" />
+            <path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" />
+          </svg>
+          Alto contraste
+        </button>
+      </li>
+      <li>
+        <div class="barra-gov__fonte" role="group" aria-label="Tamanho do texto">
+          <button type="button" class="barra-gov__botao" data-acao="fonte-menor">
+            A−<span class="somente-leitor"> diminuir texto</span>
+          </button>
+          <button type="button" class="barra-gov__botao" data-acao="fonte-padrao">
+            A<span class="somente-leitor"> tamanho padrão</span>
+          </button>
+          <button type="button" class="barra-gov__botao" data-acao="fonte-maior">
+            A+<span class="somente-leitor"> aumentar texto</span>
+          </button>
+        </div>
+      </li>
+      <li>
+        <button
+          type="button"
+          class="barra-gov__botao barra-gov__botao--destaque"
+          data-abre-painel-acessibilidade
+          aria-haspopup="dialog"
+        >
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18">
+            <circle cx="12" cy="4" r="2" fill="currentColor" />
+            <path
+              d="M4 8l8 1.5L20 8M12 9.5V15m0 0l-3.5 6M12 15l3.5 6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+          Mais opções <kbd>5</kbd>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<header class="cabecalho" id="topo">
+  <div class="container cabecalho__conteudo">
+    <a
+      class="marca"
+      href="./index.html"
+      aria-label="Prefeitura de São Luís — página inicial do portal do Mercado Central"
+    >
+      <!--
+        ESPAÇO RESERVADO PARA A LOGOMARCA OFICIAL.
+        Substitua o arquivo public/img/logo-prefeitura.svg pelo logo oficial
+        fornecido pela SECOM (mantenha o mesmo nome ou altere o src abaixo).
+      -->
+      <img
+        class="marca__logo manter-cores"
+        src="./img/logo-prefeitura.svg"
+        alt=""
+        width="52"
+        height="52"
+      />
+      <span class="marca__texto">
+        <span class="marca__orgao">Prefeitura de</span>
+        <span class="marca__cidade">São Luís</span>
+      </span>
+    </a>
+
+    <button type="button" class="menu-botao" aria-expanded="false" aria-controls="menu-principal">
+      <span class="menu-botao__icone" aria-hidden="true"
+        ><span></span><span></span><span></span
+      ></span>
+      <span class="menu-botao__rotulo">Menu</span>
+    </button>
+
+    <nav class="menu" id="menu-principal" aria-label="Menu principal" tabindex="-1">
+      <ul class="menu__lista">
+        <li><a class="menu__link" href="./index.html" data-menu="inicio">Início</a></li>
+        <li><a class="menu__link" href="./livro.html" data-menu="livro">O Livro</a></li>
+        <li><a class="menu__link" href="./mapa.html" data-menu="mapa" aria-current="page">Mapa turístico</a></li>
+        <li>
+          <a class="menu__link" href="./acessibilidade.html" data-menu="acessibilidade"
+            >Acessibilidade</a
+          >
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="faixa-marca" aria-hidden="true"></div>
+</header>
+<!-- Painel completo de acessibilidade (dialog nativo: prende o foco e fecha com Esc) -->
+<dialog
+  class="painel-acessibilidade"
+  id="painel-acessibilidade"
+  aria-labelledby="painel-acessibilidade-titulo"
+>
+  <div class="painel-acessibilidade__topo">
+    <h2 id="painel-acessibilidade-titulo">Acessibilidade</h2>
+    <button
+      type="button"
+      class="botao-icone"
+      data-fecha-painel
+      aria-label="Fechar painel de acessibilidade"
+    >
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22">
+        <path
+          d="M6 6l12 12M18 6L6 18"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+        />
+      </svg>
+    </button>
+  </div>
+  <p class="painel-acessibilidade__ajuda">
+    Suas escolhas ficam salvas neste navegador e valem para todo o site, inclusive para o livro.
+  </p>
+
+  <form class="painel-acessibilidade__form" data-formulario-acessibilidade>
+    <fieldset class="opcao-grupo">
+      <legend>Tamanho do texto</legend>
+      <div class="opcao-escala">
+        <button type="button" class="botao botao--contorno" data-acao="fonte-menor">
+          A−<span class="somente-leitor"> diminuir texto</span>
+        </button>
+        <output class="opcao-escala__valor" data-saida="escala" aria-live="polite">100%</output>
+        <button type="button" class="botao botao--contorno" data-acao="fonte-maior">
+          A+<span class="somente-leitor"> aumentar texto</span>
+        </button>
+      </div>
+    </fieldset>
+
+    <fieldset class="opcao-grupo">
+      <legend>Cores</legend>
+      <div class="opcao-cartoes">
+        <label class="opcao-cartao"
+          ><input type="radio" name="cores" value="padrao" /><span
+            class="amostra amostra--padrao"
+            aria-hidden="true"
+            >Aa</span
+          >Padrão</label
+        >
+        <label class="opcao-cartao"
+          ><input type="radio" name="cores" value="escuro" /><span
+            class="amostra amostra--escuro"
+            aria-hidden="true"
+            >Aa</span
+          >Escuro</label
+        >
+        <label class="opcao-cartao"
+          ><input type="radio" name="cores" value="alto" /><span
+            class="amostra amostra--alto"
+            aria-hidden="true"
+            >Aa</span
+          >Alto contraste</label
+        >
+      </div>
+    </fieldset>
+
+    <fieldset class="opcao-grupo">
+      <legend>Fonte</legend>
+      <div class="opcao-cartoes">
+        <label class="opcao-cartao"
+          ><input type="radio" name="fonte" value="padrao" /><span
+            class="amostra"
+            aria-hidden="true"
+            style="font-family: Montserrat"
+            >Aa</span
+          >Padrão</label
+        >
+        <label class="opcao-cartao"
+          ><input type="radio" name="fonte" value="legivel" /><span
+            class="amostra"
+            aria-hidden="true"
+            style="font-family: 'Atkinson Hyperlegible'"
+            >Aa</span
+          >Alta legibilidade</label
+        >
+        <label class="opcao-cartao"
+          ><input type="radio" name="fonte" value="dislexia" /><span
+            class="amostra"
+            aria-hidden="true"
+            style="font-family: OpenDyslexic"
+            >Aa</span
+          >Dislexia</label
+        >
+      </div>
+    </fieldset>
+
+    <fieldset class="opcao-grupo">
+      <legend>Leitura e navegação</legend>
+      <label class="interruptor"
+        ><input type="checkbox" role="switch" name="espacamento" /><span
+          class="interruptor__trilho"
+          aria-hidden="true"
+        ></span
+        >Aumentar espaçamento do texto</label
+      >
+      <label class="interruptor"
+        ><input type="checkbox" role="switch" name="links" /><span
+          class="interruptor__trilho"
+          aria-hidden="true"
+        ></span
+        >Destacar links</label
+      >
+      <label class="interruptor"
+        ><input type="checkbox" role="switch" name="regua" /><span
+          class="interruptor__trilho"
+          aria-hidden="true"
+        ></span
+        >Régua de leitura (acompanha o mouse ou o teclado)</label
+      >
+      <label class="interruptor"
+        ><input type="checkbox" role="switch" name="movimento" /><span
+          class="interruptor__trilho"
+          aria-hidden="true"
+        ></span
+        >Pausar animações</label
+      >
+      <label class="interruptor"
+        ><input type="checkbox" role="switch" name="cursor" /><span
+          class="interruptor__trilho"
+          aria-hidden="true"
+        ></span
+        >Cursor grande</label
+      >
+      <label class="interruptor"
+        ><input type="checkbox" role="switch" name="leitorSelecao" /><span
+          class="interruptor__trilho"
+          aria-hidden="true"
+        ></span
+        >Ler em voz alta o texto que eu selecionar</label
+      >
+    </fieldset>
+
+    <fieldset class="opcao-grupo">
+      <legend>Libras</legend>
+      <label class="interruptor"
+        ><input type="checkbox" role="switch" name="vlibras" /><span
+          class="interruptor__trilho"
+          aria-hidden="true"
+        ></span
+        >Mostrar o botão do VLibras (tradutor de Libras do Governo Federal)</label
+      >
+      <p class="opcao-nota">
+        Ativado por padrão. Clique no botão azul com as mãos, no canto direito da tela, e depois
+        selecione um texto para o avatar traduzir para Libras. Requer internet.
+      </p>
+    </fieldset>
+
+    <div class="painel-acessibilidade__rodape">
+      <button type="button" class="botao botao--contorno" data-acao="redefinir">
+        Restaurar padrão
+      </button>
+      <a class="botao botao--texto" href="./acessibilidade.html">Atalhos e recursos</a>
+    </div>
+  </form>
+</dialog>
+<div class="regua-leitura" aria-hidden="true" hidden></div>
+
+<div
+  class="anunciador somente-leitor"
+  role="status"
+  aria-live="polite"
+  aria-atomic="true"
+  id="anunciador"
+></div>
+
+
+    <main id="conteudo" tabindex="-1">
+      <div class="cabecalho-pagina">
+        <svg class="cabecalho-pagina__icone" aria-hidden="true" viewBox="0 0 64 64">
+          <path
+            d="M22 10 6 16v40l16-6 20 6 16-6V10l-16 6z"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linejoin="round"
+          />
+          <path d="M22 10v40M42 16v40" stroke="currentColor" stroke-width="3" />
+          <circle cx="32" cy="30" r="5" fill="currentColor" />
+        </svg>
+        <div class="container">
+          <nav class="trilha" aria-label="Você está em">
+            <ol>
+              <li><a href="./index.html">Início</a></li>
+              <li><span aria-current="page">Mapa turístico</span></li>
+            </ol>
+          </nav>
+          <h1>Do Mercado para a ilha</h1>
+          <p>
+            O Mercado Central é o ponto de partida. Escolha um destino para ver a distância, o tempo
+            e o caminho passo a passo.
+          </p>
+        </div>
+      </div>
+
+      <section class="secao secao--mapa" aria-labelledby="explorar-titulo">
+        <div class="container">
+          <header class="titulo-modulo">
+            <h2 id="explorar-titulo">Explore a Ilha de São Luís</h2>
+            <span class="titulo-modulo__sub">Mapa interativo e lista acessível</span>
+          </header>
+
+          <p class="dica-mapa">
+            <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2" />
+              <path
+                d="M12 11v6M12 7.5v.5"
+                stroke="currentColor"
+                stroke-width="2.4"
+                stroke-linecap="round"
+              />
+            </svg>
+            <span
+              >Usa leitor de tela ou teclado? A <a href="#guia-pontos">lista de pontos</a> tem todas
+              as informações do mapa, com rotas descritas em texto.</span
+            >
+          </p>
+
+          <div class="explorar">
+            <!-- Filtros + lista -->
+            <aside class="explorar__guia" id="guia-pontos" aria-labelledby="guia-titulo">
+              <h3 id="guia-titulo" class="explorar__titulo">Pontos turísticos</h3>
+              <div class="campo">
+                <label for="busca-pontos">Buscar por nome ou bairro</label>
+                <input
+                  id="busca-pontos"
+                  type="search"
+                  data-busca-pontos
+                  autocomplete="off"
+                  placeholder="Ex.: praia, igreja, Rua Portugal"
+                />
+              </div>
+              <div class="explorar__filtros">
+                <p class="explorar__rotulo" id="rotulo-filtros">Mostrar categorias:</p>
+                <ul class="chips" data-filtros aria-labelledby="rotulo-filtros"></ul>
+                <button type="button" class="botao botao--texto botao--pequeno" data-filtros-todos>
+                  Mostrar todas
+                </button>
+              </div>
+              <div class="perto-de-mim">
+                <button
+                  type="button"
+                  class="botao botao--contorno botao--pequeno"
+                  data-perto-de-mim
+                >
+                  <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="3.5" fill="currentColor" />
+                    <path
+                      d="M12 2v3M12 19v3M2 12h3M19 12h3"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    />
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="7.5"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    />
+                  </svg>
+                  Perto de mim
+                </button>
+                <p class="perto-de-mim__nota" data-nota-localizacao>
+                  Ordena os pontos pela sua distância. Sua localização fica só no seu aparelho.
+                </p>
+              </div>
+              <p class="explorar__contagem" data-contagem aria-hidden="true"></p>
+              <ul
+                class="lista-pontos"
+                data-lista-pontos
+                aria-label="Pontos ordenados do mais perto ao mais longe do Mercado Central"
+              ></ul>
+            </aside>
+
+            <!-- Mapa + detalhes -->
+            <div class="explorar__mapa">
+              <div class="vistas" role="group" aria-label="Enquadramento do mapa">
+                <button
+                  type="button"
+                  class="botao botao--pequeno botao--secundario"
+                  data-vista="mercado"
+                >
+                  <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="4" fill="currentColor" />
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="9"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    />
+                  </svg>
+                  Mercado Central
+                </button>
+                <button
+                  type="button"
+                  class="botao botao--pequeno botao--contorno"
+                  data-vista="centro"
+                >
+                  Centro Histórico
+                </button>
+                <button
+                  type="button"
+                  class="botao botao--pequeno botao--contorno"
+                  data-vista="ilha"
+                >
+                  Ilha inteira
+                </button>
+              </div>
+              <div
+                class="mapa"
+                data-mapa
+                role="region"
+                aria-label="Mapa interativo dos pontos turísticos. Use Tab para percorrer os marcadores e Enter para selecionar."
+              ></div>
+              <ul class="legenda" aria-label="Legenda do mapa">
+                <li>
+                  <span class="legenda__mercado" aria-hidden="true"></span>Mercado Central (ponto de
+                  partida)
+                </li>
+                <li>
+                  <span class="legenda__raio" aria-hidden="true"></span>Ligação direta com o Mercado
+                </li>
+                <li>
+                  <span class="legenda__rota" aria-hidden="true"></span>Caminho calculado pelas ruas
+                </li>
+              </ul>
+              <section class="detalhes" data-detalhes aria-labelledby="detalhes-titulo">
+                <h3 id="detalhes-titulo">Escolha um destino</h3>
+                <p>
+                  Selecione um ponto na lista ou toque em um marcador no mapa. Você verá a distância
+                  a partir do Mercado Central, quanto tempo leva e o caminho passo a passo.
+                </p>
+              </section>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="secao secao--suave" id="roteiros" aria-labelledby="roteiros-titulo">
+        <div class="container">
+          <header class="titulo-modulo">
+            <h2 id="roteiros-titulo">Roteiros prontos</h2>
+            <span class="titulo-modulo__sub">Saindo do Mercado Central</span>
+          </header>
+          <p class="lead">
+            Escolha um roteiro para ver todas as paradas no mapa, com o caminho e as instruções em
+            texto.
+          </p>
+          <ul class="roteiros" data-roteiros></ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="rodape" id="rodape" tabindex="-1">
+  <div class="faixa-marca" aria-hidden="true"></div>
+  <div class="container rodape__grade">
+    <div class="rodape__marca">
+      <img
+        class="manter-cores"
+        src="./img/logo-prefeitura-branca.svg"
+        alt=""
+        width="56"
+        height="56"
+      />
+      <p><strong>Prefeitura de São Luís</strong><br />Portal do Mercado Central</p>
+      <p class="rodape__nota">
+        Conteúdo de demonstração. Textos, logomarca e dados de contato serão substituídos pelos
+        oficiais.
+      </p>
+    </div>
+    <nav aria-label="Mapa do site">
+      <h2 class="rodape__titulo">Navegue</h2>
+      <ul>
+        <li><a href="./index.html">Início</a></li>
+        <li><a href="./livro.html">O Livro</a></li>
+        <li><a href="./mapa.html">Mapa turístico</a></li>
+        <li><a href="./acessibilidade.html">Acessibilidade</a></li>
+      </ul>
+    </nav>
+    <div>
+      <h2 class="rodape__titulo">Mercado Central</h2>
+      <address>
+        Rua de São João, Centro<br />
+        São Luís – MA<br />
+        Seg. a sáb., das 6h às 18h<br />
+        <span class="rodape__nota">(horário ilustrativo)</span>
+      </address>
+    </div>
+    <div>
+      <h2 class="rodape__titulo">Acessibilidade</h2>
+      <p>
+        Feito para todas as pessoas: funciona com leitor de tela, só com o teclado, em Libras e com
+        letras grandes.
+      </p>
+      <a href="#topo" class="rodape__topo">Voltar ao topo ↑</a>
+    </div>
+  </div>
+</footer>
+
+<!--
+  VLibras — tradutor de Libras do Governo Federal (marcação oficial).
+  O script é carregado por src/recursos/acessibilidade/vlibras.js.
+-->
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper>
+    <div class="vw-plugin-top-wrapper"></div>
+  </div>
+</div>
+
+  </body>
+</html>

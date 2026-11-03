@@ -1,0 +1,236 @@
+/* ---------- Painel de acessibilidade (dialog lateral) ---------- */
+.painel-acessibilidade {
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: min(420px, 100vw);
+  max-width: 100vw;
+  height: 100dvh;
+  max-height: 100dvh;
+  margin: 0;
+  padding: var(--e-5);
+  border: 0;
+  border-left: 6px solid transparent;
+  border-image: linear-gradient(
+      to bottom,
+      var(--faixa-1),
+      var(--faixa-3),
+      var(--faixa-5),
+      var(--faixa-7)
+    )
+    1;
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+  overflow-y: auto;
+  box-shadow: var(--sombra-3);
+}
+.painel-acessibilidade[open] {
+  animation: painel-entra 0.3s ease;
+}
+.painel-acessibilidade::backdrop {
+  background: rgb(11 42 69 / 0.55);
+  backdrop-filter: blur(2px);
+}
+@keyframes painel-entra {
+  from {
+    transform: translateX(40px);
+    opacity: 0;
+  }
+}
+:root[data-contraste='alto'] .painel-acessibilidade {
+  border-left: 3px solid #fff;
+  border-image: none;
+}
+.painel-acessibilidade__topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.painel-acessibilidade__topo h2 {
+  font-size: var(--texto-xl);
+  margin: 0;
+}
+.painel-acessibilidade__ajuda {
+  color: var(--cor-texto-suave);
+  font-size: var(--texto-sm);
+}
+.opcao-grupo {
+  border: 0;
+  border-top: 1px solid var(--cor-borda);
+  margin: 0;
+  padding: var(--e-4) 0;
+}
+.opcao-grupo legend {
+  font-family: var(--fonte-ui);
+  font-weight: 800;
+  color: var(--cor-titulo);
+  padding: 0;
+  margin-bottom: var(--e-3);
+  float: left;
+  width: 100%;
+}
+.opcao-grupo legend + * {
+  clear: both;
+}
+.opcao-escala {
+  display: flex;
+  align-items: center;
+  gap: var(--e-3);
+}
+.opcao-escala__valor {
+  min-width: 4ch;
+  text-align: center;
+  font-weight: 800;
+  font-size: var(--texto-lg);
+}
+.opcao-cartoes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--e-2);
+}
+.opcao-cartao {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: var(--e-1);
+  padding: var(--e-3) var(--e-2);
+  border: 2px solid var(--cor-borda);
+  border-radius: var(--raio-md);
+  font-size: var(--texto-xs);
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+}
+.opcao-cartao input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  margin: 0;
+  cursor: pointer;
+}
+.opcao-cartao:has(input:checked) {
+  border-color: var(--cor-primaria);
+  background: var(--cor-fundo-destaque);
+  box-shadow: inset 0 0 0 1px var(--cor-primaria);
+}
+.opcao-cartao:has(input:focus-visible) {
+  outline: 3px solid var(--cor-foco);
+  outline-offset: 2px;
+}
+.amostra {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--raio);
+  font-size: 1.2rem;
+  font-weight: 800;
+  background: #fff;
+  color: var(--marca-marinho-700);
+  border: 1px solid #c9d1da;
+}
+.amostra--escuro {
+  background: #0c1824;
+  color: #c9e7f7;
+}
+.amostra--alto {
+  background: #000;
+  color: #ff0;
+}
+.opcao-nota {
+  font-size: var(--texto-xs);
+  color: var(--cor-texto-suave);
+  margin: var(--e-1) 0 0;
+}
+.painel-acessibilidade__rodape {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e-3);
+  padding-top: var(--e-4);
+  border-top: 1px solid var(--cor-borda);
+}
+
+/* ---------- Régua de leitura ---------- */
+.regua-leitura {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 3.2em;
+  z-index: 2000;
+  pointer-events: none;
+  box-shadow: 0 0 0 100vmax rgb(0 0 0 / 0.55);
+  border-block: 3px solid var(--faixa-1);
+  transform: translateY(-50%);
+}
+
+/* ---------- Rodapé ---------- */
+.rodape {
+  background: var(--marca-marinho-800);
+  color: #e7eef4;
+  font-size: var(--texto-sm);
+}
+:root[data-contraste='alto'] .rodape {
+  background: #000;
+  border-top: 2px solid #fff;
+}
+.rodape a {
+  color: #fff;
+}
+.rodape a:hover {
+  color: var(--faixa-1);
+}
+:root[data-contraste='alto'] .rodape a {
+  color: #ffff00;
+}
+.rodape__grade {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(3, 1fr);
+  gap: var(--e-6);
+  padding-block: var(--e-7);
+}
+.rodape__marca img {
+  width: 56px;
+}
+.rodape__titulo {
+  color: #fff;
+  font-size: var(--texto-md);
+  margin-bottom: var(--e-3);
+}
+.rodape ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--e-2);
+}
+.rodape address {
+  font-style: normal;
+}
+.rodape__nota {
+  font-size: var(--texto-xs);
+  color: #c4d2de;
+}
+.rodape__topo {
+  display: inline-block;
+  margin-top: var(--e-2);
+  font-weight: 700;
+}
+@media (max-width: 900px) {
+  .rodape__grade {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 560px) {
+  .rodape__grade {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Botão flutuante do VLibras acima de outros elementos */
+[vw] {
+  z-index: 3000 !important;
+}
+/* o elemento do VLibras v7 tem display próprio; garante que "hidden" funcione */
+#vlibras-access-wrapper[hidden],
+#vlibras-app-root[hidden] {
+  display: none !important;
+}

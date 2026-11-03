@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <!-- @include cabeca.html -->
+    <title>Mercado Central de São Luís — Livro e Mapa Turístico | Prefeitura de São Luís</title>
+    <meta
+      name="description"
+      content="Portal acessível do Mercado Central de São Luís: leia ou ouça o livro, e explore o mapa dos pontos turísticos da ilha a partir do Mercado."
+    />
+    <link rel="canonical" href="%VITE_ENDERECO_SITE%" />
+    <meta
+      property="og:title"
+      content="Mercado Central de São Luís — Livro e Mapa Turístico | Prefeitura de São Luís"
+    />
+    <meta
+      property="og:description"
+      content="Portal acessível do Mercado Central de São Luís: leia ou ouça o livro, e explore o mapa dos pontos turísticos da ilha a partir do Mercado."
+    />
+    <meta property="og:url" content="%VITE_ENDERECO_SITE%" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "TouristAttraction",
+        "name": "Mercado Central de São Luís",
+        "description": "Mercado público do Centro Histórico de São Luís, inaugurado em 1941 em estilo Art Déco.",
+        "isAccessibleForFree": true,
+        "publicAccess": true,
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Rua de São João, Centro",
+          "addressLocality": "São Luís",
+          "addressRegion": "MA",
+          "addressCountry": "BR"
+        },
+        "geo": { "@type": "GeoCoordinates", "latitude": -2.5344761, "longitude": -44.3011069 },
+        "provider": {
+          "@type": "GovernmentOrganization",
+          "name": "Prefeitura Municipal de São Luís",
+          "url": "https://www.saoluis.ma.gov.br"
+        }
+      }
+    </script>
+  </head>
+  <body class="pagina-inicio">
+    <!-- @include cabecalho.html pagina=inicio -->
+
+    <main id="conteudo" tabindex="-1">
+      <!-- Destaque -->
+      <section class="destaque" aria-labelledby="destaque-titulo">
+        <div class="container destaque__grade">
+          <div class="destaque__texto">
+            <p class="destaque__selo">Patrimônio de São Luís</p>
+            <h1 id="destaque-titulo">Mercado Central <span>de São Luís</span></h1>
+            <p class="destaque__lead">
+              Memória, sabores e gente da nossa ilha. Leia ou ouça o livro do Mercado e descubra, a
+              partir dele, os caminhos para os pontos turísticos de São Luís.
+            </p>
+            <div class="destaque__acoes">
+              <a class="botao botao--secundario" href="./livro.html">
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24">
+                  <path
+                    d="M4 5c3-1.5 5.5-1.5 8 0 2.5-1.5 5-1.5 8 0v14c-3-1.5-5.5-1.5-8 0-2.5-1.5-5-1.5-8 0z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linejoin="round"
+                  />
+                  <path d="M12 5v14" stroke="currentColor" stroke-width="2" />
+                </svg>
+                Ler o livro
+              </a>
+              <a class="botao botao--claro" href="./mapa.html">
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24">
+                  <path
+                    d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  />
+                  <circle cx="12" cy="9" r="2.5" fill="currentColor" />
+                </svg>
+                Explorar o mapa
+              </a>
+            </div>
+          </div>
+          <figure class="destaque__ilustracao">
+            <img
+              class="ilustracao"
+              src="./src/imagens/fachada-mercado.svg"
+              width="560"
+              height="420"
+              alt="Ilustração da fachada Art Déco do Mercado Central, com torre central escalonada, letreiro, marquise e escadaria, e barracas coloridas à frente."
+            />
+          </figure>
+        </div>
+        <div class="faixa-marca destaque__faixa" aria-hidden="true"></div>
+      </section>
+
+      <!-- Acesso rápido (mesmo padrão do portal da Prefeitura) -->
+      <section class="secao" aria-labelledby="acesso-titulo">
+        <div class="container">
+          <header class="titulo-modulo">
+            <h2 id="acesso-titulo">Acesso rápido</h2>
+            <span class="titulo-modulo__sub">Escolha por onde começar</span>
+          </header>
+          <ul class="cartoes">
+            <li>
+              <article class="cartao">
+                <span class="cartao__icone" aria-hidden="true">
+                  <svg width="32" height="32" viewBox="0 0 24 24">
+                    <path
+                      d="M4 5c3-1.5 5.5-1.5 8 0 2.5-1.5 5-1.5 8 0v14c-3-1.5-5.5-1.5-8 0-2.5-1.5-5-1.5-8 0z"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linejoin="round"
+                    />
+                    <path d="M12 5v14" stroke="currentColor" stroke-width="1.8" />
+                  </svg>
+                </span>
+                <h3><a class="cartao__link" href="./livro.html">O livro do Mercado</a></h3>
+                <p>
+                  A história do Mercado Central contada em capítulos curtos, com leitor que ajusta
+                  letras, cores e espaçamento.
+                </p>
+                <span class="cartao__acao" aria-hidden="true">Ler agora →</span>
+              </article>
+            </li>
+            <li>
+              <article class="cartao">
+                <span class="cartao__icone" aria-hidden="true">
+                  <svg width="32" height="32" viewBox="0 0 24 24">
+                    <path
+                      d="M4 9v6h4l5 4V5L8 9zm12-1a5 5 0 0 1 0 8m2.5-10.5a8.5 8.5 0 0 1 0 13"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+                <h3><a class="cartao__link" href="./livro.html#leitor">Ouça o livro</a></h3>
+                <p>
+                  Leitura em voz alta, parágrafo por parágrafo, com destaque do trecho e controle de
+                  velocidade.
+                </p>
+                <span class="cartao__acao" aria-hidden="true">Ouvir →</span>
+              </article>
+            </li>
+            <li>
+              <article class="cartao">
+                <span class="cartao__icone" aria-hidden="true">
+                  <svg width="32" height="32" viewBox="0 0 24 24">
+                    <path
+                      d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2zM9 4v14M15 6v14"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+                <h3><a class="cartao__link" href="./mapa.html">Mapa turístico</a></h3>
+                <p>
+                  Do Mercado para <span data-total-pontos>vários</span> destinos da ilha, com
+                  distância, tempo e rota passo a passo.
+                </p>
+                <span class="cartao__acao" aria-hidden="true">Explorar →</span>
+              </article>
+            </li>
+            <li>
+              <article class="cartao">
+                <span class="cartao__icone" aria-hidden="true">
+                  <svg width="32" height="32" viewBox="0 0 24 24">
+                    <circle cx="12" cy="4" r="2" fill="currentColor" />
+                    <path
+                      d="M4 8l8 1.5L20 8M12 9.5V15m0 0l-3.5 6M12 15l3.5 6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                </span>
+                <h3><a class="cartao__link" href="./acessibilidade.html">Acessibilidade</a></h3>
+                <p>
+                  Alto contraste, fonte para dislexia, VLibras, régua de leitura e atalhos de
+                  teclado em todo o site.
+                </p>
+                <span class="cartao__acao" aria-hidden="true">Conhecer →</span>
+              </article>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Visite o Mercado -->
+      <section class="secao secao--suave" aria-labelledby="visite-titulo">
+        <div class="container">
+          <header class="titulo-modulo">
+            <h2 id="visite-titulo">Visite o Mercado</h2>
+            <span class="titulo-modulo__sub">Informações para sua visita</span>
+          </header>
+          <div class="visite">
+            <div class="visite__info">
+              <article class="info-bloco">
+                <span class="info-bloco__icone" aria-hidden="true">
+                  <svg width="28" height="28" viewBox="0 0 24 24">
+                    <path
+                      d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    />
+                    <circle cx="12" cy="9" r="2.5" fill="currentColor" />
+                  </svg>
+                </span>
+                <div>
+                  <h3>Onde fica</h3>
+                  <p>
+                    Rua de São João, Centro Histórico, ao lado da Fonte das Pedras e no fim da
+                    Avenida Magalhães de Almeida.
+                  </p>
+                  <a href="./mapa.html">Ver no mapa e traçar caminho</a>
+                </div>
+              </article>
+              <article class="info-bloco">
+                <span class="info-bloco__icone" aria-hidden="true">
+                  <svg width="28" height="28" viewBox="0 0 24 24">
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="9"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    />
+                    <path
+                      d="M12 7v5l3 2"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                </span>
+                <div>
+                  <h3>Quando ir</h3>
+                  <p>
+                    As bancas abrem cedo, por volta das 5h. As primeiras horas da manhã têm mais
+                    variedade de peixes e frutas.
+                  </p>
+                  <p class="info-bloco__nota">
+                    Horário oficial de funcionamento:
+                    <span class="marcador-pendente">[confirmar com a administração]</span>
+                  </p>
+                </div>
+              </article>
+              <article class="info-bloco">
+                <span class="info-bloco__icone" aria-hidden="true">
+                  <svg width="28" height="28" viewBox="0 0 24 24">
+                    <circle cx="12" cy="4" r="2" fill="currentColor" />
+                    <path
+                      d="M4 8l8 1.5L20 8M12 9.5V15m0 0l-3.5 6M12 15l3.5 6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                </span>
+                <div>
+                  <h3>Acessibilidade no local</h3>
+                  <p>
+                    Informações sobre rampas, banheiros acessíveis e vagas reservadas estão em
+                    levantamento pela Prefeitura.
+                  </p>
+                </div>
+              </article>
+            </div>
+            <div class="visite__setores">
+              <h3 id="setores-titulo">Setores do Mercado</h3>
+              <p class="visite__ajuda">Toque em um setor para saber o que encontrar.</p>
+              <div class="setores" data-setores aria-labelledby="setores-titulo"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Linha do tempo -->
+      <section class="secao" aria-labelledby="linha-titulo">
+        <div class="container">
+          <header class="titulo-modulo">
+            <h2 id="linha-titulo">Linha do tempo</h2>
+            <span class="titulo-modulo__sub">Mais de 150 anos de história</span>
+          </header>
+          <div class="linha" data-linha-do-tempo>
+            <p class="linha__instrucao">
+              Escolha um ano. No teclado, use as setas para a esquerda e para a direita.
+            </p>
+            <div class="linha__trilho">
+              <div
+                role="tablist"
+                aria-label="Anos da história do Mercado"
+                class="linha__abas"
+              ></div>
+            </div>
+            <div role="tabpanel" id="painel-linha" class="linha__painel" tabindex="0"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sabores do Mercado -->
+      <section class="secao" aria-labelledby="sabores-titulo">
+        <div class="container">
+          <header class="titulo-modulo">
+            <h2 id="sabores-titulo">Sabores do Mercado</h2>
+            <span class="titulo-modulo__sub">A cozinha maranhense começa aqui</span>
+          </header>
+          <ul class="sabores" data-sabores></ul>
+          <div class="glossario-chamada">
+            <p>
+              <strong>Não conhece alguma palavra?</strong> No livro, termos como <em>cuxá</em>,
+              <em>juçara</em> e <em>platibanda</em> vêm com explicação em linguagem simples.
+            </p>
+            <a class="botao botao--contorno botao--pequeno" href="./livro.html#leitor"
+              >Abrir o livro</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Chamada para o mapa -->
+      <section class="secao secao--suave" aria-labelledby="chamada-mapa-titulo">
+        <div class="container chamada-mapa">
+          <div class="chamada-mapa__texto">
+            <p class="sobretitulo">Mapa interativo</p>
+            <h2 id="chamada-mapa-titulo">O Mercado no centro da ilha</h2>
+            <p class="lead">
+              Cada linha começa no Mercado Central e leva a um lugar que vale conhecer: casarões de
+              azulejos, igrejas, museus, praias, mirantes e as cidades vizinhas.
+            </p>
+            <ul class="numeros">
+              <li><strong data-total-pontos>—</strong><span>destinos no mapa</span></li>
+              <li><strong>6</strong><span>categorias de passeio</span></li>
+              <li><strong>100%</strong><span>usável só com o teclado</span></li>
+            </ul>
+            <a class="botao" href="./mapa.html">Abrir o mapa turístico</a>
+          </div>
+          <div class="chamada-mapa__arte" aria-hidden="true">
+            <svg class="mini-mapa" data-mini-mapa role="presentation"></svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- Faixa institucional -->
+      <section class="faixa-institucional" aria-labelledby="inclusao-titulo">
+        <div class="container faixa-institucional__conteudo">
+          <h2 id="inclusao-titulo">Um site para todas as pessoas</h2>
+          <p>
+            Letras maiores, alto contraste, Libras, leitura em voz alta e muito mais — em todas as
+            páginas.
+          </p>
+          <button
+            type="button"
+            class="botao botao--secundario"
+            data-abre-painel-acessibilidade
+            aria-haspopup="dialog"
+          >
+            Ajustar acessibilidade
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- @include rodape.html -->
+    <script type="module" src="./src/paginas/inicio.js"></script>
+  </body>
+</html>

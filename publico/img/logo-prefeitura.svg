@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Espaço reservado para a logomarca">
+  <!-- ESPAÇO RESERVADO: substitua por logomarca oficial da Prefeitura de São Luís -->
+  <rect x="2" y="2" width="60" height="60" rx="10" fill="#144670"/>
+  <g transform="translate(10 40)">
+    <rect width="6.3" height="14" fill="#faea25"/><rect x="6.3" width="6.3" height="14" fill="#dadb32"/>
+    <rect x="12.6" width="6.3" height="14" fill="#bbd050"/><rect x="18.9" width="6.3" height="14" fill="#9ac670"/>
+    <rect x="25.2" width="6.3" height="14" fill="#79c096"/><rect x="31.5" width="6.3" height="14" fill="#56b2b8"/>
+    <rect x="37.8" width="6.2" height="14" fill="#39a6de"/>
+  </g>
+  <text x="32" y="32" font-family="Montserrat, Arial, sans-serif" font-size="13" font-weight="800" fill="#fff" text-anchor="middle">LOGO</text>
+</svg>

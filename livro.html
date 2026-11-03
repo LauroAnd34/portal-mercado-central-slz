@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <!-- @include cabeca.html -->
+    <title>O Livro — Mercado Central de São Luís | Prefeitura de São Luís</title>
+    <meta
+      name="description"
+      content="Leia, ouça ou baixe o livro sobre o Mercado Central de São Luís, com recursos de acessibilidade."
+    />
+    <link rel="canonical" href="%VITE_ENDERECO_SITE%livro.html" />
+    <meta
+      property="og:title"
+      content="O Livro — Mercado Central de São Luís | Prefeitura de São Luís"
+    />
+    <meta
+      property="og:description"
+      content="Leia, ouça ou baixe o livro sobre o Mercado Central de São Luís, com recursos de acessibilidade."
+    />
+    <meta property="og:url" content="%VITE_ENDERECO_SITE%livro.html" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Book",
+        "name": "Mercado Central de São Luís: memória, comércio e gente da nossa ilha",
+        "inLanguage": "pt-BR",
+        "publisher": {
+          "@type": "GovernmentOrganization",
+          "name": "Prefeitura Municipal de São Luís"
+        },
+        "accessMode": ["textual", "visual", "auditory"],
+        "accessibilityFeature": [
+          "alternativeText",
+          "largePrint",
+          "highContrastDisplay",
+          "readingOrder",
+          "structuralNavigation",
+          "tableOfContents",
+          "ttsMarkup"
+        ],
+        "bookFormat": "https://schema.org/EBook",
+        "isAccessibleForFree": true
+      }
+    </script>
+  </head>
+  <body class="pagina-livro">
+    <!-- @include cabecalho.html pagina=livro -->
+
+    <main id="conteudo" tabindex="-1">
+      <div class="cabecalho-pagina">
+        <svg class="cabecalho-pagina__icone" aria-hidden="true" viewBox="0 0 64 64">
+          <path
+            d="M8 14c9-5 18-5 24 0 6-5 15-5 24 0v40c-9-5-18-5-24 0-6-5-15-5-24 0z"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linejoin="round"
+          />
+          <path d="M32 14v40" stroke="currentColor" stroke-width="3" />
+          <path
+            d="M14 24h12M14 32h12M38 24h12M38 32h12"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+          />
+        </svg>
+        <div class="container">
+          <nav class="trilha" aria-label="Você está em">
+            <ol>
+              <li><a href="./index.html">Início</a></li>
+              <li><span aria-current="page">O Livro</span></li>
+            </ol>
+          </nav>
+          <h1>O Livro do Mercado Central</h1>
+          <p>
+            Leia na tela, ouça em voz alta, ajuste letras e cores, ou baixe para ler quando quiser.
+          </p>
+        </div>
+      </div>
+
+      <!-- Apresentação do livro + downloads -->
+      <section class="secao" aria-labelledby="sobre-livro-titulo">
+        <div class="container sobre-livro">
+          <div class="capa-livro" aria-hidden="true">
+            <div class="capa-livro__frente">
+              <span class="capa-livro__orgao">Prefeitura de São Luís</span>
+              <span class="capa-livro__titulo" data-livro="titulo"
+                >Mercado Central de São Luís</span
+              >
+              <span class="capa-livro__subtitulo" data-livro="subtitulo"></span>
+              <span class="capa-livro__faixa"></span>
+            </div>
+          </div>
+
+          <div class="sobre-livro__texto">
+            <p class="sobretitulo" data-livro="edicao">Edição de demonstração</p>
+            <h2 id="sobre-livro-titulo" data-livro="titulo">Mercado Central de São Luís</h2>
+            <p class="lead" data-livro="subtitulo"></p>
+            <p class="aviso-provisorio" role="note">
+              <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24">
+                <path
+                  d="M12 2 1 21h22L12 2zm0 6 1 7h-2l1-7zm0 9.5a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"
+                  fill="currentColor"
+                />
+              </svg>
+              <span data-livro="aviso"></span>
+            </p>
+
+            <div class="acoes-livro">
+              <a class="botao" href="#leitor">
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24">
+                  <path
+                    d="M4 5c3-1.5 5.5-1.5 8 0 2.5-1.5 5-1.5 8 0v14c-3-1.5-5.5-1.5-8 0-2.5-1.5-5-1.5-8 0z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linejoin="round"
+                  />
+                  <path d="M12 5v14" stroke="currentColor" stroke-width="2" />
+                </svg>
+                Ler agora
+              </a>
+              <button type="button" class="botao botao--secundario" data-ouvir-livro>
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24">
+                  <path
+                    d="M4 9v6h4l5 4V5L8 9zm12-1a5 5 0 0 1 0 8m2.5-10.5a8.5 8.5 0 0 1 0 13"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                Ouvir o livro
+              </button>
+            </div>
+
+            <h3 class="downloads__titulo" id="downloads-titulo">Baixar o livro</h3>
+            <ul class="downloads" aria-labelledby="downloads-titulo">
+              <li>
+                <a
+                  class="download"
+                  href="./livro/mercado-central-sao-luis.pdf"
+                  data-arquivo="pdf"
+                  download
+                >
+                  <span class="download__formato">PDF</span>
+                  <span class="download__info"
+                    ><strong>PDF</strong
+                    ><span>Bom para imprimir. Funciona com leitores de tela.</span></span
+                  >
+                  <span class="download__tamanho" data-tamanho="pdf"></span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="download"
+                  href="./livro/mercado-central-sao-luis.epub"
+                  data-arquivo="epub"
+                  download
+                >
+                  <span class="download__formato">EPUB</span>
+                  <span class="download__info"
+                    ><strong>Livro digital (EPUB)</strong
+                    ><span
+                      >As letras se ajustam à tela. Ideal para celular e leitores de livro
+                      digital.</span
+                    ></span
+                  >
+                  <span class="download__tamanho" data-tamanho="epub"></span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="download"
+                  href="./livro/mercado-central-sao-luis.txt"
+                  data-arquivo="txt"
+                  download
+                >
+                  <span class="download__formato">TXT</span>
+                  <span class="download__info"
+                    ><strong>Só o texto (TXT)</strong
+                    ><span
+                      >Arquivo bem leve. Abre em qualquer aparelho, inclusive em linha braile.</span
+                    ></span
+                  >
+                  <span class="download__tamanho" data-tamanho="txt"></span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Leitor -->
+      <section class="secao secao--suave" id="leitor" aria-labelledby="leitor-titulo" tabindex="-1">
+        <div class="container">
+          <header class="titulo-modulo">
+            <h2 id="leitor-titulo">Leitor acessível</h2>
+            <span class="titulo-modulo__sub">Leia, ouça e ajuste do seu jeito</span>
+          </header>
+
+          <div class="leitor" data-leitor>
+            <!-- Barra de ferramentas do leitor -->
+            <div class="leitor__barra" role="group" aria-label="Ferramentas do leitor">
+              <button
+                type="button"
+                class="botao botao--contorno botao--pequeno leitor__alternar-sumario"
+                aria-expanded="true"
+                aria-controls="leitor-sumario"
+                data-alternar-sumario
+              >
+                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24">
+                  <path
+                    d="M4 6h16M4 12h16M4 18h10"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                Sumário
+              </button>
+              <button
+                type="button"
+                class="botao botao--contorno botao--pequeno"
+                aria-expanded="false"
+                aria-controls="leitor-ajustes"
+                data-alternar-ajustes
+              >
+                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24">
+                  <text
+                    x="2"
+                    y="18"
+                    font-size="15"
+                    font-weight="800"
+                    fill="currentColor"
+                    font-family="Arial"
+                  >
+                    A
+                  </text>
+                  <text
+                    x="13"
+                    y="18"
+                    font-size="10"
+                    font-weight="800"
+                    fill="currentColor"
+                    font-family="Arial"
+                  >
+                    A
+                  </text>
+                </svg>
+                Ajustes de leitura
+              </button>
+              <button
+                type="button"
+                class="botao botao--contorno botao--pequeno"
+                aria-expanded="false"
+                aria-controls="leitor-busca"
+                data-alternar-busca
+              >
+                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24">
+                  <circle
+                    cx="10.5"
+                    cy="10.5"
+                    r="6.5"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  />
+                  <path
+                    d="m15.5 15.5 5 5"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                Buscar no livro
+              </button>
+              <button
+                type="button"
+                class="botao botao--contorno botao--pequeno"
+                aria-pressed="false"
+                data-modo-foco
+              >
+                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24">
+                  <path
+                    d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                Ler sem distrações
+              </button>
+              <button
+                type="button"
+                class="botao botao--contorno botao--pequeno"
+                aria-expanded="false"
+                aria-controls="leitor-glossario"
+                data-alternar-glossario
+              >
+                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24">
+                  <path
+                    d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M9 9h6M9 13h4"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                Glossário
+              </button>
+              <button
+                type="button"
+                class="botao botao--contorno botao--pequeno"
+                aria-expanded="false"
+                aria-controls="leitor-marcadores"
+                data-alternar-marcadores
+              >
+                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24">
+                  <path
+                    d="M6 3h12v18l-6-4-6 4z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                Marcadores <span class="contador" data-contador-marcadores hidden></span>
+              </button>
+              <button
+                type="button"
+                class="botao botao--contorno botao--pequeno"
+                data-imprimir-capitulo
+              >
+                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24">
+                  <path
+                    d="M7 8V3h10v5M7 17H4v-7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v7h-3M7 14h10v7H7z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                Imprimir capítulo
+              </button>
+            </div>
+
+            <!-- Leitura em voz alta -->
+            <div
+              class="leitor__voz"
+              role="group"
+              aria-label="Leitura em voz alta"
+              data-controle-voz
+            >
+              <button
+                type="button"
+                class="botao botao--pequeno"
+                data-voz="tocar"
+                aria-label="Ouvir este capítulo"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="icone-tocar"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M7 4v16l13-8z" fill="currentColor" />
+                </svg>
+                <svg
+                  aria-hidden="true"
+                  class="icone-pausar"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M6 4h4v16H6zM14 4h4v16h-4z" fill="currentColor" />
+                </svg>
+                <span data-voz-rotulo>Ouvir capítulo</span>
+              </button>
+              <button
+                type="button"
+                class="botao-icone"
+                data-voz="anterior"
+                aria-label="Parágrafo anterior"
+              >
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24">
+                  <path
+                    d="M6 5v14M19 5 9 12l10 7z"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+              <button
+                type="button"
+                class="botao-icone"
+                data-voz="proximo"
+                aria-label="Próximo parágrafo"
+              >
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24">
+                  <path
+                    d="M18 5v14M5 5l10 7-10 7z"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+              <button type="button" class="botao-icone" data-voz="parar" aria-label="Parar leitura">
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24">
+                  <rect x="6" y="6" width="12" height="12" rx="1" fill="currentColor" />
+                </svg>
+              </button>
+              <div class="campo campo--linha">
+                <label for="voz-velocidade">Velocidade</label>
+                <select id="voz-velocidade" data-voz-velocidade>
+                  <option value="0.75">Lenta (0,75×)</option>
+                  <option value="1" selected>Normal (1×)</option>
+                  <option value="1.25">Rápida (1,25×)</option>
+                  <option value="1.5">Muito rápida (1,5×)</option>
+                </select>
+              </div>
+              <div class="campo campo--linha" data-campo-vozes hidden>
+                <label for="voz-escolha">Voz</label>
+                <select id="voz-escolha" data-voz-escolha></select>
+              </div>
+              <p class="leitor__voz-aviso" data-voz-indisponivel hidden>
+                Seu navegador não oferece leitura em voz alta. Experimente o Chrome, Edge ou Safari.
+              </p>
+            </div>
+
+            <!-- Painel de ajustes do leitor -->
+            <div class="leitor__ajustes" id="leitor-ajustes" hidden>
+              <form data-formulario-leitor>
+                <fieldset>
+                  <legend>Tema da página</legend>
+                  <div class="temas-leitor">
+                    <label class="tema-leitor tema-leitor--claro"
+                      ><input type="radio" name="tema" value="claro" />Claro</label
+                    >
+                    <label class="tema-leitor tema-leitor--sepia"
+                      ><input type="radio" name="tema" value="sepia" />Sépia</label
+                    >
+                    <label class="tema-leitor tema-leitor--escuro"
+                      ><input type="radio" name="tema" value="escuro" />Escuro</label
+                    >
+                    <label class="tema-leitor tema-leitor--contraste"
+                      ><input type="radio" name="tema" value="contraste" />Alto contraste</label
+                    >
+                  </div>
+                </fieldset>
+                <div class="campo">
+                  <label for="leitor-fonte">Fonte</label>
+                  <select id="leitor-fonte" name="fonte">
+                    <option value="serifada">Serifada (clássica)</option>
+                    <option value="sem-serifa">Sem serifa</option>
+                    <option value="legivel">Alta legibilidade (Atkinson)</option>
+                    <option value="dislexia">Para dislexia (OpenDyslexic)</option>
+                  </select>
+                </div>
+                <div class="campo">
+                  <label for="leitor-tamanho"
+                    >Tamanho da letra: <output data-saida-leitor="tamanho">20px</output></label
+                  >
+                  <input
+                    id="leitor-tamanho"
+                    type="range"
+                    name="tamanho"
+                    min="16"
+                    max="40"
+                    step="2"
+                  />
+                </div>
+                <div class="campo">
+                  <label for="leitor-entrelinha"
+                    >Espaço entre linhas: <output data-saida-leitor="entrelinha">1,8</output></label
+                  >
+                  <input
+                    id="leitor-entrelinha"
+                    type="range"
+                    name="entrelinha"
+                    min="1.4"
+                    max="2.6"
+                    step="0.2"
+                  />
+                </div>
+                <div class="campo">
+                  <label for="leitor-largura"
+                    >Largura do texto: <output data-saida-leitor="largura">média</output></label
+                  >
+                  <input id="leitor-largura" type="range" name="largura" min="1" max="3" step="1" />
+                </div>
+                <label class="interruptor"
+                  ><input type="checkbox" role="switch" name="alinharEsquerda" /><span
+                    class="interruptor__trilho"
+                    aria-hidden="true"
+                  ></span
+                  >Texto sempre alinhado à esquerda</label
+                >
+                <label class="interruptor"
+                  ><input type="checkbox" role="switch" name="destacarParagrafo" /><span
+                    class="interruptor__trilho"
+                    aria-hidden="true"
+                  ></span
+                  >Destacar o parágrafo sob o mouse</label
+                >
+                <button type="button" class="botao botao--texto" data-redefinir-leitor>
+                  Restaurar ajustes do leitor
+                </button>
+              </form>
+            </div>
+
+            <!-- Busca -->
+            <!-- Glossário -->
+            <div class="leitor__painel-extra" id="leitor-glossario" hidden>
+              <h3 class="leitor__painel-titulo">Glossário</h3>
+              <p class="leitor__painel-ajuda">
+                Palavras que aparecem no livro, explicadas em linguagem simples. No texto, elas
+                aparecem sublinhadas com pontinhos: toque nelas para ver o significado.
+              </p>
+              <dl class="glossario" data-lista-glossario></dl>
+            </div>
+
+            <!-- Marcadores -->
+            <div class="leitor__painel-extra" id="leitor-marcadores" hidden>
+              <h3 class="leitor__painel-titulo">Meus marcadores</h3>
+              <p class="leitor__painel-ajuda">
+                Salve o trecho que está lendo para voltar depois. Os marcadores ficam guardados
+                neste navegador.
+              </p>
+              <button
+                type="button"
+                class="botao botao--secundario botao--pequeno"
+                data-adicionar-marcador
+              >
+                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24">
+                  <path d="M6 3h12v18l-6-4-6 4z" fill="currentColor" />
+                </svg>
+                Marcar o trecho que estou lendo
+              </button>
+              <ul class="marcadores" data-lista-marcadores></ul>
+            </div>
+
+            <div class="leitor__busca" id="leitor-busca" hidden>
+              <form role="search" data-formulario-busca>
+                <div class="campo">
+                  <label for="busca-livro">Buscar uma palavra ou trecho</label>
+                  <div class="busca-linha">
+                    <input id="busca-livro" type="search" name="termo" autocomplete="off" />
+                    <button type="submit" class="botao botao--pequeno">Buscar</button>
+                  </div>
+                </div>
+              </form>
+              <div class="resultados-busca" data-resultados-busca aria-live="polite"></div>
+            </div>
+
+            <div class="leitor__corpo">
+              <nav class="leitor__sumario" id="leitor-sumario" aria-label="Sumário do livro">
+                <h3 class="leitor__sumario-titulo">Sumário</h3>
+                <ol data-sumario></ol>
+              </nav>
+
+              <article class="leitor__pagina" data-pagina aria-live="off">
+                <div class="leitor__progresso" aria-hidden="true">
+                  <span data-barra-progresso></span>
+                </div>
+                <p class="leitor__posicao" data-posicao></p>
+                <div class="leitor__texto" data-texto-capitulo>
+                  <p>Carregando o livro…</p>
+                </div>
+                <nav class="leitor__navegacao" aria-label="Navegação entre capítulos">
+                  <button type="button" class="botao botao--contorno" data-capitulo-anterior>
+                    <span aria-hidden="true">←</span>
+                    <span data-rotulo-anterior>Capítulo anterior</span>
+                  </button>
+                  <button type="button" class="botao" data-capitulo-proximo>
+                    <span data-rotulo-proximo>Próximo capítulo</span>
+                    <span aria-hidden="true">→</span>
+                  </button>
+                </nav>
+              </article>
+            </div>
+            <p class="leitor__atalhos">
+              Atalhos do leitor: <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>→</kbd> próximo capítulo ·
+              <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>←</kbd> capítulo anterior · <kbd>Alt</kbd> +
+              <kbd>Shift</kbd> + <kbd>L</kbd> ouvir/pausar.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- @include rodape.html -->
+    <script type="module" src="./src/paginas/livro.js"></script>
+  </body>
+</html>
