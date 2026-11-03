@@ -236,3 +236,95 @@
 #vlibras-app-root[hidden] {
   display: none !important;
 }
+
+/* atalhos dentro do painel */
+.atalhos summary {
+  min-height: var(--alvo-min);
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  color: var(--cor-link);
+  cursor: pointer;
+}
+.atalhos dl {
+  display: grid;
+  gap: var(--e-2);
+  margin: var(--e-3) 0;
+}
+.atalhos dl div {
+  display: flex;
+  align-items: center;
+  gap: var(--e-3);
+}
+.atalhos dt {
+  min-width: 2.2rem;
+}
+.atalhos dd {
+  margin: 0;
+}
+.atalhos p,
+.atalhos dd {
+  font-size: var(--texto-sm);
+}
+.painel-acessibilidade kbd {
+  display: inline-block;
+  min-width: 26px;
+  padding: 1px 7px;
+  border: 1px solid var(--cor-borda-forte);
+  border-bottom-width: 3px;
+  border-radius: 6px;
+  background: var(--cor-superficie);
+  color: var(--cor-titulo);
+  text-align: center;
+  font-size: 0.85em;
+  opacity: 1;
+}
+
+/* rodapé: botões com cara de link */
+.rodape__link-botao,
+.rodape__topo {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #fff;
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  cursor: pointer;
+}
+.rodape__topo {
+  margin-top: var(--e-3);
+  min-height: var(--alvo-min);
+  font-weight: 700;
+}
+.rodape__link-botao:hover,
+.rodape__topo:hover {
+  color: var(--faixa-1);
+}
+:root[data-contraste='alto'] .rodape__link-botao,
+:root[data-contraste='alto'] .rodape__topo {
+  color: #ffff00;
+}
+.rodape__creditos {
+  padding-block: var(--e-4) var(--e-6);
+  border-top: 1px solid rgb(255 255 255 / 0.15);
+  font-size: var(--texto-xs);
+  color: #c4d2de;
+}
+.rodape__creditos summary {
+  min-height: var(--alvo-min);
+  display: inline-flex;
+  align-items: center;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+}
+.rodape__creditos ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--e-1) var(--e-5);
+  margin: var(--e-2) 0 var(--e-4);
+}
+.rodape__creditos p {
+  max-width: 80ch;
+}

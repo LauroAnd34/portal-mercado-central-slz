@@ -64,6 +64,7 @@
   --fonte-ui: 'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --fonte-texto: 'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --fonte-livro: 'Merriweather', Georgia, 'Times New Roman', serif;
+  --fonte-titulo: 'Fraunces', Georgia, 'Times New Roman', serif;
   --escala-fonte: 1; /* alterada pela barra de acessibilidade (A- / A+) */
 
   --texto-xs: 0.8125rem;
@@ -157,11 +158,13 @@
   --fonte-ui: 'Atkinson Hyperlegible', system-ui, sans-serif;
   --fonte-texto: 'Atkinson Hyperlegible', system-ui, sans-serif;
   --fonte-livro: 'Atkinson Hyperlegible', system-ui, sans-serif;
+  --fonte-titulo: 'Atkinson Hyperlegible', system-ui, sans-serif;
 }
 :root[data-fonte='dislexia'] {
   --fonte-ui: 'OpenDyslexic', 'Comic Sans MS', sans-serif;
   --fonte-texto: 'OpenDyslexic', 'Comic Sans MS', sans-serif;
   --fonte-livro: 'OpenDyslexic', 'Comic Sans MS', sans-serif;
+  --fonte-titulo: 'OpenDyslexic', 'Comic Sans MS', sans-serif;
 }
 
 /* ---------- Espaçamento de texto (WCAG 1.4.12) ---------- */

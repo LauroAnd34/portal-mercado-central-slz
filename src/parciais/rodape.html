@@ -18,7 +18,16 @@
         <li><a href="./index.html">Início</a></li>
         <li><a href="./livro.html">O Livro</a></li>
         <li><a href="./mapa.html">Mapa turístico</a></li>
-        <li><a href="./acessibilidade.html">Acessibilidade</a></li>
+        <li>
+          <button
+            type="button"
+            class="rodape__link-botao"
+            data-abre-painel-acessibilidade
+            aria-haspopup="dialog"
+          >
+            Acessibilidade
+          </button>
+        </li>
       </ul>
     </nav>
     <div>
@@ -36,8 +45,22 @@
         Feito para todas as pessoas: funciona com leitor de tela, só com o teclado, em Libras e com
         letras grandes.
       </p>
-      <a href="#topo" class="rodape__topo">Voltar ao topo ↑</a>
+      <button type="button" class="rodape__topo" data-voltar-topo>
+        Voltar ao topo <span aria-hidden="true">↑</span>
+      </button>
     </div>
+  </div>
+  <div class="container rodape__creditos">
+    <details>
+      <summary>Créditos das fotos</summary>
+      <p>
+        Fotos do Wikimedia Commons, usadas conforme as licenças livres indicadas. Cartões-postais de
+        1940 e 1941: acervo histórico reunido pela pesquisa do projeto. Imagem do projeto do novo
+        Mercado: Prefeitura de São Luís (divulgação). Mapa: © colaboradores do OpenStreetMap.
+      </p>
+      <ul data-creditos-fotos></ul>
+    </details>
+    <p>Prefeitura de São Luís · Portal do Mercado Central</p>
   </div>
 </footer>
 

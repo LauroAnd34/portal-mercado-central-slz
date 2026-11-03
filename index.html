@@ -5,7 +5,7 @@
     <title>Mercado Central de São Luís — Livro e Mapa Turístico | Prefeitura de São Luís</title>
     <meta
       name="description"
-      content="Portal acessível do Mercado Central de São Luís: leia ou ouça o livro, e explore o mapa dos pontos turísticos da ilha a partir do Mercado."
+      content="Portal do Mercado Central de São Luís: leia ou ouça o livro, acompanhe a reconstrução e descubra os caminhos da ilha a partir do Mercado."
     />
     <link rel="canonical" href="%VITE_ENDERECO_SITE%" />
     <meta
@@ -14,16 +14,15 @@
     />
     <meta
       property="og:description"
-      content="Portal acessível do Mercado Central de São Luís: leia ou ouça o livro, e explore o mapa dos pontos turísticos da ilha a partir do Mercado."
+      content="Leia ou ouça o livro do Mercado, acompanhe a reconstrução e descubra os caminhos da ilha."
     />
     <meta property="og:url" content="%VITE_ENDERECO_SITE%" />
-
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "TouristAttraction",
         "name": "Mercado Central de São Luís",
-        "description": "Mercado público do Centro Histórico de São Luís, inaugurado em 1941 em estilo Art Déco.",
+        "description": "Mercado público do Centro Histórico de São Luís, inaugurado em 1941 em estilo Art Déco e em reconstrução desde 2026.",
         "isAccessibleForFree": true,
         "publicAccess": true,
         "address": {
@@ -48,469 +47,191 @@
     <main id="conteudo" tabindex="-1">
       <!-- Abertura -->
       <section class="abertura" aria-labelledby="abertura-titulo">
-        <div class="container abertura__grade">
-          <div class="abertura__texto">
-            <p class="abertura__lugar">
-              <span aria-hidden="true" class="abertura__pino"></span>
-              Centro Histórico · São Luís do Maranhão
-            </p>
-            <h1 id="abertura-titulo">
-              <span class="abertura__linha">Mercado</span>
-              <span class="abertura__linha abertura__linha--destaque">Central</span>
-            </h1>
-            <p class="abertura__frase">Memória, sabores e gente da nossa ilha.</p>
-            <p class="abertura__lead">
-              Desde 1864 o coração do comércio de São Luís. Leia ou ouça a história do Mercado,
-              acompanhe a sua reconstrução e descubra, a partir dele, os caminhos da ilha.
-            </p>
-            <div class="abertura__acoes">
-              <a class="botao botao--secundario botao--grande" href="./livro.html">
-                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24">
-                  <path
-                    d="M4 5c3-1.5 5.5-1.5 8 0 2.5-1.5 5-1.5 8 0v14c-3-1.5-5.5-1.5-8 0-2.5-1.5-5-1.5-8 0z"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linejoin="round"
-                  />
-                  <path d="M12 5v14" stroke="currentColor" stroke-width="2" />
-                </svg>
-                Ler o livro
-              </a>
-              <a class="botao botao--vidro botao--grande" href="./mapa.html">
-                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24">
-                  <path
-                    d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  />
-                  <circle cx="12" cy="9" r="2.5" fill="currentColor" />
-                </svg>
-                Explorar o mapa
-              </a>
-            </div>
-            <ul class="abertura__numeros">
-              <li><strong>1864</strong><span>primeiro mercado</span></li>
-              <li><strong>1941</strong><span>prédio Art Déco</span></li>
-              <li>
-                <strong><span data-total-pontos>30</span></strong
-                ><span>destinos no mapa</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="abertura__colagem" aria-hidden="true">
-            <div class="abertura__moldura">
-              <img
-                class="abertura__foto-principal"
-                src="./src/imagens/novo-mercado-central-projeto.jpg"
-                width="1280"
-                height="720"
-                alt=""
-              />
-            </div>
-            <figure class="abertura__polaroide">
-              <img
-                src="./src/imagens/historia/mercado-1941-cartao-foto-londres.jpg"
-                width="682"
-                height="424"
-                alt=""
-              />
-              <figcaption>1941</figcaption>
-            </figure>
-            <div class="abertura__selo">
-              <svg viewBox="0 0 120 120" width="120" height="120">
-                <defs>
-                  <path id="circulo-selo" d="M60 60m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0" />
-                </defs>
-                <circle cx="60" cy="60" r="58" fill="#bbd050" />
-                <text
-                  font-family="Montserrat, sans-serif"
-                  font-size="11.5"
-                  font-weight="800"
-                  letter-spacing="2.6"
-                  fill="#0b2a45"
-                >
-                  <textPath href="#circulo-selo">
-                    PATRIMÔNIO · SÃO LUÍS · PATRIMÔNIO · SÃO LUÍS ·
-                  </textPath>
-                </text>
-                <text
-                  x="60"
-                  y="68"
-                  text-anchor="middle"
-                  font-family="Montserrat, sans-serif"
-                  font-size="24"
-                  font-weight="800"
-                  fill="#0b2a45"
-                >
-                  1864
-                </text>
+        <div class="abertura__texto">
+          <p class="abertura__lugar">Centro Histórico · São Luís do Maranhão</p>
+          <h1 id="abertura-titulo">
+            Mercado Central
+            <em>de São Luís</em>
+          </h1>
+          <p class="abertura__lead">
+            Há mais de 150 anos, o lugar onde a ilha se encontra: peixe fresco, juçara, camarão
+            seco, ervas, conversa e tradição. Leia a história, acompanhe a reconstrução e descubra
+            os caminhos que começam aqui.
+          </p>
+          <div class="abertura__acoes">
+            <a class="botao botao--secundario botao--grande" href="./livro.html">
+              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24">
+                <path
+                  d="M4 5c3-1.5 5.5-1.5 8 0 2.5-1.5 5-1.5 8 0v14c-3-1.5-5.5-1.5-8 0-2.5-1.5-5-1.5-8 0z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+                <path d="M12 5v14" stroke="currentColor" stroke-width="2" />
               </svg>
-            </div>
-            <p class="abertura__legenda">Projeto do novo Mercado e cartão-postal de 1941</p>
+              Ler o livro
+            </a>
+            <a class="botao botao--vidro botao--grande" href="./mapa.html">
+              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24">
+                <path
+                  d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <circle cx="12" cy="9" r="2.5" fill="currentColor" />
+              </svg>
+              Explorar a ilha
+            </a>
           </div>
         </div>
-        <div class="faixa-azulejo" aria-hidden="true"></div>
-      </section>
 
-      <!-- Acesso rápido (mesmo padrão do portal da Prefeitura) -->
-      <section class="secao" aria-labelledby="acesso-titulo">
-        <div class="container">
-          <header class="titulo-modulo">
-            <h2 id="acesso-titulo">Acesso rápido</h2>
-            <span class="titulo-modulo__sub">Escolha por onde começar</span>
-          </header>
-          <ul class="cartoes">
-            <li>
-              <article class="cartao">
-                <span class="cartao__icone" aria-hidden="true">
-                  <svg width="32" height="32" viewBox="0 0 24 24">
-                    <path
-                      d="M4 5c3-1.5 5.5-1.5 8 0 2.5-1.5 5-1.5 8 0v14c-3-1.5-5.5-1.5-8 0-2.5-1.5-5-1.5-8 0z"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.8"
-                      stroke-linejoin="round"
-                    />
-                    <path d="M12 5v14" stroke="currentColor" stroke-width="1.8" />
-                  </svg>
-                </span>
-                <h3><a class="cartao__link" href="./livro.html">O livro do Mercado</a></h3>
-                <p>
-                  A história do Mercado Central contada em capítulos curtos, com leitor que ajusta
-                  letras, cores e espaçamento.
-                </p>
-                <span class="cartao__acao" aria-hidden="true">Ler agora →</span>
-              </article>
-            </li>
-            <li>
-              <article class="cartao">
-                <span class="cartao__icone" aria-hidden="true">
-                  <svg width="32" height="32" viewBox="0 0 24 24">
-                    <path
-                      d="M4 9v6h4l5 4V5L8 9zm12-1a5 5 0 0 1 0 8m2.5-10.5a8.5 8.5 0 0 1 0 13"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.8"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </span>
-                <h3><a class="cartao__link" href="./livro.html#leitor">Ouça o livro</a></h3>
-                <p>
-                  Leitura em voz alta, parágrafo por parágrafo, com destaque do trecho e controle de
-                  velocidade.
-                </p>
-                <span class="cartao__acao" aria-hidden="true">Ouvir →</span>
-              </article>
-            </li>
-            <li>
-              <article class="cartao">
-                <span class="cartao__icone" aria-hidden="true">
-                  <svg width="32" height="32" viewBox="0 0 24 24">
-                    <path
-                      d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2zM9 4v14M15 6v14"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.8"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </span>
-                <h3><a class="cartao__link" href="./mapa.html">Mapa turístico</a></h3>
-                <p>
-                  Do Mercado para <span data-total-pontos>vários</span> destinos da ilha, com
-                  distância, tempo e rota passo a passo.
-                </p>
-                <span class="cartao__acao" aria-hidden="true">Explorar →</span>
-              </article>
-            </li>
-            <li>
-              <article class="cartao">
-                <span class="cartao__icone" aria-hidden="true">
-                  <svg width="32" height="32" viewBox="0 0 24 24">
-                    <circle cx="12" cy="4" r="2" fill="currentColor" />
-                    <path
-                      d="M4 8l8 1.5L20 8M12 9.5V15m0 0l-3.5 6M12 15l3.5 6"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.8"
-                      stroke-linecap="round"
-                    />
-                  </svg>
-                </span>
-                <h3><a class="cartao__link" href="./acessibilidade.html">Acessibilidade</a></h3>
-                <p>
-                  Alto contraste, fonte para dislexia, VLibras, régua de leitura e atalhos de
-                  teclado em todo o site.
-                </p>
-                <span class="cartao__acao" aria-hidden="true">Conhecer →</span>
-              </article>
-            </li>
-          </ul>
+        <div class="abertura__mosaico">
+          <figure class="mosaico__item mosaico__item--grande">
+            <img
+              data-foto="rua-portugal-azulejos"
+              width="1600"
+              height="1067"
+              alt="Fachada de casarão coberta de azulejos portugueses azuis e brancos, com três portas de madeira azul, na Rua Portugal."
+            />
+          </figure>
+          <figure class="mosaico__item">
+            <img
+              data-foto="mercado-camarao-seco"
+              width="1100"
+              height="825"
+              loading="lazy"
+              alt="Cesto de palha cheio de camarão seco, como os vendidos nas bancas do Mercado."
+            />
+          </figure>
+          <figure class="mosaico__item">
+            <img
+              data-foto="mercado-garrafas"
+              width="1100"
+              height="825"
+              loading="lazy"
+              alt="Garrafas de aguardente com caranguejos dentro, penduradas em uma banca."
+            />
+          </figure>
         </div>
       </section>
 
-      <!-- Visite o Mercado -->
-      <section class="secao secao--suave" aria-labelledby="visite-titulo">
-        <div class="container">
-          <header class="titulo-modulo">
-            <h2 id="visite-titulo">Visite o Mercado</h2>
-            <span class="titulo-modulo__sub">Informações para sua visita</span>
-          </header>
-          <div class="aviso-obra" role="note">
-            <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24">
-              <path
-                d="M12 3 2 20h20z"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M12 10v4M12 17v.5"
-                stroke="currentColor"
-                stroke-width="2.4"
-                stroke-linecap="round"
-              />
-            </svg>
-            <div>
-              <p class="aviso-obra__titulo">O Mercado Central está em reconstrução</p>
-              <p>
-                Enquanto a obra acontece, os feirantes atendem no
-                <strong>Mercado da Cidade</strong>, na Avenida Senador Vitorino Freire (Aterro do
-                Bacanga), pertinho do Centro.
-                <a href="./mapa.html#mercado-da-cidade">Ver o caminho no mapa</a>.
-              </p>
-            </div>
-          </div>
-          <div class="visite">
-            <div class="visite__info">
-              <article class="info-bloco">
-                <span class="info-bloco__icone" aria-hidden="true">
-                  <svg width="28" height="28" viewBox="0 0 24 24">
-                    <path
-                      d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    />
-                    <circle cx="12" cy="9" r="2.5" fill="currentColor" />
-                  </svg>
-                </span>
-                <div>
-                  <h3>Onde fica</h3>
-                  <p>
-                    Prédio histórico: Rua de São João, Centro, ao lado da Fonte das Pedras. Durante
-                    a obra: Mercado da Cidade, Av. Senador Vitorino Freire.
-                  </p>
-                  <a href="./mapa.html">Ver no mapa e traçar caminho</a>
-                </div>
-              </article>
-              <article class="info-bloco">
-                <span class="info-bloco__icone" aria-hidden="true">
-                  <svg width="28" height="28" viewBox="0 0 24 24">
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="9"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    />
-                    <path
-                      d="M12 7v5l3 2"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    />
-                  </svg>
-                </span>
-                <div>
-                  <h3>Quando ir</h3>
-                  <p>
-                    As bancas abrem cedo, por volta das 5h. As primeiras horas da manhã têm mais
-                    variedade de peixes e frutas.
-                  </p>
-                </div>
-              </article>
-              <article class="info-bloco">
-                <span class="info-bloco__icone" aria-hidden="true">
-                  <svg width="28" height="28" viewBox="0 0 24 24">
-                    <circle cx="12" cy="4" r="2" fill="currentColor" />
-                    <path
-                      d="M4 8l8 1.5L20 8M12 9.5V15m0 0l-3.5 6M12 15l3.5 6"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    />
-                  </svg>
-                </span>
-                <div>
-                  <h3>No Mercado da Cidade</h3>
-                  <p>
-                    Quatro galpões com boxes padronizados, corredores largos, banheiros, praça de
-                    alimentação e mais de 300 vagas de estacionamento.
-                  </p>
-                </div>
-              </article>
-            </div>
-            <div class="visite__setores">
-              <h3 id="setores-titulo">Setores do Mercado</h3>
-              <p class="visite__ajuda">Toque em um setor para saber o que encontrar.</p>
-              <div class="setores" data-setores aria-labelledby="setores-titulo"></div>
-            </div>
-          </div>
+      <!-- Aviso de obra -->
+      <div class="aviso-obra" role="note">
+        <div class="container aviso-obra__conteudo">
+          <span class="aviso-obra__selo">Em obra</span>
+          <p>
+            O prédio histórico está em reconstrução. Os feirantes atendem no
+            <strong>Mercado da Cidade</strong>, Av. Senador Vitorino Freire (Aterro do Bacanga).
+            <a href="./mapa.html#mercado-da-cidade">Ver o caminho</a>
+          </p>
         </div>
-      </section>
+      </div>
 
-      <!-- O novo Mercado Central -->
+      <!-- Ontem e amanhã -->
       <section class="secao" aria-labelledby="novo-mercado-titulo">
         <div class="container">
           <header class="titulo-modulo">
-            <h2 id="novo-mercado-titulo">O novo Mercado Central</h2>
-            <span class="titulo-modulo__sub">Reconstrução em andamento</span>
+            <h2 id="novo-mercado-titulo">Ontem e amanhã</h2>
+            <span class="titulo-modulo__sub">A reconstrução do Mercado</span>
           </header>
-          <div class="novo-mercado">
-            <figure class="comparador" data-comparador>
-              <div class="comparador__imagens">
-                <img
-                  class="comparador__depois"
-                  src="./src/imagens/novo-mercado-central-projeto.jpg"
-                  width="1280"
-                  height="720"
-                  loading="lazy"
-                  alt="Imagem em 3D do projeto do novo Mercado Central: prédio de três andares com as fachadas antigas preservadas na frente, em tons de vermelho e branco, calçada larga com árvores e faixa de pedestres."
-                />
-                <div class="comparador__antes-caixa">
-                  <img
-                    class="comparador__antes"
-                    src="./src/imagens/historia/mercado-1940-cartao-foto-berlim.jpg"
-                    width="628"
-                    height="426"
-                    loading="lazy"
-                    alt="Foto antiga em preto e branco, de 1940: o Mercado Central recém-construído, prédio térreo comprido com colunas e platibanda escalonada, em terreno ainda sem calçamento."
-                  />
-                </div>
-                <span class="comparador__rotulo comparador__rotulo--antes" aria-hidden="true"
-                  >1940</span
-                >
-                <span class="comparador__rotulo comparador__rotulo--depois" aria-hidden="true"
-                  >Projeto 2026</span
-                >
-                <span class="comparador__linha" aria-hidden="true"
-                  ><span class="comparador__alca"></span
-                ></span>
-              </div>
-              <div class="comparador__controle">
-                <label for="comparador-faixa"
-                  >Arraste para comparar <strong>1940</strong> com o
-                  <strong>projeto novo</strong></label
-                >
-                <input
-                  id="comparador-faixa"
-                  type="range"
-                  min="0"
-                  max="100"
-                  value="50"
-                  data-comparador-faixa
-                />
-              </div>
+          <div class="ontem-amanha">
+            <figure class="ontem-amanha__foto">
+              <img
+                src="./src/imagens/historia/mercado-1940-cartao-foto-berlim.jpg"
+                width="628"
+                height="426"
+                loading="lazy"
+                alt="Foto antiga em preto e branco, de 1940: o Mercado recém-construído, prédio térreo comprido com colunas e platibanda escalonada, em terreno ainda sem calçamento."
+              />
               <figcaption>
-                Esquerda: cartão-postal Foto Berlim, 1940 (acervo histórico). Direita: imagem do
-                projeto do novo Mercado Central, Prefeitura de São Luís (divulgação).
+                <strong>1940</strong> O “Mercado Novo” recém-construído, em estilo Art Déco.
+                <span>Cartão-postal Foto Berlim.</span>
               </figcaption>
             </figure>
-
-            <div class="novo-mercado__texto">
-              <p class="lead">
-                O prédio de 1941 vai ganhar uma estrutura nova por dentro, mantendo as quatro
-                fachadas originais, que ficam escoradas durante toda a obra.
-              </p>
-              <dl class="fatos">
-                <div>
-                  <dt>Início da obra</dt>
-                  <dd>Ordem de serviço assinada em 4 de julho de 2026</dd>
-                </div>
-                <div>
-                  <dt>Novo prédio</dt>
-                  <dd>3 andares, com espaço para 285 feirantes</dd>
-                </div>
-                <div>
-                  <dt>Investimento</dt>
-                  <dd>R$ 44,9 milhões, com recursos do Município, incluindo o entorno</dd>
-                </div>
-                <div>
-                  <dt>O que vai ter</dt>
-                  <dd>
-                    Peixes e mariscos, carnes, frutas e verduras, produtos regionais, artesanato,
-                    restaurantes e lanchonetes
-                  </dd>
-                </div>
-                <div>
-                  <dt>Enquanto isso</dt>
-                  <dd>Feirantes no Mercado da Cidade desde 12 de novembro de 2025, em 4 galpões</dd>
-                </div>
-              </dl>
-              <p class="fontes">
-                Fontes:
-                <a
-                  href="https://www.saoluis.ma.gov.br/portal/noticias/0/3/3405/prefeitura-de-sao-luis-entrega-novo-espaco-para-feirantes-do-mercado-central-que-sera-totalmente-reformado/"
-                  rel="noopener"
-                  target="_blank"
-                  >Prefeitura de São Luís<span class="somente-leitor"> (abre em nova aba)</span></a
-                >,
-                <a
-                  href="https://mahoje.com.br/assinada-neste-sabado-ordem-de-servico-para-reconstrucao-do-mercado-central-no-centro-historico-de-sao-luis/"
-                  rel="noopener"
-                  target="_blank"
-                  >Maranhão Hoje<span class="somente-leitor"> (abre em nova aba)</span></a
-                >
-                e
-                <a
-                  href="https://jornalpequeno.com.br/2026/07/04/mercado-central-de-sao-luis-sera-reconstruido-e-ganhara-estrutura-moderna/"
-                  rel="noopener"
-                  target="_blank"
-                  >Jornal Pequeno<span class="somente-leitor"> (abre em nova aba)</span></a
-                >.
-              </p>
-            </div>
+            <figure class="ontem-amanha__foto">
+              <img
+                src="./src/imagens/novo-mercado-central-projeto.jpg"
+                width="1280"
+                height="720"
+                loading="lazy"
+                alt="Imagem em 3D do projeto do novo Mercado Central: prédio de três andares com as fachadas antigas preservadas na frente, calçada larga com árvores e faixa de pedestres."
+              />
+              <figcaption>
+                <strong>Projeto</strong> O novo Mercado Central, com as fachadas originais
+                preservadas. <span>Imagem: Prefeitura de São Luís (divulgação).</span>
+              </figcaption>
+            </figure>
           </div>
+          <dl class="fatos">
+            <div>
+              <dt>Obra</dt>
+              <dd>Ordem de serviço assinada em 4 de julho de 2026</dd>
+            </div>
+            <div>
+              <dt>Novo prédio</dt>
+              <dd>3 andares e espaço para 285 feirantes</dd>
+            </div>
+            <div>
+              <dt>Investimento</dt>
+              <dd>R$ 44,9 milhões, incluindo o entorno</dd>
+            </div>
+            <div>
+              <dt>Fachadas</dt>
+              <dd>As quatro fachadas originais serão preservadas</dd>
+            </div>
+          </dl>
+          <p class="fontes">
+            Fontes:
+            <a
+              href="https://www.saoluis.ma.gov.br/portal/noticias/0/3/3405/prefeitura-de-sao-luis-entrega-novo-espaco-para-feirantes-do-mercado-central-que-sera-totalmente-reformado/"
+              rel="noopener"
+              target="_blank"
+              >Prefeitura de São Luís<span class="somente-leitor"> (abre em nova aba)</span></a
+            >,
+            <a
+              href="https://mahoje.com.br/assinada-neste-sabado-ordem-de-servico-para-reconstrucao-do-mercado-central-no-centro-historico-de-sao-luis/"
+              rel="noopener"
+              target="_blank"
+              >Maranhão Hoje<span class="somente-leitor"> (abre em nova aba)</span></a
+            >
+            e
+            <a
+              href="https://jornalpequeno.com.br/2026/07/04/mercado-central-de-sao-luis-sera-reconstruido-e-ganhara-estrutura-moderna/"
+              rel="noopener"
+              target="_blank"
+              >Jornal Pequeno<span class="somente-leitor"> (abre em nova aba)</span></a
+            >.
+          </p>
         </div>
       </section>
 
-      <!-- Linha do tempo -->
-      <section class="secao" aria-labelledby="linha-titulo">
+      <!-- Caminhos da ilha -->
+      <section class="secao caminhos" aria-labelledby="caminhos-titulo">
         <div class="container">
-          <header class="titulo-modulo">
-            <h2 id="linha-titulo">Linha do tempo</h2>
-            <span class="titulo-modulo__sub">Mais de 150 anos de história</span>
-          </header>
-          <div class="linha" data-linha-do-tempo>
-            <p class="linha__instrucao">
-              Escolha um ano. No teclado, use as setas para a esquerda e para a direita.
-            </p>
-            <div class="linha__trilho">
-              <div
-                role="tablist"
-                aria-label="Anos da história do Mercado"
-                class="linha__abas"
-              ></div>
-            </div>
-            <div role="tabpanel" id="painel-linha" class="linha__painel" tabindex="0"></div>
+          <div class="caminhos__topo">
+            <header class="titulo-modulo titulo-modulo--claro">
+              <h2 id="caminhos-titulo">Caminhos que começam no Mercado</h2>
+              <span class="titulo-modulo__sub">Para conhecer a ilha</span>
+            </header>
+            <a class="botao botao--secundario" href="./mapa.html">Abrir o mapa da ilha</a>
           </div>
         </div>
+        <ul
+          class="caminhos__lista"
+          data-caminhos
+          aria-label="Lugares para visitar a partir do Mercado"
+        ></ul>
+        <p class="container caminhos__dica">
+          Deslize para o lado para ver mais lugares. Toque em um lugar para ver o caminho no mapa.
+        </p>
       </section>
 
       <!-- Vozes do Mercado -->
-      <section class="vozes" aria-labelledby="vozes-titulo">
+      <section class="secao vozes" aria-labelledby="vozes-titulo">
         <div class="container">
-          <header class="titulo-modulo titulo-modulo--claro">
+          <header class="titulo-modulo">
             <h2 id="vozes-titulo">Vozes do Mercado</h2>
             <span class="titulo-modulo__sub">Quem faz a feira acontecer</span>
           </header>
@@ -547,7 +268,7 @@
               </figure>
             </li>
           </ul>
-          <p class="vozes__fonte">
+          <p class="fontes">
             Depoimentos publicados pela
             <a
               href="https://www.saoluis.ma.gov.br/portal/noticias/0/3/3405/prefeitura-de-sao-luis-entrega-novo-espaco-para-feirantes-do-mercado-central-que-sera-totalmente-reformado/"
@@ -561,44 +282,93 @@
       </section>
 
       <!-- Sabores do Mercado -->
-      <section class="secao" aria-labelledby="sabores-titulo">
-        <div class="container">
-          <header class="titulo-modulo">
-            <h2 id="sabores-titulo">Sabores do Mercado</h2>
-            <span class="titulo-modulo__sub">A cozinha maranhense começa aqui</span>
-          </header>
-          <ul class="sabores" data-sabores></ul>
-          <div class="glossario-chamada">
-            <p>
-              <strong>Não conhece alguma palavra?</strong> No livro, termos como <em>cuxá</em>,
-              <em>juçara</em> e <em>platibanda</em> vêm com explicação em linguagem simples.
-            </p>
-            <a class="botao botao--contorno botao--pequeno" href="./livro.html#leitor"
-              >Abrir o livro</a
-            >
+      <section class="secao sabores-secao" aria-labelledby="sabores-titulo">
+        <div class="container sabores-grade">
+          <div class="sabores-fotos">
+            <img
+              data-foto="mercado-camarao-seco"
+              width="1100"
+              height="825"
+              loading="lazy"
+              alt="Cesto de palha cheio de camarão seco."
+            />
+            <img
+              data-foto="mercado-garrafas"
+              width="1100"
+              height="825"
+              loading="lazy"
+              alt="Garrafas de aguardente com caranguejo penduradas numa banca."
+            />
+          </div>
+          <div>
+            <header class="titulo-modulo">
+              <h2 id="sabores-titulo">Sabores do Mercado</h2>
+              <span class="titulo-modulo__sub">A cozinha maranhense começa aqui</span>
+            </header>
+            <ul class="sabores" data-sabores></ul>
           </div>
         </div>
       </section>
 
-      <!-- Chamada para o mapa -->
-      <section class="secao secao--suave" aria-labelledby="chamada-mapa-titulo">
-        <div class="container chamada-mapa">
-          <div class="chamada-mapa__texto">
-            <p class="sobretitulo">Mapa interativo</p>
-            <h2 id="chamada-mapa-titulo">O Mercado no centro da ilha</h2>
-            <p class="lead">
-              Cada linha começa no Mercado Central e leva a um lugar que vale conhecer: casarões de
-              azulejos, igrejas, museus, praias, mirantes e as cidades vizinhas.
-            </p>
-            <ul class="numeros">
-              <li><strong data-total-pontos>—</strong><span>destinos no mapa</span></li>
-              <li><strong>6</strong><span>categorias de passeio</span></li>
-              <li><strong>100%</strong><span>usável só com o teclado</span></li>
-            </ul>
-            <a class="botao" href="./mapa.html">Abrir o mapa turístico</a>
+      <!-- Visite o Mercado -->
+      <section class="secao secao--suave" aria-labelledby="visite-titulo">
+        <div class="container">
+          <header class="titulo-modulo">
+            <h2 id="visite-titulo">Visite o Mercado</h2>
+            <span class="titulo-modulo__sub">Para planejar a sua ida</span>
+          </header>
+          <div class="visite">
+            <div class="visite__info">
+              <article class="info-bloco">
+                <h3>Onde fica</h3>
+                <p>
+                  Prédio histórico: Rua de São João, Centro, ao lado da Fonte das Pedras. Durante a
+                  obra: Mercado da Cidade, Av. Senador Vitorino Freire.
+                </p>
+                <a href="./mapa.html">Ver no mapa e traçar caminho</a>
+              </article>
+              <article class="info-bloco">
+                <h3>Quando ir</h3>
+                <p>
+                  As bancas abrem cedo, por volta das 5h. As primeiras horas da manhã têm mais
+                  variedade de peixes e frutas.
+                </p>
+              </article>
+              <article class="info-bloco">
+                <h3>No Mercado da Cidade</h3>
+                <p>
+                  Quatro galpões com boxes padronizados, corredores largos, banheiros, praça de
+                  alimentação e mais de 300 vagas de estacionamento.
+                </p>
+              </article>
+            </div>
+            <div class="visite__setores">
+              <h3 id="setores-titulo">O que você encontra</h3>
+              <div class="setores" data-setores aria-labelledby="setores-titulo"></div>
+            </div>
           </div>
-          <div class="chamada-mapa__arte" aria-hidden="true">
-            <svg class="mini-mapa" data-mini-mapa role="presentation"></svg>
+        </div>
+      </section>
+
+      <!-- Linha do tempo -->
+      <section class="secao" aria-labelledby="linha-titulo">
+        <div class="container">
+          <header class="titulo-modulo">
+            <h2 id="linha-titulo">Linha do tempo</h2>
+            <span class="titulo-modulo__sub">De 1805 até hoje</span>
+          </header>
+          <div class="linha" data-linha-do-tempo>
+            <p class="linha__instrucao">
+              Escolha um ano. No teclado, use as setas para a esquerda e para a direita.
+            </p>
+            <div class="linha__trilho">
+              <div
+                role="tablist"
+                aria-label="Anos da história do Mercado"
+                class="linha__abas"
+              ></div>
+            </div>
+            <div role="tabpanel" id="painel-linha" class="linha__painel" tabindex="0"></div>
           </div>
         </div>
       </section>

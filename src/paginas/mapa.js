@@ -9,6 +9,7 @@ import { MERCADO_CENTRAL, CATEGORIAS, PONTOS_TURISTICOS } from '../dados/pontos-
 import { criarMapaInterativo } from '../recursos/mapa/mapa-interativo.js';
 import { buscarRota, buscarRotaPorPontos } from '../recursos/mapa/rotas.js';
 import { ROTEIROS } from '../dados/roteiros.js';
+import { FOTOS, FOTO_DO_PONTO, urlDaFoto } from '../dados/fotos.js';
 import { rotaGuardadaDoPonto, rotaGuardadaDoRoteiro } from '../recursos/mapa/rotas-guardadas.js';
 import { calcularDistanciaKm, estimarTempos } from '../recursos/mapa/geografia.js';
 import {
@@ -130,7 +131,9 @@ function selecionar(id, { origem }) {
   }
   const ponto = pontos.find((p) => p.id === id);
   if (!ponto) return;
-  el.detalhes.innerHTML = renderizarDetalhes(ponto, MERCADO_CENTRAL);
+  const chaveFoto = FOTO_DO_PONTO[ponto.id];
+  const foto = chaveFoto ? { ...FOTOS[chaveFoto], url: urlDaFoto(chaveFoto) } : null;
+  el.detalhes.innerHTML = renderizarDetalhes(ponto, MERCADO_CENTRAL, foto);
   el.detalhes.hidden = false;
   mapa?.selecionar(id);
   atualizarLista();

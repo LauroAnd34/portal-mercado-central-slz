@@ -85,9 +85,13 @@ export function renderizarItem(ponto, selecionado) {
 }
 
 /** HTML do painel de detalhes. */
-export function renderizarDetalhes(ponto, mercado) {
+export function renderizarDetalhes(ponto, mercado, foto = null) {
   const modo = ponto.modoSugerido;
-  return `
+  const figura = foto
+    ? `<figure class="detalhes__foto"><img src="${foto.url}" alt="${escaparHtml(foto.lugar)}" width="900" height="600" />
+        <figcaption>Foto: ${escaparHtml(foto.autor)} · ${escaparHtml(foto.licenca)}</figcaption></figure>`
+    : '';
+  return `${figura}
     <div class="detalhes__cabecalho" style="--cor-categoria:${ponto.categoriaInfo.cor}">
       <span class="detalhes__categoria">${escaparHtml(ponto.categoriaInfo.nome)}</span>
       <h3 id="detalhes-titulo" tabindex="-1">${escaparHtml(ponto.nome)}</h3>

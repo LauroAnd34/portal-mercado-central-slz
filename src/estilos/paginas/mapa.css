@@ -494,5 +494,21 @@
 }
 
 .pagina-mapa .cabecalho-pagina {
-  --foto-topo: url('../../imagens/novo-mercado-central-projeto.jpg');
+  --foto-topo: url('../../imagens/fotos/praia-grande-casarios.jpg');
+}
+
+.detalhes__foto {
+  margin: calc(var(--e-5) * -1) calc(var(--e-5) * -1) var(--e-5);
+}
+.detalhes__foto img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--raio-md) var(--raio-md) 0 0;
+}
+.detalhes__foto figcaption {
+  padding: var(--e-1) var(--e-5) 0;
+  font-size: var(--texto-xs);
+  color: var(--cor-texto-suave);
 }

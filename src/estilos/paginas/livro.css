@@ -405,7 +405,7 @@ mark {
 }
 .leitor__item-sumario {
   display: grid;
-  grid-template-columns: 28px 1fr;
+  grid-template-columns: 22px 1fr;
   gap: 2px var(--e-2);
   padding: var(--e-2) var(--e-3);
   border-radius: var(--raio);
@@ -729,6 +729,7 @@ mark {
 /* capítulo lido no sumário */
 .leitor__item-sumario--lido .leitor__numero::after {
   content: '✓';
+  margin-left: 0 !important;
   display: inline-grid;
   place-items: center;
   width: 18px;
@@ -805,4 +806,8 @@ mark {
 
 .pagina-livro .cabecalho-pagina {
   --foto-topo: url('../../imagens/historia/mercado-1941-cartao-foto-londres.jpg');
+}
+
+.leitor__posicao:empty {
+  display: none;
 }

@@ -35,8 +35,7 @@ export function iniciarLinhaDoTempo(raiz, marcos) {
     painel.dataset.ano = marco.ano; // número grande decorativo (CSS ::before)
     painel.innerHTML = `
       <h3>${escaparHtml(marco.titulo)}</h3>
-      <p>${escaparHtml(marco.texto)}</p>
-      <p class="linha__contador">${indice + 1} de ${marcos.length}</p>`;
+      <p>${escaparHtml(marco.texto)}</p>`;
     raiz.style.setProperty('--progresso-linha-numero', String(indice / (marcos.length - 1)));
     if (focar) abas[indice].focus();
   };
