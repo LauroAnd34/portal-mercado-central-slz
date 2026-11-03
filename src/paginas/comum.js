@@ -11,6 +11,8 @@ import '@fontsource/atkinson-hyperlegible/latin-400.css';
 import '@fontsource/atkinson-hyperlegible/latin-700.css';
 import '@fontsource/opendyslexic/latin-400.css';
 import '@fontsource/opendyslexic/latin-700.css';
+import '@fontsource/fraunces/latin-600.css';
+import '@fontsource/fraunces/latin-600-italic.css';
 
 import '../estilos/tokens.css';
 import '../estilos/basico.css';
@@ -26,6 +28,7 @@ import { iniciarLeituraDeSelecao } from '../recursos/acessibilidade/leitura-de-s
 import { iniciarAtalhosDeTeclado } from '../recursos/acessibilidade/atalhos-de-teclado.js';
 import { iniciarMenuMovel } from '../recursos/navegacao/menu-movel.js';
 import { iniciarAnimacoes } from '../recursos/animacoes/animacoes.js';
+import { preencherFotos, montarCreditos } from '../recursos/fotos/fotos.js';
 
 export function iniciarPaginaComum() {
   const { abrirPainel } = iniciarControlesDeAcessibilidade();
@@ -34,9 +37,24 @@ export function iniciarPaginaComum() {
   iniciarVLibras();
   iniciarLeituraDeSelecao();
   iniciarMenuMovel();
+  preencherFotos();
+  montarCreditos();
+  iniciarVoltarAoTopo();
   registrarModoOffline();
   // depois que cada página montou seu conteúdo dinâmico (cartões, sabores…)
   queueMicrotask(iniciarAnimacoes);
+}
+
+/** "Voltar ao topo": rola até o início e leva o foco para o primeiro atalho. */
+function iniciarVoltarAoTopo() {
+  document.querySelectorAll('[data-voltar-topo]').forEach((botao) =>
+    botao.addEventListener('click', () => {
+      const reduzido = document.documentElement.dataset.movimento === 'reduzido';
+      window.scrollTo({ top: 0, behavior: reduzido ? 'auto' : 'smooth' });
+      const primeiro = document.querySelector('.barra-gov__atalhos a, .marca');
+      primeiro?.focus({ preventScroll: true });
+    }),
+  );
 }
 
 /** Guarda o site no aparelho para funcionar sem internet (só na versão publicada). */

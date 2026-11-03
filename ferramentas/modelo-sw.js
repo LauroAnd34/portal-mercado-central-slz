@@ -1,9 +1,15 @@
 /* Service worker do Portal do Mercado Central — gerado na construção do site.
-   Não edite em site-pronto/: altere ferramentas/modelo-sw.js. */
+   Não edite em site-pronto/: altere ferramentas/modelo-sw.js.
+   Estratégia:
+   - páginas (HTML): busca primeiro na internet (sempre a versão mais nova);
+     sem internet, usa a cópia guardada;
+   - arquivos com "impressão digital" no nome (assets/…): guardados de vez;
+   - demais arquivos do site: internet primeiro, cópia guardada como reserva;
+   - quadradinhos do mapa já vistos: guardados (até 400). */
 const VERSAO = '__VERSAO__';
 const CACHE_SITE = `mercado-site-${VERSAO}`;
 const CACHE_MAPA = 'mercado-mapa-v1';
-const LIMITE_MAPA = 400; // quadradinhos do mapa guardados
+const LIMITE_MAPA = 400;
 const ARQUIVOS = __ARQUIVOS__;
 
 self.addEventListener('install', (evento) => {
@@ -37,29 +43,36 @@ async function limitarCache(nome, limite) {
     await cache.delete(chave);
 }
 
+async function internetPrimeiro(request) {
+  const cache = await caches.open(CACHE_SITE);
+  try {
+    const resposta = await fetch(request);
+    if (resposta.ok) cache.put(request, resposta.clone());
+    return resposta;
+  } catch {
+    const guardado = await cache.match(request, { ignoreSearch: true });
+    if (guardado) return guardado;
+    if (request.mode === 'navigate') return (await cache.match('./404.html')) ?? Response.error();
+    return Response.error();
+  }
+}
+
 self.addEventListener('fetch', (evento) => {
   const { request } = evento;
   if (request.method !== 'GET') return;
   const url = new URL(request.url);
 
-  // Arquivos do próprio site: responde do cache e atualiza em segundo plano
   if (url.origin === self.location.origin) {
-    evento.respondWith(
-      caches.open(CACHE_SITE).then(async (cache) => {
-        const guardado = await cache.match(request, { ignoreSearch: true });
-        const daRede = fetch(request)
-          .then((resposta) => {
-            if (resposta.ok) cache.put(request, resposta.clone());
-            return resposta;
-          })
-          .catch(() => guardado ?? cache.match('./404.html'));
-        return guardado ?? daRede;
-      }),
-    );
+    if (url.pathname.includes('/assets/')) {
+      evento.respondWith(
+        caches.match(request).then((guardado) => guardado ?? internetPrimeiro(request)),
+      );
+    } else {
+      evento.respondWith(internetPrimeiro(request));
+    }
     return;
   }
 
-  // Quadradinhos do mapa: guarda os que a pessoa já viu
   if (url.hostname === 'tile.openstreetmap.org') {
     evento.respondWith(
       caches.open(CACHE_MAPA).then(async (cache) => {
@@ -74,5 +87,4 @@ self.addEventListener('fetch', (evento) => {
       }),
     );
   }
-  // demais serviços (rotas, VLibras): sempre pela rede
 });

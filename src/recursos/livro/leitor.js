@@ -72,11 +72,7 @@ export function iniciarLeitor(leitor) {
             'a',
             { href: `#cap-${capitulo.id}`, 'data-indice': i, class: 'leitor__item-sumario' },
             [
-              criarElemento('span', {
-                class: 'leitor__numero',
-                'aria-hidden': 'true',
-                texto: i === 0 ? '•' : String(i),
-              }),
+              criarElemento('span', { class: 'leitor__numero', 'aria-hidden': 'true' }),
               criarElemento('span', { class: 'leitor__nome', texto: capitulo.titulo }),
               criarElemento('span', { class: 'leitor__minutos', texto: `${capitulo.minutos} min` }),
               criarElemento('span', { class: 'leitor__lido somente-leitor' }),
@@ -118,7 +114,7 @@ export function iniciarLeitor(leitor) {
     });
 
     const total = capitulos.length;
-    elementos.posicao.textContent = `Parte ${atual + 1} de ${total}`;
+    elementos.posicao.textContent = '';
     elementos.barra.style.width = `${((atual + 1) / total) * 100}%`;
     elementos.anterior.disabled = atual === 0;
     elementos.proximo.disabled = atual === total - 1;

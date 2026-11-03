@@ -74,12 +74,17 @@ function contarNumero(el) {
 
 export function iniciarAnimacoes() {
   // troca de página suave: respeita a pausa de animações
-  window.addEventListener('pageswap', (evento) => {
-    if (!animacoesPermitidas()) evento.viewTransition?.skipTransition();
-  });
-  window.addEventListener('pagereveal', (evento) => {
-    if (!animacoesPermitidas()) evento.viewTransition?.skipTransition();
-  });
+  const tratarTransicao = (evento) => {
+    const transicao = evento.viewTransition;
+    if (!transicao) return;
+    // transições interrompidas (ex.: clicar rápido em outro link) não são erro
+    transicao.ready?.catch(() => {});
+    transicao.finished?.catch(() => {});
+    transicao.updateCallbackDone?.catch(() => {});
+    if (!animacoesPermitidas()) transicao.skipTransition();
+  };
+  window.addEventListener('pageswap', tratarTransicao);
+  window.addEventListener('pagereveal', tratarTransicao);
 
   if (!animacoesPermitidas()) return;
   const raiz = document.documentElement;

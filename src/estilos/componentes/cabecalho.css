@@ -139,7 +139,7 @@ kbd {
 .marca__logo {
   display: block;
   width: auto;
-  height: 52px;
+  height: 60px;
 }
 .marca__logo--branca {
   display: none;
@@ -287,4 +287,10 @@ kbd {
     width: 4px;
     height: auto;
   }
+}
+
+.menu__link--botao {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
 }

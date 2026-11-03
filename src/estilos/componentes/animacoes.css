@@ -91,16 +91,16 @@
 .abertura__texto > :nth-child(4) {
   animation-delay: 0.3s;
 }
-.abertura__colagem {
+.abertura__mosaico {
   animation: ilustracao-entrando 1.1s var(--curva-suave) 0.2s backwards;
 }
-.abertura__polaroide {
-  animation: polaroide-entrando 1.2s var(--curva-mola) 0.7s backwards;
+.mosaico__item:not(.mosaico__item--grande) {
+  animation: polaroide-entrando 1s var(--curva-suave) 0.5s backwards;
 }
 @keyframes polaroide-entrando {
   from {
     opacity: 0;
-    transform: translate(-40px, 30px) rotate(-18deg);
+    transform: translateX(30px);
   }
 }
 @keyframes ilustracao-entrando {

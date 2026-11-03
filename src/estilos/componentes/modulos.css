@@ -14,22 +14,17 @@
   padding-bottom: var(--e-4);
 }
 .titulo-modulo::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 112px;
-  height: 6px;
-  border-radius: 3px;
-  background: var(--faixa);
+  content: none;
 }
 .titulo-modulo h2 {
   margin: 0;
   max-width: 22ch;
   color: var(--cor-titulo);
-  font-size: clamp(1.9rem, 1.3rem + 2.4vw, 3rem);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: clamp(2rem, 1.3rem + 2.6vw, 3.3rem);
   line-height: 1.05;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
 }
 .titulo-modulo__sub {
   display: inline-flex;
@@ -43,13 +38,11 @@
   color: var(--marca-azul-600);
 }
 .titulo-modulo__sub::before {
-  /* mini azulejo como marcador */
   content: '';
-  width: 20px;
-  height: 20px;
-  border-radius: 4px;
-  background: url('../../imagens/azulejo-colorido.svg') center / cover;
-  box-shadow: 0 0 0 1px rgb(29 79 143 / 0.25);
+  width: 28px;
+  height: 3px;
+  border-radius: 2px;
+  background: currentColor;
 }
 :root[data-tema='escuro'] .titulo-modulo__sub {
   color: #8fd0f2;
@@ -194,8 +187,10 @@
   padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(2rem, 5vw, 3.5rem);
 }
 .cabecalho-pagina h1 {
-  font-size: clamp(2.2rem, 1.5rem + 3vw, 3.6rem) !important;
-  letter-spacing: -0.03em;
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: clamp(2.3rem, 1.5rem + 3.4vw, 4rem) !important;
+  letter-spacing: -0.02em;
 }
 .cabecalho-pagina {
   overflow: hidden;
@@ -305,4 +300,19 @@
   padding: 0 4px;
   border-radius: 3px;
   font-weight: 600;
+}
+
+.cartao__link--botao {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.cartao__link--botao::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--raio-lg);
 }
