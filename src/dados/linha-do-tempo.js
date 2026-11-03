@@ -1,5 +1,5 @@
 /**
- * Marcos da história do Mercado Central (versão de demonstração, baseada no
+ * Marcos da história do Mercado Central (baseada no
  * material de pesquisa do projeto). Revisar datas com a equipe do livro.
  */
 export const LINHA_DO_TEMPO = Object.freeze([
@@ -34,9 +34,21 @@ export const LINHA_DO_TEMPO = Object.freeze([
       'O Centro Histórico de São Luís, onde fica o Mercado, é reconhecido pela UNESCO como Patrimônio Mundial.',
   },
   {
+    ano: '2025',
+    titulo: 'Mudança temporária',
+    texto:
+      'Em 12 de novembro, os feirantes passam a atender no Mercado da Cidade, no Aterro do Bacanga, para que o prédio histórico possa ser reconstruído.',
+  },
+  {
+    ano: '2026',
+    titulo: 'Começa a reconstrução',
+    texto:
+      'Em 4 de julho é assinada a ordem de serviço do novo Mercado Central: três andares, 285 feirantes e as fachadas originais preservadas.',
+  },
+  {
     ano: 'Hoje',
     titulo: 'Memória viva',
     texto:
-      'Comerciantes, fregueses e visitantes mantêm o Mercado como ponto de encontro, trabalho e sabores da ilha.',
+      'Mesmo durante a obra, comerciantes e fregueses mantêm viva a tradição do Mercado: ponto de encontro, trabalho e sabores da ilha.',
   },
 ]);

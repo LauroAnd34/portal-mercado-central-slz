@@ -2,89 +2,248 @@
    PÁGINA INICIAL
    ========================================================================= */
 
-/* ---------- Destaque ---------- */
-.destaque {
+/* ---------- Abertura ---------- */
+.abertura {
   position: relative;
   overflow: hidden;
   color: #fff;
-  background-color: var(--marca-marinho-700);
-  background-image:
-    radial-gradient(circle at 85% 20%, rgb(57 166 222 / 0.45), transparent 45%),
-    radial-gradient(circle at 10% 90%, rgb(187 208 80 / 0.25), transparent 40%),
-    url('../../imagens/azulejo.svg');
+  background:
+    radial-gradient(ellipse 60% 70% at 100% 0%, rgb(57 166 222 / 0.45), transparent 70%),
+    radial-gradient(ellipse 50% 60% at 0% 100%, rgb(187 208 80 / 0.28), transparent 70%),
+    linear-gradient(160deg, #0b2a45 0%, #144670 55%, #175284 100%);
 }
-.destaque__grade {
+.abertura::before {
+  /* azulejos aparecendo à direita, em transparência */
+  content: '';
+  position: absolute;
+  inset: 0 0 0 45%;
+  background: url('../../imagens/azulejo-colorido.svg') 0 0 / 96px 96px;
+  opacity: 0.09;
+  mask-image: linear-gradient(to right, transparent, #000 40%);
+}
+.abertura__grade {
+  position: relative;
   display: grid;
-  grid-template-columns: 1.05fr 1fr;
-  gap: var(--e-7);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: clamp(2rem, 5vw, 5rem);
   align-items: center;
-  padding-block: var(--e-8) var(--e-9);
+  padding-block: clamp(3rem, 7vw, 6.5rem) clamp(4rem, 8vw, 7rem);
 }
-@media (max-width: 900px) {
-  .destaque__grade {
-    grid-template-columns: 1fr;
-    padding-block: var(--e-7);
+@media (max-width: 960px) {
+  .abertura__grade {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
-.destaque__selo {
-  display: inline-block;
-  padding: var(--e-1) var(--e-3);
-  border-radius: var(--raio-pilula);
-  background: rgb(255 255 255 / 0.12);
-  border: 1px solid rgb(255 255 255 / 0.35);
+.abertura__lugar {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-2);
+  margin: 0 0 var(--e-4);
+  font-family: var(--fonte-ui);
   font-size: var(--texto-xs);
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
+  color: #cfe6f4;
 }
-.destaque h1 {
+.abertura__pino {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--faixa-3);
+  box-shadow: 0 0 0 5px rgb(187 208 80 / 0.25);
+}
+.abertura h1 {
+  margin: 0;
   color: #fff;
-  margin-top: var(--e-4);
-  font-size: var(--texto-3xl);
+  font-size: clamp(3.2rem, 2rem + 6.5vw, 7.2rem);
+  line-height: 0.92;
+  letter-spacing: -0.035em;
 }
-.destaque h1 span {
+.abertura__linha {
   display: block;
-  background: linear-gradient(90deg, var(--faixa-1), var(--faixa-3) 45%, var(--faixa-6));
+}
+.abertura__linha--destaque {
+  background: linear-gradient(
+    90deg,
+    var(--faixa-1),
+    var(--faixa-3) 40%,
+    var(--faixa-6) 80%,
+    var(--faixa-7)
+  );
+  background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
-.destaque__lead {
-  font-size: var(--texto-lg);
-  color: #e3f2fb;
-  max-width: 56ch;
+.abertura__frase {
+  margin: var(--e-4) 0 var(--e-3);
+  font-family: var(--fonte-livro);
+  font-style: italic;
+  font-size: clamp(1.25rem, 1rem + 1vw, 1.7rem);
+  color: #fff;
 }
-.destaque__acoes {
+.abertura__lead {
+  max-width: 50ch;
+  color: #d6e8f4;
+  font-size: var(--texto-md);
+}
+.abertura__acoes {
   display: flex;
   flex-wrap: wrap;
   gap: var(--e-3);
   margin-top: var(--e-5);
 }
-.destaque__ilustracao {
-  margin: 0;
-  animation: flutuar 7s ease-in-out infinite;
+.botao--grande {
+  min-height: 54px;
+  padding: 0 var(--e-6);
+  font-size: var(--texto-md);
+  border-radius: var(--raio-md);
 }
-.destaque__ilustracao img {
+.botao--vidro {
+  background: rgb(255 255 255 / 0.1);
+  border-color: rgb(255 255 255 / 0.55);
+  color: #fff;
+  backdrop-filter: blur(6px);
+}
+.botao--vidro:hover {
+  background: #fff;
+  color: var(--marca-marinho-800);
+}
+.abertura__numeros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e-4) var(--e-6);
+  list-style: none;
+  padding: var(--e-5) 0 0;
+  margin: var(--e-6) 0 0;
+  border-top: 1px solid rgb(255 255 255 / 0.18);
+}
+.abertura__numeros li {
+  display: grid;
+}
+.abertura__numeros strong {
+  font-family: var(--fonte-ui);
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: #fff;
+}
+.abertura__numeros li > span {
+  font-size: var(--texto-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #b9d6ea;
+}
+
+/* colagem: imagem do projeto + cartão-postal + selo */
+.abertura__colagem {
+  position: relative;
+  padding: 0 0 var(--e-7) var(--e-6);
+}
+.abertura__moldura {
+  position: relative;
+  padding: 10px;
+  border-radius: 26px;
+  background: url('../../imagens/azulejo-colorido.svg') 0 0 / 48px 48px;
+  box-shadow: 0 40px 80px -30px rgb(0 0 0 / 0.65);
+  transform: rotate(1.5deg);
+}
+.abertura__foto-principal {
+  display: block;
   width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: 50% 60%;
   border-radius: 18px;
-  box-shadow: 0 30px 60px -25px rgb(0 0 0 / 0.6);
 }
-@keyframes flutuar {
-  50% {
-    transform: translateY(-10px);
+.abertura__polaroide {
+  position: absolute;
+  left: -4%;
+  bottom: 0;
+  width: 46%;
+  margin: 0;
+  padding: 10px 10px 34px;
+  background: #fffdf6;
+  box-shadow: 0 24px 40px -18px rgb(0 0 0 / 0.6);
+  transform: rotate(-6deg);
+}
+.abertura__polaroide img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  filter: sepia(0.35);
+}
+.abertura__polaroide figcaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 6px;
+  text-align: center;
+  font-family: var(--fonte-livro);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: #3b2f1e;
+}
+.abertura__selo {
+  position: absolute;
+  right: -10px;
+  top: -34px;
+  width: clamp(88px, 10vw, 124px);
+  filter: drop-shadow(0 10px 18px rgb(0 0 0 / 0.35));
+}
+.abertura__selo svg {
+  width: 100%;
+  height: auto;
+  animation: girar 28s linear infinite;
+}
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
   }
 }
-.destaque__faixa {
-  height: 10px;
+.abertura__legenda {
+  position: absolute;
+  right: 0;
+  bottom: var(--e-2);
+  margin: 0;
+  font-size: var(--texto-xs);
+  color: #b9d6ea;
 }
-:root[data-contraste='alto'] .destaque {
+@media (max-width: 960px) {
+  .abertura__colagem {
+    max-width: 560px;
+    margin-inline: auto;
+    padding-left: var(--e-4);
+  }
+}
+@media (max-width: 480px) {
+  .abertura__polaroide {
+    width: 52%;
+    padding: 6px 6px 24px;
+  }
+  .abertura__polaroide figcaption {
+    font-size: 0.85rem;
+  }
+  .abertura__selo {
+    top: -26px;
+    right: -4px;
+  }
+  .abertura__legenda {
+    display: none;
+  }
+}
+:root[data-contraste='alto'] .abertura {
   background: #000;
 }
-:root[data-contraste='alto'] .destaque h1 span {
+:root[data-contraste='alto'] .abertura__linha--destaque {
   color: #ffff00;
   background: none;
 }
-:root[data-contraste='alto'] .destaque__lead {
+:root[data-contraste='alto'] .abertura__lead,
+:root[data-contraste='alto'] .abertura__lugar,
+:root[data-contraste='alto'] .abertura__numeros span {
   color: #fff;
 }
 
@@ -181,7 +340,7 @@
   content: attr(data-ano);
   position: absolute;
   right: var(--e-4);
-  top: -0.2em;
+  bottom: -0.18em;
   margin: 0;
   font-family: var(--fonte-ui);
   font-weight: 800;
@@ -258,8 +417,14 @@
   height: 100%;
 }
 .mini-mapa__linha {
-  opacity: 0;
-  animation: aparecer 0.6s ease forwards;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: tracar-caminho 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes tracar-caminho {
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 .mini-mapa__ponto {
   opacity: 0;
@@ -498,4 +663,303 @@
 }
 .glossario-chamada p {
   margin: 0;
+}
+
+/* ---------- Aviso de obra ---------- */
+.aviso-obra {
+  display: flex;
+  gap: var(--e-4);
+  align-items: flex-start;
+  margin-bottom: var(--e-6);
+  padding: var(--e-4) var(--e-5);
+  border-radius: var(--raio-md);
+  background: repeating-linear-gradient(-45deg, #fff8db 0 18px, #fff3c4 18px 36px);
+  border: 2px solid var(--ouro-500);
+  color: #3d3300;
+}
+.aviso-obra svg {
+  flex-shrink: 0;
+  color: #8a5a00;
+}
+.aviso-obra p {
+  margin: 0;
+}
+.aviso-obra__titulo {
+  font-family: var(--fonte-ui);
+  font-weight: 800;
+  font-size: var(--texto-lg);
+  margin-bottom: var(--e-1) !important;
+}
+.aviso-obra a {
+  color: #6b4500;
+  font-weight: 700;
+}
+:root[data-tema='escuro'] .aviso-obra {
+  background: #2e2a12;
+  color: #fff3b0;
+}
+:root[data-tema='escuro'] .aviso-obra a,
+:root[data-tema='escuro'] .aviso-obra svg {
+  color: #faea25;
+}
+:root[data-contraste='alto'] .aviso-obra {
+  background: #000;
+  color: #fff;
+  border-color: #ffff00;
+}
+
+/* ---------- Novo Mercado Central ---------- */
+.novo-mercado {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: var(--e-7);
+  align-items: start;
+}
+@media (max-width: 980px) {
+  .novo-mercado {
+    grid-template-columns: 1fr;
+    gap: var(--e-5);
+  }
+}
+.comparador {
+  --posicao: 50%;
+  margin: 0;
+}
+.comparador__imagens {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--raio-lg);
+  box-shadow: var(--sombra-3);
+  background: #ddd;
+}
+.comparador__depois,
+.comparador__antes {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.comparador__antes-caixa {
+  position: absolute;
+  inset: 0;
+  clip-path: inset(0 calc(100% - var(--posicao)) 0 0);
+}
+.comparador__antes {
+  object-position: 50% 75%;
+  filter: sepia(0.35) contrast(1.05);
+}
+.comparador__linha {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--posicao);
+  width: 4px;
+  margin-left: -2px;
+  background: #fff;
+  box-shadow: 0 0 8px rgb(0 0 0 / 0.5);
+  pointer-events: none;
+}
+.comparador__alca {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 44px;
+  height: 44px;
+  margin: -22px 0 0 -22px;
+  border-radius: 50%;
+  background: var(--faixa-3);
+  border: 4px solid #fff;
+  box-shadow: var(--sombra-2);
+}
+.comparador__alca::before {
+  content: '‹ ›';
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font: 800 1rem var(--fonte-ui);
+  color: var(--marca-marinho-900);
+}
+.comparador__rotulo {
+  position: absolute;
+  top: var(--e-3);
+  padding: 2px var(--e-3);
+  border-radius: var(--raio-pilula);
+  background: rgb(11 42 69 / 0.85);
+  color: #fff;
+  font: 700 var(--texto-xs) var(--fonte-ui);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.comparador__rotulo--antes {
+  left: var(--e-3);
+}
+.comparador__rotulo--depois {
+  right: var(--e-3);
+}
+.comparador__controle {
+  display: grid;
+  gap: var(--e-1);
+  margin-top: var(--e-3);
+  font-size: var(--texto-sm);
+}
+.comparador figcaption {
+  margin-top: var(--e-2);
+  font-size: var(--texto-xs);
+  color: var(--cor-texto-suave);
+}
+.fatos {
+  display: grid;
+  gap: var(--e-3);
+  margin: var(--e-5) 0;
+}
+.fatos div {
+  display: grid;
+  grid-template-columns: 9.5rem 1fr;
+  gap: var(--e-3);
+  padding-bottom: var(--e-3);
+  border-bottom: 1px solid var(--cor-borda);
+}
+@media (max-width: 480px) {
+  .fatos div {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}
+.fatos dt {
+  font-weight: 800;
+  color: var(--cor-titulo);
+  font-size: var(--texto-sm);
+}
+.fatos dd {
+  margin: 0;
+}
+.fontes {
+  font-size: var(--texto-xs);
+  color: var(--cor-texto-suave);
+}
+
+/* ---------- Vozes do Mercado ---------- */
+.vozes {
+  position: relative;
+  padding-block: var(--e-9);
+  color: #fff;
+  background:
+    linear-gradient(180deg, rgb(11 42 69 / 0.94), rgb(20 70 112 / 0.94)),
+    url('../../imagens/azulejo-colorido.svg') 0 0 / 120px 120px;
+  overflow: hidden;
+}
+.titulo-modulo--claro h2 {
+  color: #fff;
+}
+.titulo-modulo--claro .titulo-modulo__sub {
+  color: var(--faixa-3);
+}
+.vozes__lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--e-5);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.voz {
+  position: relative;
+  height: 100%;
+  margin: 0;
+  padding: var(--e-7) var(--e-5) var(--e-5);
+  border-radius: var(--raio-lg);
+  background: rgb(255 255 255 / 0.07);
+  border: 1px solid rgb(255 255 255 / 0.18);
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--e-4);
+}
+.voz::before {
+  content: '“';
+  position: absolute;
+  top: -0.15em;
+  left: var(--e-4);
+  font-family: var(--fonte-livro);
+  font-size: 6rem;
+  line-height: 1;
+  color: var(--faixa-3);
+}
+.voz blockquote {
+  margin: 0;
+}
+.voz blockquote p {
+  margin: 0;
+  font-family: var(--fonte-livro);
+  font-style: italic;
+  font-size: clamp(1.2rem, 1rem + 0.8vw, 1.5rem);
+  line-height: 1.45;
+  color: #fff;
+}
+.voz figcaption {
+  display: grid;
+  gap: 2px;
+  padding-top: var(--e-3);
+  border-top: 1px solid rgb(255 255 255 / 0.18);
+  font-size: var(--texto-sm);
+}
+.voz figcaption strong {
+  color: #fff;
+}
+.voz figcaption span {
+  color: #b9d6ea;
+}
+.vozes__fonte {
+  margin: var(--e-5) 0 0;
+  font-size: var(--texto-xs);
+  color: #b9d6ea;
+}
+.vozes__fonte a {
+  color: #fff;
+}
+:root[data-contraste='alto'] .vozes {
+  background: #000;
+  border-block: 2px solid #fff;
+}
+:root[data-contraste='alto'] .voz {
+  background: #000;
+  border: 2px solid #fff;
+}
+:root[data-contraste='alto'] .voz::before,
+:root[data-contraste='alto'] .titulo-modulo--claro .titulo-modulo__sub {
+  color: #ffff00;
+}
+
+/* telas pequenas: polaroide dentro da tela e anos da linha do tempo em grade */
+@media (max-width: 640px) {
+  .abertura__polaroide {
+    left: 0;
+  }
+  .linha__abas {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--e-2);
+  }
+  .linha__abas::before,
+  .linha__abas::after {
+    display: none;
+  }
+  .linha__aba {
+    min-width: 0;
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-md);
+    background: var(--cor-superficie);
+  }
+  .linha__aba[aria-selected='true'] {
+    border-color: var(--cor-primaria);
+    background: var(--cor-fundo-destaque);
+  }
+  .linha__ano {
+    font-size: var(--texto-md);
+  }
 }

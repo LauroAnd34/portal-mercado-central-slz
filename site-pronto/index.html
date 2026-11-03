@@ -74,17 +74,17 @@
         }
       }
     </script>
-    <script type="module" crossorigin src="./assets/inicio-BhgWUZFN.js"></script>
-    <link rel="modulepreload" crossorigin href="./assets/modulos-Bhtwam2X.js">
-    <link rel="modulepreload" crossorigin href="./assets/pontos-turisticos-BWk8hFS6.js">
-    <link rel="stylesheet" crossorigin href="./assets/modulos-VR-Wvvhm.css">
-    <link rel="stylesheet" crossorigin href="./assets/inicio-DHOfgYwU.css">
+    <script type="module" crossorigin src="./assets/inicio-WB1MlKjF.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/modulos-18mMoEpE.js">
+    <link rel="modulepreload" crossorigin href="./assets/geografia-Dp6DEBuA.js">
+    <link rel="stylesheet" crossorigin href="./assets/modulos-B2EM1sqW.css">
+    <link rel="stylesheet" crossorigin href="./assets/inicio-w-6ZArDv.css">
   </head>
   <body class="pagina-inicio">
-    <!-- Faixa "versão de demonstração": aparece quando VITE_DEMONSTRACAO=true (ex.: GitHub Pages) -->
+    <!-- Aviso discreto de "versão de apresentação": aparece quando VITE_DEMONSTRACAO=true (ex.: GitHub Pages) -->
 <div class="faixa-demonstracao" data-mostrar="false" role="note">
-  <strong>Versão de demonstração.</strong> Este não é o site oficial da Prefeitura de São Luís — o
-  conteúdo é provisório.
+  Proposta de portal para o Mercado Central · versão de apresentação, não é o site oficial da
+  Prefeitura
 </div>
 <!-- Barra superior no padrão eMAG: atalhos de teclado + acessibilidade rápida -->
 <div class="barra-gov nao-imprimir">
@@ -154,27 +154,26 @@
 
 <header class="cabecalho" id="topo">
   <div class="container cabecalho__conteudo">
-    <a
-      class="marca"
-      href="./index.html"
-      aria-label="Prefeitura de São Luís — página inicial do portal do Mercado Central"
-    >
-      <!--
-        ESPAÇO RESERVADO PARA A LOGOMARCA OFICIAL.
-        Substitua o arquivo public/img/logo-prefeitura.svg pelo logo oficial
-        fornecido pela SECOM (mantenha o mesmo nome ou altere o src abaixo).
-      -->
+    <a class="marca" href="./index.html">
+      <!-- Logomarca oficial (portal saoluis.ma.gov.br). A versão branca aparece no modo escuro e no alto contraste. -->
       <img
-        class="marca__logo manter-cores"
-        src="./img/logo-prefeitura.svg"
-        alt=""
-        width="52"
-        height="52"
+        class="marca__logo marca__logo--cor manter-cores"
+        src="./img/oficial/logo_mobile.png"
+        alt="Prefeitura de São Luís"
+        width="278"
+        height="76"
       />
-      <span class="marca__texto">
-        <span class="marca__orgao">Prefeitura de</span>
-        <span class="marca__cidade">São Luís</span>
-      </span>
+      <img
+        class="marca__logo marca__logo--branca manter-cores"
+        src="./img/oficial/logo_branca.png"
+        alt="Prefeitura de São Luís"
+        width="278"
+        height="76"
+      />
+      <span class="marca__separador" aria-hidden="true"></span>
+      <span class="marca__portal"
+        ><span class="somente-leitor">, </span>Portal do<br />Mercado Central</span
+      >
     </a>
 
     <button type="button" class="menu-botao" aria-expanded="false" aria-controls="menu-principal">
@@ -379,18 +378,25 @@
 
 
     <main id="conteudo" tabindex="-1">
-      <!-- Destaque -->
-      <section class="destaque" aria-labelledby="destaque-titulo">
-        <div class="container destaque__grade">
-          <div class="destaque__texto">
-            <p class="destaque__selo">Patrimônio de São Luís</p>
-            <h1 id="destaque-titulo">Mercado Central <span>de São Luís</span></h1>
-            <p class="destaque__lead">
-              Memória, sabores e gente da nossa ilha. Leia ou ouça o livro do Mercado e descubra, a
-              partir dele, os caminhos para os pontos turísticos de São Luís.
+      <!-- Abertura -->
+      <section class="abertura" aria-labelledby="abertura-titulo">
+        <div class="container abertura__grade">
+          <div class="abertura__texto">
+            <p class="abertura__lugar">
+              <span aria-hidden="true" class="abertura__pino"></span>
+              Centro Histórico · São Luís do Maranhão
             </p>
-            <div class="destaque__acoes">
-              <a class="botao botao--secundario" href="./livro.html">
+            <h1 id="abertura-titulo">
+              <span class="abertura__linha">Mercado</span>
+              <span class="abertura__linha abertura__linha--destaque">Central</span>
+            </h1>
+            <p class="abertura__frase">Memória, sabores e gente da nossa ilha.</p>
+            <p class="abertura__lead">
+              Desde 1864 o coração do comércio de São Luís. Leia ou ouça a história do Mercado,
+              acompanhe a sua reconstrução e descubra, a partir dele, os caminhos da ilha.
+            </p>
+            <div class="abertura__acoes">
+              <a class="botao botao--secundario botao--grande" href="./livro.html">
                 <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24">
                   <path
                     d="M4 5c3-1.5 5.5-1.5 8 0 2.5-1.5 5-1.5 8 0v14c-3-1.5-5.5-1.5-8 0-2.5-1.5-5-1.5-8 0z"
@@ -403,7 +409,7 @@
                 </svg>
                 Ler o livro
               </a>
-              <a class="botao botao--claro" href="./mapa.html">
+              <a class="botao botao--vidro botao--grande" href="./mapa.html">
                 <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24">
                   <path
                     d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"
@@ -416,18 +422,69 @@
                 Explorar o mapa
               </a>
             </div>
+            <ul class="abertura__numeros">
+              <li><strong>1864</strong><span>primeiro mercado</span></li>
+              <li><strong>1941</strong><span>prédio Art Déco</span></li>
+              <li>
+                <strong><span data-total-pontos>30</span></strong
+                ><span>destinos no mapa</span>
+              </li>
+            </ul>
           </div>
-          <figure class="destaque__ilustracao">
-            <img
-              class="ilustracao"
-              src="./assets/fachada-mercado-CHtqyODV.svg"
-              width="560"
-              height="420"
-              alt="Ilustração da fachada Art Déco do Mercado Central, com torre central escalonada, letreiro, marquise e escadaria, e barracas coloridas à frente."
-            />
-          </figure>
+
+          <div class="abertura__colagem" aria-hidden="true">
+            <div class="abertura__moldura">
+              <img
+                class="abertura__foto-principal"
+                src="./assets/novo-mercado-central-projeto-CeT11x_2.jpg"
+                width="1280"
+                height="720"
+                alt=""
+              />
+            </div>
+            <figure class="abertura__polaroide">
+              <img
+                src="./assets/mercado-1941-cartao-foto-londres-pfMJINiw.jpg"
+                width="682"
+                height="424"
+                alt=""
+              />
+              <figcaption>1941</figcaption>
+            </figure>
+            <div class="abertura__selo">
+              <svg viewBox="0 0 120 120" width="120" height="120">
+                <defs>
+                  <path id="circulo-selo" d="M60 60m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0" />
+                </defs>
+                <circle cx="60" cy="60" r="58" fill="#bbd050" />
+                <text
+                  font-family="Montserrat, sans-serif"
+                  font-size="11.5"
+                  font-weight="800"
+                  letter-spacing="2.6"
+                  fill="#0b2a45"
+                >
+                  <textPath href="#circulo-selo">
+                    PATRIMÔNIO · SÃO LUÍS · PATRIMÔNIO · SÃO LUÍS ·
+                  </textPath>
+                </text>
+                <text
+                  x="60"
+                  y="68"
+                  text-anchor="middle"
+                  font-family="Montserrat, sans-serif"
+                  font-size="24"
+                  font-weight="800"
+                  fill="#0b2a45"
+                >
+                  1864
+                </text>
+              </svg>
+            </div>
+            <p class="abertura__legenda">Projeto do novo Mercado e cartão-postal de 1941</p>
+          </div>
         </div>
-        <div class="faixa-marca destaque__faixa" aria-hidden="true"></div>
+        <div class="faixa-azulejo" aria-hidden="true"></div>
       </section>
 
       <!-- Acesso rápido (mesmo padrão do portal da Prefeitura) -->
@@ -536,6 +593,32 @@
             <h2 id="visite-titulo">Visite o Mercado</h2>
             <span class="titulo-modulo__sub">Informações para sua visita</span>
           </header>
+          <div class="aviso-obra" role="note">
+            <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24">
+              <path
+                d="M12 3 2 20h20z"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M12 10v4M12 17v.5"
+                stroke="currentColor"
+                stroke-width="2.4"
+                stroke-linecap="round"
+              />
+            </svg>
+            <div>
+              <p class="aviso-obra__titulo">O Mercado Central está em reconstrução</p>
+              <p>
+                Enquanto a obra acontece, os feirantes atendem no
+                <strong>Mercado da Cidade</strong>, na Avenida Senador Vitorino Freire (Aterro do
+                Bacanga), pertinho do Centro.
+                <a href="./mapa.html#mercado-da-cidade">Ver o caminho no mapa</a>.
+              </p>
+            </div>
+          </div>
           <div class="visite">
             <div class="visite__info">
               <article class="info-bloco">
@@ -553,8 +636,8 @@
                 <div>
                   <h3>Onde fica</h3>
                   <p>
-                    Rua de São João, Centro Histórico, ao lado da Fonte das Pedras e no fim da
-                    Avenida Magalhães de Almeida.
+                    Prédio histórico: Rua de São João, Centro, ao lado da Fonte das Pedras. Durante
+                    a obra: Mercado da Cidade, Av. Senador Vitorino Freire.
                   </p>
                   <a href="./mapa.html">Ver no mapa e traçar caminho</a>
                 </div>
@@ -585,10 +668,6 @@
                     As bancas abrem cedo, por volta das 5h. As primeiras horas da manhã têm mais
                     variedade de peixes e frutas.
                   </p>
-                  <p class="info-bloco__nota">
-                    Horário oficial de funcionamento:
-                    <span class="marcador-pendente">[confirmar com a administração]</span>
-                  </p>
                 </div>
               </article>
               <article class="info-bloco">
@@ -605,10 +684,10 @@
                   </svg>
                 </span>
                 <div>
-                  <h3>Acessibilidade no local</h3>
+                  <h3>No Mercado da Cidade</h3>
                   <p>
-                    Informações sobre rampas, banheiros acessíveis e vagas reservadas estão em
-                    levantamento pela Prefeitura.
+                    Quatro galpões com boxes padronizados, corredores largos, banheiros, praça de
+                    alimentação e mais de 300 vagas de estacionamento.
                   </p>
                 </div>
               </article>
@@ -617,6 +696,121 @@
               <h3 id="setores-titulo">Setores do Mercado</h3>
               <p class="visite__ajuda">Toque em um setor para saber o que encontrar.</p>
               <div class="setores" data-setores aria-labelledby="setores-titulo"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- O novo Mercado Central -->
+      <section class="secao" aria-labelledby="novo-mercado-titulo">
+        <div class="container">
+          <header class="titulo-modulo">
+            <h2 id="novo-mercado-titulo">O novo Mercado Central</h2>
+            <span class="titulo-modulo__sub">Reconstrução em andamento</span>
+          </header>
+          <div class="novo-mercado">
+            <figure class="comparador" data-comparador>
+              <div class="comparador__imagens">
+                <img
+                  class="comparador__depois"
+                  src="./assets/novo-mercado-central-projeto-CeT11x_2.jpg"
+                  width="1280"
+                  height="720"
+                  loading="lazy"
+                  alt="Imagem em 3D do projeto do novo Mercado Central: prédio de três andares com as fachadas antigas preservadas na frente, em tons de vermelho e branco, calçada larga com árvores e faixa de pedestres."
+                />
+                <div class="comparador__antes-caixa">
+                  <img
+                    class="comparador__antes"
+                    src="./assets/mercado-1940-cartao-foto-berlim-DVKfE0_2.jpg"
+                    width="628"
+                    height="426"
+                    loading="lazy"
+                    alt="Foto antiga em preto e branco, de 1940: o Mercado Central recém-construído, prédio térreo comprido com colunas e platibanda escalonada, em terreno ainda sem calçamento."
+                  />
+                </div>
+                <span class="comparador__rotulo comparador__rotulo--antes" aria-hidden="true"
+                  >1940</span
+                >
+                <span class="comparador__rotulo comparador__rotulo--depois" aria-hidden="true"
+                  >Projeto 2026</span
+                >
+                <span class="comparador__linha" aria-hidden="true"
+                  ><span class="comparador__alca"></span
+                ></span>
+              </div>
+              <div class="comparador__controle">
+                <label for="comparador-faixa"
+                  >Arraste para comparar <strong>1940</strong> com o
+                  <strong>projeto novo</strong></label
+                >
+                <input
+                  id="comparador-faixa"
+                  type="range"
+                  min="0"
+                  max="100"
+                  value="50"
+                  data-comparador-faixa
+                />
+              </div>
+              <figcaption>
+                Esquerda: cartão-postal Foto Berlim, 1940 (acervo histórico). Direita: imagem do
+                projeto do novo Mercado Central, Prefeitura de São Luís (divulgação).
+              </figcaption>
+            </figure>
+
+            <div class="novo-mercado__texto">
+              <p class="lead">
+                O prédio de 1941 vai ganhar uma estrutura nova por dentro, mantendo as quatro
+                fachadas originais, que ficam escoradas durante toda a obra.
+              </p>
+              <dl class="fatos">
+                <div>
+                  <dt>Início da obra</dt>
+                  <dd>Ordem de serviço assinada em 4 de julho de 2026</dd>
+                </div>
+                <div>
+                  <dt>Novo prédio</dt>
+                  <dd>3 andares, com espaço para 285 feirantes</dd>
+                </div>
+                <div>
+                  <dt>Investimento</dt>
+                  <dd>R$ 44,9 milhões, com recursos do Município, incluindo o entorno</dd>
+                </div>
+                <div>
+                  <dt>O que vai ter</dt>
+                  <dd>
+                    Peixes e mariscos, carnes, frutas e verduras, produtos regionais, artesanato,
+                    restaurantes e lanchonetes
+                  </dd>
+                </div>
+                <div>
+                  <dt>Enquanto isso</dt>
+                  <dd>Feirantes no Mercado da Cidade desde 12 de novembro de 2025, em 4 galpões</dd>
+                </div>
+              </dl>
+              <p class="fontes">
+                Fontes:
+                <a
+                  href="https://www.saoluis.ma.gov.br/portal/noticias/0/3/3405/prefeitura-de-sao-luis-entrega-novo-espaco-para-feirantes-do-mercado-central-que-sera-totalmente-reformado/"
+                  rel="noopener"
+                  target="_blank"
+                  >Prefeitura de São Luís<span class="somente-leitor"> (abre em nova aba)</span></a
+                >,
+                <a
+                  href="https://mahoje.com.br/assinada-neste-sabado-ordem-de-servico-para-reconstrucao-do-mercado-central-no-centro-historico-de-sao-luis/"
+                  rel="noopener"
+                  target="_blank"
+                  >Maranhão Hoje<span class="somente-leitor"> (abre em nova aba)</span></a
+                >
+                e
+                <a
+                  href="https://jornalpequeno.com.br/2026/07/04/mercado-central-de-sao-luis-sera-reconstruido-e-ganhara-estrutura-moderna/"
+                  rel="noopener"
+                  target="_blank"
+                  >Jornal Pequeno<span class="somente-leitor"> (abre em nova aba)</span></a
+                >.
+              </p>
             </div>
           </div>
         </div>
@@ -642,6 +836,59 @@
             </div>
             <div role="tabpanel" id="painel-linha" class="linha__painel" tabindex="0"></div>
           </div>
+        </div>
+      </section>
+
+      <!-- Vozes do Mercado -->
+      <section class="vozes" aria-labelledby="vozes-titulo">
+        <div class="container">
+          <header class="titulo-modulo titulo-modulo--claro">
+            <h2 id="vozes-titulo">Vozes do Mercado</h2>
+            <span class="titulo-modulo__sub">Quem faz a feira acontecer</span>
+          </header>
+          <ul class="vozes__lista">
+            <li>
+              <figure class="voz">
+                <blockquote>
+                  <p>Passei a maior parte da minha vida no Mercado Central.</p>
+                </blockquote>
+                <figcaption>
+                  <strong>Sabino de Jesus Dutra</strong
+                  ><span>73 anos, mais de 40 dedicados à feira</span>
+                </figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure class="voz">
+                <blockquote>
+                  <p>A gente esperou muito por esse dia.</p>
+                </blockquote>
+                <figcaption>
+                  <strong>Gildo Nunes</strong><span>46 anos de profissão</span>
+                </figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure class="voz">
+                <blockquote>
+                  <p>O novo mercado é uma vitória para todos nós.</p>
+                </blockquote>
+                <figcaption>
+                  <strong>Lucinete Melo, a Lôra</strong><span>Feirante há mais de 20 anos</span>
+                </figcaption>
+              </figure>
+            </li>
+          </ul>
+          <p class="vozes__fonte">
+            Depoimentos publicados pela
+            <a
+              href="https://www.saoluis.ma.gov.br/portal/noticias/0/3/3405/prefeitura-de-sao-luis-entrega-novo-espaco-para-feirantes-do-mercado-central-que-sera-totalmente-reformado/"
+              rel="noopener"
+              target="_blank"
+              >Prefeitura de São Luís<span class="somente-leitor"> (abre em nova aba)</span></a
+            >
+            na entrega do Mercado da Cidade, em novembro de 2025.
+          </p>
         </div>
       </section>
 
@@ -709,21 +956,18 @@
     </main>
 
     <footer class="rodape" id="rodape" tabindex="-1">
-  <div class="faixa-marca" aria-hidden="true"></div>
+  <div class="faixa-azulejo" aria-hidden="true"></div>
   <div class="container rodape__grade">
     <div class="rodape__marca">
       <img
-        class="manter-cores"
-        src="./img/logo-prefeitura-branca.svg"
-        alt=""
-        width="56"
-        height="56"
+        class="rodape__logo manter-cores"
+        src="./img/oficial/logo_rodape.png"
+        alt="Prefeitura de São Luís — por uma cidade melhor"
+        width="344"
+        height="94"
       />
-      <p><strong>Prefeitura de São Luís</strong><br />Portal do Mercado Central</p>
-      <p class="rodape__nota">
-        Conteúdo de demonstração. Textos, logomarca e dados de contato serão substituídos pelos
-        oficiais.
-      </p>
+      <p>Portal do Mercado Central</p>
+      <p class="rodape__nota">Memória, sabores e gente da nossa ilha.</p>
     </div>
     <nav aria-label="Mapa do site">
       <h2 class="rodape__titulo">Navegue</h2>
@@ -737,10 +981,10 @@
     <div>
       <h2 class="rodape__titulo">Mercado Central</h2>
       <address>
-        Rua de São João, Centro<br />
-        São Luís – MA<br />
-        Seg. a sáb., das 6h às 18h<br />
-        <span class="rodape__nota">(horário ilustrativo)</span>
+        Prédio histórico: Rua de São João, Centro<br />
+        Durante a obra: Mercado da Cidade,<br />
+        Av. Senador Vitorino Freire – Aterro do Bacanga<br />
+        São Luís – MA
       </address>
     </div>
     <div>

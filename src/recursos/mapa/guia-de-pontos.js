@@ -16,16 +16,28 @@ import { escaparHtml } from '../../nucleo/dom.js';
 
 const normalizar = (texto) => texto.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 
-/** Enriquece cada ponto com distância e tempos a partir do Mercado. */
-export function prepararPontos(pontos, mercado, categorias) {
+/**
+ * Enriquece cada ponto com distância e tempos a partir do Mercado.
+ * `obterRota(id, modo)` (opcional) devolve a rota real pelas ruas; quando
+ * existe, a distância e os tempos passam a ser os do caminho de verdade.
+ */
+export function prepararPontos(pontos, mercado, categorias, obterRota = () => null) {
   return pontos
     .map((ponto) => {
-      const distanciaKm = calcularDistanciaKm(mercado.coordenadas, ponto.coordenadas);
+      const emLinhaReta = calcularDistanciaKm(mercado.coordenadas, ponto.coordenadas);
+      const aPe = obterRota(ponto.id, 'a-pe');
+      const carro = obterRota(ponto.id, 'carro');
+      const estimados = estimarTempos(emLinhaReta);
+      const distanciaKm = aPe?.distanciaKm ?? emLinhaReta;
       return {
         ...ponto,
         categoriaInfo: categorias[ponto.categoria],
         distanciaKm,
-        tempos: estimarTempos(distanciaKm),
+        pelasRuas: Boolean(aPe),
+        tempos: {
+          aPeMinutos: Math.max(1, Math.round(aPe?.minutos ?? estimados.aPeMinutos)),
+          carroMinutos: Math.max(1, Math.round(carro?.minutos ?? estimados.carroMinutos)),
+        },
         modoSugerido: sugerirModo(distanciaKm),
         direcao: direcaoCardeal(mercado.coordenadas, ponto.coordenadas),
       };
@@ -48,7 +60,8 @@ export function textoDeResumo(ponto) {
     ponto.modoSugerido === 'a-pe'
       ? `cerca de ${formatarDuracao(ponto.tempos.aPeMinutos)} a pé`
       : `cerca de ${formatarDuracao(ponto.tempos.carroMinutos)} de carro`;
-  return `${formatarDistancia(ponto.distanciaKm)} a ${ponto.direcao} do Mercado, ${modo}`;
+  const pelas = ponto.pelasRuas ? ' pelas ruas' : '';
+  return `${formatarDistancia(ponto.distanciaKm)}${pelas} a ${ponto.direcao} do Mercado, ${modo}`;
 }
 
 /** HTML de um item da lista. */
@@ -82,9 +95,9 @@ export function renderizarDetalhes(ponto, mercado) {
     </div>
     <p>${escaparHtml(ponto.descricao)}</p>
     <dl class="detalhes__dados">
-      <div><dt>Distância do Mercado</dt><dd>${formatarDistancia(ponto.distanciaKm)} em linha reta, a ${ponto.direcao}</dd></div>
-      <div><dt>A pé (estimativa)</dt><dd>${formatarDuracao(ponto.tempos.aPeMinutos)}</dd></div>
-      <div><dt>De carro (estimativa)</dt><dd>${formatarDuracao(ponto.tempos.carroMinutos)}</dd></div>
+      <div><dt>Distância do Mercado</dt><dd>${formatarDistancia(ponto.distanciaKm)} ${ponto.pelasRuas ? 'pelo caminho a pé' : 'em linha reta'}, a ${ponto.direcao}</dd></div>
+      <div><dt>A pé</dt><dd>${formatarDuracao(ponto.tempos.aPeMinutos)}</dd></div>
+      <div><dt>De carro</dt><dd>${formatarDuracao(ponto.tempos.carroMinutos)}</dd></div>
       <div><dt>Acessibilidade do local</dt><dd>Informações em levantamento pela Prefeitura.</dd></div>
     </dl>
     <div class="detalhes__acoes">

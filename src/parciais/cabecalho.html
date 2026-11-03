@@ -1,27 +1,26 @@
 <!-- @include barra-gov.html -->
 <header class="cabecalho" id="topo">
   <div class="container cabecalho__conteudo">
-    <a
-      class="marca"
-      href="./index.html"
-      aria-label="Prefeitura de São Luís — página inicial do portal do Mercado Central"
-    >
-      <!--
-        ESPAÇO RESERVADO PARA A LOGOMARCA OFICIAL.
-        Substitua o arquivo public/img/logo-prefeitura.svg pelo logo oficial
-        fornecido pela SECOM (mantenha o mesmo nome ou altere o src abaixo).
-      -->
+    <a class="marca" href="./index.html">
+      <!-- Logomarca oficial (portal saoluis.ma.gov.br). A versão branca aparece no modo escuro e no alto contraste. -->
       <img
-        class="marca__logo manter-cores"
-        src="./img/logo-prefeitura.svg"
-        alt=""
-        width="52"
-        height="52"
+        class="marca__logo marca__logo--cor manter-cores"
+        src="./img/oficial/logo_mobile.png"
+        alt="Prefeitura de São Luís"
+        width="278"
+        height="76"
       />
-      <span class="marca__texto">
-        <span class="marca__orgao">Prefeitura de</span>
-        <span class="marca__cidade">São Luís</span>
-      </span>
+      <img
+        class="marca__logo marca__logo--branca manter-cores"
+        src="./img/oficial/logo_branca.png"
+        alt="Prefeitura de São Luís"
+        width="278"
+        height="76"
+      />
+      <span class="marca__separador" aria-hidden="true"></span>
+      <span class="marca__portal"
+        ><span class="somente-leitor">, </span>Portal do<br />Mercado Central</span
+      >
     </a>
 
     <button type="button" class="menu-botao" aria-expanded="false" aria-controls="menu-principal">

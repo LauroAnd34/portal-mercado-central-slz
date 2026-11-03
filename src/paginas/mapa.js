@@ -9,6 +9,7 @@ import { MERCADO_CENTRAL, CATEGORIAS, PONTOS_TURISTICOS } from '../dados/pontos-
 import { criarMapaInterativo } from '../recursos/mapa/mapa-interativo.js';
 import { buscarRota, buscarRotaPorPontos } from '../recursos/mapa/rotas.js';
 import { ROTEIROS } from '../dados/roteiros.js';
+import { rotaGuardadaDoPonto, rotaGuardadaDoRoteiro } from '../recursos/mapa/rotas-guardadas.js';
 import { calcularDistanciaKm, estimarTempos } from '../recursos/mapa/geografia.js';
 import {
   prepararPontos,
@@ -26,7 +27,7 @@ import { escaparHtml, focarProgramaticamente } from '../nucleo/dom.js';
 
 iniciarPaginaComum();
 
-let pontos = prepararPontos(PONTOS_TURISTICOS, MERCADO_CENTRAL, CATEGORIAS);
+let pontos = prepararPontos(PONTOS_TURISTICOS, MERCADO_CENTRAL, CATEGORIAS, rotaGuardadaDoPonto);
 const estado = {
   categoriasAtivas: new Set(Object.keys(CATEGORIAS)),
   termo: '',
@@ -163,20 +164,22 @@ el.detalhes.addEventListener('click', async (evento) => {
   area.innerHTML = '<p class="detalhes__carregando">Calculando o caminho…</p>';
   botaoRota.setAttribute('aria-busy', 'true');
 
-  let rota;
-  try {
-    rota = await buscarRota(MERCADO_CENTRAL.coordenadas, ponto.coordenadas, modo);
-  } catch {
-    const distanciaKm = calcularDistanciaKm(MERCADO_CENTRAL.coordenadas, ponto.coordenadas);
-    const tempos = estimarTempos(distanciaKm);
-    rota = {
-      coordenadas: [MERCADO_CENTRAL.coordenadas, ponto.coordenadas],
-      distanciaKm,
-      minutos: modo === 'a-pe' ? tempos.aPeMinutos : tempos.carroMinutos,
-      passos: [],
-      aproximada: true,
-    };
-  }
+  // 1º: caminho já calculado pelas ruas (instantâneo e funciona sem internet)
+  let rota = rotaGuardadaDoPonto(ponto.id, modo);
+  if (!rota)
+    try {
+      rota = await buscarRota(MERCADO_CENTRAL.coordenadas, ponto.coordenadas, modo);
+    } catch {
+      const distanciaKm = calcularDistanciaKm(MERCADO_CENTRAL.coordenadas, ponto.coordenadas);
+      const tempos = estimarTempos(distanciaKm);
+      rota = {
+        coordenadas: [MERCADO_CENTRAL.coordenadas, ponto.coordenadas],
+        distanciaKm,
+        minutos: modo === 'a-pe' ? tempos.aPeMinutos : tempos.carroMinutos,
+        passos: [],
+        aproximada: true,
+      };
+    }
   botaoRota.removeAttribute('aria-busy');
   if (estado.selecionadoId !== ponto.id) return; // usuário trocou de ponto no meio do caminho
   area.innerHTML = renderizarRota(rota, modo);
@@ -253,7 +256,7 @@ if (listaRoteiros) {
     return renderizarCartaoRoteiro(
       roteiro,
       paradasDo(roteiro),
-      distanciaEmLinha(coordenadas) * 1.3,
+      rotaGuardadaDoRoteiro(roteiro.id)?.distanciaKm ?? distanciaEmLinha(coordenadas) * 1.3,
     );
   }).join('');
 
@@ -269,22 +272,26 @@ if (listaRoteiros) {
     document.querySelector('.explorar__mapa')?.scrollIntoView({ block: 'start' });
     botao.setAttribute('aria-busy', 'true');
 
-    let rota;
-    try {
-      rota = await buscarRotaPorPontos(coordenadas, roteiro.modo, {
-        nomesDasParadas: paradas.map((p) => p.nome),
-      });
-    } catch {
-      const distanciaKm = distanciaEmLinha(coordenadas);
-      const tempos = estimarTempos(distanciaKm);
-      rota = {
-        coordenadas,
-        distanciaKm: distanciaKm * 1.3,
-        minutos: roteiro.modo === 'a-pe' ? tempos.aPeMinutos : tempos.carroMinutos,
-        passos: [],
-        aproximada: true,
-      };
-    }
+    let rota = rotaGuardadaDoRoteiro(
+      roteiro.id,
+      paradas.map((p) => p.nome),
+    );
+    if (!rota)
+      try {
+        rota = await buscarRotaPorPontos(coordenadas, roteiro.modo, {
+          nomesDasParadas: paradas.map((p) => p.nome),
+        });
+      } catch {
+        const distanciaKm = distanciaEmLinha(coordenadas);
+        const tempos = estimarTempos(distanciaKm);
+        rota = {
+          coordenadas,
+          distanciaKm: distanciaKm * 1.3,
+          minutos: roteiro.modo === 'a-pe' ? tempos.aPeMinutos : tempos.carroMinutos,
+          passos: [],
+          aproximada: true,
+        };
+      }
     botao.removeAttribute('aria-busy');
     el.detalhes.innerHTML = renderizarDetalhesRoteiro(roteiro, paradas, rota);
     mapa?.mostrarRoteiro({ paradas, coordenadas: rota.coordenadas, cor: roteiro.cor });
