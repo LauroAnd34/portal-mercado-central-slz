@@ -14,7 +14,7 @@ Referências: **eMAG 3.1**, **WCAG 2.2 nível AA**, **Lei Brasileira de Inclusã
 | Espaçamento de texto ampliado | todas | WCAG 1.4.12 |
 | Fontes Atkinson Hyperlegible e OpenDyslexic | todas + livro | boa prática |
 | Régua de leitura, cursor grande, destaque de links | todas | boa prática |
-| Pausar animações + respeita `prefers-reduced-motion` | todas | WCAG 2.2.2, 2.3.3 |
+| Animações suaves (aparecer ao rolar, troca de página, mapa) que **desligam todas** com "Pausar animações" ou com "reduzir movimento" do sistema; o conteúdo nunca depende delas | todas | WCAG 2.2.2, 2.3.3 |
 | Painel em `<dialog>` nativo (prende e devolve o foco, fecha com Esc) | todas | WCAG 2.4.3 |
 | Mensagens para leitor de tela (`role="status"`) | todas | WCAG 4.1.3 |
 | VLibras ativo por padrão (botão oficial no canto direito; pode ser escondido) | todas | eMAG 3.11 |

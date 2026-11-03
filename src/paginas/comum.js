@@ -17,6 +17,7 @@ import '../estilos/basico.css';
 import '../estilos/componentes/cabecalho.css';
 import '../estilos/componentes/controles.css';
 import '../estilos/componentes/painel-e-rodape.css';
+import '../estilos/componentes/animacoes.css';
 
 import { iniciarControlesDeAcessibilidade } from '../recursos/acessibilidade/controles-de-acessibilidade.js';
 import { iniciarReguaDeLeitura } from '../recursos/acessibilidade/regua-de-leitura.js';
@@ -24,6 +25,7 @@ import { iniciarVLibras } from '../recursos/acessibilidade/vlibras.js';
 import { iniciarLeituraDeSelecao } from '../recursos/acessibilidade/leitura-de-selecao.js';
 import { iniciarAtalhosDeTeclado } from '../recursos/acessibilidade/atalhos-de-teclado.js';
 import { iniciarMenuMovel } from '../recursos/navegacao/menu-movel.js';
+import { iniciarAnimacoes } from '../recursos/animacoes/animacoes.js';
 
 export function iniciarPaginaComum() {
   const { abrirPainel } = iniciarControlesDeAcessibilidade();
@@ -33,6 +35,8 @@ export function iniciarPaginaComum() {
   iniciarLeituraDeSelecao();
   iniciarMenuMovel();
   registrarModoOffline();
+  // depois que cada página montou seu conteúdo dinâmico (cartões, sabores…)
+  queueMicrotask(iniciarAnimacoes);
 }
 
 /** Guarda o site no aparelho para funcionar sem internet (só na versão publicada). */

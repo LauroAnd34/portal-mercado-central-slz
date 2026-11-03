@@ -162,9 +162,8 @@ export function renderizarDetalhesRoteiro(roteiro, paradas, rota) {
       <li class="paradas__item paradas__item--inicio"><strong>Mercado Central</strong><span>Ponto de partida</span></li>
       ${paradas
         .map(
-          (
-            p,
-          ) => `<li class="paradas__item"><button type="button" class="paradas__botao" data-ponto="${p.id}">
+          (p, i) =>
+            `<li class="paradas__item" style="--atraso:${i + 1}"><button type="button" class="paradas__botao" data-ponto="${p.id}">
             <strong>${escaparHtml(p.nome)}</strong><span>${escaparHtml(p.descricao)}</span></button></li>`,
         )
         .join('')}
