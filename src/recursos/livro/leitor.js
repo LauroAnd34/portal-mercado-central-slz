@@ -89,6 +89,7 @@ export function iniciarLeitor(leitor) {
 
   /* ---------- Exibir capítulo ---------- */
   const exibir = (indice, { focar = true, continuarLendo = false, rolagem = 0 } = {}) => {
+    const voltando = indice < atual;
     atual = Math.max(0, Math.min(indice, capitulos.length - 1));
     const capitulo = capitulos[atual];
 
@@ -96,6 +97,12 @@ export function iniciarLeitor(leitor) {
       <h3 class="leitor__titulo-capitulo" id="cap-${capitulo.id}" tabindex="-1">${escaparHtml(capitulo.titulo)}</h3>
       <p class="leitor__tempo">Tempo de leitura: cerca de ${capitulo.minutos} minuto${capitulo.minutos > 1 ? 's' : ''}</p>
       ${repositorioDoLivro.renderizarCapitulo(capitulo)}`;
+
+    // animação de troca de capítulo (direção conforme avança ou volta)
+    elementos.texto.classList.remove('entrando', 'voltando');
+    void elementos.texto.offsetWidth;
+    elementos.texto.classList.add('entrando');
+    elementos.texto.classList.toggle('voltando', voltando);
 
     // cada trecho ganha um número (marcadores) e os termos do glossário viram botões
     elementos.texto

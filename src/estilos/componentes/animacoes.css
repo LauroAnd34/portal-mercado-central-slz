@@ -1,0 +1,395 @@
+/* =========================================================================
+   ANIMAÇÕES
+   Todas são desligadas automaticamente quando a pessoa ativa "Pausar
+   animações" no painel ou pede "reduzir movimento" no sistema (ver
+   basico.css). O conteúdo nunca depende de animação para aparecer.
+   ========================================================================= */
+
+/* ---------- Curvas e durações ---------- */
+:root {
+  --curva-suave: cubic-bezier(0.22, 1, 0.36, 1);
+  --curva-mola: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ---------- Aparecer ao rolar (só quando o JavaScript liga) ---------- */
+.animacoes-ativas [data-revelar] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s var(--curva-suave),
+    transform 0.7s var(--curva-suave);
+  transition-delay: calc(var(--atraso, 0) * 80ms);
+}
+.animacoes-ativas [data-revelar='esquerda'] {
+  transform: translateX(-36px);
+}
+.animacoes-ativas [data-revelar='direita'] {
+  transform: translateX(36px);
+}
+.animacoes-ativas [data-revelar='zoom'] {
+  transform: scale(0.92);
+}
+.animacoes-ativas [data-revelar].revelado {
+  opacity: 1;
+  transform: none;
+}
+
+/* barra de título dos módulos: a faixa colorida "corre" quando aparece */
+.animacoes-ativas .titulo-modulo[data-revelar]::after {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1s var(--curva-suave) 0.25s;
+}
+.animacoes-ativas .titulo-modulo.revelado::after {
+  transform: scaleX(1);
+}
+
+/* ---------- Entrada da página ---------- */
+@keyframes subir-entrando {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+@keyframes faixa-entrando {
+  from {
+    transform: scaleX(0);
+  }
+}
+.cabecalho .faixa-marca {
+  transform-origin: left;
+  animation: faixa-entrando 1.1s var(--curva-suave) backwards;
+}
+.cabecalho-pagina .container > * {
+  animation: subir-entrando 0.8s var(--curva-suave) backwards;
+}
+.cabecalho-pagina .container > :nth-child(2) {
+  animation-delay: 0.08s;
+}
+.cabecalho-pagina .container > :nth-child(3) {
+  animation-delay: 0.16s;
+}
+.cabecalho-pagina__icone {
+  animation: icone-flutuando 8s ease-in-out infinite;
+}
+@keyframes icone-flutuando {
+  50% {
+    transform: translateY(calc(-50% - 10px)) rotate(-3deg);
+  }
+}
+
+/* destaque da página inicial */
+.destaque__texto > * {
+  animation: subir-entrando 0.9s var(--curva-suave) backwards;
+}
+.destaque__texto > :nth-child(2) {
+  animation-delay: 0.1s;
+}
+.destaque__texto > :nth-child(3) {
+  animation-delay: 0.2s;
+}
+.destaque__texto > :nth-child(4) {
+  animation-delay: 0.3s;
+}
+.destaque__ilustracao {
+  animation:
+    ilustracao-entrando 1.1s var(--curva-suave) 0.2s both,
+    flutuar 7s ease-in-out 1.3s infinite;
+}
+@keyframes ilustracao-entrando {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.94) rotate(2deg);
+  }
+}
+/* fundo de azulejos se movendo devagar */
+.destaque,
+.cabecalho-pagina {
+  animation: azulejos-andando 90s linear infinite;
+}
+@keyframes azulejos-andando {
+  to {
+    background-position:
+      0 0,
+      0 0,
+      480px 240px;
+  }
+}
+.cabecalho-pagina {
+  animation-name: azulejos-andando-simples;
+}
+@keyframes azulejos-andando-simples {
+  to {
+    background-position: 480px 240px;
+  }
+}
+/* brilho passando no "de São Luís" */
+.destaque h1 span {
+  background-size: 200% 100%;
+  animation: brilho-texto 6s ease-in-out infinite;
+}
+@keyframes brilho-texto {
+  50% {
+    background-position: 100% 0;
+  }
+}
+
+/* ---------- Botões e cartões ---------- */
+.botao {
+  position: relative;
+  overflow: hidden;
+}
+.botao::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 30%,
+    rgb(255 255 255 / 0.35) 50%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+.botao:hover::after {
+  transition: transform 0.7s ease;
+  transform: translateX(120%);
+}
+.botao:active {
+  transform: translateY(0) scale(0.97);
+}
+.botao svg {
+  transition: transform 0.3s var(--curva-mola);
+}
+.botao:hover svg {
+  transform: scale(1.15) rotate(-6deg);
+}
+.cartao__acao {
+  display: inline-block;
+  transition: transform 0.3s var(--curva-suave);
+}
+.cartao:hover .cartao__acao,
+.cartao:focus-within .cartao__acao {
+  transform: translateX(6px);
+}
+.cartao__icone,
+.recurso__icone,
+.info-bloco__icone {
+  transition: transform 0.4s var(--curva-mola);
+}
+.cartao:hover .cartao__icone,
+.recurso:hover .recurso__icone,
+.info-bloco:hover .info-bloco__icone {
+  transform: scale(1.1) rotate(-8deg);
+}
+.sabor__icone {
+  transition: transform 0.5s var(--curva-mola);
+}
+.sabor:hover .sabor__icone {
+  transform: translateY(-4px) rotate(10deg) scale(1.08);
+}
+.download__formato {
+  transition: transform 0.35s var(--curva-mola);
+}
+.download:hover .download__formato {
+  transform: rotate(-6deg) scale(1.08);
+}
+
+/* sublinhado do menu crescendo */
+.menu__link::before {
+  content: '';
+  position: absolute;
+  left: var(--e-4);
+  right: var(--e-4);
+  bottom: 6px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--faixa);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s var(--curva-suave);
+}
+.menu__link:hover::before {
+  transform: scaleX(1);
+}
+.menu__link[aria-current='page']::before {
+  display: none;
+}
+
+/* sanfona dos setores */
+.setor[open] p {
+  animation: subir-entrando 0.45s var(--curva-suave);
+}
+.setor summary::after {
+  transition: transform 0.3s var(--curva-mola);
+}
+.setor[open] summary::after {
+  transform: rotate(180deg);
+}
+
+/* linha do tempo: conteúdo troca deslizando */
+.linha__painel.trocando > * {
+  animation: subir-entrando 0.5s var(--curva-suave) backwards;
+}
+.linha__painel.trocando::before {
+  animation: ano-entrando 0.7s var(--curva-suave) backwards;
+}
+@keyframes ano-entrando {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+}
+.linha__aba[aria-selected='true'] .linha__ponto {
+  animation: ponto-pulsando 2s ease-out infinite;
+}
+@keyframes ponto-pulsando {
+  0% {
+    box-shadow: 0 0 0 0 rgb(187 208 80 / 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0 14px rgb(187 208 80 / 0);
+  }
+}
+
+/* números contando (o texto final já está no HTML) */
+.numeros strong {
+  font-variant-numeric: tabular-nums;
+}
+
+/* painel de acessibilidade: opções entram em cascata */
+.painel-acessibilidade[open] .opcao-grupo {
+  animation: subir-entrando 0.5s var(--curva-suave) backwards;
+}
+.painel-acessibilidade[open] .opcao-grupo:nth-of-type(2) {
+  animation-delay: 0.05s;
+}
+.painel-acessibilidade[open] .opcao-grupo:nth-of-type(3) {
+  animation-delay: 0.1s;
+}
+.painel-acessibilidade[open] .opcao-grupo:nth-of-type(4) {
+  animation-delay: 0.15s;
+}
+.painel-acessibilidade[open] .opcao-grupo:nth-of-type(5) {
+  animation-delay: 0.2s;
+}
+.interruptor__trilho::after {
+  transition: transform 0.3s var(--curva-mola);
+}
+
+/* ---------- Livro ---------- */
+.leitor__texto.entrando {
+  animation: capitulo-entrando 0.6s var(--curva-suave);
+}
+@keyframes capitulo-entrando {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+}
+.leitor__texto.entrando.voltando {
+  animation-name: capitulo-voltando;
+}
+@keyframes capitulo-voltando {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+}
+.leitor__ajustes:not([hidden]),
+.leitor__busca:not([hidden]),
+.leitor__painel-extra:not([hidden]) {
+  animation: subir-entrando 0.4s var(--curva-suave);
+}
+.balao-termo:not([hidden]) {
+  animation: balao-abrindo 0.3s var(--curva-mola);
+  transform-origin: top left;
+}
+@keyframes balao-abrindo {
+  from {
+    opacity: 0;
+    transform: scale(0.85) translateY(-6px);
+  }
+}
+.lendo-agora {
+  transition:
+    background 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+/* ---------- Mapa ---------- */
+.marcador--normal svg,
+.marcador--selecionado svg {
+  animation: marcador-caindo 0.6s var(--curva-mola) backwards;
+}
+@keyframes marcador-caindo {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.6);
+  }
+}
+.marcador--selecionado svg {
+  animation: marcador-pulando 0.8s var(--curva-mola) backwards;
+}
+@keyframes marcador-pulando {
+  30% {
+    transform: translateY(-14px) scale(1.1);
+  }
+}
+.marcador-numero span {
+  animation: marcador-caindo 0.5s var(--curva-mola) backwards;
+}
+.mapa__rota {
+  stroke-dasharray: 6000;
+  stroke-dashoffset: 6000;
+  animation: rota-tracando 2.2s var(--curva-suave) forwards;
+}
+@keyframes rota-tracando {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.ponto__botao {
+  transition:
+    border-color var(--transicao),
+    transform 0.3s var(--curva-suave),
+    background var(--transicao);
+}
+.detalhes > * {
+  animation: subir-entrando 0.45s var(--curva-suave) backwards;
+}
+.paradas__item {
+  animation: subir-entrando 0.5s var(--curva-suave) backwards;
+  animation-delay: calc(var(--atraso, 0) * 60ms);
+}
+
+/* ---------- Troca de página suave (navegadores compatíveis) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+::view-transition-old(root) {
+  animation: 0.25s ease both pagina-saindo;
+}
+::view-transition-new(root) {
+  animation: 0.4s var(--curva-suave) backwards pagina-entrando;
+}
+@keyframes pagina-saindo {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes pagina-entrando {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+.cabecalho {
+  view-transition-name: cabecalho;
+}
+.barra-gov {
+  view-transition-name: barra-gov;
+}

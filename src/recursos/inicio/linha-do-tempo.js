@@ -28,6 +28,10 @@ export function iniciarLinhaDoTempo(raiz, marcos) {
     });
     const marco = marcos[indice];
     painel.setAttribute('aria-labelledby', abas[indice].id);
+    // reinicia a animação de troca de conteúdo
+    painel.classList.remove('trocando');
+    void painel.offsetWidth;
+    painel.classList.add('trocando');
     painel.dataset.ano = marco.ano; // número grande decorativo (CSS ::before)
     painel.innerHTML = `
       <h3>${escaparHtml(marco.titulo)}</h3>
