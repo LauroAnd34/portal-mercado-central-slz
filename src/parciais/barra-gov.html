@@ -1,0 +1,70 @@
+<!-- Faixa "versão de demonstração": aparece quando VITE_DEMONSTRACAO=true (ex.: GitHub Pages) -->
+<div class="faixa-demonstracao" data-mostrar="%VITE_DEMONSTRACAO%" role="note">
+  <strong>Versão de demonstração.</strong> Este não é o site oficial da Prefeitura de São Luís — o
+  conteúdo é provisório.
+</div>
+<!-- Barra superior no padrão eMAG: atalhos de teclado + acessibilidade rápida -->
+<div class="barra-gov nao-imprimir">
+  <div class="container barra-gov__conteudo">
+    <nav class="barra-gov__atalhos" aria-label="Atalhos de acessibilidade">
+      <ul>
+        <li>
+          <a href="#conteudo">Ir para o conteúdo <kbd>1</kbd></a>
+        </li>
+        <li>
+          <a href="#menu-principal">Ir para o menu <kbd>2</kbd></a>
+        </li>
+        <li>
+          <a href="#rodape">Ir para o rodapé <kbd>4</kbd></a>
+        </li>
+      </ul>
+    </nav>
+    <ul class="barra-gov__acoes" aria-label="Ajustes rápidos">
+      <li>
+        <a href="./acessibilidade.html" data-menu="acessibilidade-link">Acessibilidade</a>
+      </li>
+      <li>
+        <button type="button" class="barra-gov__botao" data-acao="contraste" aria-pressed="false">
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18">
+            <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2" />
+            <path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" />
+          </svg>
+          Alto contraste
+        </button>
+      </li>
+      <li>
+        <div class="barra-gov__fonte" role="group" aria-label="Tamanho do texto">
+          <button type="button" class="barra-gov__botao" data-acao="fonte-menor">
+            A−<span class="somente-leitor"> diminuir texto</span>
+          </button>
+          <button type="button" class="barra-gov__botao" data-acao="fonte-padrao">
+            A<span class="somente-leitor"> tamanho padrão</span>
+          </button>
+          <button type="button" class="barra-gov__botao" data-acao="fonte-maior">
+            A+<span class="somente-leitor"> aumentar texto</span>
+          </button>
+        </div>
+      </li>
+      <li>
+        <button
+          type="button"
+          class="barra-gov__botao barra-gov__botao--destaque"
+          data-abre-painel-acessibilidade
+          aria-haspopup="dialog"
+        >
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18">
+            <circle cx="12" cy="4" r="2" fill="currentColor" />
+            <path
+              d="M4 8l8 1.5L20 8M12 9.5V15m0 0l-3.5 6M12 15l3.5 6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+          Mais opções <kbd>5</kbd>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>

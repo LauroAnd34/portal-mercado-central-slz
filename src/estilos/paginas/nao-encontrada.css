@@ -1,0 +1,91 @@
+/* =========================================================================
+   PÁGINA 404
+   ========================================================================= */
+.erro-404 {
+  background:
+    radial-gradient(circle at 90% 10%, rgb(57 166 222 / 0.12), transparent 40%),
+    radial-gradient(circle at 0% 100%, rgb(187 208 80 / 0.15), transparent 40%);
+}
+.erro-404__grade {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: var(--e-7);
+  align-items: center;
+}
+@media (max-width: 860px) {
+  .erro-404__grade {
+    grid-template-columns: 1fr;
+  }
+  .erro-404__ilustracao {
+    order: -1;
+    max-width: 420px;
+  }
+}
+.erro-404__codigo {
+  display: inline-block;
+  margin: 0 0 var(--e-2);
+  font-family: var(--fonte-ui);
+  font-weight: 800;
+  font-size: clamp(4.5rem, 3rem + 7vw, 8rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  background: linear-gradient(
+    100deg,
+    var(--marca-marinho-700) 10%,
+    var(--marca-azul-600) 45%,
+    var(--verde-700) 90%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+:root[data-tema='escuro'] .erro-404__codigo {
+  background: var(--degrade-marca);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+:root[data-contraste='alto'] .erro-404__codigo {
+  color: #ffff00;
+}
+.erro-404 h1 {
+  font-size: var(--texto-2xl);
+  max-width: 18ch;
+}
+.erro-404__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e-3);
+  margin: var(--e-5) 0;
+}
+.erro-404__dica {
+  display: flex;
+  gap: var(--e-2);
+  align-items: center;
+  font-size: var(--texto-sm);
+  color: var(--cor-texto-suave);
+}
+.erro-404__dica::before {
+  content: '';
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--faixa-3);
+  box-shadow: 0 0 0 4px rgb(187 208 80 / 0.3);
+}
+.erro-404__ilustracao {
+  margin: 0;
+  width: 100%;
+  max-width: 540px;
+  justify-self: center;
+}
+.erro-404__ilustracao img {
+  width: 100%;
+  filter: drop-shadow(0 24px 40px rgb(11 42 69 / 0.25));
+  animation: flutuar-404 6s ease-in-out infinite;
+}
+@keyframes flutuar-404 {
+  50% {
+    transform: translateY(-10px) rotate(-1deg);
+  }
+}

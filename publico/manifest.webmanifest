@@ -1,0 +1,12 @@
+{
+  "name": "Mercado Central de São Luís — Prefeitura de São Luís",
+  "short_name": "Mercado Central",
+  "description": "Livro acessível e mapa turístico a partir do Mercado Central de São Luís.",
+  "lang": "pt-BR",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#144670",
+  "icons": [{ "src": "icone.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

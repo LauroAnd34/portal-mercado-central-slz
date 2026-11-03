@@ -1,0 +1,173 @@
+/* =========================================================================
+   TOKENS DE DESIGN
+   Paleta extraída do portal oficial saoluis.ma.gov.br (gestão 2021–2028):
+   azul-marinho institucional, azul-céu e a faixa de 7 cores
+   (amarelo → verde → azul) que assina a identidade visual.
+   Todas as combinações texto/fundo usadas foram verificadas (WCAG 2.2 AA).
+   ========================================================================= */
+
+:root {
+  /* — Marca — */
+  --marca-marinho-900: #0b2a45;
+  --marca-marinho-800: #113859;
+  --marca-marinho-700: #144670; /* cor principal — 9.8:1 sobre branco */
+  --marca-marinho-600: #175284;
+  --marca-azul-600: #1a6fa3; /* azul para links — 5.5:1 sobre branco */
+  --marca-azul-400: #39a6de; /* azul-céu: só fundo/decoração */
+  --marca-azul-100: #e3f2fb;
+
+  /* faixa de 7 cores (assinatura visual) */
+  --faixa-1: #faea25;
+  --faixa-2: #dadb32;
+  --faixa-3: #bbd050;
+  --faixa-4: #9ac670;
+  --faixa-5: #79c096;
+  --faixa-6: #56b2b8;
+  --faixa-7: #39a6de;
+  --faixa: linear-gradient(
+    to right,
+    var(--faixa-1) 0 14.28%,
+    var(--faixa-2) 0 28.57%,
+    var(--faixa-3) 0 42.85%,
+    var(--faixa-4) 0 57.14%,
+    var(--faixa-5) 0 71.42%,
+    var(--faixa-6) 0 85.71%,
+    var(--faixa-7) 0
+  );
+  --degrade-marca: linear-gradient(130deg, var(--faixa-3), var(--faixa-7));
+
+  /* apoio */
+  --ouro-500: #f2be09;
+  --vermelho-600: #c32146;
+  --verde-700: #2f6b3a;
+
+  /* — Superfícies e texto (tema claro) — */
+  --cor-fundo: #ffffff;
+  --cor-fundo-suave: #f1f3f7;
+  --cor-fundo-destaque: var(--marca-azul-100);
+  --cor-superficie: #ffffff;
+  --cor-borda: #c9d1da;
+  --cor-borda-forte: #6b7680;
+  --cor-texto: #1b2530;
+  --cor-texto-suave: #4c555b;
+  --cor-titulo: var(--marca-marinho-700);
+  --cor-link: var(--marca-azul-600);
+  --cor-link-hover: var(--marca-marinho-700);
+  --cor-foco: #0b2a45;
+  --cor-foco-halo: #faea25;
+  --cor-primaria: var(--marca-marinho-700);
+  --cor-primaria-texto: #ffffff;
+  --cor-secundaria: var(--faixa-3);
+  --cor-secundaria-texto: var(--marca-marinho-800);
+
+  /* — Tipografia — */
+  --fonte-ui: 'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --fonte-texto: 'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --fonte-livro: 'Merriweather', Georgia, 'Times New Roman', serif;
+  --escala-fonte: 1; /* alterada pela barra de acessibilidade (A- / A+) */
+
+  --texto-xs: 0.8125rem;
+  --texto-sm: 0.9375rem;
+  --texto-md: 1.0625rem;
+  --texto-lg: 1.25rem;
+  --texto-xl: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  --texto-2xl: clamp(1.9rem, 1.4rem + 2vw, 2.75rem);
+  --texto-3xl: clamp(2.3rem, 1.6rem + 3.2vw, 3.75rem);
+
+  --altura-linha: 1.65;
+  --espaco-letras: normal;
+  --espaco-palavras: normal;
+  --espaco-paragrafo: 1em;
+
+  /* — Espaçamento — */
+  --e-1: 0.25rem;
+  --e-2: 0.5rem;
+  --e-3: 0.75rem;
+  --e-4: 1rem;
+  --e-5: 1.5rem;
+  --e-6: 2rem;
+  --e-7: 3rem;
+  --e-8: 4.5rem;
+  --e-9: 6rem;
+
+  /* — Forma — (raio de 4px é o padrão do portal oficial) */
+  --raio: 4px;
+  --raio-md: 8px;
+  --raio-lg: 14px;
+  --raio-pilula: 999px;
+  --sombra-1: 0 1px 2px rgb(11 42 69 / 0.08), 0 2px 6px rgb(11 42 69 / 0.06);
+  --sombra-2: 0 10px 24px -12px rgb(11 42 69 / 0.35);
+  --sombra-3: 0 24px 48px -20px rgb(11 42 69 / 0.45);
+  --transicao: 0.25s ease;
+  --largura-max: 1200px;
+  --largura-texto: 68ch;
+  --alvo-min: 44px; /* área mínima de toque */
+  --altura-cabecalho: 76px;
+}
+
+/* ---------- Tema escuro (preferência do sistema ou escolha do usuário) ---------- */
+:root[data-tema='escuro'] {
+  --cor-fundo: #0c1824;
+  --cor-fundo-suave: #12222f;
+  --cor-fundo-destaque: #16324a;
+  --cor-superficie: #132532;
+  --cor-borda: #2c4356;
+  --cor-borda-forte: #8aa0b2;
+  --cor-texto: #e7eef4;
+  --cor-texto-suave: #b5c4d0;
+  --cor-titulo: #c9e7f7;
+  --cor-link: #8fd0f2;
+  --cor-link-hover: #faea25;
+  --cor-foco: #faea25;
+  --cor-foco-halo: #0c1824;
+  --cor-primaria: #8fd0f2;
+  --cor-primaria-texto: #0b2a45;
+  --sombra-2: 0 10px 24px -12px rgb(0 0 0 / 0.7);
+  --sombra-3: 0 24px 48px -20px rgb(0 0 0 / 0.8);
+  color-scheme: dark;
+}
+
+/* ---------- Alto contraste (padrão eMAG: preto, branco e amarelo) ---------- */
+:root[data-contraste='alto'] {
+  --cor-fundo: #000000;
+  --cor-fundo-suave: #000000;
+  --cor-fundo-destaque: #000000;
+  --cor-superficie: #000000;
+  --cor-borda: #ffffff;
+  --cor-borda-forte: #ffffff;
+  --cor-texto: #ffffff;
+  --cor-texto-suave: #ffffff;
+  --cor-titulo: #ffff00;
+  --cor-link: #ffff00;
+  --cor-link-hover: #00ffff;
+  --cor-foco: #00ffff;
+  --cor-foco-halo: #000000;
+  --cor-primaria: #ffff00;
+  --cor-primaria-texto: #000000;
+  --cor-secundaria: #ffff00;
+  --cor-secundaria-texto: #000000;
+  --sombra-1: none;
+  --sombra-2: none;
+  --sombra-3: none;
+  color-scheme: dark;
+}
+
+/* ---------- Fontes alternativas ---------- */
+:root[data-fonte='legivel'] {
+  --fonte-ui: 'Atkinson Hyperlegible', system-ui, sans-serif;
+  --fonte-texto: 'Atkinson Hyperlegible', system-ui, sans-serif;
+  --fonte-livro: 'Atkinson Hyperlegible', system-ui, sans-serif;
+}
+:root[data-fonte='dislexia'] {
+  --fonte-ui: 'OpenDyslexic', 'Comic Sans MS', sans-serif;
+  --fonte-texto: 'OpenDyslexic', 'Comic Sans MS', sans-serif;
+  --fonte-livro: 'OpenDyslexic', 'Comic Sans MS', sans-serif;
+}
+
+/* ---------- Espaçamento de texto (WCAG 1.4.12) ---------- */
+:root[data-espacamento='amplo'] {
+  --altura-linha: 2;
+  --espaco-letras: 0.12em;
+  --espaco-palavras: 0.16em;
+  --espaco-paragrafo: 2em;
+}

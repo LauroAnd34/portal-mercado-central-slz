@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <!-- Em subpastas (ex.: /mercado-central/qualquer/coisa), faz os links e arquivos partirem da raiz do site -->
+    <base href="./" />
+    <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#144670" />
+<meta name="author" content="Prefeitura Municipal de São Luís" />
+<link rel="icon" href="./icone.svg" type="image/svg+xml" />
+<link rel="manifest" href="./manifest.webmanifest" />
+<meta property="og:site_name" content="Prefeitura de São Luís — Portal do Mercado Central" />
+<meta property="og:locale" content="pt_BR" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="https://www.saoluis.ma.gov.br/mercado-central/img/compartilhar.png" />
+<meta
+  property="og:image:alt"
+  content="Ilustração da fachada do Mercado Central de São Luís com a faixa colorida da Prefeitura"
+/>
+<meta name="twitter:card" content="summary_large_image" />
+<script>
+  /* Aplica as preferências de acessibilidade ANTES da pintura da página
+     (evita "piscar" o tema claro para quem usa alto contraste ou modo escuro). */
+  (function () {
+    try {
+      var p = JSON.parse(localStorage.getItem('slz-mercado:preferencias') || '{}');
+      var r = document.documentElement;
+      if (p.escala) r.style.setProperty('--escala-fonte', p.escala);
+      if (p.cores === 'escuro') r.setAttribute('data-tema', 'escuro');
+      if (p.cores === 'alto') r.setAttribute('data-contraste', 'alto');
+      if (p.fonte && p.fonte !== 'padrao') r.setAttribute('data-fonte', p.fonte);
+      if (p.espacamento) r.setAttribute('data-espacamento', 'amplo');
+      if (p.links) r.setAttribute('data-links', 'destacados');
+      if (p.movimento) r.setAttribute('data-movimento', 'reduzido');
+      if (p.cursor) r.setAttribute('data-cursor', 'grande');
+    } catch (e) {}
+  })();
+</script>
+
+    <title>Página não encontrada | Portal do Mercado Central — Prefeitura de São Luís</title>
+    <meta name="robots" content="noindex" />
+    <script type="module" crossorigin src="./assets/naoEncontrada-upPWTjq8.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/modulos-D9ixZTVa.js">
+    <link rel="stylesheet" crossorigin href="./assets/modulos-Dye-sCMR.css">
+    <link rel="stylesheet" crossorigin href="./assets/naoEncontrada-ChfTdltD.css">
+  </head>
+  <body class="pagina-404">
+    <!-- Faixa "versão de demonstração": aparece quando VITE_DEMONSTRACAO=true (ex.: GitHub Pages) -->
+<div class="faixa-demonstracao" data-mostrar="false" role="note">
+  <strong>Versão de demonstração.</strong> Este não é o site oficial da Prefeitura de São Luís — o
+  conteúdo é provisório.
+</div>
+<!-- Barra superior no padrão eMAG: atalhos de teclado + acessibilidade rápida -->
+<div class="barra-gov nao-imprimir">
+  <div class="container barra-gov__conteudo">
+    <nav class="barra-gov__atalhos" aria-label="Atalhos de acessibilidade">
+      <ul>
+        <li>
+          <a href="#conteudo">Ir para o conteúdo <kbd>1</kbd></a>
+        </li>
+        <li>
+          <a href="#menu-principal">Ir para o menu <kbd>2</kbd></a>
+        </li>
+        <li>
+          <a href="#rodape">Ir para o rodapé <kbd>4</kbd></a>
+        </li>
+      </ul>
+    </nav>
+    <ul class="barra-gov__acoes" aria-label="Ajustes rápidos">
+      <li>
+        <a href="./acessibilidade.html" data-menu="acessibilidade-link">Acessibilidade</a>
+      </li>
+      <li>
+        <button type="button" class="barra-gov__botao" data-acao="contraste" aria-pressed="false">
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18">
+            <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2" />
+            <path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" />
+          </svg>
+          Alto contraste
+        </button>
+      </li>
+      <li>
+        <div class="barra-gov__fonte" role="group" aria-label="Tamanho do texto">
+          <button type="button" class="barra-gov__botao" data-acao="fonte-menor">
+            A−<span class="somente-leitor"> diminuir texto</span>
+          </button>
+          <button type="button" class="barra-gov__botao" data-acao="fonte-padrao">
+            A<span class="somente-leitor"> tamanho padrão</span>
+          </button>
+          <button type="button" class="barra-gov__botao" data-acao="fonte-maior">
+            A+<span class="somente-leitor"> aumentar texto</span>
+          </button>
+        </div>
+      </li>
+      <li>
+        <button
+          type="button"
+          class="barra-gov__botao barra-gov__botao--destaque"
+          data-abre-painel-acessibilidade
+          aria-haspopup="dialog"
+        >
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18">
+            <circle cx="12" cy="4" r="2" fill="currentColor" />
+            <path
+              d="M4 8l8 1.5L20 8M12 9.5V15m0 0l-3.5 6M12 15l3.5 6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+          Mais opções <kbd>5</kbd>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<header class="cabecalho" id="topo">
+  <div class="container cabecalho__conteudo">
+    <a
+      class="marca"
+      href="./index.html"
+      aria-label="Prefeitura de São Luís — página inicial do portal do Mercado Central"
+    >
+      <!--
+        ESPAÇO RESERVADO PARA A LOGOMARCA OFICIAL.
+        Substitua o arquivo public/img/logo-prefeitura.svg pelo logo oficial
+        fornecido pela SECOM (mantenha o mesmo nome ou altere o src abaixo).
+      -->
+      <img
+        class="marca__logo manter-cores"
+        src="./img/logo-prefeitura.svg"
+        alt=""
+        width="52"
+        height="52"
+      />
+      <span class="marca__texto">
+        <span class="marca__orgao">Prefeitura de</span>
+        <span class="marca__cidade">São Luís</span>
+      </span>
+    </a>
+
+    <button type="button" class="menu-botao" aria-expanded="false" aria-controls="menu-principal">
+      <span class="menu-botao__icone" aria-hidden="true"
+        ><span></span><span></span><span></span
+      ></span>
+      <span class="menu-botao__rotulo">Menu</span>
+    </button>
+
+    <nav class="menu" id="menu-principal" aria-label="Menu principal" tabindex="-1">
+      <ul class="menu__lista">
+        <li><a class="menu__link" href="./index.html" data-menu="inicio">Início</a></li>
+        <li><a class="menu__link" href="./livro.html" data-menu="livro">O Livro</a></li>
+        <li><a class="menu__link" href="./mapa.html" data-menu="mapa">Mapa turístico</a></li>
+        <li>
+          <a class="menu__link" href="./acessibilidade.html" data-menu="acessibilidade"
+            >Acessibilidade</a
+          >
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="faixa-marca" aria-hidden="true"></div>
+</header>
+<!-- Painel completo de acessibilidade (dialog nativo: prende o foco e fecha com Esc) -->
+<dialog
+  class="painel-acessibilidade"
+  id="painel-acessibilidade"
+  aria-labelledby="painel-acessibilidade-titulo"
+>
+  <div class="painel-acessibilidade__topo">
+    <h2 id="painel-acessibilidade-titulo">Acessibilidade</h2>
+    <button
+      type="button"
+      class="botao-icone"
+      data-fecha-painel
+      aria-label="Fechar painel de acessibilidade"
+    >
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22">
+        <path
+          d="M6 6l12 12M18 6L6 18"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+        />
+      </svg>
+    </button>
+  </div>
+  <p class="painel-acessibilidade__ajuda">
+    Suas escolhas ficam salvas neste navegador e valem para todo o site, inclusive para o livro.
+  </p>
+
+  <form class="painel-acessibilidade__form" data-formulario-acessibilidade>
+    <fieldset class="opcao-grupo">
+      <legend>Tamanho do texto</legend>
+      <div class="opcao-escala">
+        <button type="button" class="botao botao--contorno" data-acao="fonte-menor">
+          A−<span class="somente-leitor"> diminuir texto</span>
+        </button>
+        <output class="opcao-escala__valor" data-saida="escala" aria-live="polite">100%</output>
+        <button type="button" class="botao botao--contorno" data-acao="fonte-maior">
+          A+<span class="somente-leitor"> aumentar texto</span>
+        </button>
+      </div>
+    </fieldset>
+
+    <fieldset class="opcao-grupo">
+      <legend>Cores</legend>
+      <div class="opcao-cartoes">
+        <label class="opcao-cartao"
+          ><input type="radio" name="cores" value="padrao" /><span
+            class="amostra amostra--padrao"
+            aria-hidden="true"
+            >Aa</span
+          >Padrão</label
+        >
+        <label class="opcao-cartao"
+          ><input type="radio" name="cores" value="escuro" /><span
+            class="amostra amostra--escuro"
+            aria-hidden="true"
+            >Aa</span
+          >Escuro</label
+        >
+        <label class="opcao-cartao"
+          ><input type="radio" name="cores" value="alto" /><span
+            class="amostra amostra--alto"
+            aria-hidden="true"
+            >Aa</span
+          >Alto contraste</label
+        >
+      </div>
+    </fieldset>
+
+    <fieldset class="opcao-grupo">
+      <legend>Fonte</legend>
+      <div class="opcao-cartoes">
+        <label class="opcao-cartao"
+          ><input type="radio" name="fonte" value="padrao" /><span
+            class="amostra"
+            aria-hidden="true"
+            style="font-family: Montserrat"
+            >Aa</span
+          >Padrão</label
+        >
+        <label class="opcao-cartao"
+          ><input type="radio" name="fonte" value="legivel" /><span
+            class="amostra"
+            aria-hidden="true"
+            style="font-family: 'Atkinson Hyperlegible'"
+            >Aa</span
+          >Alta legibilidade</label
+        >
+        <label class="opcao-cartao"
+          ><input type="radio" name="fonte" value="dislexia" /><span
+            class="amostra"
+            aria-hidden="true"
+            style="font-family: OpenDyslexic"
+            >Aa</span
+          >Dislexia</label
+        >
+      </div>
+    </fieldset>
+
+    <fieldset class="opcao-grupo">
+      <legend>Leitura e navegação</legend>
+      <label class="interruptor"
+        ><input type="checkbox" role="switch" name="espacamento" /><span
+          class="interruptor__trilho"
+          aria-hidden="true"
+        ></span
+        >Aumentar espaçamento do texto</label
+      >
+      <label class="interruptor"
+        ><input type="checkbox" role="switch" name="links" /><span
+          class="interruptor__trilho"
+          aria-hidden="true"
+        ></span
+        >Destacar links</label
+      >
+      <label class="interruptor"
+        ><input type="checkbox" role="switch" name="regua" /><span
+          class="interruptor__trilho"
+          aria-hidden="true"
+        ></span
+        >Régua de leitura (acompanha o mouse ou o teclado)</label
+      >
+      <label class="interruptor"
+        ><input type="checkbox" role="switch" name="movimento" /><span
+          class="interruptor__trilho"
+          aria-hidden="true"
+        ></span
+        >Pausar animações</label
+      >
+      <label class="interruptor"
+        ><input type="checkbox" role="switch" name="cursor" /><span
+          class="interruptor__trilho"
+          aria-hidden="true"
+        ></span
+        >Cursor grande</label
+      >
+      <label class="interruptor"
+        ><input type="checkbox" role="switch" name="leitorSelecao" /><span
+          class="interruptor__trilho"
+          aria-hidden="true"
+        ></span
+        >Ler em voz alta o texto que eu selecionar</label
+      >
+    </fieldset>
+
+    <fieldset class="opcao-grupo">
+      <legend>Libras</legend>
+      <label class="interruptor"
+        ><input type="checkbox" role="switch" name="vlibras" /><span
+          class="interruptor__trilho"
+          aria-hidden="true"
+        ></span
+        >Mostrar o botão do VLibras (tradutor de Libras do Governo Federal)</label
+      >
+      <p class="opcao-nota">
+        Ativado por padrão. Clique no botão azul com as mãos, no canto direito da tela, e depois
+        selecione um texto para o avatar traduzir para Libras. Requer internet.
+      </p>
+    </fieldset>
+
+    <div class="painel-acessibilidade__rodape">
+      <button type="button" class="botao botao--contorno" data-acao="redefinir">
+        Restaurar padrão
+      </button>
+      <a class="botao botao--texto" href="./acessibilidade.html">Atalhos e recursos</a>
+    </div>
+  </form>
+</dialog>
+<div class="regua-leitura" aria-hidden="true" hidden></div>
+
+<div
+  class="anunciador somente-leitor"
+  role="status"
+  aria-live="polite"
+  aria-atomic="true"
+  id="anunciador"
+></div>
+
+    <main id="conteudo" tabindex="-1">
+      <section class="secao erro-404" aria-labelledby="erro-titulo">
+        <div class="container erro-404__grade">
+          <div class="erro-404__texto">
+            <p class="erro-404__codigo"><span class="somente-leitor">Erro </span>404</p>
+            <h1 id="erro-titulo">Parece que este caminho não leva a lugar nenhum</h1>
+            <p class="lead">
+              A página que você procura não existe, mudou de endereço ou o link está digitado
+              errado. Mas não se preocupe: todo bom passeio por São Luís começa no Mercado Central.
+            </p>
+            <div class="erro-404__acoes">
+              <a class="botao" href="./index.html">
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24">
+                  <path
+                    d="M3 11 12 4l9 7v9h-6v-6H9v6H3z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                Voltar ao início
+              </a>
+              <button type="button" class="botao botao--contorno" data-voltar>
+                <span aria-hidden="true">←</span> Página anterior
+              </button>
+            </div>
+            <p class="erro-404__dica">
+              Sem internet? As páginas que você já visitou continuam disponíveis neste aparelho.
+            </p>
+          </div>
+          <figure class="erro-404__ilustracao">
+            <img
+              class="ilustracao"
+              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MjAgNDAwIj4KICA8IS0tIElsdXN0cmHDp8OjbyBvcmlnaW5hbDogdW0gY2FtaW5obyBxdWUgc2FpIGRvIE1lcmNhZG8sIHNlIHBlcmRlIGUgdGVybWluYSBudW0gbWFyY2Fkb3IgY29tICI/IiAtLT4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0ibWFyIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjYmZlM2Y1Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZTNmMmZiIi8+PC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iaWxoYSIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2Q5ZWJiMCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2JmZTBjOSIvPjwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSI1MjAiIGhlaWdodD0iNDAwIiByeD0iMjgiIGZpbGw9InVybCgjbWFyKSIvPgogIDxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9Ii44Ij4KICAgIDxwYXRoIGQ9Ik0zMCA2MHEyMC0xMCA0MCAwdDQwIDAiLz48cGF0aCBkPSJNNDAwIDM0MHEyMC0xMCA0MCAwdDQwIDAiLz48cGF0aCBkPSJNNDIwIDUwcTE1LTggMzAgMHQzMCAwIi8+CiAgPC9nPgogIDxwYXRoIGQ9Ik03MCAyNTBjLTEwLTYwIDQwLTEyMCAxMTAtMTQwIDYwLTE3IDkwLTYwIDE2MC01MCA4MCAxMiAxMjAgNzAgMTEwIDE0MC05IDY2LTcwIDExMC0xNTAgMTEwLTYwIDAtODAtMzAtMTQwLTMwLTUwIDAtODAgMzAtOTAtMzB6IiBmaWxsPSJ1cmwoI2lsaGEpIiBzdHJva2U9IiM5YWM2NzAiIHN0cm9rZS13aWR0aD0iNCIvPgogIDwhLS0gY2FtaW5obyBxdWUgc2UgcGVyZGUgLS0+CiAgPHBhdGggZD0iTTE1MCAyNzBjNDAtMTAgNTAtNjAgMTAwLTYwczYwIDYwIDExMCA0MCAxMC04MC0zMC05MC04MCAzMC02MCA2MCA5MCAxMCAxMTAtMzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzE0NDY3MCIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2UtZGFzaGFycmF5PSIyIDEyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8IS0tIE1lcmNhZG8gKGluw61jaW8pIC0tPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDExOCAyNDApIj4KICAgIDxjaXJjbGUgcj0iMzAiIGZpbGw9IiNiYmQwNTAiIHN0cm9rZT0iIzE0NDY3MCIgc3Ryb2tlLXdpZHRoPSI1Ii8+CiAgICA8cGF0aCBkPSJNLTE1IC00aDMwbC0zLTloLTI0ek0tMTMgLTR2MTVoMjZ2LTE1TS00IDExdi04aDh2OCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMTQ0NjcwIiBzdHJva2Utd2lkdGg9IjMuNSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgogIDwvZz4KICA8IS0tIG1hcmNhZG9yIGNvbSA/IC0tPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM3MiAxMDgpIj4KICAgIDxlbGxpcHNlIGN4PSIwIiBjeT0iOTYiIHJ4PSIyNiIgcnk9IjgiIGZpbGw9IiMxNDQ2NzAiIG9wYWNpdHk9Ii4xOCIvPgogICAgPHBhdGggZD0iTTAgOTJDMCA5Mi0zOCA0OC0zOCAyMmEzOCAzOCAwIDAgMSA3NiAwYzAgMjYtMzggNzAtMzggNzB6IiBmaWxsPSIjYzMyMTQ2IiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iNSIvPgogICAgPHRleHQgeD0iMCIgeT0iMzgiIGZvbnQtZmFtaWx5PSJNb250c2VycmF0LCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSI0NCIgZm9udC13ZWlnaHQ9IjgwMCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+PzwvdGV4dD4KICA8L2c+CiAgPCEtLSBiw7pzc29sYSAtLT4KICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0NTAgMzMwKSI+CiAgICA8Y2lyY2xlIHI9IjM0IiBmaWxsPSIjZmZmIiBzdHJva2U9IiMxNDQ2NzAiIHN0cm9rZS13aWR0aD0iNCIvPgogICAgPHBhdGggZD0iTTAtMjQgNyAwIDAgMjQtNyAweiIgZmlsbD0iIzE0NDY3MCIvPjxwYXRoIGQ9Ik0wLTI0IDcgMEgtN3oiIGZpbGw9IiNjMzIxNDYiLz4KICAgIDx0ZXh0IHk9Ii0zOCIgZm9udC1mYW1pbHk9Ik1vbnRzZXJyYXQsIEFyaWFsIiBmb250LXNpemU9IjEzIiBmb250LXdlaWdodD0iODAwIiBmaWxsPSIjMTQ0NjcwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5OPC90ZXh0PgogIDwvZz4KICA8IS0tIGZhaXhhIC0tPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMzg4KSI+CiAgICA8cmVjdCB3aWR0aD0iNzQuMyIgaGVpZ2h0PSIxMiIgZmlsbD0iI2ZhZWEyNSIvPjxyZWN0IHg9Ijc0LjMiIHdpZHRoPSI3NC4zIiBoZWlnaHQ9IjEyIiBmaWxsPSIjZGFkYjMyIi8+PHJlY3QgeD0iMTQ4LjYiIHdpZHRoPSI3NC4zIiBoZWlnaHQ9IjEyIiBmaWxsPSIjYmJkMDUwIi8+PHJlY3QgeD0iMjIyLjkiIHdpZHRoPSI3NC4zIiBoZWlnaHQ9IjEyIiBmaWxsPSIjOWFjNjcwIi8+PHJlY3QgeD0iMjk3LjIiIHdpZHRoPSI3NC4zIiBoZWlnaHQ9IjEyIiBmaWxsPSIjNzljMDk2Ii8+PHJlY3QgeD0iMzcxLjUiIHdpZHRoPSI3NC4zIiBoZWlnaHQ9IjEyIiBmaWxsPSIjNTZiMmI4Ii8+PHJlY3QgeD0iNDQ1LjgiIHdpZHRoPSI3NC4yIiBoZWlnaHQ9IjEyIiBmaWxsPSIjMzlhNmRlIi8+CiAgPC9nPgo8L3N2Zz4K"
+              width="520"
+              height="400"
+              alt="Ilustração de um mapa da ilha: uma trilha tracejada sai do Mercado Central, dá voltas e termina em um marcador vermelho com um ponto de interrogação."
+            />
+          </figure>
+        </div>
+      </section>
+
+      <section class="secao secao--suave" aria-labelledby="sugestoes-titulo">
+        <div class="container">
+          <header class="titulo-modulo">
+            <h2 id="sugestoes-titulo">Talvez você esteja procurando</h2>
+            <span class="titulo-modulo__sub">Os caminhos principais</span>
+          </header>
+          <ul class="cartoes">
+            <li>
+              <article class="cartao">
+                <span class="cartao__icone" aria-hidden="true"
+                  ><svg width="32" height="32" viewBox="0 0 24 24">
+                    <path
+                      d="M4 5c3-1.5 5.5-1.5 8 0 2.5-1.5 5-1.5 8 0v14c-3-1.5-5.5-1.5-8 0-2.5-1.5-5-1.5-8 0z"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linejoin="round"
+                    />
+                    <path d="M12 5v14" stroke="currentColor" stroke-width="1.8" /></svg
+                ></span>
+                <h3><a class="cartao__link" href="./livro.html">O livro do Mercado</a></h3>
+                <p>Leia, ouça ou baixe a história do Mercado Central.</p>
+                <span class="cartao__acao" aria-hidden="true">Abrir →</span>
+              </article>
+            </li>
+            <li>
+              <article class="cartao">
+                <span class="cartao__icone" aria-hidden="true"
+                  ><svg width="32" height="32" viewBox="0 0 24 24">
+                    <path
+                      d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2zM9 4v14M15 6v14"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linejoin="round"
+                    /></svg
+                ></span>
+                <h3><a class="cartao__link" href="./mapa.html">Mapa turístico</a></h3>
+                <p>Do Mercado para os pontos turísticos da ilha, com roteiros prontos.</p>
+                <span class="cartao__acao" aria-hidden="true">Explorar →</span>
+              </article>
+            </li>
+            <li>
+              <article class="cartao">
+                <span class="cartao__icone" aria-hidden="true"
+                  ><svg width="32" height="32" viewBox="0 0 24 24">
+                    <circle cx="12" cy="4" r="2" fill="currentColor" />
+                    <path
+                      d="M4 8l8 1.5L20 8M12 9.5V15m0 0l-3.5 6M12 15l3.5 6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                    /></svg
+                ></span>
+                <h3><a class="cartao__link" href="./acessibilidade.html">Acessibilidade</a></h3>
+                <p>Recursos para ler, ouvir e navegar do seu jeito.</p>
+                <span class="cartao__acao" aria-hidden="true">Conhecer →</span>
+              </article>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </main>
+    <footer class="rodape" id="rodape" tabindex="-1">
+  <div class="faixa-marca" aria-hidden="true"></div>
+  <div class="container rodape__grade">
+    <div class="rodape__marca">
+      <img
+        class="manter-cores"
+        src="./img/logo-prefeitura-branca.svg"
+        alt=""
+        width="56"
+        height="56"
+      />
+      <p><strong>Prefeitura de São Luís</strong><br />Portal do Mercado Central</p>
+      <p class="rodape__nota">
+        Conteúdo de demonstração. Textos, logomarca e dados de contato serão substituídos pelos
+        oficiais.
+      </p>
+    </div>
+    <nav aria-label="Mapa do site">
+      <h2 class="rodape__titulo">Navegue</h2>
+      <ul>
+        <li><a href="./index.html">Início</a></li>
+        <li><a href="./livro.html">O Livro</a></li>
+        <li><a href="./mapa.html">Mapa turístico</a></li>
+        <li><a href="./acessibilidade.html">Acessibilidade</a></li>
+      </ul>
+    </nav>
+    <div>
+      <h2 class="rodape__titulo">Mercado Central</h2>
+      <address>
+        Rua de São João, Centro<br />
+        São Luís – MA<br />
+        Seg. a sáb., das 6h às 18h<br />
+        <span class="rodape__nota">(horário ilustrativo)</span>
+      </address>
+    </div>
+    <div>
+      <h2 class="rodape__titulo">Acessibilidade</h2>
+      <p>
+        Feito para todas as pessoas: funciona com leitor de tela, só com o teclado, em Libras e com
+        letras grandes.
+      </p>
+      <a href="#topo" class="rodape__topo">Voltar ao topo ↑</a>
+    </div>
+  </div>
+</footer>
+
+<!--
+  VLibras — tradutor de Libras do Governo Federal (marcação oficial).
+  O script é carregado por src/recursos/acessibilidade/vlibras.js.
+-->
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper>
+    <div class="vw-plugin-top-wrapper"></div>
+  </div>
+</div>
+
+  </body>
+</html>
