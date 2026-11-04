@@ -1,7 +1,8 @@
 /**
  * Botão flutuante de acessibilidade (como o do VLibras).
  * - Clique (ou Enter/Espaço): abre o painel de acessibilidade.
- * - Arrastar com o mouse ou o dedo: muda o botão de lugar.
+ * - Arrastar com o mouse ou o dedo: muda o botão de lugar; ao soltar, ele
+ *   encosta na lateral mais próxima (esquerda ou direita), na altura escolhida.
  * - Quem não consegue arrastar escolhe um canto no próprio painel (WCAG 2.5.7).
  * O lugar escolhido fica guardado só neste navegador.
  */
@@ -44,6 +45,7 @@ export function iniciarBotaoFlutuante() {
     const livreY = window.innerHeight - botao.offsetHeight - MARGEM * 2;
     botao.style.left = `${MARGEM + Math.round(livreX * posicao.x)}px`;
     botao.style.top = `${MARGEM + Math.round(livreY * posicao.y)}px`;
+    botao.classList.toggle('botao-flutuante-acessibilidade--esquerda', posicao.x < 0.5);
   };
 
   const marcarCanto = () => {
@@ -86,6 +88,13 @@ export function iniciarBotaoFlutuante() {
     inicio = null;
     botao.classList.remove('botao-flutuante-acessibilidade--arrastando');
     if (arrastou) {
+      // o botão "gruda" na lateral mais próxima (esquerda ou direita), na altura escolhida
+      posicao.x = posicao.x < 0.5 ? 0 : 1;
+      // na direita, não fica em cima do botão do VLibras (meio da tela)
+      if (posicao.x === 1 && Math.abs(posicao.y - 0.5) < 0.1) posicao.y = 0.64;
+      botao.classList.add('botao-flutuante-acessibilidade--assentando');
+      aplicar();
+      setTimeout(() => botao.classList.remove('botao-flutuante-acessibilidade--assentando'), 300);
       salvar(posicao);
       marcarCanto();
     }

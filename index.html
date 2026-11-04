@@ -138,26 +138,60 @@
           </header>
           <div class="ontem-amanha">
             <figure class="ontem-amanha__foto">
-              <img
-                src="./src/imagens/historia/mercado-1940-cartao-foto-berlim.jpg"
-                width="628"
-                height="426"
-                loading="lazy"
-                alt="Foto antiga em preto e branco, de 1940: o Mercado recém-construído, prédio térreo comprido com colunas e platibanda escalonada, em terreno ainda sem calçamento."
-              />
+              <button
+                type="button"
+                class="ontem-amanha__3d"
+                data-abrir-3d="1940"
+                aria-haspopup="dialog"
+              >
+                <img
+                  src="./src/imagens/historia/mercado-1940-cartao-foto-berlim.jpg"
+                  width="628"
+                  height="426"
+                  loading="lazy"
+                  alt="Foto antiga em preto e branco, de 1940: o Mercado recém-construído, prédio térreo comprido com colunas e platibanda escalonada, em terreno ainda sem calçamento."
+                /><span class="ontem-amanha__selo" aria-hidden="true"
+                  ><svg viewBox="0 0 24 24" width="18" height="18">
+                    <path
+                      d="M12 2 3 7v10l9 5 9-5V7z M3 7l9 5 9-5 M12 12v10"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linejoin="round"
+                    /></svg
+                  >Ver em 3D</span
+                ><span class="somente-leitor">Ver o Mercado de 1940 em 3D</span>
+              </button>
               <figcaption>
                 <strong>1940</strong> O “Mercado Novo” recém-construído, em estilo Art Déco.
                 <span>Cartão-postal Foto Berlim.</span>
               </figcaption>
             </figure>
             <figure class="ontem-amanha__foto">
-              <img
-                src="./src/imagens/novo-mercado-central-projeto.jpg"
-                width="1280"
-                height="720"
-                loading="lazy"
-                alt="Imagem em 3D do projeto do novo Mercado Central: prédio de três andares com as fachadas antigas preservadas na frente, calçada larga com árvores e faixa de pedestres."
-              />
+              <button
+                type="button"
+                class="ontem-amanha__3d"
+                data-abrir-3d="projeto"
+                aria-haspopup="dialog"
+              >
+                <img
+                  src="./src/imagens/novo-mercado-central-projeto.jpg"
+                  width="1280"
+                  height="720"
+                  loading="lazy"
+                  alt="Imagem em 3D do projeto do novo Mercado Central: prédio de três andares com as fachadas antigas preservadas na frente, calçada larga com árvores e faixa de pedestres."
+                /><span class="ontem-amanha__selo" aria-hidden="true"
+                  ><svg viewBox="0 0 24 24" width="18" height="18">
+                    <path
+                      d="M12 2 3 7v10l9 5 9-5V7z M3 7l9 5 9-5 M12 12v10"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linejoin="round"
+                    /></svg
+                  >Ver em 3D</span
+                ><span class="somente-leitor">Ver o projeto do novo Mercado em 3D</span>
+              </button>
               <figcaption>
                 <strong>Projeto</strong> O novo Mercado Central, com as fachadas originais
                 preservadas. <span>Imagem: Prefeitura de São Luís (divulgação).</span>
@@ -206,6 +240,97 @@
           </p>
         </div>
       </section>
+
+      <dialog class="janela-3d" data-janela-3d aria-labelledby="titulo-3d">
+        <div class="janela-3d__topo">
+          <h2 id="titulo-3d" data-titulo-3d>Mercado em 3D</h2>
+          <div class="janela-3d__abas" role="group" aria-label="Escolher o prédio">
+            <button
+              type="button"
+              class="botao botao--pequeno"
+              data-trocar-3d="1940"
+              aria-pressed="false"
+            >
+              1940
+            </button>
+            <button
+              type="button"
+              class="botao botao--pequeno"
+              data-trocar-3d="projeto"
+              aria-pressed="false"
+            >
+              Projeto novo
+            </button>
+          </div>
+          <button
+            type="button"
+            class="botao-icone janela-3d__fechar"
+            data-fechar-3d
+            aria-label="Fechar o 3D"
+          >
+            <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22">
+              <path
+                d="M6 6l12 12M18 6L6 18"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+        </div>
+        <div class="janela-3d__palco">
+          <canvas
+            data-tela-3d
+            tabindex="0"
+            role="img"
+            aria-label="Modelo 3D do prédio. Com o foco aqui, use as setas para girar e aproximar."
+          ></canvas>
+          <p class="janela-3d__carregando" data-carregando-3d>Carregando o modelo 3D…</p>
+          <p class="janela-3d__dica" aria-hidden="true">
+            Arraste para girar · role ou use dois dedos para aproximar
+          </p>
+        </div>
+        <div class="janela-3d__controles" role="group" aria-label="Controles do 3D">
+          <button
+            type="button"
+            class="botao botao--contorno botao--pequeno"
+            data-acao-3d="esquerda"
+          >
+            ↺ Girar para a esquerda
+          </button>
+          <button type="button" class="botao botao--contorno botao--pequeno" data-acao-3d="direita">
+            Girar para a direita ↻
+          </button>
+          <button type="button" class="botao botao--contorno botao--pequeno" data-acao-3d="mais">
+            + Aproximar
+          </button>
+          <button type="button" class="botao botao--contorno botao--pequeno" data-acao-3d="menos">
+            − Afastar
+          </button>
+          <button type="button" class="botao botao--contorno botao--pequeno" data-acao-3d="frente">
+            Ver de frente
+          </button>
+          <button type="button" class="botao botao--contorno botao--pequeno" data-acao-3d="lado">
+            Ver de lado
+          </button>
+          <button type="button" class="botao botao--contorno botao--pequeno" data-acao-3d="cima">
+            Ver de cima
+          </button>
+          <button
+            type="button"
+            class="botao botao--contorno botao--pequeno"
+            data-giro-automatico
+            aria-pressed="false"
+          >
+            Girar sozinho
+          </button>
+        </div>
+        <p class="janela-3d__descricao" data-descricao-3d></p>
+        <p class="janela-3d__aviso">
+          Modelo ilustrativo, feito a partir das fotos para mostrar como será a navegação em 3D. Não
+          é o projeto técnico oficial.
+        </p>
+      </dialog>
 
       <!-- Caminhos da ilha -->
       <div class="faixa-azulejo faixa-azulejo--nazare" aria-hidden="true"></div>
@@ -261,7 +386,9 @@
             </button>
             <figcaption>
               Painel de azulejos pintados à mão com cenas da cultura maranhense: festas juninas,
-              danças, brincantes, barcos à vela e o casario. <span>Foto: acervo do projeto.</span>
+              danças, brincantes, barcos à vela e o casario. Fica na recepção do Fórum Eleitoral de
+              São Luís (TRE-MA), na Madre Deus.
+              <span>Assinatura no painel: “Santos, 09”. Foto: Lauro Andrade.</span>
             </figcaption>
           </figure>
           <h3 class="azulejaria__subtitulo">Padrões pelas ruas do Centro</h3>
