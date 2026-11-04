@@ -405,3 +405,36 @@
   height: 20px;
   accent-color: var(--marca-azul-600, #1a6fa3);
 }
+.botao-flutuante-acessibilidade--assentando {
+  transition:
+    left 0.28s var(--curva-suave, ease),
+    top 0.28s var(--curva-suave, ease);
+}
+/* nome visível ao passar o mouse ou focar com o teclado */
+.botao-flutuante-acessibilidade::after {
+  content: 'Acessibilidade';
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 10px);
+  transform: translateY(-50%);
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--marca-marinho-800);
+  color: #ffffff;
+  font: 700 0.85rem/1.2 var(--fonte-ui, sans-serif);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.botao-flutuante-acessibilidade--esquerda::after {
+  right: auto;
+  left: calc(100% + 10px);
+}
+.botao-flutuante-acessibilidade:hover::after,
+.botao-flutuante-acessibilidade:focus-visible::after {
+  opacity: 1;
+}
+.botao-flutuante-acessibilidade--arrastando::after {
+  opacity: 0;
+}

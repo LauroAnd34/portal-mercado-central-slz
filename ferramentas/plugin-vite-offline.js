@@ -23,7 +23,12 @@ export function modoOffline({ pastaPublica, modelo }) {
     generateBundle(_opcoes, pacote) {
       const arquivos = [
         './',
-        ...Object.keys(pacote).filter((nome) => !nome.endsWith('.map') && !nome.endsWith('.woff')), // navegadores atuais usam .woff2
+        ...Object.keys(pacote).filter(
+          (nome) =>
+            !nome.endsWith('.map') &&
+            !nome.endsWith('.woff') &&
+            !/three\.module|modelos-do-mercado|OrbitControls|GLTFLoader/.test(nome), // 3D: só baixa se a pessoa abrir
+        ), // navegadores atuais usam .woff2
         ...listarPublicos(pastaPublica).filter((nome) => nome !== 'sw.js'),
       ].map((nome) => (nome.startsWith('./') ? nome : `./${nome.split('\\').join('/')}`));
       const versao = createHash('sha1').update(arquivos.join('|')).digest('hex').slice(0, 10);
