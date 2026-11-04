@@ -632,38 +632,149 @@
   }
 }
 
-/* ---------- Faixa institucional ---------- */
-.faixa-institucional {
-  background: var(--marca-marinho-900);
-  color: #fff;
-  padding-block: var(--e-8);
-}
-.faixa-institucional__conteudo {
-  display: grid;
-  justify-items: center;
-  gap: var(--e-3);
-  text-align: center;
-}
-.faixa-institucional h2 {
-  margin: 0;
-  color: #fff;
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: var(--texto-2xl);
-}
-.faixa-institucional p {
-  max-width: 54ch;
-  margin: 0 0 var(--e-2);
-  color: #d6e8f4;
-}
-:root[data-contraste='alto'] .faixa-institucional {
-  background: #000;
-  border-top: 2px solid #fff;
-}
-:root[data-contraste='alto'] .faixa-institucional h2 {
-  color: #ffff00;
-}
 :root[data-contraste='alto'] .fatos dt,
 :root[data-contraste='alto'] .titulo-modulo__sub {
   color: #ffff00;
+}
+
+/* ---------- A cidade dos azulejos ---------- */
+.azulejaria__texto {
+  max-width: 68ch;
+}
+.azulejaria__painel {
+  margin: var(--e-6) 0 var(--e-8);
+}
+.azulejaria__painel img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--raio-md);
+  box-shadow: 0 18px 40px rgb(7 29 49 / 0.25);
+}
+.azulejaria__painel figcaption {
+  margin-top: var(--e-3);
+  max-width: 80ch;
+  font-size: var(--texto-sm);
+  color: var(--cor-texto-suave);
+}
+.azulejaria__painel figcaption span {
+  display: block;
+  font-size: var(--texto-xs);
+}
+.azulejaria__subtitulo {
+  margin: 0 0 var(--e-4);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: var(--texto-xl);
+  color: var(--cor-titulo);
+}
+.azulejaria__galeria {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--e-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.azulejaria__item {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: var(--raio-md);
+  overflow: hidden;
+  aspect-ratio: 1;
+  background: var(--marca-marinho-800);
+  cursor: zoom-in;
+}
+.azulejaria__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--curva-suave, ease);
+}
+.azulejaria__item:hover img,
+.azulejaria__item:focus-visible img {
+  transform: scale(1.07);
+}
+.azulejaria__item:focus-visible {
+  outline: 4px solid #ffbf00;
+  outline-offset: 3px;
+}
+.azulejaria__nome {
+  position: absolute;
+  inset: auto 0 0;
+  padding: var(--e-6) var(--e-3) var(--e-3);
+  background: linear-gradient(transparent, rgb(7 29 49 / 0.92));
+  color: #ffffff;
+  font-weight: 700;
+  font-size: var(--texto-sm);
+  line-height: 1.3;
+  text-align: left;
+}
+:root[data-contraste='alto'] .azulejaria__nome {
+  background: #000000;
+  color: #ffff00;
+}
+
+/* janela da foto ampliada */
+.visualizador {
+  width: min(1100px, 94vw);
+  max-height: 92vh;
+  padding: 0;
+  border: 0;
+  border-radius: var(--raio-md);
+  background: #0b1a28;
+  color: #ffffff;
+}
+.visualizador::backdrop {
+  background: rgb(4 12 20 / 0.82);
+}
+.visualizador__caixa {
+  position: relative;
+}
+.visualizador img {
+  display: block;
+  width: 100%;
+  max-height: 78vh;
+  object-fit: contain;
+  background: #0b1a28;
+}
+.visualizador__legenda {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: var(--e-3) var(--e-4) var(--e-4);
+  font-size: var(--texto-sm);
+}
+.visualizador__legenda a {
+  color: #bfe0f5;
+}
+.visualizador__fechar {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ffffff;
+  color: var(--marca-marinho-800);
+  border-radius: 50%;
+}
+@media (max-width: 860px) {
+  .azulejaria__galeria {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--e-3);
+  }
+}
+.azulejaria__ampliar {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+  border-radius: var(--raio-md);
+}
+.azulejaria__ampliar:focus-visible {
+  outline: 4px solid #ffbf00;
+  outline-offset: 4px;
 }

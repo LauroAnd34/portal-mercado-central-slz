@@ -328,3 +328,80 @@
 .rodape__creditos p {
   max-width: 80ch;
 }
+
+/* ---------- Botão flutuante de acessibilidade (arrastável, como o do VLibras) ---------- */
+.botao-flutuante-acessibilidade {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 900;
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  padding: 0;
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  background: var(--marca-marinho-700);
+  color: #ffffff;
+  box-shadow:
+    0 6px 18px rgb(7 29 49 / 0.35),
+    0 0 0 4px rgb(187 208 80 / 0.9);
+  cursor: grab;
+  touch-action: none; /* permite arrastar com o dedo sem rolar a página */
+  user-select: none;
+  transition:
+    transform 0.2s var(--curva-suave, ease),
+    box-shadow 0.2s ease;
+}
+/* depois que o JavaScript calcula o lugar, usa left/top */
+.botao-flutuante-acessibilidade--pronto {
+  right: auto;
+  bottom: auto;
+}
+.botao-flutuante-acessibilidade:hover {
+  transform: scale(1.08);
+}
+.botao-flutuante-acessibilidade:focus-visible {
+  outline: 4px solid #ffbf00;
+  outline-offset: 3px;
+}
+.botao-flutuante-acessibilidade--arrastando {
+  cursor: grabbing;
+  transform: scale(1.12);
+  box-shadow:
+    0 12px 28px rgb(7 29 49 / 0.45),
+    0 0 0 6px rgb(187 208 80 / 0.9);
+  transition: none;
+}
+:root[data-contraste='alto'] .botao-flutuante-acessibilidade {
+  background: #000000;
+  color: #ffff00;
+  border-color: #ffff00;
+  box-shadow: none;
+}
+@media print {
+  .botao-flutuante-acessibilidade {
+    display: none;
+  }
+}
+.posicoes-botao {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--e-2, 8px);
+}
+.posicoes-botao label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 6px 10px;
+  border: 1px solid var(--cor-borda-forte);
+  border-radius: 8px;
+  cursor: pointer;
+}
+.posicoes-botao input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--marca-azul-600, #1a6fa3);
+}

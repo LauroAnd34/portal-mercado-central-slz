@@ -208,6 +208,7 @@
       </section>
 
       <!-- Caminhos da ilha -->
+      <div class="faixa-azulejo faixa-azulejo--nazare" aria-hidden="true"></div>
       <section class="secao caminhos" aria-labelledby="caminhos-titulo">
         <div class="container">
           <div class="caminhos__topo">
@@ -229,6 +230,70 @@
       </section>
 
       <!-- Vozes do Mercado -->
+      <!-- A cidade dos azulejos -->
+      <section class="secao azulejaria" aria-labelledby="azulejos-titulo">
+        <div class="container">
+          <header class="titulo-modulo">
+            <h2 id="azulejos-titulo">A cidade dos azulejos</h2>
+            <span class="titulo-modulo__sub">Arte que veste São Luís</span>
+          </header>
+          <p class="lead azulejaria__texto">
+            Os casarões do Centro Histórico guardam um dos maiores conjuntos de azulejos portugueses
+            do Brasil. Eles protegem as paredes do sol e da chuva e deixam as ruas coloridas. Cada
+            padrão é de uma época — e artistas maranhenses continuam essa história em painéis com as
+            nossas festas e tradições.
+          </p>
+          <figure class="azulejaria__painel">
+            <button
+              type="button"
+              class="azulejaria__ampliar"
+              data-ampliar-painel
+              aria-haspopup="dialog"
+            >
+              <img
+                src="./src/imagens/painel-azulejos-cultura.jpg"
+                alt="Painel de azulejos pintados à mão com cenas da cultura maranhense, emoldurado por ladrilhos cor de tijolo."
+                width="2000"
+                height="947"
+                loading="lazy"
+                decoding="async"
+              /><span class="somente-leitor">Ampliar o painel</span>
+            </button>
+            <figcaption>
+              Painel de azulejos pintados à mão com cenas da cultura maranhense: festas juninas,
+              danças, brincantes, barcos à vela e o casario. <span>Foto: acervo do projeto.</span>
+            </figcaption>
+          </figure>
+          <h3 class="azulejaria__subtitulo">Padrões pelas ruas do Centro</h3>
+          <ul class="azulejaria__galeria" data-galeria-azulejos></ul>
+        </div>
+        <dialog class="visualizador" data-visualizador aria-labelledby="visualizador-titulo">
+          <div class="visualizador__caixa">
+            <button
+              type="button"
+              class="botao-icone visualizador__fechar"
+              data-fechar-visualizador
+              aria-label="Fechar foto"
+            >
+              <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22">
+                <path
+                  d="M6 6l12 12M18 6L6 18"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </button>
+            <img data-visualizador-foto alt="" />
+            <p class="visualizador__legenda">
+              <strong id="visualizador-titulo" data-visualizador-titulo></strong>
+              <span data-visualizador-credito></span>
+            </p>
+          </div>
+        </dialog>
+      </section>
+
+      <div class="faixa-azulejo faixa-azulejo--rosas" aria-hidden="true"></div>
       <section class="secao vozes" aria-labelledby="vozes-titulo">
         <div class="container">
           <header class="titulo-modulo">
@@ -282,6 +347,7 @@
       </section>
 
       <!-- Sabores do Mercado -->
+      <div class="faixa-azulejo faixa-azulejo--estrelas" aria-hidden="true"></div>
       <section class="secao sabores-secao" aria-labelledby="sabores-titulo">
         <div class="container sabores-grade">
           <div class="sabores-fotos">
@@ -351,6 +417,7 @@
       </section>
 
       <!-- Linha do tempo -->
+      <div class="faixa-azulejo faixa-azulejo--rosas" aria-hidden="true"></div>
       <section class="secao" aria-labelledby="linha-titulo">
         <div class="container">
           <header class="titulo-modulo">
@@ -370,25 +437,6 @@
             </div>
             <div role="tabpanel" id="painel-linha" class="linha__painel" tabindex="0"></div>
           </div>
-        </div>
-      </section>
-
-      <!-- Faixa institucional -->
-      <section class="faixa-institucional" aria-labelledby="inclusao-titulo">
-        <div class="container faixa-institucional__conteudo">
-          <h2 id="inclusao-titulo">Um site para todas as pessoas</h2>
-          <p>
-            Letras maiores, alto contraste, Libras, leitura em voz alta e muito mais — em todas as
-            páginas.
-          </p>
-          <button
-            type="button"
-            class="botao botao--secundario"
-            data-abre-painel-acessibilidade
-            aria-haspopup="dialog"
-          >
-            Ajustar acessibilidade
-          </button>
         </div>
       </section>
     </main>

@@ -85,7 +85,7 @@ export function renderizarItem(ponto, selecionado) {
 }
 
 /** HTML do painel de detalhes. */
-export function renderizarDetalhes(ponto, mercado, foto = null) {
+export function renderizarDetalhes(ponto, mercado, foto = null, deMim = null) {
   const modo = ponto.modoSugerido;
   const figura = foto
     ? `<figure class="detalhes__foto"><img src="${foto.url}" alt="${escaparHtml(foto.lugar)}" width="900" height="600" />
@@ -99,16 +99,18 @@ export function renderizarDetalhes(ponto, mercado, foto = null) {
     </div>
     <p>${escaparHtml(ponto.descricao)}</p>
     <dl class="detalhes__dados">
+      ${deMim ? `<div class="detalhes__de-mim"><dt>Distância de você</dt><dd>${formatarDistancia(deMim.distanciaKm)} em linha reta</dd></div>` : ''}
       <div><dt>Distância do Mercado</dt><dd>${formatarDistancia(ponto.distanciaKm)} ${ponto.pelasRuas ? 'pelo caminho a pé' : 'em linha reta'}, a ${ponto.direcao}</dd></div>
       <div><dt>A pé</dt><dd>${formatarDuracao(ponto.tempos.aPeMinutos)}</dd></div>
       <div><dt>De carro</dt><dd>${formatarDuracao(ponto.tempos.carroMinutos)}</dd></div>
       <div><dt>Acessibilidade do local</dt><dd>Informações em levantamento pela Prefeitura.</dd></div>
     </dl>
     <div class="detalhes__acoes">
-      <button type="button" class="botao" data-tracar-rota="a-pe">Rota a pé</button>
-      <button type="button" class="botao botao--contorno" data-tracar-rota="carro">Rota de carro</button>
+      ${deMim ? '<button type="button" class="botao botao--de-mim" data-tracar-rota="de-mim">Rota saindo de onde estou</button>' : ''}
+      <button type="button" class="botao${deMim ? ' botao--contorno' : ''}" data-tracar-rota="a-pe">Rota a pé do Mercado</button>
+      <button type="button" class="botao botao--contorno" data-tracar-rota="carro">Rota de carro do Mercado</button>
       <button type="button" class="botao botao--texto" data-ouvir-ponto>Ouvir descrição</button>
-      <a class="botao botao--texto" href="${linkComoChegar(mercado.coordenadas, ponto.coordenadas, modo)}" target="_blank" rel="noopener">
+      <a class="botao botao--texto" href="${linkComoChegar(deMim?.coordenadas ?? mercado.coordenadas, ponto.coordenadas, deMim ? (deMim.distanciaKm < 2.5 ? 'a-pe' : 'carro') : modo)}" target="_blank" rel="noopener">
         Abrir no Google Maps<span class="somente-leitor"> (abre em nova aba)</span>
       </a>
     </div>
@@ -116,8 +118,8 @@ export function renderizarDetalhes(ponto, mercado, foto = null) {
 }
 
 /** HTML da rota passo a passo. */
-export function renderizarRota(rota, modo) {
-  const titulo = modo === 'a-pe' ? 'Caminho a pé' : 'Caminho de carro';
+export function renderizarRota(rota, modo, { deMim = false } = {}) {
+  const titulo = `${modo === 'a-pe' ? 'Caminho a pé' : 'Caminho de carro'}${deMim ? ' saindo de onde você está' : ' saindo do Mercado'}`;
   const aviso = rota.aproximada
     ? '<p class="detalhes__aviso">Não foi possível calcular a rota pelas ruas agora (sem internet ou serviço indisponível). Mostramos a direção em linha reta.</p>'
     : '';

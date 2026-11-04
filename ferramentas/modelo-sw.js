@@ -12,28 +12,27 @@ const CACHE_MAPA = 'mercado-mapa-v1';
 const LIMITE_MAPA = 400;
 const ARQUIVOS = __ARQUIVOS__;
 
-self.addEventListener('install', (evento) => {
-  evento.waitUntil(
-    caches
-      .open(CACHE_SITE)
-      .then((cache) => cache.addAll(ARQUIVOS))
-      .then(() => self.skipWaiting()),
-  );
-});
+// Assume o controle na hora: quem tinha uma versão antiga passa a ver a nova
+// já na próxima página aberta (não espera baixar tudo para o modo offline).
+self.addEventListener('install', () => self.skipWaiting());
 
 self.addEventListener('activate', (evento) => {
   evento.waitUntil(
-    caches
-      .keys()
-      .then((nomes) =>
-        Promise.all(
-          nomes
-            .filter((nome) => nome.startsWith('mercado-site-') && nome !== CACHE_SITE)
-            .map((nome) => caches.delete(nome)),
-        ),
-      )
-      .then(() => self.clients.claim()),
+    (async () => {
+      const antigos = (await caches.keys()).filter(
+        (nome) => nome.startsWith('mercado-site-') && nome !== CACHE_SITE,
+      );
+      await Promise.all(antigos.map((nome) => caches.delete(nome)));
+      await self.clients.claim();
+    })(),
   );
+  // guarda o site para uso sem internet em segundo plano
+  caches
+    .open(CACHE_SITE)
+    .then((cache) => cache.addAll(ARQUIVOS))
+    .catch(() => {
+      /* o que faltar é guardado conforme a pessoa navega */
+    });
 });
 
 async function limitarCache(nome, limite) {

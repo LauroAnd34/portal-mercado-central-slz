@@ -6,6 +6,7 @@ import { SETORES, SABORES } from '../dados/mercado.js';
 import { iniciarLinhaDoTempo } from '../recursos/inicio/linha-do-tempo.js';
 import { montarSetores, montarSabores } from '../recursos/inicio/sabores-e-setores.js';
 import { montarCaminhos } from '../recursos/inicio/caminhos.js';
+import { montarGaleriaDeAzulejos } from '../recursos/inicio/galeria-azulejos.js';
 
 const linha = document.querySelector('[data-linha-do-tempo]');
 if (linha) iniciarLinhaDoTempo(linha, LINHA_DO_TEMPO);
@@ -15,5 +16,6 @@ const sabores = document.querySelector('[data-sabores]');
 if (sabores) montarSabores(sabores, SABORES);
 const caminhos = document.querySelector('[data-caminhos]');
 if (caminhos) montarCaminhos(caminhos);
+montarGaleriaDeAzulejos();
 
 iniciarPaginaComum();

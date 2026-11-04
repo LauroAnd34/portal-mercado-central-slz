@@ -39,7 +39,24 @@
       rgb(255 255 255 / 0.08) 10px 13px,
       transparent 13px
     ),
-    url('../../imagens/azulejo.svg');
+    /* painel de azulejos no meio da capa, faixas azuis para o texto */
+    linear-gradient(
+      180deg,
+      var(--marca-marinho-700) 0 15%,
+      rgb(255 255 255 / 0.9) 15% calc(15% + 3px),
+      transparent calc(15% + 3px) calc(42% - 3px),
+      rgb(255 255 255 / 0.9) calc(42% - 3px) 42%,
+      var(--marca-marinho-700) 42%
+    ),
+    url('../../imagens/azulejos/faixa-estrelas.webp');
+  background-size:
+    auto,
+    auto,
+    50% auto;
+  background-position:
+    0 0,
+    0 0,
+    center 30%;
   color: #fff;
   box-shadow: var(--sombra-3);
   transform: rotateY(-12deg);

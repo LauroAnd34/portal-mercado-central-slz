@@ -93,12 +93,18 @@
                   Mostrar todas
                 </button>
               </div>
-              <div class="perto-de-mim">
-                <button
-                  type="button"
-                  class="botao botao--contorno botao--pequeno"
-                  data-perto-de-mim
-                >
+              <p class="explorar__contagem" data-contagem aria-hidden="true"></p>
+              <ul
+                class="lista-pontos"
+                data-lista-pontos
+                aria-label="Pontos ordenados do mais perto ao mais longe do Mercado Central"
+              ></ul>
+            </aside>
+
+            <!-- Mapa + detalhes -->
+            <div class="explorar__mapa">
+              <div class="vistas">
+                <button type="button" class="botao botao--localizar" data-perto-de-mim>
                   <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24">
                     <circle cx="12" cy="12" r="3.5" fill="currentColor" />
                     <path
@@ -116,62 +122,64 @@
                       stroke-width="2"
                     />
                   </svg>
-                  Perto de mim
+                  <span data-texto-perto>Usar minha localização</span>
                 </button>
-                <p class="perto-de-mim__nota" data-nota-localizacao>
-                  Ordena os pontos pela sua distância. Sua localização fica só no seu aparelho.
-                </p>
+                <div class="vistas__enquadramento" role="group" aria-label="Enquadramento do mapa">
+                  <button
+                    type="button"
+                    class="botao botao--pequeno botao--secundario"
+                    data-vista="mercado"
+                  >
+                    <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24">
+                      <circle cx="12" cy="12" r="4" fill="currentColor" />
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="9"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      />
+                    </svg>
+                    Mercado Central
+                  </button>
+                  <button
+                    type="button"
+                    class="botao botao--pequeno botao--contorno"
+                    data-vista="centro"
+                  >
+                    Centro Histórico
+                  </button>
+                  <button
+                    type="button"
+                    class="botao botao--pequeno botao--contorno"
+                    data-vista="ilha"
+                  >
+                    Ilha inteira
+                  </button>
+                </div>
               </div>
-              <p class="explorar__contagem" data-contagem aria-hidden="true"></p>
-              <ul
-                class="lista-pontos"
-                data-lista-pontos
-                aria-label="Pontos ordenados do mais perto ao mais longe do Mercado Central"
-              ></ul>
-            </aside>
+              <p class="perto-de-mim__nota" data-nota-localizacao>
+                Mostra você no mapa, ordena os pontos pela sua distância e traça a rota a partir de
+                onde você está. Sua localização fica só no seu aparelho.
+              </p>
+              <div class="explorar__palco">
+                <div
+                  class="mapa"
+                  data-mapa
+                  role="region"
+                  aria-label="Mapa interativo dos pontos turísticos. Use Tab para percorrer os marcadores e Enter para selecionar."
+                ></div>
 
-            <!-- Mapa + detalhes -->
-            <div class="explorar__mapa">
-              <div class="vistas" role="group" aria-label="Enquadramento do mapa">
-                <button
-                  type="button"
-                  class="botao botao--pequeno botao--secundario"
-                  data-vista="mercado"
-                >
-                  <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="4" fill="currentColor" />
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="9"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    />
-                  </svg>
-                  Mercado Central
-                </button>
-                <button
-                  type="button"
-                  class="botao botao--pequeno botao--contorno"
-                  data-vista="centro"
-                >
-                  Centro Histórico
-                </button>
-                <button
-                  type="button"
-                  class="botao botao--pequeno botao--contorno"
-                  data-vista="ilha"
-                >
-                  Ilha inteira
-                </button>
+                <section class="detalhes detalhes--vazio" data-detalhes aria-labelledby="detalhes-titulo">
+                  <h3 id="detalhes-titulo">Escolha um destino</h3>
+                  <p>
+                    Selecione um ponto na lista ou toque em um marcador no mapa. Você verá a
+                    distância a partir do Mercado Central, quanto tempo leva e o caminho passo a
+                    passo.
+                  </p>
+                </section>
               </div>
-              <div
-                class="mapa"
-                data-mapa
-                role="region"
-                aria-label="Mapa interativo dos pontos turísticos. Use Tab para percorrer os marcadores e Enter para selecionar."
-              ></div>
               <ul class="legenda" aria-label="Legenda do mapa">
                 <li>
                   <span class="legenda__mercado" aria-hidden="true"></span>Mercado Central (ponto de
@@ -184,14 +192,11 @@
                 <li>
                   <span class="legenda__rota" aria-hidden="true"></span>Caminho do destino escolhido
                 </li>
+                <li>
+                  <span class="legenda__voce" aria-hidden="true"></span>Você (se usar sua
+                  localização)
+                </li>
               </ul>
-              <section class="detalhes" data-detalhes aria-labelledby="detalhes-titulo">
-                <h3 id="detalhes-titulo">Escolha um destino</h3>
-                <p>
-                  Selecione um ponto na lista ou toque em um marcador no mapa. Você verá a distância
-                  a partir do Mercado Central, quanto tempo leva e o caminho passo a passo.
-                </p>
-              </section>
             </div>
           </div>
         </div>

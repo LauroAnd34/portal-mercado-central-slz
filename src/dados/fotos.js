@@ -195,6 +195,86 @@ export const FOTOS = Object.freeze({
     largura: 900,
     altura: 1200,
   },
+  'azulejo-azul-couto-fernandes': {
+    arquivo: 'azulejo-azul-couto-fernandes.jpg',
+    lugar: 'Azulejos azuis na Travessa Couto Fernandes',
+    autor: 'Prburley',
+    licenca: 'CC BY 4.0',
+    fonte:
+      'https://commons.wikimedia.org/wiki/File:Travessa_Couto_Fernandes_60_Centro_S%C3%A3o_Lu%C3%ADs_2025-6016_(pcorr,_crop).jpg',
+    largura: 1200,
+    altura: 1199,
+  },
+  'azulejo-rua-nazare-08': {
+    arquivo: 'azulejo-rua-nazare-08.jpg',
+    lugar: 'Azulejos azuis e laranja na Rua de Nazaré',
+    autor: 'Prburley',
+    licenca: 'CC BY 4.0',
+    fonte:
+      'https://commons.wikimedia.org/wiki/File:Rua_Nazar%C3%A9_08_S%C3%A3o_Lu%C3%ADs_Maranh%C3%A3o_2025-5997.jpg',
+    largura: 1200,
+    altura: 800,
+  },
+  'azulejo-policromo-centro': {
+    arquivo: 'azulejo-policromo-centro.jpg',
+    lugar: 'Azulejos amarelos, azuis e verdes no Centro Histórico',
+    autor: 'Thuaia',
+    licenca: 'CC BY-SA 4.0',
+    fonte:
+      'https://commons.wikimedia.org/wiki/File:Azulejos_no_Centro_Hist%C3%B3rico_de_S%C3%A3o_Lu%C3%ADs.jpg',
+    largura: 675,
+    altura: 1200,
+  },
+  'azulejo-verde-rua-do-egito': {
+    arquivo: 'azulejo-verde-rua-do-egito.jpg',
+    lugar: 'Azulejos verdes na Rua do Egito',
+    autor: 'Prburley',
+    licenca: 'CC BY 4.0',
+    fonte:
+      'https://commons.wikimedia.org/wiki/File:Rua_do_Egito_37_S%C3%A3o_Lu%C3%ADs_Maranh%C3%A3o_2025-5420.jpg',
+    largura: 1200,
+    altura: 900,
+  },
+  'azulejo-igreja-do-rosario': {
+    arquivo: 'azulejo-igreja-do-rosario.jpg',
+    lugar: 'Painel de azulejos na Igreja de Nossa Senhora do Rosário',
+    autor: 'Prburley',
+    licenca: 'CC BY 4.0',
+    fonte:
+      'https://commons.wikimedia.org/wiki/File:Igreja_de_Nossa_Senhora_do_Ros%C3%A1rio_S%C3%A3o_Lu%C3%ADs_Maranh%C3%A3o_2025-5531.jpg',
+    largura: 1200,
+    altura: 900,
+  },
+  'azulejo-estrelas-dom-pedro-ii': {
+    arquivo: 'azulejo-estrelas-dom-pedro-ii.jpg',
+    lugar: 'Azulejos de estrelas na Avenida Dom Pedro II',
+    autor: 'Prburley',
+    licenca: 'CC BY 4.0',
+    fonte:
+      'https://commons.wikimedia.org/wiki/File:Avenida_Dom_Pedro_II_02_S%C3%A3o_Lu%C3%ADs_Maranh%C3%A3o_2025-5947.jpg',
+    largura: 800,
+    altura: 1200,
+  },
+  'azulejo-rua-nazare-82': {
+    arquivo: 'azulejo-rua-nazare-82.jpg',
+    lugar: 'Azulejos com rosas na Rua de Nazaré',
+    autor: 'Prburley',
+    licenca: 'CC BY 4.0',
+    fonte:
+      'https://commons.wikimedia.org/wiki/File:Rua_Nazar%C3%A9_82_S%C3%A3o_Lu%C3%ADs_Maranh%C3%A3o_2025-5975.jpg',
+    largura: 1200,
+    altura: 800,
+  },
+  'azulejo-rua-nazare-328': {
+    arquivo: 'azulejo-rua-nazare-328.jpg',
+    lugar: 'Azulejos de padrão grande na Rua de Nazaré',
+    autor: 'Prburley',
+    licenca: 'CC BY 4.0',
+    fonte:
+      'https://commons.wikimedia.org/wiki/File:Rua_de_Nazar%C3%A9_328_S%C3%A3o_Lu%C3%ADs_Maranh%C3%A3o_2025-5782.jpg',
+    largura: 1200,
+    altura: 800,
+  },
 });
 
 /** Endereço (URL) final da foto, já processado pelo Vite. */
@@ -218,3 +298,15 @@ export const FOTO_DO_PONTO = Object.freeze({
   'casa-de-nhozinho': 'casa-de-nhozinho',
   'praia-ponta-dareia': 'espigao-costeiro',
 });
+
+/** Fotos da galeria "A cidade dos azulejos" (página inicial), na ordem de exibição. */
+export const GALERIA_AZULEJOS = Object.freeze([
+  'azulejo-azul-couto-fernandes',
+  'azulejo-rua-nazare-08',
+  'azulejo-policromo-centro',
+  'azulejo-verde-rua-do-egito',
+  'azulejo-igreja-do-rosario',
+  'azulejo-estrelas-dom-pedro-ii',
+  'azulejo-rua-nazare-82',
+  'azulejo-rua-nazare-328',
+]);

@@ -25,6 +25,7 @@ import { iniciarControlesDeAcessibilidade } from '../recursos/acessibilidade/con
 import { iniciarReguaDeLeitura } from '../recursos/acessibilidade/regua-de-leitura.js';
 import { iniciarVLibras } from '../recursos/acessibilidade/vlibras.js';
 import { iniciarLeituraDeSelecao } from '../recursos/acessibilidade/leitura-de-selecao.js';
+import { iniciarBotaoFlutuante } from '../recursos/acessibilidade/botao-flutuante.js';
 import { iniciarAtalhosDeTeclado } from '../recursos/acessibilidade/atalhos-de-teclado.js';
 import { iniciarMenuMovel } from '../recursos/navegacao/menu-movel.js';
 import { iniciarAnimacoes } from '../recursos/animacoes/animacoes.js';
@@ -33,6 +34,7 @@ import { preencherFotos, montarCreditos } from '../recursos/fotos/fotos.js';
 export function iniciarPaginaComum() {
   const { abrirPainel } = iniciarControlesDeAcessibilidade();
   iniciarAtalhosDeTeclado({ abrirPainel });
+  iniciarBotaoFlutuante();
   iniciarReguaDeLeitura();
   iniciarVLibras();
   iniciarLeituraDeSelecao();
@@ -61,8 +63,20 @@ function iniciarVoltarAoTopo() {
 function registrarModoOffline() {
   if (!import.meta.env.PROD || !('serviceWorker' in navigator)) return;
   if (!/^https?:$/.test(location.protocol)) return;
+  // Quando sair uma versão nova do site, a página recarrega sozinha uma vez,
+  // para ninguém ficar vendo a versão antiga guardada.
+  const jaTinhaVersao = Boolean(navigator.serviceWorker.controller);
+  let recarregou = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (!jaTinhaVersao || recarregou) return;
+    recarregou = true;
+    location.reload();
+  });
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').catch(() => {
+    navigator.serviceWorker
+      .register('./sw.js', { updateViaCache: 'none' })
+      .then((registro) => registro.update())
+      .catch(() => {
       /* sem modo offline: o site continua funcionando normalmente */
     });
   });
