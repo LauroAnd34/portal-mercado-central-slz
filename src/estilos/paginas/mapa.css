@@ -138,7 +138,7 @@
 }
 .mapa--sem-fundo {
   background-color: #dcecf5;
-  background-image: url('../../imagens/azulejo.svg');
+  background-image: url('../../imagens/azulejos/faixa-nazare.webp');
 }
 .mapa .leaflet-tile-pane {
   filter: saturate(0.75) brightness(1.03);
@@ -511,4 +511,337 @@
   padding: var(--e-1) var(--e-5) 0;
   font-size: var(--texto-xs);
   color: var(--cor-texto-suave);
+}
+
+/* ---------- Você está aqui ---------- */
+.minha-posicao {
+  position: relative;
+}
+.minha-posicao__ponto {
+  position: absolute;
+  inset: 12px;
+  display: grid;
+  place-items: center;
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  background: #1a73e8;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.4);
+}
+.minha-posicao__onda {
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  background: rgb(26 115 232 / 0.45);
+  animation: onda-posicao 2.4s ease-out infinite;
+}
+.minha-posicao__onda--2 {
+  animation-delay: 1.2s;
+}
+@keyframes onda-posicao {
+  from {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  to {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+.minha-posicao__rotulo {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% - 4px);
+  transform: translateX(-50%);
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #1a73e8;
+  color: #ffffff;
+  font: 700 0.8rem/1.2 var(--fonte-texto, sans-serif);
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.3);
+}
+.minha-posicao__rotulo::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  margin-left: -6px;
+  border: 6px solid transparent;
+  border-top-color: #1a73e8;
+}
+:root[data-movimento='reduzido'] .minha-posicao__onda {
+  animation: none;
+  transform: scale(1.8);
+  opacity: 0.35;
+}
+@media (prefers-reduced-motion: reduce) {
+  .minha-posicao__onda {
+    animation: none;
+    transform: scale(1.8);
+    opacity: 0.35;
+  }
+}
+:root[data-contraste='alto'] .minha-posicao__ponto,
+:root[data-contraste='alto'] .minha-posicao__rotulo {
+  background: #000000;
+  color: #ffff00;
+  border-color: #ffff00;
+}
+
+/* botão "onde estou" dentro do mapa */
+.mapa__localizar {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 2px solid rgb(0 0 0 / 0.2);
+  border-radius: 8px;
+  background: #ffffff;
+  color: #1a73e8;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.2);
+}
+.mapa__localizar:hover {
+  background: #e8f0fe;
+}
+.mapa__localizar:focus-visible {
+  outline: 3px solid #ffbf00;
+  outline-offset: 2px;
+}
+
+/* botão de localização na lista: chama mais atenção */
+.botao--localizar {
+  background: #1765cc;
+  border-color: #1765cc;
+  color: #ffffff;
+}
+.botao--localizar:hover {
+  background: #1557b0;
+  border-color: #1557b0;
+}
+.botao--de-mim {
+  background: #1765cc;
+  border-color: #1765cc;
+  color: #ffffff;
+}
+:root[data-contraste='alto'] .botao--localizar,
+:root[data-contraste='alto'] .botao--de-mim {
+  background: #000000;
+  border-color: #ffff00;
+  color: #ffff00;
+}
+.detalhes__de-mim dd {
+  color: #1557b0;
+  font-weight: 700;
+}
+:root[data-tema='escuro'] .detalhes__de-mim dd {
+  color: #8ab4f8;
+}
+
+/* =========================================================================
+   MAPA EM DESTAQUE (versão ampliada)
+   ========================================================================= */
+.secao--mapa .container {
+  max-width: 1480px;
+}
+.explorar {
+  grid-template-columns: minmax(290px, 340px) 1fr;
+}
+.mapa {
+  height: clamp(460px, 78vh, 820px);
+}
+.explorar__guia {
+  position: sticky;
+  top: 96px;
+}
+.lista-pontos {
+  max-height: clamp(260px, 52vh, 600px);
+}
+
+/* barra acima do mapa: localização + enquadramentos */
+.vistas {
+  align-items: center;
+  justify-content: space-between;
+}
+.vistas__enquadramento {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e-2);
+}
+.botao--localizar {
+  min-height: 48px;
+  padding-inline: var(--e-5);
+  font-size: var(--texto-base, 1rem);
+  box-shadow: 0 4px 14px rgb(23 101 204 / 0.35);
+}
+.botao--localizar[aria-pressed='true'] {
+  background: #ffffff;
+  color: #1557b0;
+}
+.perto-de-mim__nota {
+  margin: 0 0 var(--e-3);
+  font-size: var(--texto-sm);
+  color: var(--cor-texto-suave);
+}
+
+/* palco: mapa com o painel de detalhes por cima (como nos apps de mapa) */
+.explorar__palco {
+  position: relative;
+}
+@media (min-width: 1100px) {
+  .explorar__palco .detalhes {
+    position: absolute;
+    z-index: 500;
+    top: 14px;
+    left: 14px;
+    width: min(380px, 42%);
+    max-height: calc(100% - 28px);
+    overflow: auto;
+    overscroll-behavior: contain;
+    box-shadow: 0 12px 32px rgb(7 29 49 / 0.28);
+  }
+  .explorar__palco .detalhes--vazio {
+    width: min(320px, 40%);
+    padding: var(--e-4);
+  }
+  .explorar__palco .detalhes--vazio h3 {
+    font-size: var(--texto-md);
+  }
+}
+@media (max-width: 1099px) {
+  .explorar__palco .detalhes {
+    margin-top: var(--e-3);
+  }
+}
+.detalhes__barra {
+  display: flex;
+  gap: var(--e-2);
+  justify-content: flex-end;
+  margin: calc(var(--e-2) * -1) calc(var(--e-2) * -1) var(--e-2);
+}
+.detalhes__barra .botao {
+  min-height: 40px;
+}
+.detalhes__foto {
+  margin: 0 0 var(--e-4);
+}
+
+/* marcadores menores quando o mapa está afastado (menos amontoado) */
+.mapa--longe .marcador--normal svg {
+  transform: scale(0.66);
+  transform-origin: 50% 100%;
+}
+.mapa--medio .marcador--normal svg {
+  transform: scale(0.82);
+  transform-origin: 50% 100%;
+}
+/* destaque quando a pessoa passa o mouse/foco no item da lista */
+.marcador--destacado svg {
+  transform: translateY(-8px) scale(1.25) !important;
+  transform-origin: 50% 100%;
+  filter: drop-shadow(0 6px 8px rgb(0 0 0 / 0.35));
+  transition: transform 0.2s var(--curva-mola, ease);
+}
+
+/* rótulo com distância e tempo no meio da rota */
+.leaflet-tooltip.rotulo-rota {
+  padding: 6px 12px;
+  border: 2px solid #ffffff;
+  border-radius: 999px;
+  background: var(--marca-marinho-800);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.3);
+}
+.leaflet-tooltip.rotulo-rota::before {
+  display: none;
+}
+/* rota com "formiguinhas" andando no sentido do destino */
+.mapa__rota-fluxo {
+  stroke-dasharray: 2 14;
+  animation: fluxo-rota 1.2s linear infinite;
+}
+@keyframes fluxo-rota {
+  to {
+    stroke-dashoffset: -16;
+  }
+}
+:root[data-movimento='reduzido'] .mapa__rota-fluxo {
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mapa__rota-fluxo {
+    animation: none;
+  }
+}
+
+/* tela cheia */
+.explorar__palco:fullscreen {
+  background: var(--cor-fundo);
+}
+.explorar__palco:fullscreen .mapa {
+  height: 100vh;
+  border-radius: 0;
+}
+.mapa__tela-cheia {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 2px solid rgb(0 0 0 / 0.2);
+  border-radius: 8px;
+  background: #ffffff;
+  color: var(--marca-marinho-700);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.2);
+}
+.mapa__tela-cheia:hover {
+  background: #eef4fa;
+}
+.mapa__tela-cheia:focus-visible {
+  outline: 3px solid #ffbf00;
+  outline-offset: 2px;
+}
+.legenda__voce {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  vertical-align: -3px;
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  background: #1a73e8;
+  box-shadow: 0 0 0 4px rgb(26 115 232 / 0.3);
+}
+@media (max-width: 980px) {
+  .explorar__guia {
+    position: static;
+  }
+  .mapa {
+    height: clamp(380px, 64vh, 560px);
+  }
+  .vistas {
+    justify-content: flex-start;
+  }
+  .botao--localizar {
+    width: 100%;
+  }
+}
+
+/* dados do ponto mais compactos (duas colunas) */
+.detalhes__dados {
+  grid-template-columns: 1fr 1fr;
+  gap: var(--e-2);
+}
+.detalhes__dados div {
+  padding: var(--e-2) var(--e-3);
+}
+.detalhes__dados div:first-child,
+.detalhes__dados div:last-child,
+.detalhes__dados .detalhes__de-mim + div {
+  grid-column: 1 / -1;
+}
+.detalhes__dados dd {
+  font-size: var(--texto-sm);
 }

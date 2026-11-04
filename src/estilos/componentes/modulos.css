@@ -57,16 +57,28 @@
   background: #ffff00;
 }
 
-/* faixa de azulejos (separador decorativo) */
+/* faixa de azulejos (separador decorativo): cada parte do site usa um padrão diferente */
 .faixa-azulejo {
-  height: 28px;
-  background: url('../../imagens/azulejo-colorido.svg') 0 0 / 28px 28px repeat-x;
+  height: 56px;
+  background: url('../../imagens/azulejos/faixa-azul.webp') 0 0 / auto 100% repeat-x;
   border-top: 3px solid var(--faixa-3);
+  border-bottom: 3px solid var(--marca-marinho-800);
+  box-shadow: inset 0 6px 8px -6px rgb(0 0 0 / 0.35);
+}
+.faixa-azulejo--nazare {
+  background-image: url('../../imagens/azulejos/faixa-nazare.webp');
+}
+.faixa-azulejo--estrelas {
+  background-image: url('../../imagens/azulejos/faixa-estrelas.webp');
+}
+.faixa-azulejo--rosas {
+  background-image: url('../../imagens/azulejos/faixa-rosas.webp');
 }
 :root[data-contraste='alto'] .faixa-azulejo {
   background: #ffff00;
   height: 4px;
   border: 0;
+  box-shadow: none;
 }
 
 /* Cartões de acesso (padrão "Acesso rápido" do portal) */
@@ -102,10 +114,19 @@
   right: -1px;
   width: 92px;
   height: 92px;
-  background: url('../../imagens/azulejo-colorido.svg') 0 0 / 46px 46px;
+  background: var(--azulejo-cartao, url('../../imagens/azulejos/faixa-nazare.webp')) 0 0 / auto 46px;
   opacity: 0.55;
   mask-image: linear-gradient(225deg, #000 30%, transparent 70%);
   border-top-right-radius: var(--raio-lg);
+}
+li:nth-child(4n + 2) > .cartao {
+  --azulejo-cartao: url('../../imagens/azulejos/faixa-azul.webp');
+}
+li:nth-child(4n + 3) > .cartao {
+  --azulejo-cartao: url('../../imagens/azulejos/faixa-estrelas.webp');
+}
+li:nth-child(4n + 4) > .cartao {
+  --azulejo-cartao: url('../../imagens/azulejos/faixa-rosas.webp');
 }
 .cartao:hover,
 .cartao:focus-within {
@@ -180,7 +201,7 @@
       rgb(20 70 112 / 0.88) 55%,
       rgb(20 70 112 / 0.55) 100%
     ),
-    var(--foto-topo, url('../../imagens/azulejo.svg'));
+    var(--foto-topo, url('../../imagens/azulejos/faixa-rosas.webp'));
   background-size: cover;
   background-position: center 60%;
   color: #fff;

@@ -52,11 +52,30 @@ export function criarMapaInterativo(elemento, { mercado, pontos, categorias, aoS
   fundo.on('tileerror', () => elemento.classList.add('mapa--sem-fundo'));
   fundo.on('tileload', () => elemento.classList.remove('mapa--sem-fundo'));
 
+  /* ---------- Marcadores menores quando o mapa está afastado ---------- */
+  const ajustarPeloZoom = () => {
+    const z = mapa.getZoom();
+    elemento.classList.toggle('mapa--longe', z < 13);
+    elemento.classList.toggle('mapa--medio', z >= 13 && z < 15);
+  };
+  mapa.on('zoomend', ajustarPeloZoom);
+
+  /** Margens para enquadrar sem esconder nada atrás do painel de detalhes. */
+  const margens = () => {
+    const painel = elemento.parentElement?.querySelector('.detalhes:not([hidden])');
+    const sobreposto = painel && getComputedStyle(painel).position === 'absolute';
+    const largura = sobreposto ? painel.offsetWidth + 40 : 60;
+    return { paddingTopLeft: [largura, 60], paddingBottomRight: [60, 60] };
+  };
+  const semAnimacao = () => Boolean(document.documentElement.dataset.movimento);
+
   /* ---------- Raios: linhas do Mercado até cada ponto ---------- */
   const camadaRaios = L.layerGroup().addTo(mapa);
   const camadaRota = L.layerGroup().addTo(mapa);
   const camadaRoteiro = L.layerGroup().addTo(mapa);
   const camadaMinhaPosicao = L.layerGroup().addTo(mapa);
+  let marcadorEu = null;
+  let circuloPrecisao = null;
 
   /* ---------- Marcador central ---------- */
   const marcadorMercado = L.marker(mercado.coordenadas, {
@@ -155,20 +174,77 @@ export function criarMapaInterativo(elemento, { mercado, pontos, categorias, aoS
       }).addTo(camadaRota);
       if (mover) {
         mapa.flyToBounds(L.latLngBounds(caminho), {
-          padding: [70, 70],
+          ...margens(),
           maxZoom: 17,
-          duration: document.documentElement.dataset.movimento ? 0 : 0.8,
+          duration: semAnimacao() ? 0 : 0.8,
         });
       }
     },
-    /** Desenha a rota real (ou aproximada). */
-    desenharRota(coordenadas, cor) {
+    /** Desenha a rota real (ou aproximada), com rótulo de distância e tempo no meio. */
+    desenharRota(coordenadas, cor, rotulo = '') {
       camadaRota.clearLayers();
-      L.polyline(coordenadas, { color: '#ffffff', weight: 9, opacity: 0.9 }).addTo(camadaRota);
-      L.polyline(coordenadas, { color: cor, weight: 5, opacity: 1, className: 'mapa__rota' }).addTo(
+      L.polyline(coordenadas, { color: '#ffffff', weight: 10, opacity: 0.95, lineJoin: 'round' }).addTo(camadaRota);
+      L.polyline(coordenadas, { color: cor, weight: 6, opacity: 1, lineJoin: 'round', className: 'mapa__rota' }).addTo(
         camadaRota,
       );
-      mapa.fitBounds(L.latLngBounds(coordenadas), { padding: [60, 60], maxZoom: 17 });
+      L.polyline(coordenadas, {
+        color: '#ffffff',
+        weight: 3,
+        opacity: 0.9,
+        interactive: false,
+        className: 'mapa__rota-fluxo',
+      }).addTo(camadaRota);
+      if (rotulo && coordenadas.length > 1) {
+        const meio = coordenadas[Math.floor(coordenadas.length / 2)];
+        L.tooltip({ permanent: true, direction: 'center', className: 'rotulo-rota', interactive: false })
+          .setLatLng(meio)
+          .setContent(rotulo)
+          .addTo(camadaRota);
+      }
+      mapa.flyToBounds(L.latLngBounds(coordenadas), {
+        ...margens(),
+        maxZoom: 17,
+        duration: semAnimacao() ? 0 : 0.8,
+      });
+    },
+    /** Realça o marcador de um ponto (ao passar o mouse ou o foco na lista). */
+    destacar(id) {
+      for (const [chave, { marcador }] of marcadores) {
+        marcador.getElement()?.classList.toggle('marcador--destacado', chave === id);
+      }
+    },
+    /** Botão de tela cheia no próprio mapa. */
+    adicionarBotaoTelaCheia() {
+      const palco = elemento.parentElement;
+      if (!palco?.requestFullscreen) return;
+      const icone = (cheio) =>
+        cheio
+          ? '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 3v6H3M15 3v6h6M9 21v-6H3M15 21v-6h6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+          : '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M3 9V3h6M21 9V3h-6M3 15v6h6M21 15v6h-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      const Controle = L.Control.extend({
+        options: { position: 'topright' },
+        onAdd() {
+          const botao = L.DomUtil.create('button', 'mapa__tela-cheia');
+          botao.type = 'button';
+          const atualizar = () => {
+            const cheio = document.fullscreenElement === palco;
+            botao.innerHTML = icone(cheio);
+            botao.setAttribute('aria-label', cheio ? 'Sair da tela cheia' : 'Ver o mapa em tela cheia');
+            botao.title = botao.getAttribute('aria-label');
+          };
+          atualizar();
+          L.DomEvent.disableClickPropagation(botao);
+          L.DomEvent.on(botao, 'click', () =>
+            document.fullscreenElement ? document.exitFullscreen() : palco.requestFullscreen(),
+          );
+          document.addEventListener('fullscreenchange', () => {
+            atualizar();
+            setTimeout(() => mapa.invalidateSize(), 150);
+          });
+          return botao;
+        },
+      });
+      new Controle().addTo(mapa);
     },
     centralizarNoMercado() {
       mapa.setView(mercado.coordenadas, 16);
@@ -178,12 +254,12 @@ export function criarMapaInterativo(elemento, { mercado, pontos, categorias, aoS
         ['centro-historico', 'fe', 'cultura'].includes(p.categoria),
       );
       mapa.fitBounds(L.latLngBounds([mercado.coordenadas, ...doCentro.map((p) => p.coordenadas)]), {
-        padding: [40, 40],
+        ...margens(),
       });
     },
     mostrarIlhaInteira() {
       mapa.fitBounds(L.latLngBounds([mercado.coordenadas, ...pontos.map((p) => p.coordenadas)]), {
-        padding: [40, 40],
+        ...margens(),
       });
     },
     /** Roteiro: paradas numeradas + caminho (real ou em linha reta). */
@@ -209,33 +285,83 @@ export function criarMapaInterativo(elemento, { mercado, pontos, categorias, aoS
         }).bindTooltip(`${i + 1}. ${parada.nome}`, { direction: 'top', offset: [0, -14] });
         numero.addTo(camadaRoteiro);
       });
-      mapa.fitBounds(L.latLngBounds(coordenadas), { padding: [50, 50] });
+      mapa.fitBounds(L.latLngBounds(coordenadas), margens());
     },
     limparRoteiro() {
       camadaRoteiro.clearLayers();
+      emRoteiro = false;
+      desenharRaios();
     },
-    /** Marca a posição da pessoa (só no navegador; nada é enviado). */
-    mostrarMinhaPosicao(coordenadas) {
-      camadaMinhaPosicao.clearLayers();
-      L.circleMarker(coordenadas, {
-        radius: 10,
-        color: '#ffffff',
-        weight: 3,
-        fillColor: '#c32146',
-        fillOpacity: 1,
-      })
-        .bindTooltip('Você está aqui', { permanent: false, direction: 'top' })
-        .addTo(camadaMinhaPosicao);
-      mapa.fitBounds(L.latLngBounds([coordenadas, mercado.coordenadas]), {
-        padding: [60, 60],
-        maxZoom: 16,
+    /**
+     * Marca a posição da pessoa (fica só no navegador; nada é enviado).
+     * Ponto azul com ondas, rótulo "Você está aqui" e o círculo da precisão.
+     */
+    mostrarMinhaPosicao(coordenadas, { precisaoM = 0, mover = true } = {}) {
+      if (!marcadorEu) {
+        marcadorEu = L.marker(coordenadas, {
+          icon: L.divIcon({
+            className: 'minha-posicao',
+            html: `<span class="minha-posicao__onda"></span><span class="minha-posicao__onda minha-posicao__onda--2"></span>
+              <span class="minha-posicao__ponto"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="6" r="3.2" fill="#fff"/><path d="M6 21c0-4.2 2.7-7.5 6-7.5s6 3.3 6 7.5z" fill="#fff"/></svg></span>
+              <span class="minha-posicao__rotulo">Você está aqui</span>`,
+            iconSize: [56, 56],
+            iconAnchor: [28, 28],
+          }),
+          zIndexOffset: 2000,
+          keyboard: true,
+          title: 'Sua localização',
+          alt: 'Sua localização',
+        }).addTo(camadaMinhaPosicao);
+        circuloPrecisao = L.circle(coordenadas, {
+          radius: 1,
+          color: '#1a73e8',
+          weight: 1,
+          fillColor: '#1a73e8',
+          fillOpacity: 0.12,
+          interactive: false,
+        }).addTo(camadaMinhaPosicao);
+      }
+      marcadorEu.setLatLng(coordenadas);
+      circuloPrecisao.setLatLng(coordenadas);
+      circuloPrecisao.setRadius(precisaoM && precisaoM < 3000 ? precisaoM : 0);
+      if (mover) {
+        mapa.flyToBounds(L.latLngBounds([coordenadas, mercado.coordenadas]), {
+          padding: [70, 70],
+          maxZoom: 16,
+          duration: document.documentElement.dataset.movimento ? 0 : 1,
+        });
+      }
+    },
+    centralizarEmMim() {
+      if (marcadorEu) mapa.flyTo(marcadorEu.getLatLng(), 17, {
+        duration: document.documentElement.dataset.movimento ? 0 : 0.8,
       });
+    },
+    /** Botão "Onde estou" no próprio mapa. */
+    adicionarBotaoLocalizar(aoClicar) {
+      const Controle = L.Control.extend({
+        options: { position: 'topright' },
+        onAdd() {
+          const botao = L.DomUtil.create('button', 'mapa__localizar');
+          botao.type = 'button';
+          botao.title = 'Mostrar onde estou';
+          botao.setAttribute('aria-label', 'Mostrar onde estou no mapa');
+          botao.innerHTML =
+            '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="currentColor"/><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+          L.DomEvent.disableClickPropagation(botao);
+          L.DomEvent.on(botao, 'click', aoClicar);
+          return botao;
+        },
+      });
+      new Controle().addTo(mapa);
     },
     redimensionar: () => mapa.invalidateSize(),
   };
 
   desenharRaios();
   api.mostrarIlhaInteira();
+  ajustarPeloZoom();
+  api.adicionarBotaoTelaCheia();
   return api;
 }
 

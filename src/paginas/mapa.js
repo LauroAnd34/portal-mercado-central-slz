@@ -28,11 +28,15 @@ import { escaparHtml, focarProgramaticamente } from '../nucleo/dom.js';
 
 iniciarPaginaComum();
 
+const formatarDistanciaCurta = (km) =>
+  km < 1 ? `${Math.round((km * 1000) / 10) * 10} m` : `${km.toFixed(1).replace('.', ',')} km`;
+
 let pontos = prepararPontos(PONTOS_TURISTICOS, MERCADO_CENTRAL, CATEGORIAS, rotaGuardadaDoPonto);
 const estado = {
   categoriasAtivas: new Set(Object.keys(CATEGORIAS)),
   termo: '',
   selecionadoId: null,
+  minhaPosicao: null, // [lat, lon] — só existe se a pessoa permitir
 };
 
 const el = {
@@ -111,6 +115,31 @@ el.lista.addEventListener('click', (evento) => {
   const botao = evento.target.closest('[data-ponto]');
   if (botao) selecionar(botao.dataset.ponto, { origem: 'lista' });
 });
+// passar o mouse ou o foco num item da lista realça o marcador no mapa
+const realcar = (evento) => mapa?.destacar(evento.target.closest?.('[data-ponto]')?.dataset.ponto ?? null);
+el.lista.addEventListener('pointerover', realcar);
+el.lista.addEventListener('focusin', realcar);
+el.lista.addEventListener('pointerleave', () => mapa?.destacar(null));
+el.lista.addEventListener('focusout', () => mapa?.destacar(null));
+
+/* barra do painel: copiar link e fechar */
+const BARRA_DETALHES = `<div class="detalhes__barra">
+    <button type="button" class="botao botao--texto botao--pequeno" data-copiar-link>Copiar link</button>
+    <button type="button" class="botao botao--contorno botao--pequeno" data-fechar-detalhes>Fechar<span class="somente-leitor"> detalhes</span></button>
+  </div>`;
+const TEXTO_INICIAL = el.detalhes.innerHTML;
+function fecharDetalhes() {
+  pararFala();
+  const anterior = estado.selecionadoId;
+  estado.selecionadoId = null;
+  el.detalhes.innerHTML = TEXTO_INICIAL;
+  el.detalhes.classList.add('detalhes--vazio');
+  mapa?.selecionar(null, { mover: false });
+  mapa?.limparRoteiro();
+  history.replaceState(null, '', location.pathname + location.search);
+  atualizarLista();
+  (el.lista.querySelector(`[data-ponto="${anterior}"]`) ?? el.detalhes.querySelector('h3'))?.focus?.();
+}
 
 /* ---------- Seleção e detalhes ---------- */
 function selecionar(id, { origem }) {
@@ -125,6 +154,7 @@ function selecionar(id, { origem }) {
       </div>
       <p>${escaparHtml(MERCADO_CENTRAL.descricao)}</p>
       <p>Escolha um destino na lista ou no mapa para ver a distância e o caminho a partir daqui.</p>`;
+    el.detalhes.classList.remove('detalhes--vazio');
     mapa?.selecionar(id);
     atualizarLista();
     return;
@@ -133,7 +163,14 @@ function selecionar(id, { origem }) {
   if (!ponto) return;
   const chaveFoto = FOTO_DO_PONTO[ponto.id];
   const foto = chaveFoto ? { ...FOTOS[chaveFoto], url: urlDaFoto(chaveFoto) } : null;
-  el.detalhes.innerHTML = renderizarDetalhes(ponto, MERCADO_CENTRAL, foto);
+  const deMim = estado.minhaPosicao
+    ? {
+        coordenadas: estado.minhaPosicao,
+        distanciaKm: calcularDistanciaKm(estado.minhaPosicao, ponto.coordenadas),
+      }
+    : null;
+  el.detalhes.innerHTML = BARRA_DETALHES + renderizarDetalhes(ponto, MERCADO_CENTRAL, foto, deMim);
+  el.detalhes.classList.remove('detalhes--vazio');
   el.detalhes.hidden = false;
   mapa?.selecionar(id);
   atualizarLista();
@@ -151,8 +188,26 @@ function selecionar(id, { origem }) {
 }
 
 el.detalhes.addEventListener('click', async (evento) => {
+  if (evento.target.closest('[data-fechar-detalhes]')) {
+    fecharDetalhes();
+    return;
+  }
   const ponto = pontos.find((p) => p.id === estado.selecionadoId);
   if (!ponto) return;
+
+  const copiar = evento.target.closest('[data-copiar-link]');
+  if (copiar) {
+    const link = `${location.origin}${location.pathname}#${ponto.id}`;
+    try {
+      await navigator.clipboard.writeText(link);
+      copiar.textContent = 'Link copiado!';
+      anunciar('Link copiado.');
+    } catch {
+      copiar.textContent = 'Não foi possível copiar';
+    }
+    setTimeout(() => (copiar.textContent = 'Copiar link'), 2500);
+    return;
+  }
 
   if (evento.target.closest('[data-ouvir-ponto]')) {
     pararFala();
@@ -162,22 +217,25 @@ el.detalhes.addEventListener('click', async (evento) => {
 
   const botaoRota = evento.target.closest('[data-tracar-rota]');
   if (!botaoRota) return;
-  const modo = botaoRota.dataset.tracarRota;
+  const pedido = botaoRota.dataset.tracarRota;
+  const deMim = pedido === 'de-mim' && estado.minhaPosicao;
+  const origem = deMim ? estado.minhaPosicao : MERCADO_CENTRAL.coordenadas;
+  const distanciaReta = calcularDistanciaKm(origem, ponto.coordenadas);
+  const modo = deMim ? (distanciaReta < 2.5 ? 'a-pe' : 'carro') : pedido;
   const area = el.detalhes.querySelector('[data-area-rota]');
   area.innerHTML = '<p class="detalhes__carregando">Calculando o caminho…</p>';
   botaoRota.setAttribute('aria-busy', 'true');
 
   // 1º: caminho já calculado pelas ruas (instantâneo e funciona sem internet)
-  let rota = rotaGuardadaDoPonto(ponto.id, modo);
+  let rota = deMim ? null : rotaGuardadaDoPonto(ponto.id, modo);
   if (!rota)
     try {
-      rota = await buscarRota(MERCADO_CENTRAL.coordenadas, ponto.coordenadas, modo);
+      rota = await buscarRota(origem, ponto.coordenadas, modo);
     } catch {
-      const distanciaKm = calcularDistanciaKm(MERCADO_CENTRAL.coordenadas, ponto.coordenadas);
-      const tempos = estimarTempos(distanciaKm);
+      const tempos = estimarTempos(distanciaReta);
       rota = {
-        coordenadas: [MERCADO_CENTRAL.coordenadas, ponto.coordenadas],
-        distanciaKm,
+        coordenadas: [origem, ponto.coordenadas],
+        distanciaKm: distanciaReta,
         minutos: modo === 'a-pe' ? tempos.aPeMinutos : tempos.carroMinutos,
         passos: [],
         aproximada: true,
@@ -185,8 +243,17 @@ el.detalhes.addEventListener('click', async (evento) => {
     }
   botaoRota.removeAttribute('aria-busy');
   if (estado.selecionadoId !== ponto.id) return; // usuário trocou de ponto no meio do caminho
-  area.innerHTML = renderizarRota(rota, modo);
-  mapa?.desenharRota(rota.coordenadas, ponto.categoriaInfo.cor);
+  area.innerHTML = renderizarRota(rota, modo, { deMim: Boolean(deMim) });
+  mapa?.desenharRota(
+    rota.coordenadas,
+    deMim ? '#1a73e8' : ponto.categoriaInfo.cor,
+    `${formatarDistanciaCurta(rota.distanciaKm)} · ${rota.minutos < 60 ? `${Math.max(1, Math.round(rota.minutos))} min` : `${Math.floor(rota.minutos / 60)} h ${Math.round(rota.minutos % 60)} min`}${modo === 'a-pe' ? ' a pé' : ' de carro'}`,
+  );
+});
+
+// Esc fecha o painel de detalhes (quando o foco está nele)
+el.detalhes.addEventListener('keydown', (evento) => {
+  if (evento.key === 'Escape' && !el.detalhes.classList.contains('detalhes--vazio')) fecharDetalhes();
 });
 
 /* ---------- Atalhos de vista ---------- */
@@ -206,28 +273,58 @@ const doEndereco = location.hash.slice(1);
 if (doEndereco && pontos.some((p) => p.id === doEndereco))
   selecionar(doEndereco, { origem: 'endereco' });
 window.addEventListener('resize', () => mapa?.redimensionar());
+// link com #ponto aberto com a página já carregada (ex.: vindo de outro link da página)
+window.addEventListener('hashchange', () => {
+  const id = location.hash.slice(1);
+  if (id && id !== estado.selecionadoId && pontos.some((p) => p.id === id))
+    selecionar(id, { origem: 'endereco' });
+});
 
 /* ---------- Perto de mim (geolocalização opcional) ---------- */
 const botaoPerto = document.querySelector('[data-perto-de-mim]');
 const notaLocalizacao = document.querySelector('[data-nota-localizacao]');
 if (!('geolocation' in navigator)) botaoPerto.hidden = true;
-botaoPerto?.addEventListener('click', () => {
+let vigiaPosicao = null;
+function receberPosicao({ coords }, primeiraVez) {
+  estado.minhaPosicao = [coords.latitude, coords.longitude];
+  mapa?.mostrarMinhaPosicao(estado.minhaPosicao, {
+    precisaoM: coords.accuracy,
+    mover: primeiraVez,
+  });
+  if (!primeiraVez) return;
+  botaoPerto.removeAttribute('aria-busy');
+  pontos = pontos
+    .map((p) => ({ ...p, distanciaDeMimKm: calcularDistanciaKm(estado.minhaPosicao, p.coordenadas) }))
+    .sort((a, b) => a.distanciaDeMimKm - b.distanciaDeMimKm);
+  const maisPerto = pontos[0];
+  notaLocalizacao.textContent = `Você aparece no mapa como um ponto azul. Lista ordenada pela sua distância — mais perto: ${maisPerto.nome}.`;
+  el.lista.setAttribute('aria-label', 'Pontos ordenados do mais perto ao mais longe de você');
+  botaoPerto.setAttribute('aria-pressed', 'true');
+  botaoPerto.querySelector('[data-texto-perto]')?.replaceChildren('Ver onde estou no mapa');
+  atualizarLista();
+  // se um ponto está aberto, mostra também a distância e a rota a partir da pessoa
+  if (estado.selecionadoId && estado.selecionadoId !== MERCADO_CENTRAL.id)
+    selecionar(estado.selecionadoId, { origem: 'mapa' });
+  anunciar(`Sua localização aparece no mapa. O ponto mais perto é ${maisPerto.nome}.`);
+}
+
+function localizar() {
+  if (!('geolocation' in navigator)) return;
+  if (estado.minhaPosicao) {
+    mapa?.centralizarEmMim();
+    return;
+  }
   botaoPerto.setAttribute('aria-busy', 'true');
   notaLocalizacao.textContent = 'Procurando sua localização…';
   navigator.geolocation.getCurrentPosition(
-    ({ coords }) => {
-      botaoPerto.removeAttribute('aria-busy');
-      const minhaPosicao = [coords.latitude, coords.longitude];
-      pontos = pontos
-        .map((p) => ({ ...p, distanciaDeMimKm: calcularDistanciaKm(minhaPosicao, p.coordenadas) }))
-        .sort((a, b) => a.distanciaDeMimKm - b.distanciaDeMimKm);
-      const maisPerto = pontos[0];
-      notaLocalizacao.textContent = `Lista ordenada pela sua distância. Mais perto: ${maisPerto.nome}.`;
-      el.lista.setAttribute('aria-label', 'Pontos ordenados do mais perto ao mais longe de você');
-      botaoPerto.setAttribute('aria-pressed', 'true');
-      mapa?.mostrarMinhaPosicao(minhaPosicao);
-      atualizarLista();
-      anunciar(`Lista ordenada pela sua distância. O ponto mais perto é ${maisPerto.nome}.`);
+    (posicao) => {
+      receberPosicao(posicao, true);
+      // continua acompanhando enquanto a pessoa anda (só move o ponto azul)
+      vigiaPosicao ??= navigator.geolocation.watchPosition(
+        (nova) => receberPosicao(nova, false),
+        () => {},
+        { enableHighAccuracy: true, maximumAge: 15000 },
+      );
     },
     (erro) => {
       botaoPerto.removeAttribute('aria-busy');
@@ -241,7 +338,9 @@ botaoPerto?.addEventListener('click', () => {
     },
     { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 },
   );
-});
+}
+botaoPerto?.addEventListener('click', localizar);
+if ('geolocation' in navigator) mapa?.adicionarBotaoLocalizar(localizar);
 
 /* ---------- Roteiros prontos ---------- */
 const listaRoteiros = document.querySelector('[data-roteiros]');
@@ -272,6 +371,7 @@ if (listaRoteiros) {
     estado.selecionadoId = null;
     atualizarLista();
     el.detalhes.innerHTML = `<h3 id="detalhes-titulo" tabindex="-1">${escaparHtml(roteiro.nome)}</h3><p class="detalhes__carregando">Calculando o caminho…</p>`;
+    el.detalhes.classList.remove('detalhes--vazio');
     document.querySelector('.explorar__mapa')?.scrollIntoView({ block: 'start' });
     botao.setAttribute('aria-busy', 'true');
 
@@ -296,7 +396,9 @@ if (listaRoteiros) {
         };
       }
     botao.removeAttribute('aria-busy');
-    el.detalhes.innerHTML = renderizarDetalhesRoteiro(roteiro, paradas, rota);
+    el.detalhes.innerHTML =
+      BARRA_DETALHES.replace(/<button[^>]*data-copiar-link[^>]*>.*?<\/button>/, '') +
+      renderizarDetalhesRoteiro(roteiro, paradas, rota);
     mapa?.mostrarRoteiro({ paradas, coordenadas: rota.coordenadas, cor: roteiro.cor });
     focarProgramaticamente(el.detalhes.querySelector('#detalhes-titulo'));
     anunciar(`Roteiro ${roteiro.nome}: ${paradas.length} paradas.`);

@@ -93,7 +93,7 @@ export function iniciarControlesDeAcessibilidade() {
       origem ??
       (ativo && ativo !== document.body
         ? ativo
-        : selecionar('.barra-gov [data-abre-painel-acessibilidade]'));
+        : selecionar('[data-botao-flutuante]'));
     painel?.showModal();
   };
   selecionarTodos('[data-abre-painel-acessibilidade]').forEach((botao) =>
@@ -107,6 +107,7 @@ export function iniciarControlesDeAcessibilidade() {
 
   const formulario = selecionar('[data-formulario-acessibilidade]');
   formulario?.addEventListener('change', (evento) => {
+    if (evento.target.closest('[data-posicao-botao]')) return; // tratado em botao-flutuante.js
     const { name, type, checked, value } = evento.target;
     preferencias.definir({ [name]: type === 'checkbox' ? checked : value });
   });
