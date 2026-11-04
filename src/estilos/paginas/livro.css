@@ -276,7 +276,7 @@ li:nth-child(3) .download__formato {
 }
 .leitor__ajustes form {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
   gap: var(--e-4) var(--e-6);
   align-items: end;
 }
@@ -673,7 +673,7 @@ mark {
 }
 .glossario {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
   gap: var(--e-3);
   margin: 0;
 }
