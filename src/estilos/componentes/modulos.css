@@ -16,6 +16,7 @@
 .titulo-modulo::after {
   content: none;
 }
+.titulo-modulo h1,
 .titulo-modulo h2 {
   margin: 0;
   max-width: 22ch;
@@ -47,6 +48,7 @@
 :root[data-tema='escuro'] .titulo-modulo__sub {
   color: #8fd0f2;
 }
+:root[data-contraste='alto'] .titulo-modulo h1,
 :root[data-contraste='alto'] .titulo-modulo h2 {
   color: #ffff00;
 }

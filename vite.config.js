@@ -31,6 +31,7 @@ export default defineConfig({
         livro: resolve(raiz, 'livro.html'),
         mapa: resolve(raiz, 'mapa.html'),
         naoEncontrada: resolve(raiz, '404.html'),
+        placas: resolve(raiz, 'placas.html'),
       },
     },
   },

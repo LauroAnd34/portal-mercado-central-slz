@@ -334,7 +334,7 @@
   position: fixed;
   right: 16px;
   bottom: 16px;
-  z-index: 900;
+  z-index: 100000; /* acima de tudo: cabeçalho, mapa e menus */
   display: grid;
   place-items: center;
   width: 60px;

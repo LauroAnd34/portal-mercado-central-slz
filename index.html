@@ -91,6 +91,8 @@
           <figure class="mosaico__item mosaico__item--grande">
             <img
               data-foto="rua-portugal-azulejos"
+              data-tamanhos="(max-width: 980px) 100vw, 50vw"
+              fetchpriority="high"
               width="1600"
               height="1067"
               alt="Fachada de casarão coberta de azulejos portugueses azuis e brancos, com três portas de madeira azul, na Rua Portugal."
@@ -176,6 +178,12 @@
               >
                 <img
                   src="./src/imagens/novo-mercado-central-projeto.jpg"
+                  srcset="
+                    ./src/imagens/novo-mercado-central-projeto-480.webp  480w,
+                    ./src/imagens/novo-mercado-central-projeto-960.webp  960w,
+                    ./src/imagens/novo-mercado-central-projeto.jpg      1280w
+                  "
+                  sizes="(max-width: 760px) 100vw, 50vw"
                   width="1280"
                   height="720"
                   loading="lazy"
@@ -197,6 +205,11 @@
                 preservadas. <span>Imagem: Prefeitura de São Luís (divulgação).</span>
               </figcaption>
             </figure>
+          </div>
+          <div class="obra">
+            <h3 class="obra__titulo">Acompanhe a obra</h3>
+            <ol class="obra__etapas" data-obra></ol>
+            <p class="obra__nota" data-obra-nota></p>
           </div>
           <dl class="fatos">
             <div>
@@ -286,9 +299,7 @@
             aria-label="Modelo 3D do prédio. Com o foco aqui, use as setas para girar e aproximar."
           ></canvas>
           <p class="janela-3d__carregando" data-carregando-3d>Carregando o modelo 3D…</p>
-          <p class="janela-3d__dica" aria-hidden="true">
-            Arraste para girar · role ou use dois dedos para aproximar
-          </p>
+          <p class="janela-3d__dica" data-dica-3d aria-hidden="true"></p>
         </div>
         <div class="janela-3d__controles" role="group" aria-label="Controles do 3D">
           <button
@@ -323,6 +334,17 @@
             aria-pressed="false"
           >
             Girar sozinho
+          </button>
+          <button type="button" class="botao botao--contorno botao--pequeno" data-acao-3d="inicio">
+            Voltar ao início
+          </button>
+          <button
+            type="button"
+            class="botao botao--contorno botao--pequeno"
+            data-tela-cheia-3d
+            aria-pressed="false"
+          >
+            Tela cheia
           </button>
         </div>
         <p class="janela-3d__descricao" data-descricao-3d></p>
@@ -377,6 +399,12 @@
             >
               <img
                 src="./src/imagens/painel-azulejos-cultura.jpg"
+                srcset="
+                  ./src/imagens/painel-azulejos-cultura-480.webp   480w,
+                  ./src/imagens/painel-azulejos-cultura-960.webp   960w,
+                  ./src/imagens/painel-azulejos-cultura-1600.webp 1600w
+                "
+                sizes="(max-width: 1240px) 100vw, 1200px"
                 alt="Painel de azulejos pintados à mão com cenas da cultura maranhense, emoldurado por ladrilhos cor de tijolo."
                 width="2000"
                 height="947"
@@ -411,7 +439,39 @@
                 />
               </svg>
             </button>
-            <img data-visualizador-foto alt="" />
+            <div
+              class="visualizador__area"
+              data-area-zoom
+              tabindex="0"
+              role="group"
+              aria-label="Foto ampliada. Use + e − para aproximar, setas para mover e 0 para voltar."
+            >
+              <img data-visualizador-foto alt="" draggable="false" />
+            </div>
+            <div class="visualizador__zoom" role="group" aria-label="Zoom da foto">
+              <button
+                type="button"
+                class="botao botao--pequeno"
+                data-zoom-foto="mais"
+                aria-label="Aproximar"
+              >
+                +
+              </button>
+              <button
+                type="button"
+                class="botao botao--pequeno"
+                data-zoom-foto="menos"
+                aria-label="Afastar"
+              >
+                −
+              </button>
+              <button type="button" class="botao botao--pequeno" data-zoom-foto="normal">
+                Tamanho normal
+              </button>
+              <span class="visualizador__dica" aria-hidden="true"
+                >Pinça com dois dedos ou toque duplo para dar zoom</span
+              >
+            </div>
             <p class="visualizador__legenda">
               <strong id="visualizador-titulo" data-visualizador-titulo></strong>
               <span data-visualizador-credito></span>
@@ -537,6 +597,23 @@
             </div>
             <div class="visite__setores">
               <h3 id="setores-titulo">O que você encontra</h3>
+              <div class="onde-encontro">
+                <label for="busca-produto">Onde encontro? Digite um produto</label>
+                <input
+                  id="busca-produto"
+                  type="search"
+                  data-busca-produto
+                  autocomplete="off"
+                  placeholder="Ex.: juçara, camarão seco, cofo"
+                  aria-describedby="resposta-produto"
+                />
+                <p
+                  id="resposta-produto"
+                  class="onde-encontro__resposta"
+                  data-resposta-produto
+                  aria-live="polite"
+                ></p>
+              </div>
               <div class="setores" data-setores aria-labelledby="setores-titulo"></div>
             </div>
           </div>

@@ -10,6 +10,12 @@ const urls = import.meta.glob('../imagens/fotos/*.jpg', {
   eager: true,
 });
 const url = (arquivo) => urls[`../imagens/fotos/${arquivo}`];
+// versões leves (WebP) em vários tamanhos, criadas por `npm run otimizar-imagens`
+const urlsLeves = import.meta.glob('../imagens/fotos/*-{480,960,1600}.webp', {
+  query: '?url',
+  import: 'default',
+  eager: true,
+});
 
 export const FOTOS = Object.freeze({
   'rua-portugal-azulejos': {
@@ -279,6 +285,18 @@ export const FOTOS = Object.freeze({
 
 /** Endereço (URL) final da foto, já processado pelo Vite. */
 export const urlDaFoto = (chave) => (FOTOS[chave] ? url(FOTOS[chave].arquivo) : null);
+
+/** "foto-480.webp 480w, foto-960.webp 960w, …" — o navegador escolhe o tamanho certo. */
+export function srcsetDaFoto(chave) {
+  const foto = FOTOS[chave];
+  if (!foto) return '';
+  const base = foto.arquivo.replace(/\.jpg$/, '');
+  return [480, 960, 1600]
+    .map((l) => [urlsLeves[`../imagens/fotos/${base}-${l}.webp`], l])
+    .filter(([u]) => u)
+    .map(([u, l]) => `${u} ${Math.min(l, foto.largura)}w`)
+    .join(', ');
+}
 
 /** Foto de cada ponto turístico do mapa (id do ponto → chave da foto). */
 export const FOTO_DO_PONTO = Object.freeze({

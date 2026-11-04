@@ -183,10 +183,19 @@ export function criarMapaInterativo(elemento, { mercado, pontos, categorias, aoS
     /** Desenha a rota real (ou aproximada), com rótulo de distância e tempo no meio. */
     desenharRota(coordenadas, cor, rotulo = '') {
       camadaRota.clearLayers();
-      L.polyline(coordenadas, { color: '#ffffff', weight: 10, opacity: 0.95, lineJoin: 'round' }).addTo(camadaRota);
-      L.polyline(coordenadas, { color: cor, weight: 6, opacity: 1, lineJoin: 'round', className: 'mapa__rota' }).addTo(
-        camadaRota,
-      );
+      L.polyline(coordenadas, {
+        color: '#ffffff',
+        weight: 10,
+        opacity: 0.95,
+        lineJoin: 'round',
+      }).addTo(camadaRota);
+      L.polyline(coordenadas, {
+        color: cor,
+        weight: 6,
+        opacity: 1,
+        lineJoin: 'round',
+        className: 'mapa__rota',
+      }).addTo(camadaRota);
       L.polyline(coordenadas, {
         color: '#ffffff',
         weight: 3,
@@ -196,7 +205,12 @@ export function criarMapaInterativo(elemento, { mercado, pontos, categorias, aoS
       }).addTo(camadaRota);
       if (rotulo && coordenadas.length > 1) {
         const meio = coordenadas[Math.floor(coordenadas.length / 2)];
-        L.tooltip({ permanent: true, direction: 'center', className: 'rotulo-rota', interactive: false })
+        L.tooltip({
+          permanent: true,
+          direction: 'center',
+          className: 'rotulo-rota',
+          interactive: false,
+        })
           .setLatLng(meio)
           .setContent(rotulo)
           .addTo(camadaRota);
@@ -229,7 +243,10 @@ export function criarMapaInterativo(elemento, { mercado, pontos, categorias, aoS
           const atualizar = () => {
             const cheio = document.fullscreenElement === palco;
             botao.innerHTML = icone(cheio);
-            botao.setAttribute('aria-label', cheio ? 'Sair da tela cheia' : 'Ver o mapa em tela cheia');
+            botao.setAttribute(
+              'aria-label',
+              cheio ? 'Sair da tela cheia' : 'Ver o mapa em tela cheia',
+            );
             botao.title = botao.getAttribute('aria-label');
           };
           atualizar();
@@ -333,9 +350,10 @@ export function criarMapaInterativo(elemento, { mercado, pontos, categorias, aoS
       }
     },
     centralizarEmMim() {
-      if (marcadorEu) mapa.flyTo(marcadorEu.getLatLng(), 17, {
-        duration: document.documentElement.dataset.movimento ? 0 : 0.8,
-      });
+      if (marcadorEu)
+        mapa.flyTo(marcadorEu.getLatLng(), 17, {
+          duration: document.documentElement.dataset.movimento ? 0 : 0.8,
+        });
     },
     /** Botão "Onde estou" no próprio mapa. */
     adicionarBotaoLocalizar(aoClicar) {

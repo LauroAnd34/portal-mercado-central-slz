@@ -88,7 +88,7 @@ export function renderizarItem(ponto, selecionado) {
 export function renderizarDetalhes(ponto, mercado, foto = null, deMim = null) {
   const modo = ponto.modoSugerido;
   const figura = foto
-    ? `<figure class="detalhes__foto"><img src="${foto.url}" alt="${escaparHtml(foto.lugar)}" width="900" height="600" />
+    ? `<figure class="detalhes__foto"><img src="${foto.url}"${foto.srcset ? ` srcset="${foto.srcset}" sizes="380px"` : ''} alt="${escaparHtml(foto.lugar)}" width="900" height="600" />
         <figcaption>Foto: ${escaparHtml(foto.autor)} · ${escaparHtml(foto.licenca)}</figcaption></figure>`
     : '';
   return `${figura}
@@ -177,6 +177,11 @@ export function renderizarDetalhesRoteiro(roteiro, paradas, rota) {
       <p class="detalhes__endereco">${formatarDistancia(rota.distanciaKm)} · ${formatarDuracao(rota.minutos)} de deslocamento (sem contar as visitas)</p>
     </div>
     ${aviso}
+    <div class="passeio-audio">
+      <button type="button" class="botao botao--de-mim" data-passeio-audio aria-pressed="false">Começar passeio em áudio</button>
+      <button type="button" class="botao botao--contorno" data-proxima-parada>Ouvir a próxima parada</button>
+      <p class="passeio-audio__nota" data-passeio-status>Com a localização ligada, o celular conta a história de cada lugar quando você chegar perto. Use fones de ouvido na rua.</p>
+    </div>
     <ol class="paradas">
       <li class="paradas__item paradas__item--inicio"><strong>Mercado Central</strong><span>Ponto de partida</span></li>
       ${paradas

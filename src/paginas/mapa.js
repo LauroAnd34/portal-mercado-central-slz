@@ -9,7 +9,7 @@ import { MERCADO_CENTRAL, CATEGORIAS, PONTOS_TURISTICOS } from '../dados/pontos-
 import { criarMapaInterativo } from '../recursos/mapa/mapa-interativo.js';
 import { buscarRota, buscarRotaPorPontos } from '../recursos/mapa/rotas.js';
 import { ROTEIROS } from '../dados/roteiros.js';
-import { FOTOS, FOTO_DO_PONTO, urlDaFoto } from '../dados/fotos.js';
+import { FOTOS, FOTO_DO_PONTO, urlDaFoto, srcsetDaFoto } from '../dados/fotos.js';
 import { rotaGuardadaDoPonto, rotaGuardadaDoRoteiro } from '../recursos/mapa/rotas-guardadas.js';
 import { calcularDistanciaKm, estimarTempos } from '../recursos/mapa/geografia.js';
 import {
@@ -116,7 +116,8 @@ el.lista.addEventListener('click', (evento) => {
   if (botao) selecionar(botao.dataset.ponto, { origem: 'lista' });
 });
 // passar o mouse ou o foco num item da lista realça o marcador no mapa
-const realcar = (evento) => mapa?.destacar(evento.target.closest?.('[data-ponto]')?.dataset.ponto ?? null);
+const realcar = (evento) =>
+  mapa?.destacar(evento.target.closest?.('[data-ponto]')?.dataset.ponto ?? null);
 el.lista.addEventListener('pointerover', realcar);
 el.lista.addEventListener('focusin', realcar);
 el.lista.addEventListener('pointerleave', () => mapa?.destacar(null));
@@ -130,6 +131,8 @@ const BARRA_DETALHES = `<div class="detalhes__barra">
 const TEXTO_INICIAL = el.detalhes.innerHTML;
 function fecharDetalhes() {
   pararFala();
+  pararPasseio();
+  estado.roteiro = null;
   const anterior = estado.selecionadoId;
   estado.selecionadoId = null;
   el.detalhes.innerHTML = TEXTO_INICIAL;
@@ -138,7 +141,9 @@ function fecharDetalhes() {
   mapa?.limparRoteiro();
   history.replaceState(null, '', location.pathname + location.search);
   atualizarLista();
-  (el.lista.querySelector(`[data-ponto="${anterior}"]`) ?? el.detalhes.querySelector('h3'))?.focus?.();
+  (
+    el.lista.querySelector(`[data-ponto="${anterior}"]`) ?? el.detalhes.querySelector('h3')
+  )?.focus?.();
 }
 
 /* ---------- Seleção e detalhes ---------- */
@@ -162,7 +167,9 @@ function selecionar(id, { origem }) {
   const ponto = pontos.find((p) => p.id === id);
   if (!ponto) return;
   const chaveFoto = FOTO_DO_PONTO[ponto.id];
-  const foto = chaveFoto ? { ...FOTOS[chaveFoto], url: urlDaFoto(chaveFoto) } : null;
+  const foto = chaveFoto
+    ? { ...FOTOS[chaveFoto], url: urlDaFoto(chaveFoto), srcset: srcsetDaFoto(chaveFoto) }
+    : null;
   const deMim = estado.minhaPosicao
     ? {
         coordenadas: estado.minhaPosicao,
@@ -253,7 +260,8 @@ el.detalhes.addEventListener('click', async (evento) => {
 
 // Esc fecha o painel de detalhes (quando o foco está nele)
 el.detalhes.addEventListener('keydown', (evento) => {
-  if (evento.key === 'Escape' && !el.detalhes.classList.contains('detalhes--vazio')) fecharDetalhes();
+  if (evento.key === 'Escape' && !el.detalhes.classList.contains('detalhes--vazio'))
+    fecharDetalhes();
 });
 
 /* ---------- Atalhos de vista ---------- */
@@ -270,13 +278,17 @@ document
 /* ---------- Início ---------- */
 atualizarLista();
 const doEndereco = location.hash.slice(1);
-if (doEndereco && pontos.some((p) => p.id === doEndereco))
+if (doEndereco && (doEndereco === MERCADO_CENTRAL.id || pontos.some((p) => p.id === doEndereco)))
   selecionar(doEndereco, { origem: 'endereco' });
 window.addEventListener('resize', () => mapa?.redimensionar());
 // link com #ponto aberto com a página já carregada (ex.: vindo de outro link da página)
 window.addEventListener('hashchange', () => {
   const id = location.hash.slice(1);
-  if (id && id !== estado.selecionadoId && pontos.some((p) => p.id === id))
+  if (
+    id &&
+    id !== estado.selecionadoId &&
+    (id === MERCADO_CENTRAL.id || pontos.some((p) => p.id === id))
+  )
     selecionar(id, { origem: 'endereco' });
 });
 
@@ -294,7 +306,10 @@ function receberPosicao({ coords }, primeiraVez) {
   if (!primeiraVez) return;
   botaoPerto.removeAttribute('aria-busy');
   pontos = pontos
-    .map((p) => ({ ...p, distanciaDeMimKm: calcularDistanciaKm(estado.minhaPosicao, p.coordenadas) }))
+    .map((p) => ({
+      ...p,
+      distanciaDeMimKm: calcularDistanciaKm(estado.minhaPosicao, p.coordenadas),
+    }))
     .sort((a, b) => a.distanciaDeMimKm - b.distanciaDeMimKm);
   const maisPerto = pontos[0];
   notaLocalizacao.textContent = `Você aparece no mapa como um ponto azul. Lista ordenada pela sua distância — mais perto: ${maisPerto.nome}.`;
@@ -396,6 +411,8 @@ if (listaRoteiros) {
         };
       }
     botao.removeAttribute('aria-busy');
+    estado.roteiro = { roteiro, paradas, ouvidas: new Set(), proxima: 0 };
+    pararPasseio();
     el.detalhes.innerHTML =
       BARRA_DETALHES.replace(/<button[^>]*data-copiar-link[^>]*>.*?<\/button>/, '') +
       renderizarDetalhesRoteiro(roteiro, paradas, rota);
@@ -409,4 +426,81 @@ if (listaRoteiros) {
 el.detalhes.addEventListener('click', (evento) => {
   const parada = evento.target.closest('.paradas__botao[data-ponto]');
   if (parada) selecionar(parada.dataset.ponto, { origem: 'lista' });
+});
+
+/* ---------- Passeio em áudio (roteiros) ---------- */
+const RAIO_DE_CHEGADA_M = 60;
+let vigiaPasseio = null;
+
+function narrar(parada, prefixo = '') {
+  pararFala();
+  falar(`${prefixo}${parada.nome}. ${parada.descricao}`);
+}
+
+function pararPasseio() {
+  if (vigiaPasseio !== null) navigator.geolocation.clearWatch(vigiaPasseio);
+  vigiaPasseio = null;
+  const botao = el.detalhes.querySelector('[data-passeio-audio]');
+  if (botao) {
+    botao.setAttribute('aria-pressed', 'false');
+    botao.textContent = 'Começar passeio em áudio';
+  }
+}
+
+el.detalhes.addEventListener('click', (evento) => {
+  const r = estado.roteiro;
+  if (!r) return;
+  const status = el.detalhes.querySelector('[data-passeio-status]');
+
+  if (evento.target.closest('[data-proxima-parada]')) {
+    const parada = r.paradas[r.proxima % r.paradas.length];
+    r.proxima += 1;
+    narrar(parada, `Parada ${r.paradas.indexOf(parada) + 1}: `);
+    return;
+  }
+  const botao = evento.target.closest('[data-passeio-audio]');
+  if (!botao) return;
+  if (vigiaPasseio !== null) {
+    pararPasseio();
+    pararFala();
+    status.textContent = 'Passeio em áudio parado.';
+    anunciar(status.textContent);
+    return;
+  }
+  if (!('geolocation' in navigator)) {
+    status.textContent = 'Este aparelho não informa a localização. Use “Ouvir a próxima parada”.';
+    return;
+  }
+  botao.setAttribute('aria-pressed', 'true');
+  botao.textContent = 'Parar passeio em áudio';
+  status.textContent =
+    'Passeio ligado. Vá até a primeira parada; a narração começa quando você chegar perto.';
+  anunciar(status.textContent);
+  falar(`Passeio ${r.roteiro.nome} começou. Primeira parada: ${r.paradas[0].nome}.`);
+  vigiaPasseio = navigator.geolocation.watchPosition(
+    ({ coords }) => {
+      const aqui = [coords.latitude, coords.longitude];
+      estado.minhaPosicao = aqui;
+      mapa?.mostrarMinhaPosicao(aqui, { precisaoM: coords.accuracy, mover: false });
+      const perto = r.paradas.find(
+        (p) =>
+          !r.ouvidas.has(p.id) &&
+          calcularDistanciaKm(aqui, p.coordenadas) * 1000 < RAIO_DE_CHEGADA_M,
+      );
+      if (!perto) return;
+      r.ouvidas.add(perto.id);
+      r.proxima = r.paradas.indexOf(perto) + 1;
+      status.textContent = `Você chegou a ${perto.nome}.`;
+      narrar(perto, 'Você chegou a ');
+      if (r.ouvidas.size === r.paradas.length) {
+        status.textContent = 'Você completou o roteiro. Obrigado pela visita!';
+        pararPasseio();
+      }
+    },
+    () => {
+      status.textContent = 'Não foi possível usar a localização. Use “Ouvir a próxima parada”.';
+      pararPasseio();
+    },
+    { enableHighAccuracy: true, maximumAge: 10000 },
+  );
 });

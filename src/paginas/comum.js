@@ -31,7 +31,21 @@ import { iniciarMenuMovel } from '../recursos/navegacao/menu-movel.js';
 import { iniciarAnimacoes } from '../recursos/animacoes/animacoes.js';
 import { preencherFotos, montarCreditos } from '../recursos/fotos/fotos.js';
 
+/**
+ * Proteção contra páginas falsas que tentam mostrar o portal "dentro" delas
+ * (clickjacking). No servidor da Prefeitura, use também o cabeçalho
+ * Content-Security-Policy: frame-ancestors 'self'.
+ */
+function impedirSiteDentroDeOutro() {
+  try {
+    if (window.top !== window.self) window.top.location.href = window.location.href;
+  } catch {
+    document.documentElement.innerHTML = '';
+  }
+}
+
 export function iniciarPaginaComum() {
+  impedirSiteDentroDeOutro();
   const { abrirPainel } = iniciarControlesDeAcessibilidade();
   iniciarAtalhosDeTeclado({ abrirPainel });
   iniciarBotaoFlutuante();
@@ -77,7 +91,7 @@ function registrarModoOffline() {
       .register('./sw.js', { updateViaCache: 'none' })
       .then((registro) => registro.update())
       .catch(() => {
-      /* sem modo offline: o site continua funcionando normalmente */
-    });
+        /* sem modo offline: o site continua funcionando normalmente */
+      });
   });
 }
