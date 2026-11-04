@@ -40,11 +40,26 @@ export function iniciarBotaoFlutuante() {
   if (!botao) return;
   let posicao = ler(); // x e y de 0 a 1 (fração da área livre da tela)
 
+  // áreas da tela cobertas por entalhe, câmera ou barra de gestos (celulares modernos)
+  const sonda = document.createElement('div');
+  sonda.style.cssText =
+    'position:fixed;inset:0;visibility:hidden;pointer-events:none;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)';
+  document.body.append(sonda);
+  const seguro = () => {
+    const c = getComputedStyle(sonda);
+    return {
+      t: parseFloat(c.paddingTop) || 0,
+      r: parseFloat(c.paddingRight) || 0,
+      b: parseFloat(c.paddingBottom) || 0,
+      l: parseFloat(c.paddingLeft) || 0,
+    };
+  };
   const aplicar = () => {
-    const livreX = window.innerWidth - botao.offsetWidth - MARGEM * 2;
-    const livreY = window.innerHeight - botao.offsetHeight - MARGEM * 2;
-    botao.style.left = `${MARGEM + Math.round(livreX * posicao.x)}px`;
-    botao.style.top = `${MARGEM + Math.round(livreY * posicao.y)}px`;
+    const m = seguro();
+    const livreX = window.innerWidth - botao.offsetWidth - MARGEM * 2 - m.l - m.r;
+    const livreY = window.innerHeight - botao.offsetHeight - MARGEM * 2 - m.t - m.b;
+    botao.style.left = `${MARGEM + m.l + Math.round(livreX * posicao.x)}px`;
+    botao.style.top = `${MARGEM + m.t + Math.round(livreY * posicao.y)}px`;
     botao.classList.toggle('botao-flutuante-acessibilidade--esquerda', posicao.x < 0.5);
   };
 
