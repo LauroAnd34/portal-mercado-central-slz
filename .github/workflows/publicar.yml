@@ -37,7 +37,7 @@ jobs:
           VITE_CAMINHO_BASE: /${{ github.event.repository.name }}/
           VITE_DEMONSTRACAO: 'true'
         run: npm run construir
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: site-pronto
 
