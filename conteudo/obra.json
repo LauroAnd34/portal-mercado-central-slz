@@ -1,0 +1,30 @@
+{
+  "atualizadoEm": "2026-11-04",
+  "aviso": "Atualizações oficiais da obra serão publicadas aqui pela Prefeitura.",
+  "etapas": [
+    {
+      "data": "2025-11",
+      "titulo": "Feirantes vão para o Mercado da Cidade",
+      "texto": "Os feirantes passam a atender em quatro galpões na Avenida Senador Vitorino Freire, enquanto o prédio histórico é reconstruído.",
+      "situacao": "concluida"
+    },
+    {
+      "data": "2026-07-04",
+      "titulo": "Ordem de serviço assinada",
+      "texto": "Investimento de R$ 44,9 milhões, incluindo o entorno. O novo prédio terá 3 andares e espaço para 285 feirantes.",
+      "situacao": "concluida"
+    },
+    {
+      "data": "",
+      "titulo": "Reconstrução do prédio",
+      "texto": "As quatro fachadas originais serão preservadas.",
+      "situacao": "andamento"
+    },
+    {
+      "data": "",
+      "titulo": "Volta dos feirantes e inauguração",
+      "texto": "Data a ser divulgada pela Prefeitura.",
+      "situacao": "prevista"
+    }
+  ]
+}

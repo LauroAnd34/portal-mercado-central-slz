@@ -59,3 +59,64 @@ export const SABORES = Object.freeze([
     texto: 'Para chás e temperos; os vendedores explicam o uso de cada folha.',
   },
 ]);
+
+/**
+ * Guia rápido "Onde encontro?": produtos e o setor em que ficam.
+ * Para incluir um produto, acrescente-o à lista do setor.
+ */
+export const PRODUTOS_POR_SETOR = Object.freeze({
+  'Peixes e mariscos': [
+    'peixe',
+    'pescada',
+    'camarão fresco',
+    'caranguejo',
+    'sururu',
+    'siri',
+    'ostra',
+    'tainha',
+  ],
+  Carnes: ['carne bovina', 'carne de porco', 'frango', 'carne de sol', 'linguiça', 'bucho'],
+  'Frutas e verduras': [
+    'bacuri',
+    'cupuaçu',
+    'buriti',
+    'murici',
+    'juçara',
+    'açaí',
+    'vinagreira',
+    'cheiro-verde',
+    'maxixe',
+    'quiabo',
+    'jambu',
+    'pimenta',
+  ],
+  'Farinhas e grãos': [
+    'farinha d’água',
+    'farinha seca',
+    'tapioca',
+    'goma',
+    'arroz',
+    'feijão',
+    'camarão seco',
+    'gergelim',
+  ],
+  'Ervas e garrafadas': [
+    'ervas medicinais',
+    'garrafada',
+    'boldo',
+    'capim-santo',
+    'erva-cidreira',
+    'raízes',
+    'cascas',
+    'tiquira',
+  ],
+  'Artesanato e utilidades': [
+    'cofo',
+    'cesto',
+    'peça de barro',
+    'rede',
+    'panela',
+    'abano',
+    'vassoura',
+  ],
+});

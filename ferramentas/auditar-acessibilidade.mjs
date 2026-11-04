@@ -8,7 +8,7 @@ import { chromium } from 'playwright';
 import { AxeBuilder } from '@axe-core/playwright';
 
 const BASE = process.env.ENDERECO ?? 'http://localhost:4173/';
-const PAGINAS = ['index.html', 'livro.html', 'mapa.html', '404.html'];
+const PAGINAS = ['index.html', 'livro.html', 'mapa.html', '404.html', 'placas.html'];
 const ESQUEMAS = { padrao: {}, escuro: { cores: 'escuro' }, alto: { cores: 'alto' } };
 
 const navegador = await chromium.launch();

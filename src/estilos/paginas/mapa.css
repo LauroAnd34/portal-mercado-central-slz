@@ -845,3 +845,19 @@
 .detalhes__dados dd {
   font-size: var(--texto-sm);
 }
+
+/* passeio em áudio */
+.passeio-audio {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e-2);
+  margin: var(--e-3) 0 var(--e-4);
+  padding: var(--e-3);
+  border-radius: var(--raio);
+  background: var(--cor-fundo-suave);
+}
+.passeio-audio__nota {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: var(--texto-sm);
+}

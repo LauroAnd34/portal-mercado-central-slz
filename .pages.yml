@@ -1,0 +1,54 @@
+# Painel de edição do site (Pages CMS — https://pagescms.org)
+# A equipe de comunicação entra com a conta do GitHub em app.pagescms.org,
+# escolhe este repositório e edita os textos sem mexer no código.
+# Cada alteração salva vira um commit; o site é testado e publicado sozinho.
+media:
+  input: conteudo/livro
+  output: ./
+content:
+  - name: livro
+    label: Capítulos do livro
+    type: collection
+    path: conteudo/livro
+    format: yaml-frontmatter
+    filename: '{year}-novo-capitulo.md'
+    fields:
+      - name: body
+        label: Texto do capítulo (a primeira linha com # é o título)
+        type: rich-text
+  - name: livro-dados
+    label: Dados do livro (título, autores, edição)
+    type: file
+    path: conteudo/livro/livro.json
+    format: json
+  - name: obra
+    label: Acompanhe a obra
+    type: file
+    path: conteudo/obra.json
+    format: json
+    fields:
+      - name: atualizadoEm
+        label: Data da última atualização
+        type: date
+      - name: aviso
+        label: Aviso abaixo das etapas
+        type: string
+      - name: etapas
+        label: Etapas
+        type: object
+        list: true
+        fields:
+          - name: data
+            label: Data (AAAA-MM-DD ou AAAA-MM; deixe vazio se ainda não houver)
+            type: string
+          - name: titulo
+            label: Título
+            type: string
+          - name: texto
+            label: Texto
+            type: text
+          - name: situacao
+            label: Situação
+            type: select
+            options:
+              values: [concluida, andamento, prevista]

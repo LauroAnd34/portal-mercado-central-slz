@@ -66,13 +66,21 @@ export function iniciarBotaoFlutuante() {
     if (evento.button !== 0) return;
     evento.preventDefault(); // evita que o navegador inicie "arrastar e soltar" nativo
     const caixa = botao.getBoundingClientRect();
-    inicio = { x: evento.clientX, y: evento.clientY, dx: evento.clientX - caixa.left, dy: evento.clientY - caixa.top };
+    inicio = {
+      x: evento.clientX,
+      y: evento.clientY,
+      dx: evento.clientX - caixa.left,
+      dy: evento.clientY - caixa.top,
+    };
     arrastou = false;
     botao.setPointerCapture(evento.pointerId);
   });
   botao.addEventListener('pointermove', (evento) => {
     if (!inicio) return;
-    if (!arrastou && Math.hypot(evento.clientX - inicio.x, evento.clientY - inicio.y) < LIMIAR_ARRASTE)
+    if (
+      !arrastou &&
+      Math.hypot(evento.clientX - inicio.x, evento.clientY - inicio.y) < LIMIAR_ARRASTE
+    )
       return;
     arrastou = true;
     botao.classList.add('botao-flutuante-acessibilidade--arrastando');

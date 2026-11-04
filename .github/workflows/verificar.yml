@@ -1,0 +1,30 @@
+# Confere toda proposta de mudança (pull request) antes de ela entrar na main:
+# padrão do código, testes, segurança das bibliotecas e construção do site.
+name: Verificar mudanças
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - name: Instalar dependências
+        run: npm ci
+      - name: Verificar código
+        run: npm run verificar
+      - name: Testes
+        run: npm run testar
+      - name: Segurança das bibliotecas
+        run: npm audit --omit=dev --audit-level=high
+      - name: Construir o site
+        run: npm run construir

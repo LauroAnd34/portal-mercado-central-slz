@@ -59,6 +59,20 @@ function criarCena(tela) {
   controles.maxDistance = 220;
   controles.maxPolarAngle = Math.PI / 2.05; // não passa para baixo do chão
   controles.target.set(0, 6, 0);
+  // gestos como nos apps de mapa: 1 dedo gira, pinça aproxima, 2 dedos movem;
+  // mouse: arrastar gira, roda aproxima no cursor, botão direito move
+  controles.enablePan = true;
+  controles.screenSpacePanning = true;
+  controles.zoomToCursor = true;
+  controles.rotateSpeed = 0.7;
+  controles.touches = { ONE: THREE.TOUCH.ROTATE, TWO: THREE.TOUCH.DOLLY_PAN };
+  // não deixa o prédio "fugir" da tela ao mover
+  controles.addEventListener('change', () => {
+    const t = controles.target;
+    t.x = Math.max(-60, Math.min(60, t.x));
+    t.z = Math.max(-50, Math.min(50, t.z));
+    t.y = Math.max(0, Math.min(25, t.y));
+  });
   return { renderizador, cena, camera, controles };
 }
 
@@ -69,24 +83,55 @@ const VISTAS = {
   diagonal: [58, 32, 66],
 };
 
-function irParaVista(nome, suave = true) {
+/** Anima câmera e alvo até novas posições. */
+function voar(destinoCamera, destinoAlvo, duracao = 650) {
   const { camera, controles } = estado;
-  const destino = new THREE.Vector3(...VISTAS[nome]);
-  if (!suave || document.documentElement.dataset.movimento) {
-    camera.position.copy(destino);
-    controles.target.set(0, 6, 0);
+  if (document.documentElement.dataset.movimento) {
+    camera.position.copy(destinoCamera);
+    controles.target.copy(destinoAlvo);
     return;
   }
-  const inicio = camera.position.clone();
+  const c0 = camera.position.clone();
+  const a0 = controles.target.clone();
   const t0 = performance.now();
   const passo = (agora) => {
-    const t = Math.min(1, (agora - t0) / 700);
+    const t = Math.min(1, (agora - t0) / duracao);
     const e = 1 - (1 - t) ** 3;
-    camera.position.lerpVectors(inicio, destino, e);
+    camera.position.lerpVectors(c0, destinoCamera, e);
+    controles.target.lerpVectors(a0, destinoAlvo, e);
     if (t < 1) requestAnimationFrame(passo);
   };
   requestAnimationFrame(passo);
-  controles.target.set(0, 6, 0);
+}
+
+/** Clique duplo / toque duplo: aproxima no ponto do prédio que a pessoa tocou. */
+function aproximarNoPonto(clienteX, clienteY) {
+  const { camera, controles, renderizador } = estado;
+  const r = renderizador.domElement.getBoundingClientRect();
+  const ponto = new THREE.Vector2(
+    ((clienteX - r.left) / r.width) * 2 - 1,
+    -((clienteY - r.top) / r.height) * 2 + 1,
+  );
+  const raio = new THREE.Raycaster();
+  raio.setFromCamera(ponto, camera);
+  const [acerto] = raio.intersectObject(estado.modelo, true);
+  if (!acerto) return;
+  const alvo = acerto.point;
+  const direcao = camera.position.clone().sub(controles.target);
+  const distancia = Math.max(controles.minDistance, direcao.length() * 0.5);
+  voar(alvo.clone().add(direcao.setLength(distancia)), alvo);
+}
+
+function irParaVista(nome, suave = true) {
+  const { camera, controles } = estado;
+  const destino = new THREE.Vector3(...VISTAS[nome]);
+  const alvo = new THREE.Vector3(0, 6, 0);
+  if (!suave) {
+    camera.position.copy(destino);
+    controles.target.copy(alvo);
+    return;
+  }
+  voar(destino, alvo, 700);
 }
 
 async function mostrarModelo(chave) {
@@ -160,6 +205,7 @@ export function iniciarVisualizador3D() {
   async function abrir(chave) {
     atualizarTextos(chave);
     janela.showModal();
+    janela.querySelector('[data-dica-3d]').classList.remove('janela-3d__dica--escondida');
     carregando.hidden = false;
     try {
       await carregarBibliotecas();
@@ -196,6 +242,7 @@ export function iniciarVisualizador3D() {
     if (acao === 'mais') aproximar(0.8);
     if (acao === 'menos') aproximar(1.25);
     if (VISTAS[acao]) irParaVista(acao);
+    if (acao === 'inicio') irParaVista('diagonal');
   });
   botaoGiro?.addEventListener('click', () => {
     if (!estado) return;
@@ -220,6 +267,49 @@ export function iniciarVisualizador3D() {
       evento.preventDefault();
       mapa[evento.key]();
     }
+  });
+  // clique duplo (mouse) e toque duplo (celular) aproximam no ponto tocado
+  let tipoDoUltimo = 'mouse';
+  tela.addEventListener('pointerdown', (evento) => (tipoDoUltimo = evento.pointerType));
+  tela.addEventListener(
+    'dblclick',
+    (evento) =>
+      estado && tipoDoUltimo === 'mouse' && aproximarNoPonto(evento.clientX, evento.clientY),
+  );
+  let ultimoToque = null;
+  tela.addEventListener('pointerup', (evento) => {
+    if (evento.pointerType === 'mouse' || !estado) return;
+    const agora = performance.now();
+    if (
+      ultimoToque &&
+      agora - ultimoToque.t < 300 &&
+      Math.hypot(evento.clientX - ultimoToque.x, evento.clientY - ultimoToque.y) < 30
+    ) {
+      aproximarNoPonto(evento.clientX, evento.clientY);
+      ultimoToque = null;
+    } else ultimoToque = { t: agora, x: evento.clientX, y: evento.clientY };
+  });
+  // dica de gestos: some no primeiro toque
+  const dica = janela.querySelector('[data-dica-3d]');
+  const toque = window.matchMedia('(pointer: coarse)').matches;
+  dica.innerHTML = toque
+    ? '<span>☝️ 1 dedo: girar</span><span>🤏 Pinça: aproximar e afastar</span><span>✌️ 2 dedos: mover</span><span>👆👆 Toque duplo: chegar perto</span>'
+    : '<span>Arrastar: girar</span><span>Rodinha: aproximar e afastar</span><span>Botão direito ou Shift + arrastar: mover</span><span>Clique duplo: chegar perto</span>';
+  tela.addEventListener('pointerdown', () => dica.classList.add('janela-3d__dica--escondida'), {
+    passive: true,
+  });
+  // tela cheia
+  const palco = janela.querySelector('.janela-3d__palco');
+  const botaoCheia = janela.querySelector('[data-tela-cheia-3d]');
+  if (!palco.requestFullscreen) botaoCheia.hidden = true; // iPhone não deixa tela cheia em elementos
+  botaoCheia.addEventListener('click', () =>
+    document.fullscreenElement ? document.exitFullscreen() : palco.requestFullscreen(),
+  );
+  document.addEventListener('fullscreenchange', () => {
+    const cheia = document.fullscreenElement === palco;
+    botaoCheia.setAttribute('aria-pressed', String(cheia));
+    botaoCheia.textContent = cheia ? 'Sair da tela cheia' : 'Tela cheia';
+    if (estado?.aberto) setTimeout(ajustarTamanho, 100);
   });
   janela.querySelector('[data-fechar-3d]').addEventListener('click', () => janela.close());
   janela.addEventListener('close', () => {

@@ -90,10 +90,7 @@ export function iniciarControlesDeAcessibilidade() {
     const ativo = document.activeElement;
     // aberto pelo atalho Alt+5 sem nada focado: devolve o foco ao botão do topo
     gatilho =
-      origem ??
-      (ativo && ativo !== document.body
-        ? ativo
-        : selecionar('[data-botao-flutuante]'));
+      origem ?? (ativo && ativo !== document.body ? ativo : selecionar('[data-botao-flutuante]'));
     painel?.showModal();
   };
   selecionarTodos('[data-abre-painel-acessibilidade]').forEach((botao) =>

@@ -39,6 +39,22 @@ O passo a passo para enviar está em [documentacao/COMO-PUBLICAR-NO-GITHUB.md](d
 
 Veja [documentacao/COMO-TROCAR-CONTEUDO.md](documentacao/COMO-TROCAR-CONTEUDO.md). O guia diz em qual arquivo fica cada coisa: o livro, a logo, os pontos do mapa, os roteiros, o horário e outras.
 
+## Painel de edição (sem mexer no código)
+
+A equipe de comunicação pode editar os capítulos do livro e o "Acompanhe a obra" pelo navegador:
+
+1. Entre em [app.pagescms.org](https://app.pagescms.org) com a conta do GitHub que tem acesso ao repositório.
+2. Escolha o repositório do portal. Aparecem "Capítulos do livro", "Dados do livro" e "Acompanhe a obra".
+3. Edite e clique em **Salvar**. O site é testado e publicado sozinho em cerca de 2 minutos.
+
+A configuração do painel está no arquivo `.pages.yml`.
+
+## Outras ferramentas
+
+- `npm run otimizar-imagens` — cria as versões leves (WebP) das fotos depois de trocar ou incluir uma foto.
+- `placas.html` — placas com QR code dos pontos turísticos, prontas para imprimir.
+- Toda proposta de mudança (pull request) é testada automaticamente antes de entrar no site, e o Dependabot avisa quando alguma biblioteca precisa de atualização de segurança.
+
 ## Como colocar no servidor da Prefeitura
 
 Envie para a equipe de TI o conteúdo da pasta **`site-pronto/`**. Ela já tem tudo pronto e não precisa de banco de dados.
