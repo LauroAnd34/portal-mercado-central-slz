@@ -93,12 +93,12 @@
           </div>
 
           <div class="sobre-livro__texto">
-            <p class="sobretitulo" data-livro="edicao">Edição digital acessível</p>
+            <p class="sobretitulo" data-livro="edicao">Edição digital · 2026</p>
             <h2 id="sobre-livro-titulo" data-livro="titulo">Mercado Central de São Luís</h2>
             <p class="lead" data-livro="subtitulo"></p>
 
             <div class="acoes-livro">
-              <a class="botao" href="#leitor">
+              <button type="button" class="botao" data-abrir-leitura>
                 <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24">
                   <path
                     d="M4 5c3-1.5 5.5-1.5 8 0 2.5-1.5 5-1.5 8 0v14c-3-1.5-5.5-1.5-8 0-2.5-1.5-5-1.5-8 0z"
@@ -109,8 +109,8 @@
                   />
                   <path d="M12 5v14" stroke="currentColor" stroke-width="2" />
                 </svg>
-                Ler agora
-              </a>
+                Ler online
+              </button>
               <button type="button" class="botao botao--secundario" data-ouvir-livro>
                 <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24">
                   <path
@@ -187,8 +187,8 @@
       <section class="secao secao--suave" id="leitor" aria-labelledby="leitor-titulo" tabindex="-1">
         <div class="container">
           <header class="titulo-modulo">
-            <h2 id="leitor-titulo">Leitor acessível</h2>
-            <span class="titulo-modulo__sub">Leia, ouça e ajuste do seu jeito</span>
+            <h2 id="leitor-titulo">Ler online</h2>
+            <span class="titulo-modulo__sub">Leia ou ouça, com as letras do seu jeito</span>
           </header>
 
           <div class="leitor" data-leitor>
@@ -282,7 +282,24 @@
                     stroke-linecap="round"
                   />
                 </svg>
-                Ler sem distrações
+                <span data-texto-foco>Tela cheia</span>
+              </button>
+              <button
+                type="button"
+                class="botao botao--contorno botao--pequeno leitor__so-tela-cheia"
+                aria-pressed="true"
+                data-alternar-paginas
+              >
+                Páginas
+              </button>
+              <button
+                type="button"
+                class="botao botao--contorno botao--pequeno leitor__so-tela-cheia"
+                aria-pressed="false"
+                aria-controls="leitor-voz"
+                data-alternar-voz
+              >
+                Ouvir
               </button>
               <button
                 type="button"
@@ -347,6 +364,7 @@
             <!-- Leitura em voz alta -->
             <div
               class="leitor__voz"
+              id="leitor-voz"
               role="group"
               aria-label="Leitura em voz alta"
               data-controle-voz
@@ -583,11 +601,53 @@
                 </nav>
               </article>
             </div>
-            <p class="leitor__atalhos">
-              Atalhos do leitor: <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>→</kbd> próximo capítulo ·
-              <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>←</kbd> capítulo anterior · <kbd>Alt</kbd> +
-              <kbd>Shift</kbd> + <kbd>L</kbd> ouvir/pausar.
-            </p>
+            <!-- Rodapé da leitura em páginas (tela cheia): página, progresso e tempo -->
+            <div class="leitor__rodape-leitura" data-rodape-leitura>
+              <button
+                type="button"
+                class="botao-icone"
+                data-pagina-anterior
+                aria-label="Página anterior"
+              >
+                <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24">
+                  <path
+                    d="M15 5l-7 7 7 7"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+              <input
+                type="range"
+                min="1"
+                max="1"
+                value="1"
+                step="1"
+                data-deslizador-pagina
+                aria-label="Ir para a página"
+              />
+              <button
+                type="button"
+                class="botao-icone"
+                data-pagina-proxima
+                aria-label="Próxima página"
+              >
+                <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24">
+                  <path
+                    d="M9 5l7 7-7 7"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+              <p class="leitor__status" data-status-pagina></p>
+            </div>
           </div>
         </div>
       </section>

@@ -270,3 +270,49 @@ body {
     column-gap: calc(var(--dobra) + 24px) !important;
   }
 }
+
+/* =========================================================================
+   LETRAS GRANDES (até 200%): nada pode sumir ou ficar cortado
+   ========================================================================= */
+fieldset {
+  min-width: 0; /* por padrão o navegador não deixa o fieldset encolher */
+}
+h1,
+h2,
+h3,
+h4,
+legend,
+.botao,
+button,
+label,
+a {
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+.botao,
+button {
+  max-width: 100%;
+  white-space: normal;
+}
+dialog {
+  max-width: 100vw;
+  max-height: 100dvh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+input,
+select,
+textarea {
+  max-width: 100%;
+  min-width: 0;
+}
+input[type='search'],
+input[type='text'],
+select {
+  width: 100%;
+}
+.sobre-livro > *,
+.visite > *,
+.explorar__guia > * {
+  min-width: 0;
+}

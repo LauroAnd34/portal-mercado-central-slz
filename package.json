@@ -24,7 +24,6 @@
     "@fontsource/opendyslexic": "^5.3.0",
     "leaflet": "^1.9.4",
     "marked": "^14.1.4",
-    "qrcode": "^1.5.4",
     "three": "^0.170.0"
   },
   "private": true,

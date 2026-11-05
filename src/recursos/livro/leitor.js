@@ -12,6 +12,7 @@ import { ler, gravar } from '../../nucleo/armazenamento.js';
 import { criarElemento, escaparHtml, focarProgramaticamente } from '../../nucleo/dom.js';
 import { GLOSSARIO } from '../../dados/glossario.js';
 import { marcarTermos, iniciarGlossario } from './glossario-do-livro.js';
+import { criarPaginador } from './paginador.js';
 import {
   obterLidos,
   marcarComoLido,
@@ -122,6 +123,7 @@ export function iniciarLeitor(leitor) {
     elementos.rotuloProximo.textContent =
       atual < total - 1 ? capitulos[atual + 1].titulo : 'Fim do livro';
 
+    paginador?.aoTrocarCapitulo();
     if (focar || continuarLendo) history.replaceState(null, '', `#cap-${capitulo.id}`);
     gravar(CHAVE_POSICAO, { capitulo: capitulo.id, rolagem });
     voz.aoTrocarCapitulo({ continuarLendo });
@@ -134,6 +136,26 @@ export function iniciarLeitor(leitor) {
       window.scrollTo({ top: rolagem });
     }
   };
+
+  /* ---------- Leitura em páginas (tela cheia) ---------- */
+  let paginador = null;
+  const CHAVE_PAGINAS = 'leitor-paginas';
+  const botaoPaginas = leitor.querySelector('[data-alternar-paginas]');
+  const criarPaginas = () =>
+    criarPaginador({
+      leitor,
+      texto: elementos.texto,
+      minutosDoCapitulo: () => capitulos[atual].minutos,
+      aoPrecisarDeOutroCapitulo: (direcao) => {
+        const destino = atual + direcao;
+        if (destino < 0) return anunciar('Você está no começo do livro.');
+        if (destino >= capitulos.length) return anunciar('Fim do livro. Obrigado pela leitura!');
+        exibir(destino, { focar: false });
+        history.replaceState(history.state, '', `#cap-${capitulos[destino].id}`);
+        paginador.aoTrocarCapitulo({ irParaFim: direcao < 0 });
+        anunciar(capitulos[destino].titulo);
+      },
+    });
 
   const irPara = (passo) => {
     const destino = atual + passo;
@@ -186,22 +208,69 @@ export function iniciarLeitor(leitor) {
     definirSumario(botaoSumario.getAttribute('aria-expanded') !== 'true'),
   );
 
-  /* ---------- Modo foco ---------- */
+  /* ---------- Modo leitura em tela cheia ----------
+   * Esconde o resto do site e deixa só o livro, ocupando a tela toda.
+   * As ferramentas (sumário, letras, ouvir…) continuam na barra do leitor.
+   * Sai com o botão "Sair da tela cheia", com Esc ou com o "voltar" do celular. */
   const botaoFoco = leitor.querySelector('[data-modo-foco]');
-  const definirFoco = (ativo) => {
+  const textoFoco = botaoFoco.querySelector('[data-texto-foco]');
+  let gatilhoFoco = null;
+  const definirFoco = (ativo, { daHistoria = false } = {}) => {
+    if (ativo === document.body.classList.contains('modo-foco')) return;
     botaoFoco.setAttribute('aria-pressed', String(ativo));
+    if (textoFoco) textoFoco.textContent = ativo ? 'Sair da tela cheia' : 'Tela cheia';
     document.body.classList.toggle('modo-foco', ativo);
-    anunciar(
-      ativo
-        ? 'Leitura sem distrações ativada. Pressione Esc para sair.'
-        : 'Leitura sem distrações desativada.',
-    );
+    paginador ??= criarPaginas();
+    if (ativo && ler(CHAVE_PAGINAS, true)) paginador.ligar();
+    if (!ativo) paginador.desligar();
+    if (ativo) {
+      gatilhoFoco = document.activeElement;
+      definirSumario(false); // na tela cheia o sumário vira gaveta: começa fechado
+      const pedido = document.documentElement.requestFullscreen?.();
+      pedido?.catch?.(() => {});
+      if (!daHistoria) history.pushState({ leitura: true }, '');
+      document.getElementById('leitor')?.scrollTo?.(0, 0);
+      focarProgramaticamente(
+        leitor.querySelector('[data-texto-capitulo] h1, [data-texto-capitulo] h2'),
+      );
+    } else {
+      if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+      if (!daHistoria && history.state?.leitura) history.back();
+      gatilhoFoco?.focus?.();
+    }
+    anunciar(ativo ? 'Tela cheia de leitura. Pressione Esc para sair.' : 'Saiu da tela cheia.');
   };
   botaoFoco.addEventListener('click', () =>
     definirFoco(botaoFoco.getAttribute('aria-pressed') !== 'true'),
   );
+  // páginas (como num leitor digital) ou rolagem contínua, dentro da tela cheia
+  botaoPaginas.setAttribute('aria-pressed', String(ler(CHAVE_PAGINAS, true)));
+  botaoPaginas.addEventListener('click', () => {
+    const paginas = botaoPaginas.getAttribute('aria-pressed') !== 'true';
+    botaoPaginas.setAttribute('aria-pressed', String(paginas));
+    gravar(CHAVE_PAGINAS, paginas);
+    paginador ??= criarPaginas();
+    if (paginas) paginador.ligar();
+    else paginador.desligar();
+    anunciar(paginas ? 'Leitura em páginas.' : 'Leitura com rolagem.');
+  });
+  document
+    .querySelectorAll('[data-abrir-leitura]')
+    .forEach((botao) => botao.addEventListener('click', () => definirFoco(true)));
+  window.addEventListener('popstate', () => {
+    if (document.body.classList.contains('modo-foco')) definirFoco(false, { daHistoria: true });
+  });
+  document.addEventListener('fullscreenchange', () => {
+    // a pessoa saiu da tela cheia do navegador (tecla Esc): sai também do modo leitura
+    if (!document.fullscreenElement && document.body.classList.contains('modo-foco'))
+      definirFoco(false);
+  });
   document.addEventListener('keydown', (evento) => {
-    if (evento.key === 'Escape' && document.body.classList.contains('modo-foco'))
+    if (
+      evento.key === 'Escape' &&
+      document.body.classList.contains('modo-foco') &&
+      !document.querySelector('dialog[open]')
+    )
       definirFoco(false);
   });
 
@@ -244,7 +313,17 @@ export function iniciarLeitor(leitor) {
     if (!link) return;
     evento.preventDefault();
     exibir(Number(link.dataset.indice));
-    if (mediaPequena.matches) definirSumario(false);
+    if (mediaPequena.matches || document.body.classList.contains('modo-foco'))
+      definirSumario(false);
+  });
+
+  // botão "Ouvir" da tela cheia: mostra/esconde os controles de voz
+  const botaoVoz = leitor.querySelector('[data-alternar-voz]');
+  botaoVoz?.addEventListener('click', () => {
+    const aberto = botaoVoz.getAttribute('aria-pressed') !== 'true';
+    botaoVoz.setAttribute('aria-pressed', String(aberto));
+    document.body.classList.toggle('voz-aberta', aberto);
+    if (aberto) leitor.querySelector('#leitor-voz button')?.focus();
   });
   elementos.anterior.addEventListener('click', () => irPara(-1));
   elementos.proximo.addEventListener('click', () => irPara(1));
