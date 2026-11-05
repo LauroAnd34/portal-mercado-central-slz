@@ -867,3 +867,104 @@
 .explorar > * {
   min-width: 0;
 }
+
+/* ---------- Perto de você ---------- */
+.perto-de-voce {
+  margin: 0 0 var(--e-3);
+}
+.perto-de-voce[hidden] {
+  display: none;
+}
+.perto-de-voce__titulo {
+  margin: 0 0 var(--e-2);
+  font-size: var(--texto-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--cor-texto-suave);
+}
+.perto-de-voce__lista {
+  display: flex;
+  gap: var(--e-2);
+  margin: 0;
+  padding: 2px 2px var(--e-2);
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+}
+.perto-de-voce__lista li {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+.perto-de-voce__item {
+  display: grid;
+  gap: 2px;
+  min-height: 48px;
+  max-width: 220px;
+  padding: 6px 14px 6px 12px;
+  border: 2px solid var(--cor-borda);
+  border-left: 6px solid var(--cor-categoria, var(--cor-primaria));
+  border-radius: var(--raio);
+  background: var(--cor-superficie);
+  color: var(--cor-texto);
+  font: inherit;
+  font-size: var(--texto-sm);
+  text-align: left;
+  cursor: pointer;
+}
+.perto-de-voce__item strong {
+  color: #1557b0;
+}
+:root[data-tema='escuro'] .perto-de-voce__item strong,
+:root[data-contraste='alto'] .perto-de-voce__item strong {
+  color: inherit;
+}
+.perto-de-voce__item:hover {
+  border-color: var(--cor-primaria);
+}
+.perto-de-voce__item:focus-visible {
+  outline: 3px solid #ffbf00;
+  outline-offset: 2px;
+}
+
+/* ---------- Filtros recolhíveis ---------- */
+.explorar__filtros > summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  cursor: pointer;
+}
+.explorar__filtros[open] > summary {
+  margin-bottom: var(--e-2);
+}
+
+/* ---------- Celular: só o essencial de cara ---------- */
+@media (max-width: 980px) {
+  .secao--mapa .titulo-modulo {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .secao--mapa {
+    padding-top: var(--e-4);
+  }
+  .pagina-mapa .cabecalho-pagina p,
+  .pagina-mapa .cabecalho-pagina__icone {
+    display: none;
+  }
+  .pagina-mapa .cabecalho-pagina {
+    padding-block: var(--e-5) var(--e-4);
+  }
+  .explorar__palco .detalhes--vazio {
+    display: none;
+  }
+  .legenda {
+    display: none;
+  }
+}
+.perto-de-mim__nota:empty {
+  display: none;
+}

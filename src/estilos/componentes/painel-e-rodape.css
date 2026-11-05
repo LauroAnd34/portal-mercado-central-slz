@@ -21,6 +21,7 @@
   background: var(--cor-fundo);
   color: var(--cor-texto);
   overflow-y: auto;
+  overflow-x: hidden;
   box-shadow: var(--sombra-3);
 }
 .painel-acessibilidade[open] {
@@ -44,6 +45,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: var(--e-2);
 }
 .painel-acessibilidade__topo h2 {
   font-size: var(--texto-xl);
@@ -74,6 +76,7 @@
 .opcao-escala {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: var(--e-3);
 }
 .opcao-escala__valor {
@@ -84,7 +87,7 @@
 }
 .opcao-cartoes {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(min(96px, 100%), 1fr));
   gap: var(--e-2);
 }
 .opcao-cartao {
@@ -331,22 +334,21 @@
 
 /* ---------- Botão flutuante de acessibilidade (arrastável, como o do VLibras) ---------- */
 .botao-flutuante-acessibilidade {
+  /* ícone quadrado arredondado, no mesmo formato do botão do VLibras */
   position: fixed;
   right: 16px;
   bottom: 16px;
   z-index: 100000; /* acima de tudo: cabeçalho, mapa e menus */
   display: grid;
   place-items: center;
-  width: 60px;
-  height: 60px;
+  width: 56px;
+  height: 56px;
   padding: 0;
-  border: 3px solid #ffffff;
-  border-radius: 50%;
-  background: var(--marca-marinho-700);
+  border: 2px solid #ffffff;
+  border-radius: 14px;
+  background: #144670;
   color: #ffffff;
-  box-shadow:
-    0 6px 18px rgb(7 29 49 / 0.35),
-    0 0 0 4px rgb(187 208 80 / 0.9);
+  box-shadow: 0 4px 14px rgb(7 29 49 / 0.4);
   cursor: grab;
   touch-action: none; /* permite arrastar com o dedo sem rolar a página */
   user-select: none;
@@ -369,9 +371,7 @@
 .botao-flutuante-acessibilidade--arrastando {
   cursor: grabbing;
   transform: scale(1.12);
-  box-shadow:
-    0 12px 28px rgb(7 29 49 / 0.45),
-    0 0 0 6px rgb(187 208 80 / 0.9);
+  box-shadow: 0 12px 28px rgb(7 29 49 / 0.5);
   transition: none;
 }
 :root[data-contraste='alto'] .botao-flutuante-acessibilidade {

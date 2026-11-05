@@ -10,7 +10,7 @@
 }
 @media (max-width: 820px) {
   .sobre-livro {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: var(--e-6);
   }
   .capa-livro {
@@ -42,11 +42,11 @@
     /* painel de azulejos no meio da capa, faixas azuis para o texto */
     linear-gradient(
       180deg,
-      var(--marca-marinho-700) 0 15%,
-      rgb(255 255 255 / 0.9) 15% calc(15% + 3px),
-      transparent calc(15% + 3px) calc(42% - 3px),
-      rgb(255 255 255 / 0.9) calc(42% - 3px) 42%,
-      var(--marca-marinho-700) 42%
+      var(--marca-marinho-700) 0 13%,
+      rgb(255 255 255 / 0.9) 13% calc(13% + 3px),
+      transparent calc(13% + 3px) calc(36% - 3px),
+      rgb(255 255 255 / 0.9) calc(36% - 3px) 36%,
+      var(--marca-marinho-700) 36%
     ),
     url('../../imagens/azulejos/faixa-estrelas.webp');
   background-size:
@@ -56,7 +56,7 @@
   background-position:
     0 0,
     0 0,
-    center 30%;
+    center 24%;
   color: #fff;
   box-shadow: var(--sombra-3);
   transform: rotateY(-12deg);
@@ -112,7 +112,7 @@
 }
 .download {
   display: grid;
-  grid-template-columns: 64px 1fr auto;
+  grid-template-columns: 64px minmax(0, 1fr) auto;
   align-items: center;
   gap: var(--e-4);
   padding: var(--e-3) var(--e-4);
@@ -588,24 +588,68 @@ mark {
 }
 
 /* ---------- Modo foco: só o texto na tela ---------- */
+/* ---------- Tela cheia de leitura: só o livro na tela ---------- */
 .modo-foco .barra-gov,
+.modo-foco .faixa-demonstracao,
 .modo-foco .cabecalho,
 .modo-foco .cabecalho-pagina,
-.modo-foco .sobre-livro,
 .modo-foco .rodape,
-.modo-foco .titulo-modulo,
-.modo-foco .leitor__sumario,
-.modo-foco .leitor__atalhos {
+.modo-foco .faixa-azulejo,
+.modo-foco #leitor .titulo-modulo {
   display: none !important;
 }
-.modo-foco main > .secao:first-of-type {
+.modo-foco main > .secao:not(#leitor) {
   display: none;
+}
+.modo-foco {
+  overflow: hidden;
+}
+.modo-foco #leitor {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 0 var(--e-8);
+  background: var(--leitor-fundo-pagina, var(--cor-fundo));
+}
+.modo-foco #leitor > .container {
+  max-width: 1100px;
+  padding-inline: max(12px, env(safe-area-inset-left));
+}
+/* barra de ferramentas presa no alto, em uma linha que rola para o lado */
+.modo-foco .leitor__barra {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  border-radius: 0;
+  margin-inline: calc(-1 * max(12px, env(safe-area-inset-left)));
+  padding-inline: max(12px, env(safe-area-inset-left));
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.12);
+}
+.modo-foco .leitor__barra > * {
+  flex: 0 0 auto;
+}
+.modo-foco [data-modo-foco] {
+  order: -1;
+  background: var(--cor-primaria);
+  color: var(--cor-primaria-texto);
 }
 .modo-foco .leitor__corpo {
   grid-template-columns: 1fr;
 }
-.modo-foco #leitor {
-  padding-top: var(--e-4);
+/* sumário vira uma gaveta por cima do texto */
+.modo-foco .leitor:not(.leitor--sem-sumario) .leitor__sumario {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  bottom: 0;
+  z-index: 6;
+  width: min(340px, 90vw);
+  overflow-y: auto;
+  box-shadow: 0 0 0 100vmax rgb(0 0 0 / 0.35);
 }
 
 .leitor__nome {
@@ -827,4 +871,198 @@ mark {
 
 .leitor__posicao:empty {
   display: none;
+}
+
+/* =========================================================================
+   LEITURA EM PÁGINAS (tela cheia, estilo leitor digital)
+   O texto ocupa a tela; as ferramentas ficam por cima, no alto e embaixo,
+   e somem com um toque no meio do texto (aparecem de novo com outro toque
+   ou ao usar o teclado).
+   ========================================================================= */
+.leitor__rodape-leitura,
+.leitor__so-tela-cheia {
+  display: none;
+}
+.modo-foco .leitor__so-tela-cheia {
+  display: inline-flex;
+}
+.leitura-paginada #leitor {
+  overflow: hidden;
+}
+.leitura-paginada .leitor__barra {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  z-index: 20;
+}
+.leitura-paginada .leitor__voz {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: var(--altura-rodape-leitura, 88px);
+  margin: 0;
+  z-index: 20;
+  border-radius: 0;
+  border: 0;
+  border-top: 1px solid var(--leitor-borda);
+  background: var(--leitor-fundo);
+}
+.leitura-paginada .leitor__progresso,
+.leitura-paginada .leitor__posicao,
+.leitura-paginada .leitor__navegacao {
+  display: none;
+}
+.leitura-paginada .leitor__pagina {
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+  padding: 0;
+}
+/* a "folha": o texto dividido em colunas, uma página por vez */
+.leitura-paginada .leitor__texto {
+  position: fixed;
+  top: 64px;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(calc(100vw - 48px), 1180px);
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  column-fill: auto;
+  touch-action: pan-y pinch-zoom;
+  cursor: default;
+  animation: none !important;
+}
+@media (max-width: 959px) {
+  .leitura-paginada .leitor__texto {
+    width: min(calc(100vw - 40px), 680px);
+  }
+}
+.leitura-paginada .leitor__texto img,
+.leitura-paginada .leitor__texto figure {
+  max-height: calc(100dvh - 150px);
+  break-inside: avoid;
+}
+.leitura-paginada .leitor__texto h2,
+.leitura-paginada .leitor__texto h3 {
+  break-after: avoid;
+}
+.leitura-paginada .leitor__texto p {
+  orphans: 2;
+  widows: 2;
+}
+/* rodapé: setas, barra de progresso e "página X de Y · tempo restante" */
+.leitura-paginada .leitor__rodape-leitura {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0 var(--e-2);
+  padding: var(--e-2) max(12px, env(safe-area-inset-right)) max(var(--e-2), env(safe-area-inset-bottom))
+    max(12px, env(safe-area-inset-left));
+  background: var(--leitor-fundo);
+  color: var(--leitor-texto);
+  border-top: 1px solid var(--leitor-borda);
+}
+.leitor__rodape-leitura input[type='range'] {
+  width: 100%;
+  accent-color: var(--leitor-titulo);
+  min-height: 44px;
+}
+.leitor__rodape-leitura .botao-icone {
+  color: var(--leitor-titulo);
+}
+.leitor__status {
+  grid-column: 1 / -1;
+  margin: 0;
+  text-align: center;
+  font-family: var(--fonte-ui);
+  font-size: var(--texto-xs);
+  color: var(--leitor-texto);
+  opacity: 0.8;
+}
+/* ferramentas por cima do texto, que somem com um toque no meio */
+.leitura-paginada .leitor__barra,
+.leitura-paginada .leitor__voz,
+.leitura-paginada .leitor__rodape-leitura {
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+.leitura-sem-ferramentas .leitor__barra:not(:focus-within) {
+  opacity: 0;
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+.leitura-sem-ferramentas .leitor__voz:not(:focus-within) {
+  opacity: 0;
+  transform: translateY(100%);
+  pointer-events: none;
+}
+/* com as ferramentas escondidas, sobra só a linha de página (como no Kindle) */
+.leitura-sem-ferramentas .leitor__rodape-leitura:not(:focus-within) {
+  background: transparent;
+  border-color: transparent;
+}
+.leitura-sem-ferramentas .leitor__rodape-leitura:not(:focus-within) > :not(.leitor__status) {
+  opacity: 0;
+  pointer-events: none;
+}
+/* painéis (letras, busca, glossário, marcadores) viram uma "gaveta" que sobe de baixo */
+.modo-foco .leitor__ajustes:not([hidden]),
+.modo-foco .leitor__busca:not([hidden]),
+.modo-foco .leitor__painel-extra:not([hidden]) {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+  max-height: 75dvh;
+  overflow-y: auto;
+  margin: 0;
+  border-radius: var(--raio-md) var(--raio-md) 0 0;
+  box-shadow: 0 -10px 40px rgb(0 0 0 / 0.3);
+  background: var(--leitor-fundo, var(--cor-fundo));
+}
+/* na tela cheia, os controles de voz só aparecem quando a pessoa toca em "Ouvir" */
+.modo-foco:not(.voz-aberta) .leitor__voz {
+  display: none;
+}
+.modo-foco [data-imprimir-capitulo] {
+  display: none;
+}
+/* espaço para o botão de acessibilidade não cobrir as setas do rodapé */
+.leitura-paginada .leitor__rodape-leitura {
+  padding-inline: 76px;
+}
+.download {
+  grid-template-columns: auto minmax(0, 1fr);
+}
+.download__tamanho {
+  grid-column: 2;
+}
+@media (min-width: 640px) {
+  .download {
+    grid-template-columns: 64px minmax(0, 1fr) auto;
+  }
+  .download__tamanho {
+    grid-column: auto;
+  }
+}
+.leitura-paginada .leitor__texto h1,
+.leitura-paginada .leitor__texto h2,
+.leitura-paginada .leitor__texto h3 {
+  overflow-wrap: anywhere;
+  max-width: 100%;
+}
+.leitura-paginada .leitor__titulo-capitulo {
+  font-size: min(2em, 11vw);
 }

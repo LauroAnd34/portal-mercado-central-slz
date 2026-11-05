@@ -52,7 +52,6 @@ A configuração do painel está no arquivo `.pages.yml`.
 ## Outras ferramentas
 
 - `npm run otimizar-imagens` — cria as versões leves (WebP) das fotos depois de trocar ou incluir uma foto.
-- `placas.html` — placas com QR code dos pontos turísticos, prontas para imprimir.
 - Toda proposta de mudança (pull request) é testada automaticamente antes de entrar no site, e o Dependabot avisa quando alguma biblioteca precisa de atualização de segurança.
 
 ## Como colocar no servidor da Prefeitura

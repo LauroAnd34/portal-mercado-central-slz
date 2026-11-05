@@ -55,23 +55,6 @@
             <h2 id="explorar-titulo">Explore a Ilha de São Luís</h2>
             <span class="titulo-modulo__sub">Mapa interativo e lista acessível</span>
           </header>
-
-          <p class="dica-mapa">
-            <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2" />
-              <path
-                d="M12 11v6M12 7.5v.5"
-                stroke="currentColor"
-                stroke-width="2.4"
-                stroke-linecap="round"
-              />
-            </svg>
-            <span
-              >Usa leitor de tela ou teclado? A <a href="#guia-pontos">lista de pontos</a> tem todas
-              as informações do mapa, com rotas descritas em texto.</span
-            >
-          </p>
-
           <div class="explorar">
             <!-- Filtros + lista -->
             <aside class="explorar__guia" id="guia-pontos" aria-labelledby="guia-titulo">
@@ -86,13 +69,14 @@
                   placeholder="Ex.: praia, igreja, Rua Portugal"
                 />
               </div>
-              <div class="explorar__filtros">
-                <p class="explorar__rotulo" id="rotulo-filtros">Mostrar categorias:</p>
+              <details class="explorar__filtros" data-filtros-recolhiveis>
+                <summary>Filtrar por tipo de lugar</summary>
+                <p class="somente-leitor" id="rotulo-filtros">Mostrar categorias:</p>
                 <ul class="chips" data-filtros aria-labelledby="rotulo-filtros"></ul>
                 <button type="button" class="botao botao--texto botao--pequeno" data-filtros-todos>
                   Mostrar todas
                 </button>
-              </div>
+              </details>
               <p class="explorar__contagem" data-contagem aria-hidden="true"></p>
               <ul
                 class="lista-pontos"
@@ -159,10 +143,11 @@
                   </button>
                 </div>
               </div>
-              <p class="perto-de-mim__nota" data-nota-localizacao>
-                Mostra você no mapa, ordena os pontos pela sua distância e traça a rota a partir de
-                onde você está. Sua localização fica só no seu aparelho.
-              </p>
+              <p class="perto-de-mim__nota" data-nota-localizacao></p>
+              <div class="perto-de-voce" data-perto-de-voce hidden>
+                <h3 class="perto-de-voce__titulo">Perto de você</h3>
+                <ul class="perto-de-voce__lista" data-lista-perto></ul>
+              </div>
               <div class="explorar__palco">
                 <div
                   class="mapa"
@@ -171,13 +156,13 @@
                   aria-label="Mapa interativo dos pontos turísticos. Use Tab para percorrer os marcadores e Enter para selecionar."
                 ></div>
 
-                <section class="detalhes detalhes--vazio" data-detalhes aria-labelledby="detalhes-titulo">
-                  <h3 id="detalhes-titulo">Escolha um destino</h3>
-                  <p>
-                    Selecione um ponto na lista ou toque em um marcador no mapa. Você verá a
-                    distância a partir do Mercado Central, quanto tempo leva e o caminho passo a
-                    passo.
-                  </p>
+                <section
+                  class="detalhes detalhes--vazio"
+                  data-detalhes
+                  aria-labelledby="detalhes-titulo"
+                >
+                  <h3 id="detalhes-titulo">Escolha um lugar</h3>
+                  <p>Toque no mapa ou na lista.</p>
                 </section>
               </div>
               <ul class="legenda" aria-label="Legenda do mapa">

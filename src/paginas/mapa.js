@@ -183,13 +183,20 @@ function selecionar(id, { origem }) {
   atualizarLista();
   history.replaceState(null, '', `#${id}`);
 
+  // com a localização ligada, já mostra o caminho saindo de onde a pessoa está
+  if (estado.minhaPosicao && origem !== 'endereco')
+    el.detalhes.querySelector('[data-tracar-rota="de-mim"]')?.click();
+
   if (origem === 'mapa') {
     // quem clicou no mapa recebe o resumo falado pelo leitor de tela
     anunciar(`${ponto.nome}. ${textoDeResumo(ponto)}.`);
   } else {
     focarProgramaticamente(el.detalhes.querySelector('#detalhes-titulo'));
   }
-  if (window.matchMedia('(max-width: 980px)').matches && origem === 'lista') {
+  if (
+    window.matchMedia('(max-width: 980px)').matches &&
+    (origem === 'lista' || origem === 'perto')
+  ) {
     el.detalhes.scrollIntoView({ block: 'start' });
   }
 }
@@ -275,6 +282,11 @@ document
   .querySelector('[data-vista="ilha"]')
   ?.addEventListener('click', () => mapa?.mostrarIlhaInteira());
 
+/* filtros abertos no computador, recolhidos no celular (menos coisa na tela) */
+const filtrosRecolhiveis = document.querySelector('[data-filtros-recolhiveis]');
+if (filtrosRecolhiveis && window.matchMedia('(min-width: 981px)').matches)
+  filtrosRecolhiveis.open = true;
+
 /* ---------- Início ---------- */
 atualizarLista();
 const doEndereco = location.hash.slice(1);
@@ -312,7 +324,8 @@ function receberPosicao({ coords }, primeiraVez) {
     }))
     .sort((a, b) => a.distanciaDeMimKm - b.distanciaDeMimKm);
   const maisPerto = pontos[0];
-  notaLocalizacao.textContent = `Você aparece no mapa como um ponto azul. Lista ordenada pela sua distância — mais perto: ${maisPerto.nome}.`;
+  notaLocalizacao.textContent = 'Você é o ponto azul. Escolha um lugar para ver o caminho até ele.';
+  mostrarPertoDeVoce();
   el.lista.setAttribute('aria-label', 'Pontos ordenados do mais perto ao mais longe de você');
   botaoPerto.setAttribute('aria-pressed', 'true');
   botaoPerto.querySelector('[data-texto-perto]')?.replaceChildren('Ver onde estou no mapa');
@@ -322,6 +335,27 @@ function receberPosicao({ coords }, primeiraVez) {
     selecionar(estado.selecionadoId, { origem: 'mapa' });
   anunciar(`Sua localização aparece no mapa. O ponto mais perto é ${maisPerto.nome}.`);
 }
+
+/* lugares mais perto da pessoa, em botões compactos */
+const caixaPerto = document.querySelector('[data-perto-de-voce]');
+const listaPerto = document.querySelector('[data-lista-perto]');
+const formatarCurta = (km) =>
+  km < 1 ? `${Math.round((km * 1000) / 10) * 10} m` : `${km.toFixed(1).replace('.', ',')} km`;
+function mostrarPertoDeVoce() {
+  if (!caixaPerto || !estado.minhaPosicao) return;
+  const maisPerto = [...pontos].sort((a, b) => a.distanciaDeMimKm - b.distanciaDeMimKm).slice(0, 5);
+  listaPerto.innerHTML = maisPerto
+    .map(
+      (p) =>
+        `<li><button type="button" class="perto-de-voce__item" data-ponto-perto="${p.id}" style="--cor-categoria:${p.categoriaInfo.cor}"><span>${escaparHtml(p.nome.replace(/ \(.*\)$/, ''))}</span><strong>${formatarCurta(p.distanciaDeMimKm)}</strong></button></li>`,
+    )
+    .join('');
+  caixaPerto.hidden = false;
+}
+listaPerto?.addEventListener('click', (evento) => {
+  const botao = evento.target.closest('[data-ponto-perto]');
+  if (botao) selecionar(botao.dataset.pontoPerto, { origem: 'perto' });
+});
 
 function localizar() {
   if (!('geolocation' in navigator)) return;
