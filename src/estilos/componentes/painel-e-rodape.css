@@ -374,11 +374,15 @@
   box-shadow: 0 12px 28px rgb(7 29 49 / 0.5);
   transition: none;
 }
-:root[data-contraste='alto'] .botao-flutuante-acessibilidade {
-  background: #000000;
-  color: #ffff00;
-  border-color: #ffff00;
-  box-shadow: none;
+/* O ícone é sempre igual, em todas as páginas e com qualquer escolha
+   (alto contraste, tema escuro, letras grandes): assim a pessoa sempre o reconhece.
+   Azul-marinho com branco tem contraste de 9,8:1. */
+:root .botao-flutuante-acessibilidade,
+:root[data-contraste='alto'] .botao-flutuante-acessibilidade,
+:root[data-tema='escuro'] .botao-flutuante-acessibilidade {
+  background: #144670 !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
 }
 @media print {
   .botao-flutuante-acessibilidade {
