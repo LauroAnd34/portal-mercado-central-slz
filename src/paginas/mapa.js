@@ -11,7 +11,7 @@ import { buscarRota, buscarRotaPorPontos } from '../recursos/mapa/rotas.js';
 import { ROTEIROS } from '../dados/roteiros.js';
 import { FOTOS, FOTO_DO_PONTO, urlDaFoto, srcsetDaFoto } from '../dados/fotos.js';
 import { rotaGuardadaDoPonto, rotaGuardadaDoRoteiro } from '../recursos/mapa/rotas-guardadas.js';
-import { calcularDistanciaKm, estimarTempos } from '../recursos/mapa/geografia.js';
+import { calcularDistanciaKm, estimarTempos, linkComoChegar } from '../recursos/mapa/geografia.js';
 import {
   prepararPontos,
   filtrarPontos,
@@ -23,6 +23,7 @@ import {
   renderizarDetalhesRoteiro,
 } from '../recursos/mapa/guia-de-pontos.js';
 import { anunciar } from '../nucleo/anunciador.js';
+import { meioPorId, temposPorMeio, meioSugerido } from '../recursos/mapa/meios-de-transporte.js';
 import { falar, pararFala } from '../nucleo/voz.js';
 import { escaparHtml, focarProgramaticamente } from '../nucleo/dom.js';
 
@@ -124,10 +125,9 @@ el.lista.addEventListener('pointerleave', () => mapa?.destacar(null));
 el.lista.addEventListener('focusout', () => mapa?.destacar(null));
 
 /* barra do painel: copiar link e fechar */
-const BARRA_DETALHES = `<div class="detalhes__barra">
-    <button type="button" class="botao botao--texto botao--pequeno" data-copiar-link>Copiar link</button>
-    <button type="button" class="botao botao--contorno botao--pequeno" data-fechar-detalhes>Fechar<span class="somente-leitor"> detalhes</span></button>
-  </div>`;
+const BARRA_DETALHES = `<button type="button" class="botao-icone detalhes__fechar" data-fechar-detalhes aria-label="Fechar detalhes">
+    <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+  </button>`;
 const TEXTO_INICIAL = el.detalhes.innerHTML;
 function fecharDetalhes() {
   pararFala();
@@ -157,8 +157,7 @@ function selecionar(id, { origem }) {
         <h3 id="detalhes-titulo" tabindex="-1">${escaparHtml(MERCADO_CENTRAL.nome)}</h3>
         <p class="detalhes__endereco">${escaparHtml(MERCADO_CENTRAL.endereco)}</p>
       </div>
-      <p>${escaparHtml(MERCADO_CENTRAL.descricao)}</p>
-      <p>Escolha um destino na lista ou no mapa para ver a distância e o caminho a partir daqui.</p>`;
+      <p>${escaparHtml(MERCADO_CENTRAL.descricao)}</p>`;
     el.detalhes.classList.remove('detalhes--vazio');
     mapa?.selecionar(id);
     atualizarLista();
@@ -176,16 +175,35 @@ function selecionar(id, { origem }) {
         distanciaKm: calcularDistanciaKm(estado.minhaPosicao, ponto.coordenadas),
       }
     : null;
-  el.detalhes.innerHTML = BARRA_DETALHES + renderizarDetalhes(ponto, MERCADO_CENTRAL, foto, deMim);
+  if (!deMim && estado.origemRota === 'mim') estado.origemRota = 'mercado';
+  if (deMim && origem !== 'endereco' && !estado.origemEscolhida) estado.origemRota = 'mim';
+  const doMercado = estado.origemRota !== 'mim';
+  const distanciaRuas = doMercado ? ponto.distanciaKm : deMim.distanciaKm * 1.3;
+  if (!estado.meioEscolhido) estado.meio = meioSugerido(distanciaRuas);
+  const tempos = temposPorMeio(
+    distanciaRuas,
+    doMercado
+      ? {
+          'a-pe': rotaGuardadaDoPonto(ponto.id, 'a-pe')?.minutos ?? ponto.tempos.aPeMinutos,
+          carro: rotaGuardadaDoPonto(ponto.id, 'carro')?.minutos ?? ponto.tempos.carroMinutos,
+        }
+      : {},
+  );
+  el.detalhes.innerHTML =
+    BARRA_DETALHES +
+    renderizarDetalhes(ponto, MERCADO_CENTRAL, foto, deMim, {
+      origem: estado.origemRota,
+      meio: estado.meio,
+      tempos,
+    });
   el.detalhes.classList.remove('detalhes--vazio');
   el.detalhes.hidden = false;
   mapa?.selecionar(id);
   atualizarLista();
   history.replaceState(null, '', `#${id}`);
 
-  // com a localização ligada, já mostra o caminho saindo de onde a pessoa está
-  if (estado.minhaPosicao && origem !== 'endereco')
-    el.detalhes.querySelector('[data-tracar-rota="de-mim"]')?.click();
+  // já mostra o caminho (saindo de onde a pessoa está, se a localização estiver ligada)
+  tracarRota(ponto);
 
   if (origem === 'mapa') {
     // quem clicou no mapa recebe o resumo falado pelo leitor de tela
@@ -212,6 +230,10 @@ el.detalhes.addEventListener('click', async (evento) => {
   const copiar = evento.target.closest('[data-copiar-link]');
   if (copiar) {
     const link = `${location.origin}${location.pathname}#${ponto.id}`;
+    if (navigator.share) {
+      navigator.share({ title: ponto.nome, url: link }).catch(() => {});
+      return;
+    }
     try {
       await navigator.clipboard.writeText(link);
       copiar.textContent = 'Link copiado!';
@@ -219,7 +241,7 @@ el.detalhes.addEventListener('click', async (evento) => {
     } catch {
       copiar.textContent = 'Não foi possível copiar';
     }
-    setTimeout(() => (copiar.textContent = 'Copiar link'), 2500);
+    setTimeout(() => (copiar.textContent = 'Compartilhar'), 2500);
     return;
   }
 
@@ -229,47 +251,79 @@ el.detalhes.addEventListener('click', async (evento) => {
     return;
   }
 
-  const botaoRota = evento.target.closest('[data-tracar-rota]');
-  if (!botaoRota) return;
-  const pedido = botaoRota.dataset.tracarRota;
-  const deMim = pedido === 'de-mim' && estado.minhaPosicao;
+  const botaoOrigem = evento.target.closest('[data-origem]');
+  const botaoMeio = evento.target.closest('[data-meio]');
+  if (botaoOrigem) {
+    estado.origemRota = botaoOrigem.dataset.origem;
+    estado.origemEscolhida = true;
+    selecionar(ponto.id, { origem: 'troca' });
+    el.detalhes.querySelector(`[data-origem="${estado.origemRota}"]`)?.focus();
+    return;
+  }
+  if (botaoMeio) {
+    estado.meio = botaoMeio.dataset.meio;
+    estado.meioEscolhido = true;
+    el.detalhes
+      .querySelectorAll('[data-meio]')
+      .forEach((b) => b.setAttribute('aria-pressed', String(b === botaoMeio)));
+    tracarRota(ponto);
+  }
+});
+
+/**
+ * Desenha o caminho até o ponto com o meio e a origem escolhidos.
+ * Rotas a partir do Mercado já vêm calculadas (instantâneas, funcionam sem internet).
+ */
+async function tracarRota(ponto) {
+  const meio = meioPorId(estado.meio);
+  const deMim = estado.origemRota === 'mim' && estado.minhaPosicao;
   const origem = deMim ? estado.minhaPosicao : MERCADO_CENTRAL.coordenadas;
   const distanciaReta = calcularDistanciaKm(origem, ponto.coordenadas);
-  const modo = deMim ? (distanciaReta < 2.5 ? 'a-pe' : 'carro') : pedido;
   const area = el.detalhes.querySelector('[data-area-rota]');
+  if (!area) return;
   area.innerHTML = '<p class="detalhes__carregando">Calculando o caminho…</p>';
-  botaoRota.setAttribute('aria-busy', 'true');
 
-  // 1º: caminho já calculado pelas ruas (instantâneo e funciona sem internet)
-  let rota = deMim ? null : rotaGuardadaDoPonto(ponto.id, modo);
+  let rota = null;
+  if (!deMim) {
+    const guardada = rotaGuardadaDoPonto(ponto.id, meio.rotaGuardada);
+    if (guardada) rota = { ...guardada };
+  }
   if (!rota)
     try {
-      rota = await buscarRota(origem, ponto.coordenadas, modo);
+      rota = await buscarRota(origem, ponto.coordenadas, meio.servico);
     } catch {
-      const tempos = estimarTempos(distanciaReta);
       rota = {
         coordenadas: [origem, ponto.coordenadas],
-        distanciaKm: distanciaReta,
-        minutos: modo === 'a-pe' ? tempos.aPeMinutos : tempos.carroMinutos,
+        distanciaKm: distanciaReta * 1.3,
         passos: [],
         aproximada: true,
       };
     }
-  botaoRota.removeAttribute('aria-busy');
-  if (estado.selecionadoId !== ponto.id) return; // usuário trocou de ponto no meio do caminho
-  area.innerHTML = renderizarRota(rota, modo, { deMim: Boolean(deMim) });
+  // tempo de cada meio sobre o caminho encontrado
+  const semTempo = rota.minutos === undefined || rota.minutos === null;
+  if (meio.id === 'bicicleta' && (rota.aproximada || !deMim))
+    rota.minutos = temposPorMeio(rota.distanciaKm).bicicleta; // caminho a pé, no ritmo da bicicleta
+  else if (meio.fatorSobreCarro && !semTempo && !rota.aproximada)
+    rota.minutos = rota.minutos * meio.fatorSobreCarro;
+  if (semTempo || rota.aproximada) rota.minutos = temposPorMeio(rota.distanciaKm)[meio.id];
+  rota.minutos = Math.max(1, Math.round(rota.minutos));
+
+  if (estado.selecionadoId !== ponto.id) return; // a pessoa trocou de lugar no meio do cálculo
+  area.innerHTML = renderizarRota(rota, meio.id, { deMim: Boolean(deMim) });
+  const tempo = el.detalhes.querySelector(`[data-tempo-meio="${meio.id}"]`);
+  if (tempo) tempo.textContent = `${rota.minutos} min`;
+  const link = el.detalhes.querySelector('[data-link-google]');
+  if (link) link.href = linkComoChegar(origem, ponto.coordenadas, meio.google);
+  const minutos =
+    rota.minutos < 60
+      ? `${rota.minutos} min`
+      : `${Math.floor(rota.minutos / 60)} h ${rota.minutos % 60} min`;
   mapa?.desenharRota(
     rota.coordenadas,
     deMim ? '#1a73e8' : ponto.categoriaInfo.cor,
-    `${formatarDistanciaCurta(rota.distanciaKm)} · ${rota.minutos < 60 ? `${Math.max(1, Math.round(rota.minutos))} min` : `${Math.floor(rota.minutos / 60)} h ${Math.round(rota.minutos % 60)} min`}${modo === 'a-pe' ? ' a pé' : ' de carro'}`,
+    `${formatarDistanciaCurta(rota.distanciaKm)} · ${minutos} ${meio.nome.toLowerCase()}`,
   );
-});
-
-// Esc fecha o painel de detalhes (quando o foco está nele)
-el.detalhes.addEventListener('keydown', (evento) => {
-  if (evento.key === 'Escape' && !el.detalhes.classList.contains('detalhes--vazio'))
-    fecharDetalhes();
-});
+}
 
 /* ---------- Atalhos de vista ---------- */
 document

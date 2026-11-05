@@ -105,19 +105,24 @@ export function criarPaginador({ leitor, texto, aoPrecisarDeOutroCapitulo, minut
     else if (fracao < 0.3) anterior();
     else document.body.classList.toggle('leitura-sem-ferramentas');
   });
-  // roda do mouse/trackpad vira a página (com intervalo, para não pular várias)
-  let ultimaRoda = 0;
+  // roda do mouse/trackpad: vira UMA página por gesto. O trackpad continua
+  // mandando eventos por um tempo depois que o dedo sai (inércia) — esses
+  // eventos fazem parte do mesmo gesto e são ignorados.
+  let ultimoEventoRoda = 0;
+  let gestoJaVirou = false;
   texto.addEventListener(
     'wheel',
     (evento) => {
       if (!ativo) return;
       evento.preventDefault();
       const agora = performance.now();
-      if (agora - ultimaRoda < 450) return;
+      if (agora - ultimoEventoRoda > 300) gestoJaVirou = false; // começou um gesto novo
+      ultimoEventoRoda = agora;
+      if (gestoJaVirou) return;
       const delta =
         Math.abs(evento.deltaY) > Math.abs(evento.deltaX) ? evento.deltaY : evento.deltaX;
-      if (Math.abs(delta) < 8) return;
-      ultimaRoda = agora;
+      if (Math.abs(delta) < 15) return;
+      gestoJaVirou = true;
       if (delta > 0) proxima();
       else anterior();
     },

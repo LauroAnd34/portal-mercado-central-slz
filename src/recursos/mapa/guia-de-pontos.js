@@ -13,6 +13,7 @@ import {
   linkComoChegar,
 } from './geografia.js';
 import { escaparHtml } from '../../nucleo/dom.js';
+import { MEIOS } from './meios-de-transporte.js';
 
 const normalizar = (texto) => texto.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 
@@ -84,55 +85,73 @@ export function renderizarItem(ponto, selecionado) {
     </li>`;
 }
 
-/** HTML do painel de detalhes. */
-export function renderizarDetalhes(ponto, mercado, foto = null, deMim = null) {
-  const modo = ponto.modoSugerido;
+/** HTML do painel de detalhes: o lugar e o "Como chegar" (origem + meio de transporte). */
+export function renderizarDetalhes(ponto, mercado, foto = null, deMim = null, comoChegar = {}) {
+  const { origem = 'mercado', meio = 'a-pe', tempos = {} } = comoChegar;
   const figura = foto
     ? `<figure class="detalhes__foto"><img src="${foto.url}"${foto.srcset ? ` srcset="${foto.srcset}" sizes="380px"` : ''} alt="${escaparHtml(foto.lugar)}" width="900" height="600" />
         <figcaption>Foto: ${escaparHtml(foto.autor)} · ${escaparHtml(foto.licenca)}</figcaption></figure>`
     : '';
-  return `${figura}
+  const distancias = [
+    deMim ? `<strong>${formatarDistancia(deMim.distanciaKm)} de você</strong>` : '',
+    `${formatarDistancia(ponto.distanciaKm)} do Mercado`,
+  ]
+    .filter(Boolean)
+    .join(' · ');
+  const origens = deMim
+    ? `<div class="segmentos segmentos--origem" role="group" aria-label="Saindo de">
+        <button type="button" class="segmento" data-origem="mim" aria-pressed="${origem === 'mim'}">De onde estou</button>
+        <button type="button" class="segmento" data-origem="mercado" aria-pressed="${origem === 'mercado'}">Do Mercado</button>
+      </div>`
+    : '';
+  const meios = MEIOS.map(
+    (m) => `<button type="button" class="meio" data-meio="${m.id}" aria-pressed="${m.id === meio}">
+        ${m.icone}<span class="meio__nome">${m.nome}</span><span class="meio__tempo" data-tempo-meio="${m.id}">${tempos[m.id] ? formatarDuracao(tempos[m.id]) : '…'}</span>
+      </button>`,
+  ).join('');
+  const meioAtual = MEIOS.find((m) => m.id === meio) ?? MEIOS[0];
+  const linkGoogle = linkComoChegar(
+    origem === 'mim' && deMim ? deMim.coordenadas : mercado.coordenadas,
+    ponto.coordenadas,
+    meioAtual.google,
+  );
+  return `
     <div class="detalhes__cabecalho" style="--cor-categoria:${ponto.categoriaInfo.cor}">
       <span class="detalhes__categoria">${escaparHtml(ponto.categoriaInfo.nome)}</span>
       <h3 id="detalhes-titulo" tabindex="-1">${escaparHtml(ponto.nome)}</h3>
-      <p class="detalhes__endereco">${escaparHtml(ponto.endereco)}</p>
+      <p class="detalhes__endereco">${distancias}</p>
     </div>
+    <section class="como-chegar" aria-labelledby="como-chegar-titulo">
+      <h4 id="como-chegar-titulo" class="como-chegar__titulo">Como chegar</h4>
+      ${origens}
+      <div class="meios" role="group" aria-label="Meio de transporte">${meios}</div>
+      <div class="detalhes__rota" data-area-rota aria-live="polite"></div>
+    </section>
+    ${figura}
     <p>${escaparHtml(ponto.descricao)}</p>
-    <dl class="detalhes__dados">
-      ${deMim ? `<div class="detalhes__de-mim"><dt>Distância de você</dt><dd>${formatarDistancia(deMim.distanciaKm)} em linha reta</dd></div>` : ''}
-      <div><dt>Distância do Mercado</dt><dd>${formatarDistancia(ponto.distanciaKm)} ${ponto.pelasRuas ? 'pelo caminho a pé' : 'em linha reta'}, a ${ponto.direcao}</dd></div>
-      <div><dt>A pé</dt><dd>${formatarDuracao(ponto.tempos.aPeMinutos)}</dd></div>
-      <div><dt>De carro</dt><dd>${formatarDuracao(ponto.tempos.carroMinutos)}</dd></div>
-      <div><dt>Acessibilidade do local</dt><dd>Informações em levantamento pela Prefeitura.</dd></div>
-    </dl>
-    <div class="detalhes__acoes">
-      ${deMim ? '<button type="button" class="botao botao--de-mim" data-tracar-rota="de-mim">Rota saindo de onde estou</button>' : ''}
-      <button type="button" class="botao${deMim ? ' botao--contorno' : ''}" data-tracar-rota="a-pe">Rota a pé do Mercado</button>
-      <button type="button" class="botao botao--contorno" data-tracar-rota="carro">Rota de carro do Mercado</button>
-      <button type="button" class="botao botao--texto" data-ouvir-ponto>Ouvir descrição</button>
-      <a class="botao botao--texto" href="${linkComoChegar(deMim?.coordenadas ?? mercado.coordenadas, ponto.coordenadas, deMim ? (deMim.distanciaKm < 2.5 ? 'a-pe' : 'carro') : modo)}" target="_blank" rel="noopener">
-        Abrir no Google Maps<span class="somente-leitor"> (abre em nova aba)</span>
-      </a>
-    </div>
-    <div class="detalhes__rota" data-area-rota aria-live="polite"></div>`;
+    <div class="detalhes__mais">
+      <button type="button" class="botao botao--texto botao--pequeno" data-ouvir-ponto>Ouvir</button>
+      <button type="button" class="botao botao--texto botao--pequeno" data-copiar-link>Compartilhar</button>
+      <a class="botao botao--texto botao--pequeno" data-link-google href="${linkGoogle}" target="_blank" rel="noopener">Abrir no Google Maps<span class="somente-leitor"> (abre em nova aba)</span></a>
+    </div>`;
 }
 
-/** HTML da rota passo a passo. */
-export function renderizarRota(rota, modo, { deMim = false } = {}) {
-  const titulo = `${modo === 'a-pe' ? 'Caminho a pé' : 'Caminho de carro'}${deMim ? ' saindo de onde você está' : ' saindo do Mercado'}`;
+/** HTML da rota: resumo + passo a passo recolhido. */
+export function renderizarRota(rota, meio, { deMim = false } = {}) {
+  const nome = (MEIOS.find((m) => m.id === meio)?.nome ?? 'A pé').toLowerCase();
   const aviso = rota.aproximada
-    ? '<p class="detalhes__aviso">Não foi possível calcular a rota pelas ruas agora (sem internet ou serviço indisponível). Mostramos a direção em linha reta.</p>'
+    ? '<p class="detalhes__aviso">Sem conexão com o serviço de rotas: o mapa mostra a direção em linha reta e o tempo é estimado.</p>'
     : '';
   const passos = rota.passos?.length
-    ? `<ol class="passos">${rota.passos
+    ? `<details class="detalhes__passo-a-passo"><summary>Ver o caminho passo a passo</summary><ol class="passos">${rota.passos
         .map(
           (p) =>
             `<li>${escaparHtml(p.texto)}${p.distanciaM ? ` <span class="passos__distancia">— ${formatarDistancia(p.distanciaM / 1000)}</span>` : ''}</li>`,
         )
-        .join('')}</ol>`
+        .join('')}</ol></details>`
     : '';
   return `
-    <h4>${titulo}: ${formatarDistancia(rota.distanciaKm)}, ${formatarDuracao(rota.minutos)}</h4>
+    <p class="detalhes__resumo-rota"><strong>${formatarDuracao(rota.minutos)}</strong> ${nome} · ${formatarDistancia(rota.distanciaKm)} ${deMim ? 'saindo de onde você está' : 'saindo do Mercado'}</p>
     ${aviso}${passos}`;
 }
 

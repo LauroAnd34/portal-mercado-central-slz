@@ -6,6 +6,7 @@
 
 const SERVIDORES = {
   'a-pe': 'https://routing.openstreetmap.de/routed-foot/route/v1/foot',
+  bicicleta: 'https://routing.openstreetmap.de/routed-bike/route/v1/bike',
   carro: 'https://routing.openstreetmap.de/routed-car/route/v1/driving',
 };
 

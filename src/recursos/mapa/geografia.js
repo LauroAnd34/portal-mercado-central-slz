@@ -72,7 +72,9 @@ export function linkComoChegar(origem, destino, modo = 'a-pe') {
     api: '1',
     origin: origem.join(','),
     destination: destino.join(','),
-    travelmode: modo === 'a-pe' ? 'walking' : 'driving',
+    travelmode:
+      { 'a-pe': 'walking', carro: 'driving' }[modo] ??
+      (['walking', 'bicycling', 'driving', 'transit'].includes(modo) ? modo : 'driving'),
   });
   return `https://www.google.com/maps/dir/?${parametros}`;
 }

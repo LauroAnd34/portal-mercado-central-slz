@@ -45,6 +45,36 @@ export function criarMapaInterativo(elemento, { mercado, pontos, categorias, aoS
   mapa.on('click', () => mapa.scrollWheelZoom.enable());
   mapa.on('mouseout', () => mapa.scrollWheelZoom.disable());
 
+  /* Pinça no trackpad do computador (chega como Ctrl + roda) e no Safari do Mac
+     (gesturechange): aproxima e afasta o mapa sem dar zoom na página inteira. */
+  let acumulado = 0;
+  elemento.addEventListener(
+    'wheel',
+    (evento) => {
+      if (!evento.ctrlKey && !evento.metaKey) return;
+      evento.preventDefault();
+      evento.stopPropagation();
+      acumulado += -evento.deltaY * 0.012;
+      if (Math.abs(acumulado) < 0.5) return;
+      const passo = Math.sign(acumulado);
+      acumulado = 0;
+      mapa.setZoomAround(mapa.mouseEventToContainerPoint(evento), mapa.getZoom() + passo);
+    },
+    { passive: false, capture: true },
+  );
+  let escalaInicial = 1;
+  let zoomInicial = 0;
+  elemento.addEventListener('gesturestart', (evento) => {
+    evento.preventDefault();
+    escalaInicial = evento.scale;
+    zoomInicial = mapa.getZoom();
+  });
+  elemento.addEventListener('gesturechange', (evento) => {
+    evento.preventDefault();
+    const alvo = Math.round(zoomInicial + Math.log2(evento.scale / escalaInicial));
+    if (alvo !== mapa.getZoom()) mapa.setZoom(alvo);
+  });
+
   /* ---------- Camada de fundo ---------- */
   const fundo = L.tileLayer(URL_MAPA_DE_FUNDO, { attribution: ATRIBUICAO, maxZoom: 19 }).addTo(
     mapa,
@@ -380,6 +410,22 @@ export function criarMapaInterativo(elemento, { mercado, pontos, categorias, aoS
   api.mostrarIlhaInteira();
   ajustarPeloZoom();
   api.adicionarBotaoTelaCheia();
+  // botão único no mapa para voltar a ver tudo (ilha inteira com o Mercado)
+  const Controle = L.Control.extend({
+    options: { position: 'topright' },
+    onAdd() {
+      const botao = L.DomUtil.create('button', 'mapa__tela-cheia');
+      botao.type = 'button';
+      botao.title = 'Ver a ilha inteira';
+      botao.setAttribute('aria-label', 'Ver a ilha inteira');
+      botao.innerHTML =
+        '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M3 9V3h6M21 9V3h-6M3 15v6h6M21 15v6h-6M12 8v8M8 12h8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>';
+      L.DomEvent.disableClickPropagation(botao);
+      L.DomEvent.on(botao, 'click', () => api.mostrarIlhaInteira());
+      return botao;
+    },
+  });
+  new Controle().addTo(mapa);
   return api;
 }
 
