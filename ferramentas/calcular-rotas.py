@@ -78,6 +78,12 @@ def main():
         resultado['roteiros'][roteiro['id']] = buscar(coords, roteiro['modo'])
     destino = RAIZ / 'src' / 'dados' / 'rotas-calculadas.json'
     destino.write_text(json.dumps(resultado, ensure_ascii=False, separators=(',', ':')), encoding='utf8')
+    # resumo leve (só distância e tempo) para a página inicial, que não precisa dos caminhos
+    resumo = {
+        id_ponto: {modo: {'km': round(r['distancia'] / 1000, 3), 'min': round(r['duracao'] / 60, 1)} for modo, r in modos.items()}
+        for id_ponto, modos in resultado['pontos'].items()
+    }
+    (RAIZ / 'src' / 'dados' / 'resumo-das-rotas.json').write_text(json.dumps(resumo, separators=(',', ':')), encoding='utf8')
     print(f'Salvo em {destino} ({destino.stat().st_size // 1024} KB)')
 
 if __name__ == '__main__':

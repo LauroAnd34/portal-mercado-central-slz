@@ -1,0 +1,25 @@
+.visitante__aviso {
+  margin-top: var(--e-4);
+  padding: var(--e-3) var(--e-4);
+  border-left: 4px solid var(--cor-destaque, #f2b400);
+  background: var(--cor-fundo-suave);
+  border-radius: var(--raio);
+  font-size: var(--texto-sm);
+}
+.visitante__grade {
+  display: grid;
+  gap: var(--e-4);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+}
+.visitante__grade article {
+  padding: var(--e-4);
+  background: var(--cor-fundo-suave);
+  border-radius: var(--raio);
+}
+.visitante__grade h2 {
+  font-size: var(--texto-lg);
+  margin-top: 0;
+}
+.visitante__linhas {
+  font-weight: 700;
+}

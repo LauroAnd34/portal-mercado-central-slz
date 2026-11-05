@@ -494,7 +494,7 @@
 }
 
 .pagina-mapa .cabecalho-pagina {
-  --foto-topo: url('../../imagens/fotos/praia-grande-casarios.jpg');
+  --foto-topo: url('../../imagens/fotos/praia-grande-casarios-960.webp');
 }
 
 .detalhes__foto {
@@ -1082,4 +1082,29 @@
   margin-top: var(--e-3);
   padding-top: var(--e-3);
   border-top: 1px solid var(--cor-borda);
+}
+.meios {
+  grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
+}
+.onibus {
+  display: grid;
+  gap: var(--e-2);
+  margin: var(--e-2) 0;
+}
+.onibus div {
+  padding: var(--e-2) var(--e-3);
+  border-left: 4px solid #8a5a00;
+  background: var(--cor-fundo-suave);
+  border-radius: var(--raio);
+}
+.onibus dt {
+  font-weight: 700;
+}
+.onibus dd {
+  margin: 2px 0 0;
+  font-size: var(--texto-sm);
+}
+.onibus__fonte {
+  font-size: var(--texto-xs);
+  color: var(--cor-texto-suave);
 }

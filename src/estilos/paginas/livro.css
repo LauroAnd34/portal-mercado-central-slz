@@ -41,13 +41,13 @@
     ),
     /* painel de azulejos no meio da capa, faixas azuis para o texto */
     linear-gradient(
-      180deg,
-      var(--marca-marinho-700) 0 13%,
-      rgb(255 255 255 / 0.9) 13% calc(13% + 3px),
-      transparent calc(13% + 3px) calc(36% - 3px),
-      rgb(255 255 255 / 0.9) calc(36% - 3px) 36%,
-      var(--marca-marinho-700) 36%
-    ),
+        180deg,
+        var(--marca-marinho-700) 0 13%,
+        rgb(255 255 255 / 0.9) 13% calc(13% + 3px),
+        transparent calc(13% + 3px) calc(36% - 3px),
+        rgb(255 255 255 / 0.9) calc(36% - 3px) 36%,
+        var(--marca-marinho-700) 36%
+      ),
     url('../../imagens/azulejos/faixa-estrelas.webp');
   background-size:
     auto,
@@ -966,8 +966,8 @@ mark {
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 0 var(--e-2);
-  padding: var(--e-2) max(12px, env(safe-area-inset-right)) max(var(--e-2), env(safe-area-inset-bottom))
-    max(12px, env(safe-area-inset-left));
+  padding: var(--e-2) max(12px, env(safe-area-inset-right))
+    max(var(--e-2), env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
   background: var(--leitor-fundo);
   color: var(--leitor-texto);
   border-top: 1px solid var(--leitor-borda);

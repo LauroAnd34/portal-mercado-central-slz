@@ -1,3 +1,4 @@
+import { minutosPorDistancia } from '../src/recursos/mapa/meios-de-transporte.js';
 import { describe, it, expect } from 'vitest';
 import {
   calcularDistanciaKm,
@@ -18,11 +19,17 @@ describe('geografia', () => {
   it('distância de um ponto para ele mesmo é zero', () => {
     expect(calcularDistanciaKm([-2.5, -44.3], [-2.5, -44.3])).toBe(0);
   });
-  it('estima tempos a pé e de carro com no mínimo 1 minuto', () => {
-    expect(estimarTempos(0)).toEqual({ aPeMinutos: 1, carroMinutos: 1 });
+  it('estima tempos a pé e de carro (mínimo 1 min; carro inclui sair e estacionar)', () => {
+    expect(estimarTempos(0)).toEqual({ aPeMinutos: 1, carroMinutos: 2 });
     const { aPeMinutos, carroMinutos } = estimarTempos(4.5);
-    expect(aPeMinutos).toBe(78);
+    expect(aPeMinutos).toBe(76);
     expect(carroMinutos).toBeLessThan(aPeMinutos);
+  });
+  it('tempo de carro parecido com o do Google Maps em viagem longa', () => {
+    // ~32 km pelas ruas até São José de Ribamar: Google Maps ≈ 1h05–1h10
+    const minutos = minutosPorDistancia('carro', 32);
+    expect(minutos).toBeGreaterThanOrEqual(60);
+    expect(minutos).toBeLessThanOrEqual(75);
   });
   it('sugere ir a pé apenas em distâncias curtas', () => {
     expect(sugerirModo(1)).toBe('a-pe');
