@@ -294,3 +294,10 @@ kbd {
   background: transparent;
   cursor: pointer;
 }
+.menu__idiomas {
+  display: flex;
+  gap: 2px;
+}
+.menu__idiomas abbr {
+  text-decoration: none;
+}

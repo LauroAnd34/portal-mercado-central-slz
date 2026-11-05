@@ -5,21 +5,25 @@
  */
 import { PONTOS_TURISTICOS, CATEGORIAS, MERCADO_CENTRAL } from '../../dados/pontos-turisticos.js';
 import { FOTO_DO_PONTO, urlDaFoto, srcsetDaFoto } from '../../dados/fotos.js';
-import { rotaGuardadaDoPonto } from '../mapa/rotas-guardadas.js';
+import resumo from '../../dados/resumo-das-rotas.json'; // só distância e tempo (leve)
 import { calcularDistanciaKm, formatarDistancia, formatarDuracao } from '../mapa/geografia.js';
 import { escaparHtml } from '../../nucleo/dom.js';
+import { minutosPorDistancia } from '../mapa/meios-de-transporte.js';
 
 export function montarCaminhos(lista) {
   const itens = PONTOS_TURISTICOS.filter((p) => FOTO_DO_PONTO[p.id])
     .map((p) => {
-      const aPe = rotaGuardadaDoPonto(p.id, 'a-pe');
-      const carro = rotaGuardadaDoPonto(p.id, 'carro');
+      const aPe = resumo[p.id]?.['a-pe'] && {
+        distanciaKm: resumo[p.id]['a-pe'].km,
+        minutos: resumo[p.id]['a-pe'].min,
+      };
       const km =
         aPe?.distanciaKm ?? calcularDistanciaKm(MERCADO_CENTRAL.coordenadas, p.coordenadas);
+      const kmCarro = resumo[p.id]?.carro?.km ?? km;
       const tempo =
-        km <= 2.5
-          ? `${formatarDuracao(aPe?.minutos ?? km * 13)} a pé`
-          : `${formatarDuracao(carro?.minutos ?? km * 3)} de carro`;
+        km <= 1.5
+          ? `${formatarDuracao(minutosPorDistancia('a-pe', km))} a pé`
+          : `${formatarDuracao(minutosPorDistancia('carro', kmCarro))} de carro`;
       return { ...p, km, tempo };
     })
     .sort((a, b) => a.km - b.km);

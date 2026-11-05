@@ -1,6 +1,7 @@
 /**
  * Cálculos geográficos puros (sem mapa, sem DOM) — testados em testes/.
  */
+import { minutosPorDistancia } from './meios-de-transporte.js';
 
 const RAIO_DA_TERRA_KM = 6371;
 const grausParaRadianos = (graus) => (graus * Math.PI) / 180;
@@ -21,10 +22,11 @@ export function calcularDistanciaKm([lat1, lon1], [lat2, lon2]) {
  * (média urbana). É só uma referência — a rota real é calculada sob demanda.
  */
 export function estimarTempos(distanciaKm) {
+  // sem rota pelas ruas: o caminho real costuma ser ~30% maior que a linha reta
   const real = distanciaKm * 1.3;
   return {
-    aPeMinutos: Math.max(1, Math.round((real / 4.5) * 60)),
-    carroMinutos: Math.max(1, Math.round((real / 25) * 60)),
+    aPeMinutos: minutosPorDistancia('a-pe', real),
+    carroMinutos: minutosPorDistancia('carro', real),
   };
 }
 

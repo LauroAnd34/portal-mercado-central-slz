@@ -13,7 +13,7 @@ import {
   linkComoChegar,
 } from './geografia.js';
 import { escaparHtml } from '../../nucleo/dom.js';
-import { MEIOS } from './meios-de-transporte.js';
+import { MEIOS, minutosPorDistancia } from './meios-de-transporte.js';
 
 const normalizar = (texto) => texto.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 
@@ -35,9 +35,12 @@ export function prepararPontos(pontos, mercado, categorias, obterRota = () => nu
         categoriaInfo: categorias[ponto.categoria],
         distanciaKm,
         pelasRuas: Boolean(aPe),
+        distanciaCarroKm: carro?.distanciaKm ?? emLinhaReta * 1.3,
         tempos: {
-          aPeMinutos: Math.max(1, Math.round(aPe?.minutos ?? estimados.aPeMinutos)),
-          carroMinutos: Math.max(1, Math.round(carro?.minutos ?? estimados.carroMinutos)),
+          aPeMinutos: aPe ? minutosPorDistancia('a-pe', aPe.distanciaKm) : estimados.aPeMinutos,
+          carroMinutos: carro
+            ? minutosPorDistancia('carro', carro.distanciaKm)
+            : estimados.carroMinutos,
         },
         modoSugerido: sugerirModo(distanciaKm),
         direcao: direcaoCardeal(mercado.coordenadas, ponto.coordenadas),
@@ -93,7 +96,7 @@ export function renderizarDetalhes(ponto, mercado, foto = null, deMim = null, co
         <figcaption>Foto: ${escaparHtml(foto.autor)} · ${escaparHtml(foto.licenca)}</figcaption></figure>`
     : '';
   const distancias = [
-    deMim ? `<strong>${formatarDistancia(deMim.distanciaKm)} de você</strong>` : '',
+    deMim ? `<strong>${formatarDistancia(deMim.distanciaKm)} de você</strong> (em linha reta)` : '',
     `${formatarDistancia(ponto.distanciaKm)} do Mercado`,
   ]
     .filter(Boolean)
@@ -106,7 +109,7 @@ export function renderizarDetalhes(ponto, mercado, foto = null, deMim = null, co
     : '';
   const meios = MEIOS.map(
     (m) => `<button type="button" class="meio" data-meio="${m.id}" aria-pressed="${m.id === meio}">
-        ${m.icone}<span class="meio__nome">${m.nome}</span><span class="meio__tempo" data-tempo-meio="${m.id}">${tempos[m.id] ? formatarDuracao(tempos[m.id]) : '…'}</span>
+        ${m.icone}<span class="meio__nome">${m.nome}</span><span class="meio__tempo" data-tempo-meio="${m.id}">${tempos[m.id] ? formatarDuracao(tempos[m.id]) : m.servico ? '…' : 'linhas'}</span>
       </button>`,
   ).join('');
   const meioAtual = MEIOS.find((m) => m.id === meio) ?? MEIOS[0];
@@ -212,4 +215,15 @@ export function renderizarDetalhesRoteiro(roteiro, paradas, rota) {
         .join('')}
     </ol>
     ${passos}`;
+}
+
+/** Painel do ônibus: parada do Mercado, linhas e terminal (sem tempo, que depende da linha). */
+export function renderizarOnibus(onibus, linkTransporte) {
+  return `
+    <p class="detalhes__resumo-rota"><strong>Ônibus:</strong> paradas perto do Mercado. O tempo depende da linha e do trânsito.</p>
+    <dl class="onibus">
+      <div><dt>Parada ${escaparHtml(onibus.parada.nome)}</dt><dd>${escaparHtml(onibus.parada.endereco)}. Linhas: <strong>${onibus.parada.linhas.join(', ')}</strong></dd></div>
+      <div><dt>${escaparHtml(onibus.terminal.nome)}</dt><dd>${escaparHtml(onibus.terminal.endereco)}. ${escaparHtml(onibus.terminal.texto)}</dd></div>
+    </dl>
+    <p class="onibus__fonte">Linhas segundo o <a href="${onibus.fonte.url}" target="_blank" rel="noopener">${onibus.fonte.nome}<span class="somente-leitor"> (abre em nova aba)</span></a>; podem mudar. <a href="${linkTransporte}" target="_blank" rel="noopener">Ver horários e trajeto no Google Maps<span class="somente-leitor"> (abre em nova aba)</span></a></p>`;
 }

@@ -21,9 +21,16 @@ import {
   textoDeResumo,
   renderizarCartaoRoteiro,
   renderizarDetalhesRoteiro,
+  renderizarOnibus,
 } from '../recursos/mapa/guia-de-pontos.js';
+import { ONIBUS } from '../dados/onibus.js';
 import { anunciar } from '../nucleo/anunciador.js';
-import { meioPorId, temposPorMeio, meioSugerido } from '../recursos/mapa/meios-de-transporte.js';
+import {
+  meioPorId,
+  temposPorMeio,
+  meioSugerido,
+  minutosPorDistancia,
+} from '../recursos/mapa/meios-de-transporte.js';
 import { falar, pararFala } from '../nucleo/voz.js';
 import { escaparHtml, focarProgramaticamente } from '../nucleo/dom.js';
 
@@ -178,17 +185,10 @@ function selecionar(id, { origem }) {
   if (!deMim && estado.origemRota === 'mim') estado.origemRota = 'mercado';
   if (deMim && origem !== 'endereco' && !estado.origemEscolhida) estado.origemRota = 'mim';
   const doMercado = estado.origemRota !== 'mim';
-  const distanciaRuas = doMercado ? ponto.distanciaKm : deMim.distanciaKm * 1.3;
-  if (!estado.meioEscolhido) estado.meio = meioSugerido(distanciaRuas);
-  const tempos = temposPorMeio(
-    distanciaRuas,
-    doMercado
-      ? {
-          'a-pe': rotaGuardadaDoPonto(ponto.id, 'a-pe')?.minutos ?? ponto.tempos.aPeMinutos,
-          carro: rotaGuardadaDoPonto(ponto.id, 'carro')?.minutos ?? ponto.tempos.carroMinutos,
-        }
-      : {},
-  );
+  const kmPe = doMercado ? ponto.distanciaKm : deMim.distanciaKm * 1.3;
+  const kmCarro = doMercado ? ponto.distanciaCarroKm : deMim.distanciaKm * 1.3;
+  if (!estado.meioEscolhido) estado.meio = meioSugerido(kmPe);
+  const tempos = temposPorMeio(kmPe, kmCarro);
   el.detalhes.innerHTML =
     BARRA_DETALHES +
     renderizarDetalhes(ponto, MERCADO_CENTRAL, foto, deMim, {
@@ -281,6 +281,19 @@ async function tracarRota(ponto) {
   const distanciaReta = calcularDistanciaKm(origem, ponto.coordenadas);
   const area = el.detalhes.querySelector('[data-area-rota]');
   if (!area) return;
+  if (!meio.servico) {
+    // ônibus: linhas e paradas perto do Mercado
+    const linkOnibus = linkComoChegar(origem, ponto.coordenadas, 'transit');
+    area.innerHTML = renderizarOnibus(ONIBUS, linkOnibus);
+    const link = el.detalhes.querySelector('[data-link-google]');
+    if (link) link.href = linkOnibus;
+    mapa?.desenharRota(
+      [ONIBUS.parada.coordenadas, MERCADO_CENTRAL.coordenadas],
+      '#8a5a00',
+      'Parada de ônibus',
+    );
+    return;
+  }
   area.innerHTML = '<p class="detalhes__carregando">Calculando o caminho…</p>';
 
   let rota = null;
@@ -299,14 +312,8 @@ async function tracarRota(ponto) {
         aproximada: true,
       };
     }
-  // tempo de cada meio sobre o caminho encontrado
-  const semTempo = rota.minutos === undefined || rota.minutos === null;
-  if (meio.id === 'bicicleta' && (rota.aproximada || !deMim))
-    rota.minutos = temposPorMeio(rota.distanciaKm).bicicleta; // caminho a pé, no ritmo da bicicleta
-  else if (meio.fatorSobreCarro && !semTempo && !rota.aproximada)
-    rota.minutos = rota.minutos * meio.fatorSobreCarro;
-  if (semTempo || rota.aproximada) rota.minutos = temposPorMeio(rota.distanciaKm)[meio.id];
-  rota.minutos = Math.max(1, Math.round(rota.minutos));
+  // tempo pela distância das ruas, com a velocidade média real de cada meio em São Luís
+  rota.minutos = minutosPorDistancia(meio.id, rota.distanciaKm);
 
   if (estado.selecionadoId !== ponto.id) return; // a pessoa trocou de lugar no meio do cálculo
   area.innerHTML = renderizarRota(rota, meio.id, { deMim: Boolean(deMim) });
@@ -499,6 +506,10 @@ if (listaRoteiros) {
         };
       }
     botao.removeAttribute('aria-busy');
+    rota.minutos = minutosPorDistancia(
+      roteiro.modo === 'a-pe' ? 'a-pe' : 'carro',
+      rota.distanciaKm,
+    );
     estado.roteiro = { roteiro, paradas, ouvidas: new Set(), proxima: 0 };
     pararPasseio();
     el.detalhes.innerHTML =
