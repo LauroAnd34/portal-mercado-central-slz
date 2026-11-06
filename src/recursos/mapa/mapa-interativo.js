@@ -93,7 +93,11 @@ export function criarMapaInterativo(elemento, { mercado, pontos, categorias, aoS
   /** Margens para enquadrar sem esconder nada atrás do painel de detalhes. */
   const margens = () => {
     const painel = elemento.parentElement?.querySelector('.detalhes:not([hidden])');
-    const sobreposto = painel && getComputedStyle(painel).position === 'absolute';
+    const posicao = painel && getComputedStyle(painel).position;
+    // celular: o painel é uma gaveta embaixo — o caminho fica na parte de cima do mapa
+    if (posicao === 'fixed')
+      return { paddingTopLeft: [40, 70], paddingBottomRight: [40, painel.offsetHeight + 30] };
+    const sobreposto = posicao === 'absolute';
     const largura = sobreposto ? painel.offsetWidth + 40 : 60;
     return { paddingTopLeft: [largura, 60], paddingBottomRight: [60, 60] };
   };
@@ -268,7 +272,7 @@ export function criarMapaInterativo(elemento, { mercado, pontos, categorias, aoS
       const Controle = L.Control.extend({
         options: { position: 'topright' },
         onAdd() {
-          const botao = L.DomUtil.create('button', 'mapa__tela-cheia');
+          const botao = L.DomUtil.create('button', 'mapa__tela-cheia mapa__expandir');
           botao.type = 'button';
           const atualizar = () => {
             const cheio = document.fullscreenElement === palco;
@@ -414,7 +418,7 @@ export function criarMapaInterativo(elemento, { mercado, pontos, categorias, aoS
   const Controle = L.Control.extend({
     options: { position: 'topright' },
     onAdd() {
-      const botao = L.DomUtil.create('button', 'mapa__tela-cheia');
+      const botao = L.DomUtil.create('button', 'mapa__tela-cheia mapa__ilha');
       botao.type = 'button';
       botao.title = 'Ver a ilha inteira';
       botao.setAttribute('aria-label', 'Ver a ilha inteira');

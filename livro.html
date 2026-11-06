@@ -192,266 +192,406 @@
           </header>
 
           <div class="leitor" data-leitor>
-            <!-- Barra de ferramentas do leitor -->
-            <div class="leitor__barra" role="group" aria-label="Ferramentas do leitor">
+            <!-- Topo da leitura em tela cheia: fechar, capítulo atual e marcar página -->
+            <div class="leitor__topo" data-topo-leitura>
               <button
                 type="button"
-                class="botao botao--contorno botao--pequeno leitor__alternar-sumario"
-                aria-expanded="true"
-                aria-controls="leitor-sumario"
-                data-alternar-sumario
+                class="leitor__icone-botao"
+                data-sair-foco
+                aria-label="Fechar a leitura em tela cheia"
               >
-                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24">
+                <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
                   <path
-                    d="M4 6h16M4 12h16M4 18h10"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                  />
-                </svg>
-                Sumário
-              </button>
-              <button
-                type="button"
-                class="botao botao--contorno botao--pequeno"
-                aria-expanded="false"
-                aria-controls="leitor-ajustes"
-                data-alternar-ajustes
-              >
-                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24">
-                  <text
-                    x="2"
-                    y="18"
-                    font-size="15"
-                    font-weight="800"
-                    fill="currentColor"
-                    font-family="Arial"
-                  >
-                    A
-                  </text>
-                  <text
-                    x="13"
-                    y="18"
-                    font-size="10"
-                    font-weight="800"
-                    fill="currentColor"
-                    font-family="Arial"
-                  >
-                    A
-                  </text>
-                </svg>
-                Ajustes de leitura
-              </button>
-              <button
-                type="button"
-                class="botao botao--contorno botao--pequeno"
-                aria-expanded="false"
-                aria-controls="leitor-busca"
-                data-alternar-busca
-              >
-                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24">
-                  <circle
-                    cx="10.5"
-                    cy="10.5"
-                    r="6.5"
+                    d="M15 5l-7 7 7 7"
                     fill="none"
                     stroke="currentColor"
                     stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
                   />
+                </svg>
+              </button>
+              <p class="leitor__topo-titulo" data-titulo-topo></p>
+              <button
+                type="button"
+                class="leitor__icone-botao"
+                data-marcar-rapido
+                aria-label="Marcar esta página"
+              >
+                <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
                   <path
-                    d="m15.5 15.5 5 5"
+                    d="M6 3h12v18l-6-4-6 4z"
+                    fill="none"
                     stroke="currentColor"
                     stroke-width="2"
                     stroke-linecap="round"
+                    stroke-linejoin="round"
                   />
                 </svg>
-                Buscar no livro
               </button>
+            </div>
+
+            <!-- Barra de ferramentas do leitor (embaixo, como num aplicativo de leitura) -->
+            <div class="leitor__barra" role="group" aria-label="Ferramentas do leitor">
               <button
                 type="button"
-                class="botao botao--contorno botao--pequeno"
+                class="ferramenta ferramenta--tela-cheia"
                 aria-pressed="false"
                 data-modo-foco
               >
-                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24">
+                <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
                   <path
                     d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"
                     fill="none"
                     stroke="currentColor"
                     stroke-width="2"
                     stroke-linecap="round"
-                  />
-                </svg>
-                <span data-texto-foco>Tela cheia</span>
-              </button>
-              <button
-                type="button"
-                class="botao botao--contorno botao--pequeno leitor__so-tela-cheia"
-                aria-pressed="true"
-                data-alternar-paginas
-              >
-                Páginas
-              </button>
-              <button
-                type="button"
-                class="botao botao--contorno botao--pequeno leitor__so-tela-cheia"
-                aria-pressed="false"
-                aria-controls="leitor-voz"
-                data-alternar-voz
-              >
-                Ouvir
-              </button>
-              <button
-                type="button"
-                class="botao botao--contorno botao--pequeno"
-                aria-expanded="false"
-                aria-controls="leitor-glossario"
-                data-alternar-glossario
-              >
-                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24">
-                  <path
-                    d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
                     stroke-linejoin="round"
                   />
+                </svg>
+                <span class="ferramenta__rotulo"><span data-texto-foco>Ampliar</span></span>
+              </button>
+              <button
+                type="button"
+                class="ferramenta"
+                aria-expanded="false"
+                aria-controls="leitor-sumario"
+                data-alternar-sumario
+              >
+                <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
                   <path
-                    d="M9 9h6M9 13h4"
+                    d="M4 6h16M4 12h16M4 18h10"
+                    fill="none"
                     stroke="currentColor"
                     stroke-width="2"
                     stroke-linecap="round"
+                    stroke-linejoin="round"
                   />
                 </svg>
-                Glossário
+                <span class="ferramenta__rotulo">Sumário</span>
               </button>
               <button
                 type="button"
-                class="botao botao--contorno botao--pequeno"
+                class="ferramenta"
                 aria-expanded="false"
-                aria-controls="leitor-marcadores"
-                data-alternar-marcadores
+                aria-controls="leitor-ajustes"
+                data-alternar-ajustes
               >
-                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24">
+                <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
                   <path
-                    d="M6 3h12v18l-6-4-6 4z"
+                    d="M3 19 8.5 5h1L15 19M5 14h7M15.5 19l3-8 3 8M16.5 16.5h4"
                     fill="none"
                     stroke="currentColor"
                     stroke-width="2"
+                    stroke-linecap="round"
                     stroke-linejoin="round"
                   />
                 </svg>
-                Marcadores <span class="contador" data-contador-marcadores hidden></span>
+                <span class="ferramenta__rotulo">Letras</span>
               </button>
               <button
                 type="button"
-                class="botao botao--contorno botao--pequeno"
-                data-imprimir-capitulo
+                class="ferramenta"
+                aria-expanded="false"
+                aria-controls="leitor-voz"
+                data-alternar-voz
               >
-                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24">
+                <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
                   <path
-                    d="M7 8V3h10v5M7 17H4v-7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v7h-3M7 14h10v7H7z"
+                    d="M4 9v6h4l5 4V5L8 9zm12-1a5 5 0 0 1 0 8"
                     fill="none"
                     stroke="currentColor"
                     stroke-width="2"
+                    stroke-linecap="round"
                     stroke-linejoin="round"
                   />
                 </svg>
-                Imprimir capítulo
+                <span class="ferramenta__rotulo">Ouvir</span>
               </button>
+              <button
+                type="button"
+                class="ferramenta"
+                aria-expanded="false"
+                aria-controls="leitor-busca"
+                data-alternar-busca
+              >
+                <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+                  <path
+                    d="M10.5 4a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zm4.5 11 5 5"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span class="ferramenta__rotulo">Buscar</span>
+              </button>
+              <button
+                type="button"
+                class="ferramenta"
+                aria-expanded="false"
+                aria-controls="leitor-mais"
+                data-alternar-mais
+              >
+                <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+                  <circle cx="5" cy="12" r="2" fill="currentColor" />
+                  <circle cx="12" cy="12" r="2" fill="currentColor" />
+                  <circle cx="19" cy="12" r="2" fill="currentColor" />
+                </svg>
+                <span class="ferramenta__rotulo"
+                  >Mais <span class="contador" data-contador-marcadores hidden></span
+                ></span>
+              </button>
+            </div>
+
+            <!-- Véu escuro atrás das gavetas (toque nele para fechar) -->
+            <div class="leitor__veu" data-veu hidden></div>
+
+            <!-- Mais opções -->
+            <div
+              class="folha"
+              id="leitor-mais"
+              data-folha
+              role="region"
+              aria-labelledby="titulo-mais"
+              hidden
+            >
+              <div class="folha__topo">
+                <h3 class="folha__titulo" id="titulo-mais" tabindex="-1">Mais opções</h3>
+                <button
+                  type="button"
+                  class="folha__fechar"
+                  data-fechar-folha
+                  aria-label="Fechar mais opções"
+                >
+                  <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+                    <path
+                      d="M6 6l12 12M18 6 6 18"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <ul class="lista-opcoes">
+                <li>
+                  <button type="button" class="opcao" data-abrir-folha="leitor-glossario">
+                    <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+                      <path
+                        d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3zM9 9h6M9 13h4"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      /></svg
+                    ><span>Glossário<small>Palavras do livro explicadas</small></span>
+                  </button>
+                </li>
+                <li>
+                  <button type="button" class="opcao" data-abrir-folha="leitor-marcadores">
+                    <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+                      <path
+                        d="M6 3h12v18l-6-4-6 4z"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      /></svg
+                    ><span
+                      >Marcadores<small data-resumo-marcadores>Trechos que você salvou</small></span
+                    >
+                  </button>
+                </li>
+                <li class="so-tela-cheia">
+                  <button type="button" class="opcao" aria-pressed="true" data-alternar-paginas>
+                    <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+                      <path
+                        d="M4 5h7v14H4zM13 5h7v14h-7z"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      /></svg
+                    ><span
+                      >Virar páginas<small data-texto-paginas
+                        >Ligado · desligue para rolar o texto</small
+                      ></span
+                    >
+                  </button>
+                </li>
+                <li>
+                  <button type="button" class="opcao" data-imprimir-capitulo>
+                    <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+                      <path
+                        d="M7 8V3h10v5M7 17H4v-7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v7h-3M7 14h10v7H7z"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      /></svg
+                    ><span>Imprimir capítulo<small>Ou salvar em PDF</small></span>
+                  </button>
+                </li>
+              </ul>
             </div>
 
             <!-- Leitura em voz alta -->
             <div
-              class="leitor__voz"
+              class="leitor__voz folha folha--leve"
               id="leitor-voz"
-              role="group"
-              aria-label="Leitura em voz alta"
+              role="region"
+              aria-labelledby="titulo-voz"
               data-controle-voz
+              data-folha
+              hidden
             >
-              <button
-                type="button"
-                class="botao botao--pequeno"
-                data-voz="tocar"
-                aria-label="Ouvir este capítulo"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="icone-tocar"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
+              <div class="folha__topo">
+                <h3 class="folha__titulo" id="titulo-voz" tabindex="-1">Ouvir o livro</h3>
+                <button
+                  type="button"
+                  class="folha__fechar"
+                  data-fechar-folha
+                  aria-label="Fechar a leitura em voz alta"
                 >
-                  <path d="M7 4v16l13-8z" fill="currentColor" />
-                </svg>
-                <svg
-                  aria-hidden="true"
-                  class="icone-pausar"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
+                  <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+                    <path
+                      d="M6 6l12 12M18 6 6 18"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div class="leitor__voz-controles">
+                <button
+                  type="button"
+                  class="botao botao--pequeno"
+                  data-voz="tocar"
+                  aria-label="Ouvir este capítulo"
                 >
-                  <path d="M6 4h4v16H6zM14 4h4v16h-4z" fill="currentColor" />
-                </svg>
-                <span data-voz-rotulo>Ouvir capítulo</span>
-              </button>
-              <button
-                type="button"
-                class="botao-icone"
-                data-voz="anterior"
-                aria-label="Parágrafo anterior"
-              >
-                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24">
-                  <path
-                    d="M6 5v14M19 5 9 12l10 7z"
-                    fill="currentColor"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </button>
-              <button
-                type="button"
-                class="botao-icone"
-                data-voz="proximo"
-                aria-label="Próximo parágrafo"
-              >
-                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24">
-                  <path
-                    d="M18 5v14M5 5l10 7-10 7z"
-                    fill="currentColor"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </button>
-              <button type="button" class="botao-icone" data-voz="parar" aria-label="Parar leitura">
-                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24">
-                  <rect x="6" y="6" width="12" height="12" rx="1" fill="currentColor" />
-                </svg>
-              </button>
-              <div class="campo campo--linha">
-                <label for="voz-velocidade">Velocidade</label>
-                <select id="voz-velocidade" data-voz-velocidade>
-                  <option value="0.75">Lenta (0,75×)</option>
-                  <option value="1" selected>Normal (1×)</option>
-                  <option value="1.25">Rápida (1,25×)</option>
-                  <option value="1.5">Muito rápida (1,5×)</option>
-                </select>
+                  <svg
+                    aria-hidden="true"
+                    class="icone-tocar"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M7 4v16l13-8z" fill="currentColor" />
+                  </svg>
+                  <svg
+                    aria-hidden="true"
+                    class="icone-pausar"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M6 4h4v16H6zM14 4h4v16h-4z" fill="currentColor" />
+                  </svg>
+                  <span data-voz-rotulo>Ouvir capítulo</span>
+                </button>
+                <button
+                  type="button"
+                  class="botao-icone"
+                  data-voz="anterior"
+                  aria-label="Parágrafo anterior"
+                >
+                  <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24">
+                    <path
+                      d="M6 5v14M19 5 9 12l10 7z"
+                      fill="currentColor"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  class="botao-icone"
+                  data-voz="proximo"
+                  aria-label="Próximo parágrafo"
+                >
+                  <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24">
+                    <path
+                      d="M18 5v14M5 5l10 7-10 7z"
+                      fill="currentColor"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  class="botao-icone"
+                  data-voz="parar"
+                  aria-label="Parar leitura"
+                >
+                  <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24">
+                    <rect x="6" y="6" width="12" height="12" rx="1" fill="currentColor" />
+                  </svg>
+                </button>
+                <div class="campo campo--linha">
+                  <label for="voz-velocidade">Velocidade</label>
+                  <select id="voz-velocidade" data-voz-velocidade>
+                    <option value="0.75">Lenta (0,75×)</option>
+                    <option value="1" selected>Normal (1×)</option>
+                    <option value="1.25">Rápida (1,25×)</option>
+                    <option value="1.5">Muito rápida (1,5×)</option>
+                  </select>
+                </div>
+                <div class="campo campo--linha" data-campo-vozes hidden>
+                  <label for="voz-escolha">Voz</label>
+                  <select id="voz-escolha" data-voz-escolha></select>
+                </div>
+                <p class="leitor__voz-aviso" data-voz-indisponivel hidden>
+                  Seu navegador não oferece leitura em voz alta. Experimente o Chrome, Edge ou
+                  Safari.
+                </p>
               </div>
-              <div class="campo campo--linha" data-campo-vozes hidden>
-                <label for="voz-escolha">Voz</label>
-                <select id="voz-escolha" data-voz-escolha></select>
-              </div>
-              <p class="leitor__voz-aviso" data-voz-indisponivel hidden>
-                Seu navegador não oferece leitura em voz alta. Experimente o Chrome, Edge ou Safari.
-              </p>
             </div>
 
             <!-- Painel de ajustes do leitor -->
-            <div class="leitor__ajustes" id="leitor-ajustes" hidden>
+            <div
+              class="leitor__ajustes folha"
+              id="leitor-ajustes"
+              data-folha
+              role="region"
+              aria-labelledby="titulo-ajustes"
+              hidden
+            >
+              <div class="folha__topo">
+                <h3 class="folha__titulo" id="titulo-ajustes" tabindex="-1">Letras e cores</h3>
+                <button
+                  type="button"
+                  class="folha__fechar"
+                  data-fechar-folha
+                  aria-label="Fechar os ajustes de leitura"
+                >
+                  <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+                    <path
+                      d="M6 6l12 12M18 6 6 18"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+
               <form data-formulario-leitor>
                 <fieldset>
                   <legend>Tema da página</legend>
@@ -533,8 +673,35 @@
 
             <!-- Busca -->
             <!-- Glossário -->
-            <div class="leitor__painel-extra" id="leitor-glossario" hidden>
-              <h3 class="leitor__painel-titulo">Glossário</h3>
+            <div
+              class="leitor__painel-extra folha"
+              id="leitor-glossario"
+              data-folha
+              role="region"
+              aria-labelledby="titulo-glossario"
+              hidden
+            >
+              <div class="folha__topo">
+                <h3 class="folha__titulo" id="titulo-glossario" tabindex="-1">Glossário</h3>
+                <button
+                  type="button"
+                  class="folha__fechar"
+                  data-fechar-folha
+                  aria-label="Fechar o glossário"
+                >
+                  <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+                    <path
+                      d="M6 6l12 12M18 6 6 18"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+
               <p class="leitor__painel-ajuda">
                 Palavras que aparecem no livro, explicadas em linguagem simples. No texto, elas
                 aparecem sublinhadas com pontinhos: toque nelas para ver o significado.
@@ -543,8 +710,35 @@
             </div>
 
             <!-- Marcadores -->
-            <div class="leitor__painel-extra" id="leitor-marcadores" hidden>
-              <h3 class="leitor__painel-titulo">Meus marcadores</h3>
+            <div
+              class="leitor__painel-extra folha"
+              id="leitor-marcadores"
+              data-folha
+              role="region"
+              aria-labelledby="titulo-marcadores"
+              hidden
+            >
+              <div class="folha__topo">
+                <h3 class="folha__titulo" id="titulo-marcadores" tabindex="-1">Meus marcadores</h3>
+                <button
+                  type="button"
+                  class="folha__fechar"
+                  data-fechar-folha
+                  aria-label="Fechar os marcadores"
+                >
+                  <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+                    <path
+                      d="M6 6l12 12M18 6 6 18"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+
               <p class="leitor__painel-ajuda">
                 Salve o trecho que está lendo para voltar depois. Os marcadores ficam guardados
                 neste navegador.
@@ -562,8 +756,36 @@
               <ul class="marcadores" data-lista-marcadores></ul>
             </div>
 
-            <div class="leitor__busca" id="leitor-busca" hidden>
-              <form role="search" data-formulario-busca>
+            <div
+              class="leitor__busca folha"
+              id="leitor-busca"
+              data-folha
+              role="search"
+              aria-labelledby="titulo-busca"
+              hidden
+            >
+              <div class="folha__topo">
+                <h3 class="folha__titulo" id="titulo-busca" tabindex="-1">Buscar no livro</h3>
+                <button
+                  type="button"
+                  class="folha__fechar"
+                  data-fechar-folha
+                  aria-label="Fechar a busca"
+                >
+                  <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+                    <path
+                      d="M6 6l12 12M18 6 6 18"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+
+              <form data-formulario-busca>
                 <div class="campo">
                   <label for="busca-livro">Buscar uma palavra ou trecho</label>
                   <div class="busca-linha">
@@ -576,8 +798,34 @@
             </div>
 
             <div class="leitor__corpo">
-              <nav class="leitor__sumario" id="leitor-sumario" aria-label="Sumário do livro">
-                <h3 class="leitor__sumario-titulo">Sumário</h3>
+              <nav class="leitor__sumario" id="leitor-sumario" aria-labelledby="titulo-sumario">
+                <div class="folha__topo">
+                  <h3
+                    class="folha__titulo leitor__sumario-titulo"
+                    id="titulo-sumario"
+                    tabindex="-1"
+                  >
+                    Sumário
+                  </h3>
+                  <button
+                    type="button"
+                    class="folha__fechar"
+                    data-fechar-folha
+                    aria-label="Fechar o sumário"
+                  >
+                    <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+                      <path
+                        d="M6 6l12 12M18 6 6 18"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </button>
+                </div>
+
                 <ol data-sumario></ol>
               </nav>
 

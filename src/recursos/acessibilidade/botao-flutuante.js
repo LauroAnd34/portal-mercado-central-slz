@@ -43,7 +43,7 @@ export function iniciarBotaoFlutuante() {
   // áreas da tela cobertas por entalhe, câmera ou barra de gestos (celulares modernos)
   const sonda = document.createElement('div');
   sonda.style.cssText =
-    'position:fixed;inset:0;visibility:hidden;pointer-events:none;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)';
+    'position:fixed;inset:0;visibility:hidden;pointer-events:none;padding:calc(env(safe-area-inset-top) + var(--reserva-topo, 0px)) env(safe-area-inset-right) calc(env(safe-area-inset-bottom) + var(--reserva-base, 0px)) env(safe-area-inset-left)';
   document.body.append(sonda);
   const seguro = () => {
     const c = getComputedStyle(sonda);

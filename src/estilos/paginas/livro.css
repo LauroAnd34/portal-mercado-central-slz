@@ -226,24 +226,6 @@ li:nth-child(3) .download__formato {
   --leitor-fonte: 'Atkinson Hyperlegible', sans-serif !important;
 }
 
-.leitor__barra,
-.leitor__voz {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--e-2);
-  padding: var(--e-3);
-  background: var(--cor-superficie);
-  border: 1px solid var(--cor-borda);
-}
-.leitor__barra {
-  border-radius: var(--raio-md) var(--raio-md) 0 0;
-}
-.leitor__voz {
-  border-top: 0;
-  border-radius: 0 0 var(--raio-md) var(--raio-md);
-  margin-bottom: var(--e-4);
-}
 .leitor__voz .icone-pausar,
 .leitor[data-estado-voz='falando'] .leitor__voz .icone-tocar {
   display: none;
@@ -618,39 +600,11 @@ mark {
   padding-inline: max(12px, env(safe-area-inset-left));
 }
 /* barra de ferramentas presa no alto, em uma linha que rola para o lado */
-.modo-foco .leitor__barra {
-  position: sticky;
-  top: 0;
-  z-index: 5;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  border-radius: 0;
-  margin-inline: calc(-1 * max(12px, env(safe-area-inset-left)));
-  padding-inline: max(12px, env(safe-area-inset-left));
-  box-shadow: 0 4px 12px rgb(0 0 0 / 0.12);
-}
-.modo-foco .leitor__barra > * {
-  flex: 0 0 auto;
-}
-.modo-foco [data-modo-foco] {
-  order: -1;
-  background: var(--cor-primaria);
-  color: var(--cor-primaria-texto);
-}
+
 .modo-foco .leitor__corpo {
   grid-template-columns: 1fr;
 }
 /* sumário vira uma gaveta por cima do texto */
-.modo-foco .leitor:not(.leitor--sem-sumario) .leitor__sumario {
-  position: fixed;
-  top: 64px;
-  left: 0;
-  bottom: 0;
-  z-index: 6;
-  width: min(340px, 90vw);
-  overflow-y: auto;
-  box-shadow: 0 0 0 100vmax rgb(0 0 0 / 0.35);
-}
 
 .leitor__nome {
   overflow-wrap: anywhere;
@@ -808,6 +762,9 @@ mark {
   .imprimindo-capitulo main > *:not(#leitor),
   .imprimindo-capitulo .titulo-modulo,
   .imprimindo-capitulo .leitor__barra,
+  .imprimindo-capitulo .leitor__topo,
+  .imprimindo-capitulo .leitor__veu,
+  .imprimindo-capitulo .folha,
   .imprimindo-capitulo .leitor__voz,
   .imprimindo-capitulo .leitor__ajustes,
   .imprimindo-capitulo .leitor__busca,
@@ -879,36 +836,11 @@ mark {
    e somem com um toque no meio do texto (aparecem de novo com outro toque
    ou ao usar o teclado).
    ========================================================================= */
-.leitor__rodape-leitura,
-.leitor__so-tela-cheia {
-  display: none;
-}
-.modo-foco .leitor__so-tela-cheia {
-  display: inline-flex;
-}
+
 .leitura-paginada #leitor {
   overflow: hidden;
 }
-.leitura-paginada .leitor__barra {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  margin: 0;
-  z-index: 20;
-}
-.leitura-paginada .leitor__voz {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: var(--altura-rodape-leitura, 88px);
-  margin: 0;
-  z-index: 20;
-  border-radius: 0;
-  border: 0;
-  border-top: 1px solid var(--leitor-borda);
-  background: var(--leitor-fundo);
-}
+
 .leitura-paginada .leitor__progresso,
 .leitura-paginada .leitor__posicao,
 .leitura-paginada .leitor__navegacao {
@@ -923,8 +855,8 @@ mark {
 /* a "folha": o texto dividido em colunas, uma página por vez */
 .leitura-paginada .leitor__texto {
   position: fixed;
-  top: 64px;
-  bottom: 40px;
+  top: calc(72px + env(safe-area-inset-top));
+  bottom: calc(36px + env(safe-area-inset-bottom));
   left: 50%;
   transform: translateX(-50%);
   width: min(calc(100vw - 48px), 1180px);
@@ -960,7 +892,7 @@ mark {
   position: fixed;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: var(--altura-barra-leitura);
   z-index: 20;
   display: grid;
   grid-template-columns: auto 1fr auto;
@@ -990,23 +922,7 @@ mark {
   opacity: 0.8;
 }
 /* ferramentas por cima do texto, que somem com um toque no meio */
-.leitura-paginada .leitor__barra,
-.leitura-paginada .leitor__voz,
-.leitura-paginada .leitor__rodape-leitura {
-  transition:
-    opacity 0.25s ease,
-    transform 0.25s ease;
-}
-.leitura-sem-ferramentas .leitor__barra:not(:focus-within) {
-  opacity: 0;
-  transform: translateY(-100%);
-  pointer-events: none;
-}
-.leitura-sem-ferramentas .leitor__voz:not(:focus-within) {
-  opacity: 0;
-  transform: translateY(100%);
-  pointer-events: none;
-}
+
 /* com as ferramentas escondidas, sobra só a linha de página (como no Kindle) */
 .leitura-sem-ferramentas .leitor__rodape-leitura:not(:focus-within) {
   background: transparent;
@@ -1017,32 +933,9 @@ mark {
   pointer-events: none;
 }
 /* painéis (letras, busca, glossário, marcadores) viram uma "gaveta" que sobe de baixo */
-.modo-foco .leitor__ajustes:not([hidden]),
-.modo-foco .leitor__busca:not([hidden]),
-.modo-foco .leitor__painel-extra:not([hidden]) {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 30;
-  max-height: 75dvh;
-  overflow-y: auto;
-  margin: 0;
-  border-radius: var(--raio-md) var(--raio-md) 0 0;
-  box-shadow: 0 -10px 40px rgb(0 0 0 / 0.3);
-  background: var(--leitor-fundo, var(--cor-fundo));
-}
+
 /* na tela cheia, os controles de voz só aparecem quando a pessoa toca em "Ouvir" */
-.modo-foco:not(.voz-aberta) .leitor__voz {
-  display: none;
-}
-.modo-foco [data-imprimir-capitulo] {
-  display: none;
-}
-/* espaço para o botão de acessibilidade não cobrir as setas do rodapé */
-.leitura-paginada .leitor__rodape-leitura {
-  padding-inline: 76px;
-}
+
 .download {
   grid-template-columns: auto minmax(0, 1fr);
 }
@@ -1065,4 +958,459 @@ mark {
 }
 .leitura-paginada .leitor__titulo-capitulo {
   font-size: min(2em, 11vw);
+}
+
+/* =========================================================================
+   FERRAMENTAS DO LEITOR — barra de ícones e gavetas
+   Uma linha de ícones com nome (Sumário, Letras, Ouvir, Buscar, Mais).
+   No celular e na tela cheia, cada ferramenta abre uma gaveta que sobe de
+   baixo, com título e botão de fechar. Na tela cheia, a barra fica embaixo
+   (perto do polegar) e o topo mostra "voltar", o capítulo e "marcar página".
+   ========================================================================= */
+:root {
+  --altura-barra-leitura: calc(64px + env(safe-area-inset-bottom));
+}
+.leitor__barra {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(56px, 1fr));
+  gap: 4px;
+  padding: 6px;
+  margin-bottom: var(--e-4);
+  background: var(--leitor-fundo);
+  border: 1px solid var(--leitor-borda);
+  border-radius: 18px;
+  box-shadow: 0 2px 10px rgb(7 29 49 / 0.06);
+}
+.ferramenta {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-width: 0;
+  min-height: 56px;
+  padding: 6px 2px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--leitor-titulo);
+  font-family: var(--fonte-ui);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.15;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+.ferramenta__rotulo {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  hyphens: none;
+  text-align: center;
+}
+.ferramenta:hover {
+  background: color-mix(in srgb, var(--leitor-titulo) 8%, transparent);
+}
+.ferramenta[aria-expanded='true'],
+.ferramenta[aria-pressed='true'] {
+  background: color-mix(in srgb, var(--leitor-titulo) 15%, transparent);
+}
+.ferramenta:focus-visible,
+.leitor__icone-botao:focus-visible,
+.folha__fechar:focus-visible,
+.opcao:focus-visible {
+  outline: 3px solid var(--leitor-link);
+  outline-offset: 2px;
+}
+.ferramenta .contador {
+  position: absolute;
+  top: 4px;
+  right: calc(50% - 22px);
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 9px;
+  background: var(--leitor-link);
+  color: var(--leitor-fundo);
+  font-size: 0.6875rem;
+  line-height: 18px;
+}
+/* enquanto lê em voz alta, o ícone "Ouvir" ganha um ponto pulsando */
+.leitor[data-estado-voz='falando'] [data-alternar-voz]::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  right: calc(50% - 16px);
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #2e9b4f;
+  animation: pulso-voz 1.2s ease-in-out infinite;
+}
+@keyframes pulso-voz {
+  50% {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
+}
+.ferramenta--tela-cheia {
+  background: var(--leitor-titulo);
+  color: var(--leitor-fundo);
+}
+.ferramenta--tela-cheia:hover {
+  background: var(--leitor-titulo);
+  filter: brightness(1.15);
+}
+
+/* ---------- Topo da tela cheia ---------- */
+.leitor__topo {
+  display: none;
+}
+.leitor__icone-botao,
+.folha__fechar {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--leitor-titulo) 10%, transparent);
+  color: var(--leitor-titulo);
+  cursor: pointer;
+}
+.leitor__icone-botao:hover,
+.folha__fechar:hover {
+  background: color-mix(in srgb, var(--leitor-titulo) 18%, transparent);
+}
+
+/* ---------- Gavetas: título e botão de fechar ---------- */
+.folha__topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--e-3);
+  margin-bottom: var(--e-3);
+}
+.folha__titulo {
+  margin: 0;
+  font-family: var(--fonte-ui);
+  font-size: var(--texto-lg);
+  color: var(--leitor-titulo);
+}
+.folha__titulo:focus {
+  outline: none;
+}
+.folha {
+  color: var(--leitor-texto);
+  background: var(--leitor-fundo);
+  padding: var(--e-4) var(--e-5) var(--e-5);
+  margin-bottom: var(--e-4);
+  border: 1px solid var(--leitor-borda);
+  border-radius: 18px;
+}
+.leitor__sumario .folha__topo {
+  margin-bottom: var(--e-2);
+}
+.leitor__sumario-titulo {
+  font-size: var(--texto-md);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.leitor__voz-controles {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--e-2);
+}
+.leitor__voz .folha__topo + .leitor__voz-controles {
+  margin-top: 0;
+}
+
+/* lista do "Mais" */
+.lista-opcoes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 2px;
+}
+.so-tela-cheia {
+  display: none;
+}
+.modo-foco .so-tela-cheia {
+  display: block;
+}
+.opcao {
+  display: flex;
+  align-items: center;
+  gap: var(--e-4);
+  width: 100%;
+  min-height: 60px;
+  padding: var(--e-2) var(--e-3);
+  border: 0;
+  border-radius: 14px;
+  background: transparent;
+  color: var(--leitor-texto);
+  font: inherit;
+  font-family: var(--fonte-ui);
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+.opcao:hover {
+  background: color-mix(in srgb, var(--leitor-titulo) 8%, transparent);
+}
+.opcao svg {
+  flex: 0 0 auto;
+  color: var(--leitor-titulo);
+}
+.opcao small {
+  display: block;
+  font-weight: 400;
+  font-size: var(--texto-sm);
+  opacity: 0.8;
+}
+.opcao[aria-pressed='true'] svg {
+  color: #2e9b4f;
+}
+
+/* ---------- Véu atrás das gavetas ---------- */
+.leitor__veu {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgb(4 14 24 / 0.5);
+  animation: aparecer-veu 0.2s ease;
+}
+.leitor__veu[hidden] {
+  display: none;
+}
+@keyframes aparecer-veu {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes subir-gaveta {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+}
+body.com-gaveta {
+  overflow: hidden;
+}
+
+/* ---------- Celular (e tela cheia): os painéis viram gavetas ---------- */
+@media (max-width: 900px) {
+  .leitor__barra {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 2px;
+    padding: 4px;
+  }
+  .leitor__barra .ferramenta {
+    padding-inline: 0;
+    font-size: 0.6875rem;
+    letter-spacing: -0.01em;
+  }
+  .folha:not([hidden]),
+  .leitor:not(.leitor--sem-sumario) .leitor__sumario {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: auto;
+    z-index: 50;
+    max-width: 640px;
+    max-height: 82dvh;
+    margin: 0 auto;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0 var(--e-4) max(var(--e-5), env(safe-area-inset-bottom));
+    border: 0;
+    border-radius: 22px 22px 0 0;
+    background: var(--leitor-fundo);
+    box-shadow: 0 -12px 40px rgb(0 0 0 / 0.3);
+    animation: subir-gaveta 0.22s ease;
+  }
+  .folha:not([hidden]) .folha__topo,
+  .leitor:not(.leitor--sem-sumario) .leitor__sumario .folha__topo {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    margin: 0 calc(-1 * var(--e-4)) var(--e-3);
+    padding: 22px var(--e-4) var(--e-3);
+    background: var(--leitor-fundo);
+    border-bottom: 1px solid var(--leitor-borda);
+  }
+  /* "alça" da gaveta, como nos aplicativos */
+  .folha:not([hidden]) .folha__topo::before,
+  .leitor:not(.leitor--sem-sumario) .leitor__sumario .folha__topo::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    width: 40px;
+    height: 4px;
+    margin-left: -20px;
+    border-radius: 2px;
+    background: var(--leitor-borda);
+  }
+}
+.modo-foco .folha:not([hidden]),
+.modo-foco .leitor:not(.leitor--sem-sumario) .leitor__sumario {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: auto;
+  z-index: 50;
+  max-width: 640px;
+  max-height: 82dvh;
+  margin: 0 auto;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 var(--e-4) max(var(--e-5), env(safe-area-inset-bottom));
+  border: 0;
+  border-radius: 22px 22px 0 0;
+  background: var(--leitor-fundo);
+  box-shadow: 0 -12px 40px rgb(0 0 0 / 0.3);
+  animation: subir-gaveta 0.22s ease;
+}
+.modo-foco .folha:not([hidden]) .folha__topo,
+.modo-foco .leitor:not(.leitor--sem-sumario) .leitor__sumario .folha__topo {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  margin: 0 calc(-1 * var(--e-4)) var(--e-3);
+  padding: 22px var(--e-4) var(--e-3);
+  background: var(--leitor-fundo);
+  border-bottom: 1px solid var(--leitor-borda);
+}
+.modo-foco .folha:not([hidden]) .folha__topo::before,
+.modo-foco .leitor:not(.leitor--sem-sumario) .leitor__sumario .folha__topo::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 40px;
+  height: 4px;
+  margin-left: -20px;
+  border-radius: 2px;
+  background: var(--leitor-borda);
+}
+/* "Ouvir" fica logo acima da barra e deixa o texto à vista */
+.modo-foco .folha--leve:not([hidden]) {
+  bottom: var(--altura-barra-leitura);
+  z-index: 25;
+  border-radius: 18px 18px 0 0;
+  box-shadow: 0 -6px 20px rgb(0 0 0 / 0.18);
+  padding-bottom: var(--e-3);
+}
+.leitura-paginada .folha--leve:not([hidden]) {
+  bottom: calc(var(--altura-barra-leitura) + 72px);
+}
+
+/* ---------- Tela cheia: topo e barra fixos ---------- */
+.modo-foco {
+  /* o botão de acessibilidade não fica por cima das barras */
+  --reserva-topo: 56px;
+  --reserva-base: calc(var(--altura-barra-leitura) + 76px);
+}
+.modo-foco .leitor__topo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: var(--e-3);
+  min-height: calc(56px + env(safe-area-inset-top));
+  padding: env(safe-area-inset-top) max(var(--e-3), env(safe-area-inset-right)) 0
+    max(var(--e-3), env(safe-area-inset-left));
+  background: var(--leitor-fundo);
+  color: var(--leitor-texto);
+  border-bottom: 1px solid var(--leitor-borda);
+}
+.leitor__topo-titulo {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: center;
+  font-family: var(--fonte-ui);
+  font-size: var(--texto-sm);
+  font-weight: 700;
+  color: var(--leitor-titulo);
+}
+.modo-foco .leitor__barra {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  min-height: var(--altura-barra-leitura);
+  margin: 0;
+  padding: 4px max(8px, calc((100vw - 560px) / 2)) max(4px, env(safe-area-inset-bottom));
+  border: 0;
+  border-top: 1px solid var(--leitor-borda);
+  border-radius: 0;
+  box-shadow: 0 -4px 14px rgb(0 0 0 / 0.08);
+}
+.modo-foco .ferramenta--tela-cheia {
+  display: none;
+}
+.modo-foco #leitor {
+  padding-top: calc(64px + env(safe-area-inset-top));
+  padding-bottom: calc(var(--altura-barra-leitura) + var(--e-6));
+}
+.leitor__rodape-leitura {
+  display: none;
+}
+/* um toque no meio do texto esconde topo e barra (como no Kindle) */
+.modo-foco .leitor__topo,
+.modo-foco .leitor__barra,
+.leitura-paginada .leitor__rodape-leitura {
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease,
+    bottom 0.25s ease;
+}
+.leitura-sem-ferramentas .leitor__topo:not(:focus-within) {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+.leitura-sem-ferramentas .leitor__barra:not(:focus-within) {
+  transform: translateY(100%);
+  opacity: 0;
+  pointer-events: none;
+}
+.leitura-sem-ferramentas .leitor__rodape-leitura:not(:focus-within) {
+  bottom: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .folha,
+  .leitor__sumario,
+  .leitor__veu {
+    animation: none !important;
+  }
+}
+/* computador, fora da tela cheia: barra compacta, alinhada à esquerda */
+@media (min-width: 901px) {
+  body:not(.modo-foco) .leitor__barra {
+    display: flex;
+    width: fit-content;
+    max-width: 100%;
+    flex-wrap: wrap;
+  }
+  body:not(.modo-foco) .ferramenta {
+    min-width: 88px;
+    padding-inline: var(--e-3);
+  }
 }
