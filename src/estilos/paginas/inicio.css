@@ -822,47 +822,27 @@
 }
 
 /* ---------- Janela do 3D ---------- */
+/* ---------- Janela do 3D: o prédio ocupa a tela, os botões flutuam por cima ---------- */
 .janela-3d {
   width: min(1200px, 96vw);
-  max-height: 96vh;
+  height: min(86vh, 820px);
+  max-width: none;
+  max-height: none;
   padding: 0;
   border: 0;
-  border-radius: var(--raio-md);
-  background: var(--cor-superficie);
-  color: var(--cor-texto);
-  overflow: auto;
+  border-radius: 20px;
+  background: #cfe3f1;
+  color: #0b2a45;
+  overflow: hidden;
 }
 .janela-3d::backdrop {
-  background: rgb(4 12 20 / 0.8);
-}
-.janela-3d__topo {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--e-3);
-  padding: var(--e-3) var(--e-4);
-  border-bottom: 1px solid var(--cor-borda);
-}
-.janela-3d__topo h2 {
-  margin: 0;
-  flex: 1 1 260px;
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: var(--texto-xl);
-  color: var(--cor-titulo);
-}
-.janela-3d__abas {
-  display: flex;
-  gap: var(--e-2);
-}
-.janela-3d__abas .botao[aria-pressed='false'] {
-  background: transparent;
-  color: var(--cor-primaria);
+  background: rgb(4 12 20 / 0.82);
 }
 .janela-3d__palco {
   position: relative;
-  height: min(62vh, 620px);
-  background: #cfe3f1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 .janela-3d__palco canvas {
   display: block;
@@ -870,6 +850,8 @@
   height: 100%;
   touch-action: none;
   cursor: grab;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 .janela-3d__palco canvas:active {
   cursor: grabbing;
@@ -877,6 +859,109 @@
 .janela-3d__palco canvas:focus-visible {
   outline: 4px solid #ffbf00;
   outline-offset: -4px;
+}
+/* botões redondos, translúcidos, como nos aplicativos de mapa */
+.botao-3d {
+  display: inline-grid;
+  grid-auto-flow: column;
+  place-items: center;
+  gap: 6px;
+  min-width: 48px;
+  height: 48px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.94);
+  color: #0b2a45;
+  font: 700 0.875rem/1 var(--fonte-ui);
+  box-shadow: 0 2px 10px rgb(4 20 36 / 0.22);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  backdrop-filter: blur(6px);
+}
+.botao-3d:not(.botao-3d--texto) {
+  width: 48px;
+  padding: 0;
+}
+.botao-3d:hover {
+  background: #ffffff;
+}
+.botao-3d:active {
+  transform: scale(0.94);
+}
+.botao-3d:focus-visible,
+.janela-3d__abas button:focus-visible {
+  outline: 3px solid #ffbf00;
+  outline-offset: 2px;
+}
+.botao-3d[aria-pressed='true'],
+.botao-3d[aria-expanded='true'] {
+  background: #144670;
+  color: #ffffff;
+}
+.janela-3d__topo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--e-3);
+  padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) 28px
+    max(12px, env(safe-area-inset-left));
+  background: linear-gradient(rgb(207 227 241 / 0.95), rgb(207 227 241 / 0));
+  pointer-events: none;
+}
+.janela-3d__topo > * {
+  pointer-events: auto;
+}
+.janela-3d__topo h2 {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-family: var(--fonte-ui);
+  font-size: var(--texto-md);
+  font-weight: 800;
+  color: #0b2a45;
+  overflow-wrap: anywhere;
+}
+.janela-3d__abas {
+  display: flex;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.94);
+  box-shadow: 0 2px 10px rgb(4 20 36 / 0.22);
+}
+.janela-3d__abas button {
+  min-height: 40px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #144670;
+  font: 700 0.875rem/1 var(--fonte-ui);
+  cursor: pointer;
+}
+.janela-3d__abas button[aria-pressed='true'] {
+  background: #144670;
+  color: #ffffff;
+}
+.janela-3d__zoom {
+  position: absolute;
+  right: max(12px, env(safe-area-inset-right));
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  gap: 10px;
+}
+.janela-3d__controles {
+  position: absolute;
+  left: 50%;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  max-width: calc(100% - 24px);
 }
 .janela-3d__carregando {
   position: absolute;
@@ -896,7 +981,7 @@
 .janela-3d__dica {
   position: absolute;
   left: 50%;
-  bottom: 14px;
+  bottom: calc(max(16px, env(safe-area-inset-bottom)) + 64px);
   transform: translateX(-50%);
   display: flex;
   flex-wrap: wrap;
@@ -908,58 +993,97 @@
   pointer-events: none;
   transition: opacity 0.6s ease;
 }
-.janela-3d__dica span {
-  padding: 6px 12px;
+.janela-3d__dica {
+  gap: 0;
+  padding: 6px 4px;
   border-radius: 999px;
-  background: rgb(11 42 69 / 0.88);
+  background: rgb(11 42 69 / 0.86);
+  backdrop-filter: blur(6px);
+  flex-wrap: nowrap;
+}
+.janela-3d__dica span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
   color: #ffffff;
   font-size: var(--texto-xs);
   font-weight: 600;
   white-space: nowrap;
 }
+.janela-3d__dica span + span {
+  border-left: 1px solid rgb(255 255 255 / 0.25);
+}
 .janela-3d__dica--escondida {
   opacity: 0;
 }
-.janela-3d__controles {
+/* informações: gaveta que sobe de baixo */
+.janela-3d__info {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-width: 640px;
+  max-height: 70%;
+  margin: 0 auto;
+  overflow-y: auto;
+  padding: var(--e-3) var(--e-5) max(var(--e-5), env(safe-area-inset-bottom));
+  border-radius: 22px 22px 0 0;
+  background: var(--cor-superficie);
+  color: var(--cor-texto);
+  box-shadow: 0 -10px 40px rgb(0 0 0 / 0.3);
+  animation: subir-info-3d 0.22s ease;
+}
+.janela-3d__info[hidden] {
+  display: none;
+}
+@keyframes subir-info-3d {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+}
+.janela-3d__info-topo {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--e-2);
-  padding: var(--e-3) var(--e-4) 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--e-3);
 }
-.janela-3d__descricao {
-  margin: var(--e-3) var(--e-4) var(--e-2);
-  max-width: 90ch;
+.janela-3d__info-topo h3 {
+  margin: 0;
+  font-size: var(--texto-lg);
 }
-.janela-3d__aviso {
-  margin: 0 var(--e-4) var(--e-4);
-  font-size: var(--texto-xs);
+.janela-3d__info .botao-3d {
+  box-shadow: none;
+  background: var(--cor-fundo-suave);
+}
+.janela-3d__aviso,
+.janela-3d__atalhos {
+  font-size: var(--texto-sm);
   color: var(--cor-texto-suave);
 }
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .janela-3d {
     inset: 0;
     margin: 0;
     width: 100%;
-    max-width: none;
     height: 100dvh;
-    max-height: none;
     border-radius: 0;
   }
-  .janela-3d__topo h2 {
-    flex-basis: 100%;
-    font-size: var(--texto-lg);
-  }
-  .janela-3d__fechar {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-  }
   .janela-3d__topo {
-    position: relative;
-    padding-right: 56px;
+    flex-wrap: wrap;
   }
-  .janela-3d__palco {
-    height: 52vh;
+  .janela-3d__topo h2 {
+    font-size: var(--texto-sm);
+  }
+  .janela-3d__controles {
+    gap: 8px;
+  }
+}
+@media (max-width: 380px) {
+  .janela-3d__topo h2 {
+    order: 3;
+    flex-basis: 100%;
   }
 }
 .visualizador__area {
@@ -1119,4 +1243,8 @@
   min-height: 1.5em;
   font-weight: 600;
   color: var(--cor-titulo);
+}
+.janela-3d svg {
+  flex-shrink: 0;
+  max-width: none;
 }

@@ -33,8 +33,14 @@ async function carregarBibliotecas() {
 }
 
 function criarCena(tela) {
-  const renderizador = new THREE.WebGLRenderer({ canvas: tela, antialias: true });
-  renderizador.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  // no celular, menos pixels e sombras mais leves: o giro fica fluido e a bateria agradece
+  const celular = window.matchMedia('(pointer: coarse)').matches;
+  const renderizador = new THREE.WebGLRenderer({
+    canvas: tela,
+    antialias: !celular || window.devicePixelRatio < 2,
+    powerPreference: 'high-performance',
+  });
+  renderizador.setPixelRatio(Math.min(window.devicePixelRatio, celular ? 1.5 : 2));
   renderizador.shadowMap.enabled = true;
   renderizador.shadowMap.type = THREE.PCFSoftShadowMap;
   renderizador.outputColorSpace = THREE.SRGBColorSpace;
@@ -49,7 +55,7 @@ function criarCena(tela) {
   const sol = new THREE.DirectionalLight('#fff4e0', 2.4);
   sol.position.set(60, 90, 70);
   sol.castShadow = true;
-  sol.shadow.mapSize.set(2048, 2048);
+  sol.shadow.mapSize.set(celular ? 1024 : 2048, celular ? 1024 : 2048);
   Object.assign(sol.shadow.camera, { left: -80, right: 80, top: 80, bottom: -80, far: 300 });
   cena.add(sol);
 
@@ -64,7 +70,9 @@ function criarCena(tela) {
   controles.enablePan = true;
   controles.screenSpacePanning = true;
   controles.zoomToCursor = true;
-  controles.rotateSpeed = 0.7;
+  controles.rotateSpeed = celular ? 0.9 : 0.7;
+  controles.zoomSpeed = celular ? 1.2 : 1;
+  controles.dampingFactor = 0.12;
   controles.touches = { ONE: THREE.TOUCH.ROTATE, TWO: THREE.TOUCH.DOLLY_PAN };
   // não deixa o prédio "fugir" da tela ao mover
   controles.addEventListener('change', () => {
@@ -89,6 +97,7 @@ function voar(destinoCamera, destinoAlvo, duracao = 650) {
   if (document.documentElement.dataset.movimento) {
     camera.position.copy(destinoCamera);
     controles.target.copy(destinoAlvo);
+    redesenhar();
     return;
   }
   const c0 = camera.position.clone();
@@ -99,6 +108,7 @@ function voar(destinoCamera, destinoAlvo, duracao = 650) {
     const e = 1 - (1 - t) ** 3;
     camera.position.lerpVectors(c0, destinoCamera, e);
     controles.target.lerpVectors(a0, destinoAlvo, e);
+    redesenhar();
     if (t < 1) requestAnimationFrame(passo);
   };
   requestAnimationFrame(passo);
@@ -122,13 +132,17 @@ function aproximarNoPonto(clienteX, clienteY) {
   voar(alvo.clone().add(direcao.setLength(distancia)), alvo);
 }
 
+// tela em pé (celular) mostra menos dos lados: a câmera recua para o prédio caber inteiro
+const recuoPelaTela = () => Math.min(3, Math.max(1, 1.5 / estado.camera.aspect));
+
 function irParaVista(nome, suave = true) {
   const { camera, controles } = estado;
-  const destino = new THREE.Vector3(...VISTAS[nome]);
+  const destino = new THREE.Vector3(...VISTAS[nome]).multiplyScalar(recuoPelaTela());
   const alvo = new THREE.Vector3(0, 6, 0);
   if (!suave) {
     camera.position.copy(destino);
     controles.target.copy(alvo);
+    redesenhar();
     return;
   }
   voar(destino, alvo, 700);
@@ -151,6 +165,7 @@ async function mostrarModelo(chave) {
   estado.modelo = modelo;
   cena.add(modelo);
   estado.chave = chave;
+  redesenhar(4);
 }
 
 function ajustarTamanho() {
@@ -160,14 +175,25 @@ function ajustarTamanho() {
   renderizador.setSize(l, a, false);
   camera.aspect = l / a;
   camera.updateProjectionMatrix();
+  estado.controles.maxDistance = 220 * recuoPelaTela();
+  estado.cena.fog.near = 140 * recuoPelaTela();
+  estado.cena.fog.far = 260 * recuoPelaTela();
+  redesenhar();
 }
 
+// desenha só quando algo mudou (gesto, botão, giro automático): economiza bateria
 function animar() {
   if (!estado?.aberto) return;
-  estado.controles.update();
-  estado.renderizador.render(estado.cena, estado.camera);
+  const mudou = estado.controles.update();
+  if (mudou || estado.sujo > 0) {
+    estado.renderizador.render(estado.cena, estado.camera);
+    if (estado.sujo > 0) estado.sujo -= 1;
+  }
   requestAnimationFrame(animar);
 }
+const redesenhar = (quadros = 2) => {
+  if (estado) estado.sujo = Math.max(estado.sujo ?? 0, quadros);
+};
 
 function girar(angulo) {
   const { camera, controles } = estado;
@@ -175,6 +201,7 @@ function girar(angulo) {
   const v = camera.position.clone().sub(alvo);
   v.applyAxisAngle(new THREE.Vector3(0, 1, 0), angulo);
   camera.position.copy(alvo).add(v);
+  redesenhar();
 }
 
 function aproximar(fator) {
@@ -182,6 +209,7 @@ function aproximar(fator) {
   const v = camera.position.clone().sub(controles.target).multiplyScalar(fator);
   const d = Math.min(controles.maxDistance, Math.max(controles.minDistance, v.length()));
   camera.position.copy(controles.target).add(v.setLength(d));
+  redesenhar();
 }
 
 export function iniciarVisualizador3D() {
@@ -205,7 +233,9 @@ export function iniciarVisualizador3D() {
   async function abrir(chave) {
     atualizarTextos(chave);
     janela.showModal();
-    janela.querySelector('[data-dica-3d]').classList.remove('janela-3d__dica--escondida');
+    const dicaGestos = janela.querySelector('[data-dica-3d]');
+    dicaGestos.classList.remove('janela-3d__dica--escondida');
+    setTimeout(() => dicaGestos.classList.add('janela-3d__dica--escondida'), 5000);
     carregando.hidden = false;
     try {
       await carregarBibliotecas();
@@ -292,24 +322,70 @@ export function iniciarVisualizador3D() {
   // dica de gestos: some no primeiro toque
   const dica = janela.querySelector('[data-dica-3d]');
   const toque = window.matchMedia('(pointer: coarse)').matches;
-  dica.innerHTML = toque
-    ? '<span>☝️ 1 dedo: girar</span><span>🤏 Pinça: aproximar e afastar</span><span>✌️ 2 dedos: mover</span><span>👆👆 Toque duplo: chegar perto</span>'
-    : '<span>Arrastar: girar</span><span>Rodinha: aproximar e afastar</span><span>Botão direito ou Shift + arrastar: mover</span><span>Clique duplo: chegar perto</span>';
+  const icone = (d) =>
+    `<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24"><path d="${d}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  const GIRAR = 'M20 12a8 8 0 1 1-2.3-5.7M20 4v4h-4';
+  const ZOOM = 'M14 4h6v6M10 20H4v-6M20 4l-6 6M4 20l6-6';
+  const MOVER =
+    'M12 3v18M3 12h18M12 3l-3 3M12 3l3 3M12 21l-3-3M12 21l3-3M3 12l3-3M3 12l3 3M21 12l-3-3M21 12l-3 3';
+  const itens = toque
+    ? [
+        [GIRAR, 'Girar'],
+        [ZOOM, 'Pinça: zoom'],
+        [MOVER, '2 dedos: mover'],
+      ]
+    : [
+        [GIRAR, 'Arraste: girar'],
+        [ZOOM, 'Rodinha: zoom'],
+        [MOVER, 'Botão direito: mover'],
+      ];
+  dica.innerHTML = itens.map(([d, texto]) => `<span>${icone(d)}${texto}</span>`).join('');
   tela.addEventListener('pointerdown', () => dica.classList.add('janela-3d__dica--escondida'), {
     passive: true,
   });
-  // tela cheia
-  const palco = janela.querySelector('.janela-3d__palco');
-  const botaoCheia = janela.querySelector('[data-tela-cheia-3d]');
-  if (!palco.requestFullscreen) botaoCheia.hidden = true; // iPhone não deixa tela cheia em elementos
-  botaoCheia.addEventListener('click', () =>
-    document.fullscreenElement ? document.exitFullscreen() : palco.requestFullscreen(),
-  );
-  document.addEventListener('fullscreenchange', () => {
-    const cheia = document.fullscreenElement === palco;
-    botaoCheia.setAttribute('aria-pressed', String(cheia));
-    botaoCheia.textContent = cheia ? 'Sair da tela cheia' : 'Tela cheia';
-    if (estado?.aberto) setTimeout(ajustarTamanho, 100);
+  // vistas: um botão só, que passa por frente, lado, de cima e volta ao início
+  const SEQUENCIA = [
+    ['frente', 'Frente', 'de frente'],
+    ['lado', 'Lado', 'de lado'],
+    ['cima', 'De cima', 'de cima'],
+    ['diagonal', 'Início', 'a vista inicial'],
+  ];
+  let vista = 0;
+  const botaoVista = janela.querySelector('[data-proxima-vista]');
+  const nomeVista = janela.querySelector('[data-nome-vista]');
+  const mostrarProximaVista = () => {
+    const [, curto, longo] = SEQUENCIA[vista];
+    nomeVista.textContent = curto;
+    botaoVista.setAttribute('aria-label', `Trocar a vista: ${longo}`);
+  };
+  mostrarProximaVista();
+  botaoVista.addEventListener('click', () => {
+    if (!estado) return;
+    irParaVista(SEQUENCIA[vista][0]);
+    vista = (vista + 1) % SEQUENCIA.length;
+    mostrarProximaVista();
+  });
+  // informações sobre o modelo
+  const info = janela.querySelector('#info-3d');
+  const botaoInfo = janela.querySelector('[data-info-3d]');
+  const mostrarInfo = (aberta) => {
+    info.hidden = !aberta;
+    botaoInfo.setAttribute('aria-expanded', String(aberta));
+    if (aberta) info.querySelector('h3')?.setAttribute('tabindex', '-1');
+    if (aberta) info.querySelector('h3')?.focus();
+    else botaoInfo.focus();
+  };
+  botaoInfo.addEventListener('click', () => mostrarInfo(info.hidden));
+  janela.querySelector('[data-fechar-info-3d]').addEventListener('click', () => mostrarInfo(false));
+  janela.querySelector('[data-atalhos-3d]').textContent = toque
+    ? 'Gestos: 1 dedo gira, pinça aproxima e afasta, 2 dedos movem, toque duplo chega perto.'
+    : 'Mouse: arrastar gira, rodinha aproxima, botão direito move, clique duplo chega perto. Teclado: setas giram, + e − aproximam.';
+  // Esc fecha primeiro as informações, depois o 3D
+  janela.addEventListener('cancel', (evento) => {
+    if (!info.hidden) {
+      evento.preventDefault();
+      mostrarInfo(false);
+    }
   });
   janela.querySelector('[data-fechar-3d]').addEventListener('click', () => janela.close());
   janela.addEventListener('close', () => {
@@ -317,6 +393,8 @@ export function iniciarVisualizador3D() {
       estado.aberto = false;
       estado.controles.autoRotate = false;
       botaoGiro?.setAttribute('aria-pressed', 'false');
+      info.hidden = true;
+      botaoInfo.setAttribute('aria-expanded', 'false');
     }
   });
   window.addEventListener('resize', () => estado?.aberto && ajustarTamanho());

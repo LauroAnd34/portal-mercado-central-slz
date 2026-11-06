@@ -1108,3 +1108,191 @@
   font-size: var(--texto-xs);
   color: var(--cor-texto-suave);
 }
+
+/* =========================================================================
+   CELULAR: mapa em tela inteira, como num aplicativo de mapas
+   - sem a capa da página (o título continua para leitores de tela);
+   - no mapa, só "onde estou" e "ilha inteira" (aproximar é com os dedos);
+   - o lugar escolhido sobe numa gaveta por cima do mapa, com X para fechar.
+   ========================================================================= */
+@media (max-width: 980px) {
+  .pagina-mapa .cabecalho-pagina {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .secao--mapa {
+    padding-top: 0;
+  }
+  .secao--mapa > .container {
+    padding-inline: 0;
+  }
+  .explorar {
+    gap: var(--e-3);
+  }
+  .explorar__guia {
+    margin-inline: var(--e-4);
+  }
+  .vistas {
+    display: none;
+  }
+  .perto-de-mim__nota,
+  .perto-de-voce {
+    margin-inline: var(--e-4);
+  }
+  .explorar__palco {
+    scroll-margin-top: var(--altura-cabecalho, 72px);
+  }
+  .mapa {
+    height: calc(100svh - var(--altura-cabecalho, 72px) - 56px);
+    min-height: 360px;
+    border-radius: 0;
+    border-inline: 0;
+  }
+  .mapa .leaflet-control-zoom,
+  .mapa .mapa__expandir {
+    display: none;
+  }
+  /* gaveta do lugar escolhido */
+  .explorar__palco .detalhes:not(.detalhes--vazio) {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: auto;
+    z-index: 1200;
+    width: auto;
+    max-width: 640px;
+    max-height: 46dvh;
+    margin: 0 auto;
+    padding: 26px var(--e-4) max(var(--e-4), env(safe-area-inset-bottom));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border: 0;
+    border-radius: 22px 22px 0 0;
+    background: var(--cor-superficie);
+    box-shadow: 0 -10px 36px rgb(0 0 0 / 0.28);
+    animation: subir-detalhes 0.22s ease;
+  }
+  .explorar__palco .detalhes:not(.detalhes--vazio)::before {
+    content: '';
+    position: absolute;
+    top: 9px;
+    left: 50%;
+    width: 40px;
+    height: 4px;
+    margin-left: -20px;
+    border-radius: 2px;
+    background: var(--cor-borda);
+  }
+  .detalhes__fechar {
+    position: sticky;
+    top: 0;
+    float: right;
+    margin: -10px -6px 0 var(--e-2);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--cor-fundo-suave);
+  }
+  .detalhes__cabecalho {
+    padding-right: 0;
+  }
+  .detalhes__cabecalho h3 {
+    font-size: var(--texto-lg);
+  }
+  .como-chegar {
+    gap: var(--e-2);
+    margin-block: var(--e-2) var(--e-3);
+  }
+  .como-chegar__titulo {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  /* meios de transporte: uma linha só, ícone + tempo */
+  .meios {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 4px;
+  }
+  .meio {
+    position: relative;
+    min-height: 56px;
+    padding: 6px 2px;
+    border-width: 1px;
+    border-radius: 14px;
+  }
+  .meio__nome {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .meio__tempo {
+    font-size: var(--texto-xs);
+  }
+  .segmentos {
+    width: 100%;
+  }
+  .detalhes__foto img {
+    max-height: 180px;
+    object-fit: cover;
+  }
+  .detalhes__mais {
+    justify-content: space-between;
+  }
+}
+@keyframes subir-detalhes {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+}
+@media (max-width: 980px) and (prefers-reduced-motion: reduce) {
+  .explorar__palco .detalhes:not(.detalhes--vazio) {
+    animation: none;
+  }
+}
+.mapa__ver-lista {
+  display: none;
+}
+@media (max-width: 980px) {
+  .explorar__palco {
+    position: relative;
+  }
+  .mapa__ver-lista {
+    position: absolute;
+    left: 50%;
+    bottom: 34px;
+    z-index: 1000;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 0 20px;
+    border-radius: 999px;
+    background: var(--cor-primaria);
+    color: var(--cor-primaria-texto);
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    box-shadow: 0 4px 16px rgb(4 20 36 / 0.3);
+  }
+  .mapa__ver-lista:focus-visible {
+    outline: 3px solid #ffbf00;
+    outline-offset: 3px;
+  }
+  .explorar__palco:has(.detalhes:not(.detalhes--vazio)) .mapa__ver-lista {
+    display: none;
+  }
+}

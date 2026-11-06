@@ -136,6 +136,17 @@ const BARRA_DETALHES = `<button type="button" class="botao-icone detalhes__fecha
     <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
   </button>`;
 const TEXTO_INICIAL = el.detalhes.innerHTML;
+// celular: o botão de acessibilidade sobe para não cobrir a gaveta de detalhes
+function afastarBotaoAcessibilidade() {
+  requestAnimationFrame(() => {
+    const gaveta = getComputedStyle(el.detalhes).position === 'fixed';
+    if (gaveta && !el.detalhes.classList.contains('detalhes--vazio')) {
+      const altura = window.innerHeight - el.detalhes.getBoundingClientRect().top;
+      document.body.style.setProperty('--reserva-base', `${Math.round(altura + 48)}px`);
+    } else document.body.style.removeProperty('--reserva-base');
+    window.dispatchEvent(new Event('resize'));
+  });
+}
 function fecharDetalhes() {
   pararFala();
   pararPasseio();
@@ -144,6 +155,7 @@ function fecharDetalhes() {
   estado.selecionadoId = null;
   el.detalhes.innerHTML = TEXTO_INICIAL;
   el.detalhes.classList.add('detalhes--vazio');
+  afastarBotaoAcessibilidade();
   mapa?.selecionar(null, { mover: false });
   mapa?.limparRoteiro();
   history.replaceState(null, '', location.pathname + location.search);
@@ -166,6 +178,7 @@ function selecionar(id, { origem }) {
       </div>
       <p>${escaparHtml(MERCADO_CENTRAL.descricao)}</p>`;
     el.detalhes.classList.remove('detalhes--vazio');
+    afastarBotaoAcessibilidade();
     mapa?.selecionar(id);
     atualizarLista();
     return;
@@ -198,6 +211,7 @@ function selecionar(id, { origem }) {
     });
   el.detalhes.classList.remove('detalhes--vazio');
   el.detalhes.hidden = false;
+  afastarBotaoAcessibilidade();
   mapa?.selecionar(id);
   atualizarLista();
   history.replaceState(null, '', `#${id}`);
@@ -211,11 +225,9 @@ function selecionar(id, { origem }) {
   } else {
     focarProgramaticamente(el.detalhes.querySelector('#detalhes-titulo'));
   }
-  if (
-    window.matchMedia('(max-width: 980px)').matches &&
-    (origem === 'lista' || origem === 'perto')
-  ) {
-    el.detalhes.scrollIntoView({ block: 'start' });
+  // celular: o mapa ocupa a tela e os detalhes sobem de baixo, por cima dele
+  if (window.matchMedia('(max-width: 980px)').matches) {
+    document.querySelector('.explorar__palco')?.scrollIntoView({ block: 'start' });
   }
 }
 
@@ -482,6 +494,7 @@ if (listaRoteiros) {
     atualizarLista();
     el.detalhes.innerHTML = `<h3 id="detalhes-titulo" tabindex="-1">${escaparHtml(roteiro.nome)}</h3><p class="detalhes__carregando">Calculando o caminho…</p>`;
     el.detalhes.classList.remove('detalhes--vazio');
+    afastarBotaoAcessibilidade();
     document.querySelector('.explorar__mapa')?.scrollIntoView({ block: 'start' });
     botao.setAttribute('aria-busy', 'true');
 

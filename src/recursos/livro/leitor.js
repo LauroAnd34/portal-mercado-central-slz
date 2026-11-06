@@ -115,6 +115,8 @@ export function iniciarLeitor(leitor) {
     });
 
     const total = capitulos.length;
+    const tituloTopo = leitor.querySelector('[data-titulo-topo]');
+    if (tituloTopo) tituloTopo.textContent = capitulo.titulo;
     elementos.posicao.textContent = '';
     elementos.barra.style.width = `${((atual + 1) / total) * 100}%`;
     elementos.anterior.disabled = atual === 0;
@@ -176,37 +178,102 @@ export function iniciarLeitor(leitor) {
     },
   });
 
-  /* ---------- Painéis recolhíveis (ajustes, busca, sumário) ---------- */
-  const alternarPainel = (botao, painel, forcar) => {
-    const abrir = forcar ?? botao.getAttribute('aria-expanded') !== 'true';
-    botao.setAttribute('aria-expanded', String(abrir));
-    painel.hidden = !abrir;
-    if (abrir) painel.querySelector('input, select, button')?.focus();
-  };
-  const ligarPainel = (seletorBotao, seletorPainel) => {
-    const botao = leitor.querySelector(seletorBotao);
-    const painel = leitor.querySelector(seletorPainel);
-    botao.addEventListener('click', () => alternarPainel(botao, painel));
-    painel.addEventListener('keydown', (evento) => {
-      if (evento.key === 'Escape') {
-        alternarPainel(botao, painel, false);
-        botao.focus();
-      }
-    });
-  };
-  ligarPainel('[data-alternar-ajustes]', '#leitor-ajustes');
-  ligarPainel('[data-alternar-busca]', '#leitor-busca');
-
-  const botaoSumario = leitor.querySelector('[data-alternar-sumario]');
+  /* ---------- Gavetas (sumário, letras, ouvir, busca, glossário, marcadores, mais) ----------
+   * No celular e na tela cheia, cada painel sobe de baixo como uma "gaveta", com título,
+   * botão de fechar (X) e um véu escuro atrás: toque fora, no X ou aperte Esc para fechar.
+   * No computador, fora da tela cheia, os painéis aparecem logo abaixo da barra. */
   const mediaPequena = window.matchMedia('(max-width: 900px)');
+  const veu = leitor.querySelector('[data-veu]');
+  const botaoSumario = leitor.querySelector('[data-alternar-sumario]');
+  const emTelaCheia = () => document.body.classList.contains('modo-foco');
+  const usaGaveta = () => mediaPequena.matches || emTelaCheia();
+  const gatilhoDe = (id) => leitor.querySelector(`.leitor__barra [aria-controls="${id}"]`);
+
+  // o sumário é uma coluna ao lado do texto no computador e uma gaveta no celular
   const definirSumario = (aberto) => {
     botaoSumario.setAttribute('aria-expanded', String(aberto));
     leitor.classList.toggle('leitor--sem-sumario', !aberto);
   };
-  definirSumario(!mediaPequena.matches);
-  botaoSumario.addEventListener('click', () =>
-    definirSumario(botaoSumario.getAttribute('aria-expanded') !== 'true'),
+  const mostrar = (folha, visivel) => {
+    if (folha.id === 'leitor-sumario') definirSumario(visivel);
+    else folha.hidden = !visivel;
+    gatilhoDe(folha.id)?.setAttribute('aria-expanded', String(visivel));
+  };
+
+  // o botão de acessibilidade (que fica por cima de tudo) sobe para não cobrir a gaveta
+  const afastarBotaoAcessibilidade = (folha) => {
+    requestAnimationFrame(() => {
+      if (folha && usaGaveta()) {
+        const altura = window.innerHeight - folha.getBoundingClientRect().top;
+        document.body.style.setProperty('--reserva-base', `${Math.round(altura + 8)}px`);
+      } else document.body.style.removeProperty('--reserva-base');
+      window.dispatchEvent(new Event('resize'));
+    });
+  };
+  let folhaAberta = null;
+  let gatilhoFolha = null;
+  const fecharFolha = ({ devolverFoco = true } = {}) => {
+    if (!folhaAberta) return;
+    mostrar(folhaAberta, false);
+    veu.hidden = true;
+    document.body.classList.remove('com-gaveta');
+    afastarBotaoAcessibilidade(null);
+    const gatilho = gatilhoFolha;
+    folhaAberta = null;
+    gatilhoFolha = null;
+    if (devolverFoco) gatilho?.focus?.();
+  };
+  const abrirFolha = (id, gatilho = gatilhoDe(id)) => {
+    fecharFolha({ devolverFoco: false });
+    const folha = leitor.querySelector(`#${id}`);
+    if (!folha) return;
+    mostrar(folha, true);
+    folhaAberta = folha;
+    gatilhoFolha = gatilho;
+    const leve = folha.classList.contains('folha--leve'); // "Ouvir" deixa o texto visível
+    veu.hidden = !usaGaveta() || leve;
+    document.body.classList.toggle('com-gaveta', usaGaveta() && !leve);
+    focarProgramaticamente(folha.querySelector('.folha__titulo'));
+    afastarBotaoAcessibilidade(folha);
+  };
+  const alternarFolha = (id) => {
+    if (folhaAberta?.id === id) fecharFolha();
+    else abrirFolha(id);
+  };
+
+  ['leitor-ajustes', 'leitor-busca', 'leitor-voz', 'leitor-mais'].forEach((id) =>
+    gatilhoDe(id)?.addEventListener('click', () => alternarFolha(id)),
   );
+  botaoSumario.addEventListener('click', () => {
+    if (usaGaveta()) return alternarFolha('leitor-sumario');
+    // computador: liga e desliga a coluna do sumário
+    definirSumario(botaoSumario.getAttribute('aria-expanded') !== 'true');
+  });
+  leitor.addEventListener('click', (evento) => {
+    if (evento.target.closest('[data-fechar-folha]')) {
+      const folha = evento.target.closest('[data-folha], .leitor__sumario');
+      if (folhaAberta) fecharFolha();
+      else if (folha?.id === 'leitor-sumario') {
+        definirSumario(false);
+        botaoSumario.focus();
+      }
+      return;
+    }
+    const abrir = evento.target.closest('[data-abrir-folha]');
+    if (abrir) abrirFolha(abrir.dataset.abrirFolha, gatilhoDe('leitor-mais'));
+  });
+  veu.addEventListener('click', () => fecharFolha());
+  leitor.addEventListener('keydown', (evento) => {
+    if (evento.key === 'Escape' && folhaAberta) {
+      evento.stopPropagation();
+      fecharFolha();
+    }
+  });
+  definirSumario(!mediaPequena.matches);
+  mediaPequena.addEventListener('change', () => {
+    fecharFolha({ devolverFoco: false });
+    if (!emTelaCheia()) definirSumario(!mediaPequena.matches);
+  });
 
   /* ---------- Modo leitura em tela cheia ----------
    * Esconde o resto do site e deixa só o livro, ocupando a tela toda.
@@ -218,8 +285,11 @@ export function iniciarLeitor(leitor) {
   const definirFoco = (ativo, { daHistoria = false } = {}) => {
     if (ativo === document.body.classList.contains('modo-foco')) return;
     botaoFoco.setAttribute('aria-pressed', String(ativo));
-    if (textoFoco) textoFoco.textContent = ativo ? 'Sair da tela cheia' : 'Tela cheia';
+    if (textoFoco) textoFoco.textContent = ativo ? 'Sair' : 'Ampliar';
+    fecharFolha({ devolverFoco: false });
     document.body.classList.toggle('modo-foco', ativo);
+    // o botão de acessibilidade se afasta das barras da leitura
+    requestAnimationFrame(() => window.dispatchEvent(new Event('resize')));
     paginador ??= criarPaginas();
     if (ativo && ler(CHAVE_PAGINAS, true)) paginador.ligar();
     if (!ativo) paginador.desligar();
@@ -236,6 +306,7 @@ export function iniciarLeitor(leitor) {
     } else {
       if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
       if (!daHistoria && history.state?.leitura) history.back();
+      definirSumario(!mediaPequena.matches);
       gatilhoFoco?.focus?.();
     }
     anunciar(ativo ? 'Tela cheia de leitura. Pressione Esc para sair.' : 'Saiu da tela cheia.');
@@ -243,11 +314,19 @@ export function iniciarLeitor(leitor) {
   botaoFoco.addEventListener('click', () =>
     definirFoco(botaoFoco.getAttribute('aria-pressed') !== 'true'),
   );
+  leitor.querySelector('[data-sair-foco]')?.addEventListener('click', () => definirFoco(false));
   // páginas (como num leitor digital) ou rolagem contínua, dentro da tela cheia
-  botaoPaginas.setAttribute('aria-pressed', String(ler(CHAVE_PAGINAS, true)));
+  const textoPaginas = leitor.querySelector('[data-texto-paginas]');
+  const mostrarModoPaginas = (paginas) => {
+    botaoPaginas.setAttribute('aria-pressed', String(paginas));
+    textoPaginas.textContent = paginas
+      ? 'Ligado · desligue para rolar o texto'
+      : 'Desligado · o texto rola para baixo';
+  };
+  mostrarModoPaginas(ler(CHAVE_PAGINAS, true));
   botaoPaginas.addEventListener('click', () => {
     const paginas = botaoPaginas.getAttribute('aria-pressed') !== 'true';
-    botaoPaginas.setAttribute('aria-pressed', String(paginas));
+    mostrarModoPaginas(paginas);
     gravar(CHAVE_PAGINAS, paginas);
     paginador ??= criarPaginas();
     if (paginas) paginador.ligar();
@@ -269,6 +348,7 @@ export function iniciarLeitor(leitor) {
     if (
       evento.key === 'Escape' &&
       document.body.classList.contains('modo-foco') &&
+      !folhaAberta &&
       !document.querySelector('dialog[open]')
     )
       definirFoco(false);
@@ -304,6 +384,7 @@ export function iniciarLeitor(leitor) {
   areaResultados.addEventListener('click', (evento) => {
     const botao = evento.target.closest('[data-ir-capitulo]');
     if (!botao) return;
+    if (usaGaveta()) fecharFolha({ devolverFoco: false });
     exibir(capitulos.findIndex((c) => c.id === botao.dataset.irCapitulo));
   });
 
@@ -312,19 +393,10 @@ export function iniciarLeitor(leitor) {
     const link = evento.target.closest('a[data-indice]');
     if (!link) return;
     evento.preventDefault();
+    if (folhaAberta) fecharFolha({ devolverFoco: false });
     exibir(Number(link.dataset.indice));
-    if (mediaPequena.matches || document.body.classList.contains('modo-foco'))
-      definirSumario(false);
   });
 
-  // botão "Ouvir" da tela cheia: mostra/esconde os controles de voz
-  const botaoVoz = leitor.querySelector('[data-alternar-voz]');
-  botaoVoz?.addEventListener('click', () => {
-    const aberto = botaoVoz.getAttribute('aria-pressed') !== 'true';
-    botaoVoz.setAttribute('aria-pressed', String(aberto));
-    document.body.classList.toggle('voz-aberta', aberto);
-    if (aberto) leitor.querySelector('#leitor-voz button')?.focus();
-  });
   elementos.anterior.addEventListener('click', () => irPara(-1));
   elementos.proximo.addEventListener('click', () => irPara(1));
 
@@ -360,19 +432,22 @@ export function iniciarLeitor(leitor) {
 
   /* ---------- Glossário ---------- */
   const glossario = iniciarGlossario(leitor, GLOSSARIO);
-  ligarPainel('[data-alternar-glossario]', '#leitor-glossario');
 
   /* ---------- Marcadores ---------- */
-  ligarPainel('[data-alternar-marcadores]', '#leitor-marcadores');
   const listaMarcadores = leitor.querySelector('[data-lista-marcadores]');
   const contador = leitor.querySelector('[data-contador-marcadores]');
   const tituloDoCapitulo = (id) => capitulos.find((c) => c.id === id)?.titulo ?? 'Capítulo';
   const mostrarMarcadores = (lista = obterMarcadores()) => {
     listaMarcadores.innerHTML = renderizarMarcadores(lista, tituloDoCapitulo);
     contador.hidden = !lista.length;
-    contador.textContent = lista.length ? `(${lista.length})` : '';
+    contador.textContent = lista.length ? String(lista.length) : '';
+    const resumo = leitor.querySelector('[data-resumo-marcadores]');
+    if (resumo)
+      resumo.textContent = lista.length
+        ? `${lista.length} trecho${lista.length > 1 ? 's' : ''} salvo${lista.length > 1 ? 's' : ''}`
+        : 'Trechos que você salvou';
   };
-  leitor.querySelector('[data-adicionar-marcador]').addEventListener('click', () => {
+  const marcarTrecho = () => {
     const trecho = encontrarTrechoAtual(elementos.texto);
     if (!trecho) return;
     const texto = trecho.textContent.replace(/\s+/g, ' ').trim();
@@ -387,7 +462,9 @@ export function iniciarLeitor(leitor) {
     trecho.classList.add('trecho-marcado');
     setTimeout(() => trecho.classList.remove('trecho-marcado'), 1800);
     anunciar(`Marcador salvo em “${capitulos[atual].titulo}”.`);
-  });
+  };
+  leitor.querySelector('[data-adicionar-marcador]').addEventListener('click', marcarTrecho);
+  leitor.querySelector('[data-marcar-rapido]')?.addEventListener('click', marcarTrecho);
   listaMarcadores.addEventListener('click', (evento) => {
     const ir = evento.target.closest('[data-ir-marcador]');
     const remover = evento.target.closest('[data-remover-marcador]');
@@ -399,6 +476,7 @@ export function iniciarLeitor(leitor) {
       return;
     }
     if (!ir) return;
+    if (usaGaveta()) fecharFolha({ devolverFoco: false });
     const [capitulo, indice] = ir.dataset.irMarcador.split('|');
     exibir(
       Math.max(
@@ -418,6 +496,7 @@ export function iniciarLeitor(leitor) {
 
   /* ---------- Imprimir capítulo ---------- */
   leitor.querySelector('[data-imprimir-capitulo]').addEventListener('click', () => {
+    fecharFolha({ devolverFoco: false });
     document.body.classList.add('imprimindo-capitulo');
     window.addEventListener(
       'afterprint',

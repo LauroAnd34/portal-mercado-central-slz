@@ -255,103 +255,188 @@
       </section>
 
       <dialog class="janela-3d" data-janela-3d aria-labelledby="titulo-3d">
-        <div class="janela-3d__topo">
-          <h2 id="titulo-3d" data-titulo-3d>Mercado em 3D</h2>
-          <div class="janela-3d__abas" role="group" aria-label="Escolher o prédio">
-            <button
-              type="button"
-              class="botao botao--pequeno"
-              data-trocar-3d="1940"
-              aria-pressed="false"
-            >
-              1940
-            </button>
-            <button
-              type="button"
-              class="botao botao--pequeno"
-              data-trocar-3d="projeto"
-              aria-pressed="false"
-            >
-              Projeto novo
-            </button>
-          </div>
-          <button
-            type="button"
-            class="botao-icone janela-3d__fechar"
-            data-fechar-3d
-            aria-label="Fechar o 3D"
-          >
-            <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22">
-              <path
-                d="M6 6l12 12M18 6L6 18"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-              />
-            </svg>
-          </button>
-        </div>
         <div class="janela-3d__palco">
           <canvas
             data-tela-3d
             tabindex="0"
             role="img"
-            aria-label="Modelo 3D do prédio. Com o foco aqui, use as setas para girar e aproximar."
+            aria-label="Modelo 3D do prédio. Com o foco aqui, use as setas para girar e + ou − para aproximar."
           ></canvas>
           <p class="janela-3d__carregando" data-carregando-3d>Carregando o modelo 3D…</p>
           <p class="janela-3d__dica" data-dica-3d aria-hidden="true"></p>
+
+          <!-- Topo: fechar, título e escolha do prédio -->
+          <div class="janela-3d__topo">
+            <button type="button" class="botao-3d" data-fechar-3d aria-label="Fechar o 3D">
+              <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+                <path
+                  d="M6 6l12 12M18 6 6 18"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+            <h2 id="titulo-3d" data-titulo-3d>Mercado em 3D</h2>
+            <div class="janela-3d__abas" role="group" aria-label="Escolher o prédio">
+              <button type="button" data-trocar-3d="1940" aria-pressed="false">1940</button>
+              <button type="button" data-trocar-3d="projeto" aria-pressed="false">Projeto</button>
+            </div>
+          </div>
+
+          <!-- Lado direito: aproximar e afastar (para quem não usa a pinça) -->
+          <div class="janela-3d__zoom" role="group" aria-label="Aproximar e afastar">
+            <button type="button" class="botao-3d" data-acao-3d="mais" aria-label="Aproximar">
+              <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+                <path
+                  d="M12 5v14M5 12h14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+            <button type="button" class="botao-3d" data-acao-3d="menos" aria-label="Afastar">
+              <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+                <path
+                  d="M5 12h14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Embaixo: girar, vistas, girar sozinho e informações -->
+          <div class="janela-3d__controles" role="group" aria-label="Controles do 3D">
+            <button
+              type="button"
+              class="botao-3d"
+              data-acao-3d="esquerda"
+              aria-label="Girar para a esquerda"
+            >
+              <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+                <path
+                  d="M4 12a8 8 0 1 0 2.3-5.7M4 4v4h4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+            <button
+              type="button"
+              class="botao-3d botao-3d--texto"
+              data-proxima-vista
+              aria-label="Trocar a vista: de frente"
+            >
+              <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+                <path
+                  d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12zM12 9.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <span data-nome-vista aria-hidden="true">Frente</span>
+            </button>
+            <button
+              type="button"
+              class="botao-3d"
+              data-acao-3d="direita"
+              aria-label="Girar para a direita"
+            >
+              <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+                <path
+                  d="M20 12a8 8 0 1 1-2.3-5.7M20 4v4h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+            <button
+              type="button"
+              class="botao-3d"
+              data-giro-automatico
+              aria-pressed="false"
+              aria-label="Girar sozinho"
+            >
+              <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+                <path
+                  d="M8 5.5v13l10.5-6.5z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+            <button
+              type="button"
+              class="botao-3d"
+              data-info-3d
+              aria-expanded="false"
+              aria-controls="info-3d"
+              aria-label="Sobre este modelo"
+            >
+              <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+                <path
+                  d="M12 11v6M12 7.5v.5M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Informações (sobem de baixo) -->
+          <div class="janela-3d__info" id="info-3d" hidden>
+            <div class="janela-3d__info-topo">
+              <h3>Sobre este modelo</h3>
+              <button
+                type="button"
+                class="botao-3d"
+                data-fechar-info-3d
+                aria-label="Fechar informações"
+              >
+                <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+                  <path
+                    d="M6 6l12 12M18 6 6 18"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
+            <p data-descricao-3d></p>
+            <p class="janela-3d__aviso">
+              Modelo ilustrativo, feito a partir das fotos para mostrar como será a navegação em 3D.
+              Não é o projeto técnico oficial.
+            </p>
+            <p class="janela-3d__atalhos" data-atalhos-3d></p>
+          </div>
         </div>
-        <div class="janela-3d__controles" role="group" aria-label="Controles do 3D">
-          <button
-            type="button"
-            class="botao botao--contorno botao--pequeno"
-            data-acao-3d="esquerda"
-          >
-            ↺ Girar para a esquerda
-          </button>
-          <button type="button" class="botao botao--contorno botao--pequeno" data-acao-3d="direita">
-            Girar para a direita ↻
-          </button>
-          <button type="button" class="botao botao--contorno botao--pequeno" data-acao-3d="mais">
-            + Aproximar
-          </button>
-          <button type="button" class="botao botao--contorno botao--pequeno" data-acao-3d="menos">
-            − Afastar
-          </button>
-          <button type="button" class="botao botao--contorno botao--pequeno" data-acao-3d="frente">
-            Ver de frente
-          </button>
-          <button type="button" class="botao botao--contorno botao--pequeno" data-acao-3d="lado">
-            Ver de lado
-          </button>
-          <button type="button" class="botao botao--contorno botao--pequeno" data-acao-3d="cima">
-            Ver de cima
-          </button>
-          <button
-            type="button"
-            class="botao botao--contorno botao--pequeno"
-            data-giro-automatico
-            aria-pressed="false"
-          >
-            Girar sozinho
-          </button>
-          <button type="button" class="botao botao--contorno botao--pequeno" data-acao-3d="inicio">
-            Voltar ao início
-          </button>
-          <button
-            type="button"
-            class="botao botao--contorno botao--pequeno"
-            data-tela-cheia-3d
-            aria-pressed="false"
-          >
-            Tela cheia
-          </button>
-        </div>
-        <p class="janela-3d__descricao" data-descricao-3d></p>
-        <p class="janela-3d__aviso">
-          Modelo ilustrativo, feito a partir das fotos para mostrar como será a navegação em 3D. Não
-          é o projeto técnico oficial.
-        </p>
       </dialog>
 
       <!-- Caminhos da ilha -->
