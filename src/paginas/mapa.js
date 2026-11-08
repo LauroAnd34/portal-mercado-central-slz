@@ -136,11 +136,16 @@ const BARRA_DETALHES = `<button type="button" class="botao-icone detalhes__fecha
     <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
   </button>`;
 const TEXTO_INICIAL = el.detalhes.innerHTML;
+// no celular, só o corpo da gaveta rola: o X fica sempre no mesmo lugar
+const gaveta = (html) => `${BARRA_DETALHES}<div class="detalhes__corpo">${html}</div>`;
 // celular: o botão de acessibilidade sobe para não cobrir a gaveta de detalhes
 function afastarBotaoAcessibilidade() {
   requestAnimationFrame(() => {
     const gaveta = getComputedStyle(el.detalhes).position === 'fixed';
-    if (gaveta && !el.detalhes.classList.contains('detalhes--vazio')) {
+    const aberta = gaveta && !el.detalhes.classList.contains('detalhes--vazio');
+    // com a gaveta aberta, a página fica parada: só o mapa e a gaveta se mexem
+    document.documentElement.classList.toggle('com-gaveta-mapa', aberta);
+    if (aberta) {
       const altura = window.innerHeight - el.detalhes.getBoundingClientRect().top;
       document.body.style.setProperty('--reserva-base', `${Math.round(altura + 48)}px`);
     } else document.body.style.removeProperty('--reserva-base');
@@ -170,13 +175,13 @@ function selecionar(id, { origem }) {
   pararFala();
   estado.selecionadoId = id;
   if (id === MERCADO_CENTRAL.id) {
-    el.detalhes.innerHTML = `
+    el.detalhes.innerHTML = gaveta(`
       <div class="detalhes__cabecalho" style="--cor-categoria:#144670">
         <span class="detalhes__categoria">Ponto de partida</span>
         <h3 id="detalhes-titulo" tabindex="-1">${escaparHtml(MERCADO_CENTRAL.nome)}</h3>
         <p class="detalhes__endereco">${escaparHtml(MERCADO_CENTRAL.endereco)}</p>
       </div>
-      <p>${escaparHtml(MERCADO_CENTRAL.descricao)}</p>`;
+      <p>${escaparHtml(MERCADO_CENTRAL.descricao)}</p>`);
     el.detalhes.classList.remove('detalhes--vazio');
     afastarBotaoAcessibilidade();
     mapa?.selecionar(id);
@@ -202,13 +207,13 @@ function selecionar(id, { origem }) {
   const kmCarro = doMercado ? ponto.distanciaCarroKm : deMim.distanciaKm * 1.3;
   if (!estado.meioEscolhido) estado.meio = meioSugerido(kmPe);
   const tempos = temposPorMeio(kmPe, kmCarro);
-  el.detalhes.innerHTML =
-    BARRA_DETALHES +
+  el.detalhes.innerHTML = gaveta(
     renderizarDetalhes(ponto, MERCADO_CENTRAL, foto, deMim, {
       origem: estado.origemRota,
       meio: estado.meio,
       tempos,
-    });
+    }),
+  );
   el.detalhes.classList.remove('detalhes--vazio');
   el.detalhes.hidden = false;
   afastarBotaoAcessibilidade();
@@ -227,7 +232,9 @@ function selecionar(id, { origem }) {
   }
   // celular: o mapa ocupa a tela e os detalhes sobem de baixo, por cima dele
   if (window.matchMedia('(max-width: 980px)').matches) {
-    document.querySelector('.explorar__palco')?.scrollIntoView({ block: 'start' });
+    document
+      .querySelector('.explorar__palco')
+      ?.scrollIntoView({ block: 'start', behavior: 'instant' });
   }
 }
 
@@ -492,7 +499,9 @@ if (listaRoteiros) {
     const coordenadas = [MERCADO_CENTRAL.coordenadas, ...paradas.map((p) => p.coordenadas)];
     estado.selecionadoId = null;
     atualizarLista();
-    el.detalhes.innerHTML = `<h3 id="detalhes-titulo" tabindex="-1">${escaparHtml(roteiro.nome)}</h3><p class="detalhes__carregando">Calculando o caminho…</p>`;
+    el.detalhes.innerHTML = gaveta(
+      `<h3 id="detalhes-titulo" tabindex="-1">${escaparHtml(roteiro.nome)}</h3><p class="detalhes__carregando">Calculando o caminho…</p>`,
+    );
     el.detalhes.classList.remove('detalhes--vazio');
     afastarBotaoAcessibilidade();
     document.querySelector('.explorar__mapa')?.scrollIntoView({ block: 'start' });
@@ -525,9 +534,7 @@ if (listaRoteiros) {
     );
     estado.roteiro = { roteiro, paradas, ouvidas: new Set(), proxima: 0 };
     pararPasseio();
-    el.detalhes.innerHTML =
-      BARRA_DETALHES.replace(/<button[^>]*data-copiar-link[^>]*>.*?<\/button>/, '') +
-      renderizarDetalhesRoteiro(roteiro, paradas, rota);
+    el.detalhes.innerHTML = gaveta(renderizarDetalhesRoteiro(roteiro, paradas, rota));
     mapa?.mostrarRoteiro({ paradas, coordenadas: rota.coordenadas, cor: roteiro.cor });
     focarProgramaticamente(el.detalhes.querySelector('#detalhes-titulo'));
     anunciar(`Roteiro ${roteiro.nome}: ${paradas.length} paradas.`);

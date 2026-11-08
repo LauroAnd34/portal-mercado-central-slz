@@ -1189,18 +1189,33 @@
     border-radius: 2px;
     background: var(--cor-borda);
   }
+  /* o X fica parado no canto; só o corpo da gaveta rola */
+  .explorar__palco .detalhes:not(.detalhes--vazio) {
+    display: flex;
+    flex-direction: column;
+    padding: 52px 0 0;
+    overflow: hidden;
+  }
+  .detalhes__corpo {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0 var(--e-4) var(--e-4);
+  }
   .detalhes__fechar {
-    position: sticky;
-    top: 0;
-    float: right;
-    margin: -10px -6px 0 var(--e-2);
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    z-index: 3;
     width: 44px;
     height: 44px;
     border-radius: 50%;
     background: var(--cor-fundo-suave);
   }
-  .detalhes__cabecalho {
-    padding-right: 0;
+  /* linha fina embaixo da faixa fixa, quando o corpo rola */
+  .detalhes__corpo {
+    border-top: 1px solid transparent;
   }
   .detalhes__cabecalho h3 {
     font-size: var(--texto-lg);
@@ -1304,5 +1319,13 @@
   :root[data-letras='grandes'] .meio__tempo,
   :root[data-letras='grandes'] .mapa__ver-lista {
     font-size: min(var(--texto-xs), 3.6vw);
+  }
+}
+/* gaveta aberta no celular: a página não rola por baixo dela */
+@media (max-width: 980px) {
+  html.com-gaveta-mapa,
+  html.com-gaveta-mapa body {
+    overflow: hidden;
+    overscroll-behavior: none;
   }
 }
