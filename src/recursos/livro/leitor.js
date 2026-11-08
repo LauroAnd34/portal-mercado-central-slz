@@ -291,7 +291,10 @@ export function iniciarLeitor(leitor) {
     // o botão de acessibilidade se afasta das barras da leitura
     requestAnimationFrame(() => window.dispatchEvent(new Event('resize')));
     paginador ??= criarPaginas();
-    if (ativo && ler(CHAVE_PAGINAS, true)) paginador.ligar();
+    // com letras muito grandes, cada página teria poucas palavras: o texto rola
+    const letrasGrandes = document.documentElement.dataset.letras === 'grandes';
+    if (ativo && ler(CHAVE_PAGINAS, true) && !letrasGrandes) paginador.ligar();
+    if (ativo && letrasGrandes) mostrarModoPaginas(false);
     if (!ativo) paginador.desligar();
     if (ativo) {
       gatilhoFoco = document.activeElement;

@@ -106,6 +106,7 @@ export function aplicarNoDocumento(estado, raiz = document.documentElement) {
   const alternar = (atributo, ativo, valor) =>
     ativo ? raiz.setAttribute(atributo, valor) : raiz.removeAttribute(atributo);
 
+  alternar('data-letras', estado.escala >= 1.5, 'grandes');
   alternar('data-tema', estado.cores === 'escuro', 'escuro');
   alternar('data-contraste', estado.cores === 'alto', 'alto');
   alternar('data-fonte', estado.fonte !== 'padrao', estado.fonte);

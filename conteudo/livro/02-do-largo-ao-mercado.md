@@ -1,10 +1,10 @@
 # Do Largo do Açougue Velho ao Mercado
 
-O terreno onde hoje está o Mercado Central já teve outros nomes e outras funções. Ficou conhecido como Largo do Açougue Velho, uma referência ao comércio de carnes que existia na região. Ali também funcionou o antigo gasômetro, responsável pelo gás que acendia os lampiões da iluminação pública do Centro.
+O terreno onde hoje está o Mercado Central já teve outros nomes e outras funções. Ficou conhecido como Largo do Açougue Velho, uma referência ao comércio de carnes que existia na região. Um plano da Câmara de 1854 já previa erguer ali os prédios do mercado "nos chãos da antiga matança" e "do antigo curtume" (Arquivo Público do Maranhão).
 
-## 1864: o primeiro mercado
+## 1864: o Mercado Central
 
-Em 1864, a cidade ganhou nesse local o seu primeiro mercado. Ele logo se tornou o principal ponto de abastecimento de São Luís: carnes, peixes, verduras, frutas, farinha, miudezas e produtos trazidos do interior do Maranhão encontravam ali seus compradores.
+A cidade já tinha outros espaços de venda, como a Casa das Tulhas, as barracas da Praia Grande e açougues públicos. Em 1864, ganhou nesse local o Mercado Central. Ele logo se tornou o principal ponto de abastecimento de São Luís: carnes, peixes, verduras, frutas, farinha, miudezas e produtos trazidos do interior do Maranhão encontravam ali seus compradores.
 
 O mercado organizava a rotina da vizinhança. Barqueiros, carregadores, vendedores e fregueses chegavam cedo. O comércio movimentava as ruas do entorno, que passaram a viver em função dele.
 

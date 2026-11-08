@@ -489,7 +489,7 @@ mark {
   text-align: left;
 }
 .leitor__titulo-capitulo {
-  font-size: 1.9em !important;
+  font-size: min(1.9em, 8.5vw) !important;
   margin-top: 0 !important;
   padding-bottom: 0.3em;
   border-bottom: 4px solid var(--faixa-3);
@@ -1413,4 +1413,54 @@ body.com-gaveta {
     min-width: 88px;
     padding-inline: var(--e-3);
   }
+}
+
+/* letras grandes: a barra do leitor mostra só os ícones (maiores); o nome de
+   cada botão continua sendo lido pelo leitor de tela */
+:root[data-letras='grandes'] .ferramenta__rotulo {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+:root[data-letras='grandes'] .ferramenta svg {
+  width: 30px;
+  height: 30px;
+}
+:root[data-letras='grandes'] .ferramenta .contador {
+  top: 2px;
+}
+:root[data-letras='grandes'] .leitor__titulo-capitulo {
+  font-size: min(2em, 10vw);
+}
+:root[data-letras='grandes'] .leitor__topo-titulo,
+:root[data-letras='grandes'] .folha__titulo {
+  font-size: min(var(--texto-lg), 6vw);
+}
+:root[data-letras='grandes'] .folha:not([hidden]),
+:root[data-letras='grandes'] .leitor:not(.leitor--sem-sumario) .leitor__sumario {
+  max-height: 90dvh;
+}
+/* tela cheia em rolagem: o texto ocupa a largura toda, sem moldura de cartão */
+@media (max-width: 900px) {
+  .modo-foco .leitor__pagina {
+    padding-inline: 0;
+    border: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+  .modo-foco .leitor__progresso {
+    display: none;
+  }
+}
+/* letras grandes: sem a letra capitular gigante no começo do capítulo */
+:root[data-letras='grandes'] .leitor__tempo + p::first-letter {
+  float: none;
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0;
+  padding: 0;
+  color: inherit;
 }

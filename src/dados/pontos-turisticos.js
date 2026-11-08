@@ -15,7 +15,7 @@ export const MERCADO_CENTRAL = Object.freeze({
   coordenadas: [-2.5344761, -44.3011069],
   endereco: 'Rua de São João, Centro',
   descricao:
-    'Ponto de partida de todos os roteiros. Mercado público inaugurado em sua forma atual em 1941, em estilo Art Déco, com boxes de peixes, carnes, frutas, farinhas, ervas e artesanato.',
+    'Ponto de partida de todos os roteiros. Mercado público fundado em 1864. O prédio Art Déco de 1941 foi demolido em 2026 e um novo está sendo construído; enquanto isso, os feirantes atendem no Mercado da Cidade.',
 });
 
 export const CATEGORIAS = Object.freeze({
@@ -35,7 +35,7 @@ export const PONTOS_TURISTICOS = Object.freeze([
     coordenadas: [-2.5444427, -44.2984244],
     endereco: 'Avenida Senador Vitorino Freire, Aterro do Bacanga',
     descricao:
-      'Desde novembro de 2025, os feirantes do Mercado Central atendem aqui, em quatro galpões, enquanto o prédio histórico é reconstruído. Localização aproximada.',
+      'Desde o início de 2026, os feirantes do Mercado Central atendem aqui, em quatro galpões, enquanto o prédio histórico é reconstruído. Localização aproximada.',
   },
   {
     id: 'casa-das-tulhas',

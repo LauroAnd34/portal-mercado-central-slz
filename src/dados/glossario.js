@@ -12,6 +12,9 @@ export const GLOSSARIO = Object.freeze({
     'Cobertura que avança sobre a calçada, na frente do prédio, para proteger do sol e da chuva.',
   aterro: 'Obra que coloca terra em uma área de mar, rio ou mangue para criar terreno firme.',
   gasômetro: 'Instalação que guardava e distribuía o gás usado para acender os lampiões das ruas.',
+  matança: 'Antigo matadouro: lugar onde se abatiam os animais para vender a carne.',
+  curtume:
+    'Lugar onde o couro dos animais era tratado para virar material de sapatos, selas e bolsas.',
   sanitarista:
     'Ideia ou política que busca melhorar a saúde pública com higiene, água limpa e esgoto.',
   juçara:

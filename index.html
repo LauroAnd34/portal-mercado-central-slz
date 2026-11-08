@@ -22,7 +22,7 @@
         "@context": "https://schema.org",
         "@type": "TouristAttraction",
         "name": "Mercado Central de São Luís",
-        "description": "Mercado público do Centro Histórico de São Luís, inaugurado em 1941 em estilo Art Déco e em reconstrução desde 2026.",
+        "description": "Mercado público do Centro Histórico de São Luís, inaugurado em 1941 em estilo Art Déco e demolido em 2026 para a construção de um novo prédio.",
         "isAccessibleForFree": true,
         "publicAccess": true,
         "address": {
@@ -124,12 +124,71 @@
         <div class="container aviso-obra__conteudo">
           <span class="aviso-obra__selo">Em obra</span>
           <p>
-            O prédio histórico está em reconstrução. Os feirantes atendem no
-            <strong>Mercado da Cidade</strong>, Av. Senador Vitorino Freire (Aterro do Bacanga).
+            O prédio de 1941 foi demolido em setembro de 2026 e um novo está sendo construído. Os
+            feirantes atendem no <strong>Mercado da Cidade</strong>, Av. Senador Vitorino Freire
+            (Aterro do Bacanga).
             <a href="./mapa.html#mercado-da-cidade">Ver o caminho</a>
           </p>
         </div>
       </div>
+
+      <!-- Visite o Mercado -->
+      <section class="secao secao--suave" id="visite" aria-labelledby="visite-titulo">
+        <div class="container">
+          <header class="titulo-modulo">
+            <h2 id="visite-titulo">Visite o Mercado</h2>
+            <span class="titulo-modulo__sub">Para planejar a sua ida</span>
+          </header>
+          <div class="visite">
+            <div class="visite__info">
+              <article class="info-bloco">
+                <h3>Onde fica</h3>
+                <p>
+                  <strong>Durante a obra:</strong> Mercado da Cidade, Av. Senador Vitorino Freire
+                  (Aterro do Bacanga). O novo prédio está sendo construído no endereço histórico,
+                  Rua de São João, Centro.
+                </p>
+                <a href="./mapa.html#mercado-da-cidade">Ver no mapa e traçar caminho</a>
+              </article>
+              <article class="info-bloco">
+                <h3>Quando ir</h3>
+                <p>
+                  As bancas abrem cedo, por volta das 5h. As primeiras horas da manhã têm mais
+                  variedade de peixes e frutas.
+                </p>
+              </article>
+              <article class="info-bloco">
+                <h3>No Mercado da Cidade</h3>
+                <p>
+                  Quatro galpões com boxes padronizados, corredores largos, banheiros, praça de
+                  alimentação e mais de 300 vagas de estacionamento.
+                </p>
+              </article>
+            </div>
+            <div class="visite__setores">
+              <h3 id="setores-titulo">O que você encontra</h3>
+              <div class="onde-encontro">
+                <label for="busca-produto">Onde encontro? Digite um produto</label>
+                <input
+                  id="busca-produto"
+                  type="search"
+                  data-busca-produto
+                  autocomplete="off"
+                  placeholder="Ex.: juçara, camarão seco, cofo"
+                  aria-describedby="resposta-produto"
+                />
+                <p
+                  id="resposta-produto"
+                  class="onde-encontro__resposta"
+                  data-resposta-produto
+                  aria-live="polite"
+                ></p>
+              </div>
+              <div class="setores" data-setores aria-labelledby="setores-titulo"></div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <!-- Ontem e amanhã -->
       <section class="secao" aria-labelledby="novo-mercado-titulo">
@@ -187,7 +246,7 @@
                   width="1280"
                   height="720"
                   loading="lazy"
-                  alt="Imagem em 3D do projeto do novo Mercado Central: prédio de três andares com as fachadas antigas preservadas na frente, calçada larga com árvores e faixa de pedestres."
+                  alt="Imagem em 3D do projeto do novo Mercado Central divulgado pela Prefeitura: prédio de três andares com fachadas no estilo antigo na frente, calçada larga com árvores e faixa de pedestres."
                 /><span class="ontem-amanha__selo" aria-hidden="true"
                   ><svg viewBox="0 0 24 24" width="18" height="18">
                     <path
@@ -201,8 +260,8 @@
                 ><span class="somente-leitor">Ver o projeto do novo Mercado em 3D</span>
               </button>
               <figcaption>
-                <strong>Projeto</strong> O novo Mercado Central, com as fachadas originais
-                preservadas. <span>Imagem: Prefeitura de São Luís (divulgação).</span>
+                <strong>Projeto</strong> O novo Mercado Central, como divulgado pela Prefeitura.
+                <span>Imagem: Prefeitura de São Luís (divulgação).</span>
               </figcaption>
             </figure>
           </div>
@@ -225,8 +284,8 @@
               <dd>R$ 44,9 milhões, incluindo o entorno</dd>
             </div>
             <div>
-              <dt>Fachadas</dt>
-              <dd>As quatro fachadas originais serão preservadas</dd>
+              <dt>Prédio antigo</dt>
+              <dd>Demolido em 10 de setembro de 2026, por risco de desabamento</dd>
             </div>
           </dl>
           <p class="fontes">
@@ -388,6 +447,19 @@
             </button>
             <button
               type="button"
+              class="botao-3d botao-3d--extras"
+              data-mais-controles-3d
+              aria-expanded="false"
+              aria-label="Mais controles: girar e aproximar com botões"
+            >
+              <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+                <circle cx="5" cy="12" r="2" fill="currentColor" />
+                <circle cx="12" cy="12" r="2" fill="currentColor" />
+                <circle cx="19" cy="12" r="2" fill="currentColor" />
+              </svg>
+            </button>
+            <button
+              type="button"
               class="botao-3d"
               data-info-3d
               aria-expanded="false"
@@ -439,6 +511,113 @@
         </div>
       </dialog>
 
+      <!-- Linha do tempo -->
+      <div class="faixa-azulejo faixa-azulejo--rosas" aria-hidden="true"></div>
+      <section class="secao" aria-labelledby="linha-titulo">
+        <div class="container">
+          <header class="titulo-modulo">
+            <h2 id="linha-titulo">Linha do tempo</h2>
+            <span class="titulo-modulo__sub">De 1805 até hoje</span>
+          </header>
+          <div class="linha" data-linha-do-tempo>
+            <p class="linha__instrucao">
+              Escolha um ano. No teclado, use as setas para a esquerda e para a direita.
+            </p>
+            <div class="linha__trilho">
+              <div
+                role="tablist"
+                aria-label="Anos da história do Mercado"
+                class="linha__abas"
+              ></div>
+            </div>
+            <div role="tabpanel" id="painel-linha" class="linha__painel" tabindex="0"></div>
+          </div>
+        </div>
+      </section>
+      <!-- Vozes do Mercado -->
+      <div class="faixa-azulejo faixa-azulejo--rosas" aria-hidden="true"></div>
+      <section class="secao vozes" aria-labelledby="vozes-titulo">
+        <div class="container">
+          <header class="titulo-modulo">
+            <h2 id="vozes-titulo">Vozes do Mercado</h2>
+            <span class="titulo-modulo__sub">Quem faz a feira acontecer</span>
+          </header>
+          <ul class="vozes__lista">
+            <li>
+              <figure class="voz">
+                <blockquote>
+                  <p>Passei a maior parte da minha vida no Mercado Central.</p>
+                </blockquote>
+                <figcaption>
+                  <strong>Sabino de Jesus Dutra</strong
+                  ><span>73 anos, mais de 40 dedicados à feira</span>
+                </figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure class="voz">
+                <blockquote>
+                  <p>A gente esperou muito por esse dia.</p>
+                </blockquote>
+                <figcaption>
+                  <strong>Gildo Nunes</strong><span>46 anos de profissão</span>
+                </figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure class="voz">
+                <blockquote>
+                  <p>O novo mercado é uma vitória para todos nós.</p>
+                </blockquote>
+                <figcaption>
+                  <strong>Lucinete Melo, a Lôra</strong><span>Feirante há mais de 20 anos</span>
+                </figcaption>
+              </figure>
+            </li>
+          </ul>
+          <p class="fontes">
+            Depoimentos publicados pela
+            <a
+              href="https://www.saoluis.ma.gov.br/portal/noticias/0/3/3405/prefeitura-de-sao-luis-entrega-novo-espaco-para-feirantes-do-mercado-central-que-sera-totalmente-reformado/"
+              rel="noopener"
+              target="_blank"
+              >Prefeitura de São Luís<span class="somente-leitor"> (abre em nova aba)</span></a
+            >
+            na entrega do Mercado da Cidade, em novembro de 2025.
+          </p>
+        </div>
+      </section>
+
+      <!-- Sabores do Mercado -->
+      <div class="faixa-azulejo faixa-azulejo--estrelas" aria-hidden="true"></div>
+      <section class="secao sabores-secao" aria-labelledby="sabores-titulo">
+        <div class="container sabores-grade">
+          <div class="sabores-fotos">
+            <img
+              data-foto="mercado-camarao-seco"
+              width="1100"
+              height="825"
+              loading="lazy"
+              alt="Cesto de palha cheio de camarão seco."
+            />
+            <img
+              data-foto="mercado-garrafas"
+              width="1100"
+              height="825"
+              loading="lazy"
+              alt="Garrafas de aguardente com caranguejo penduradas numa banca."
+            />
+          </div>
+          <div>
+            <header class="titulo-modulo">
+              <h2 id="sabores-titulo">Sabores do Mercado</h2>
+              <span class="titulo-modulo__sub">A cozinha maranhense começa aqui</span>
+            </header>
+            <ul class="sabores" data-sabores></ul>
+          </div>
+        </div>
+      </section>
+
       <!-- Caminhos da ilha -->
       <div class="faixa-azulejo faixa-azulejo--nazare" aria-hidden="true"></div>
       <section class="secao caminhos" aria-labelledby="caminhos-titulo">
@@ -461,7 +640,6 @@
         </p>
       </section>
 
-      <!-- Vozes do Mercado -->
       <!-- A cidade dos azulejos -->
       <section class="secao azulejaria" aria-labelledby="azulejos-titulo">
         <div class="container">
@@ -563,170 +741,6 @@
             </p>
           </div>
         </dialog>
-      </section>
-
-      <div class="faixa-azulejo faixa-azulejo--rosas" aria-hidden="true"></div>
-      <section class="secao vozes" aria-labelledby="vozes-titulo">
-        <div class="container">
-          <header class="titulo-modulo">
-            <h2 id="vozes-titulo">Vozes do Mercado</h2>
-            <span class="titulo-modulo__sub">Quem faz a feira acontecer</span>
-          </header>
-          <ul class="vozes__lista">
-            <li>
-              <figure class="voz">
-                <blockquote>
-                  <p>Passei a maior parte da minha vida no Mercado Central.</p>
-                </blockquote>
-                <figcaption>
-                  <strong>Sabino de Jesus Dutra</strong
-                  ><span>73 anos, mais de 40 dedicados à feira</span>
-                </figcaption>
-              </figure>
-            </li>
-            <li>
-              <figure class="voz">
-                <blockquote>
-                  <p>A gente esperou muito por esse dia.</p>
-                </blockquote>
-                <figcaption>
-                  <strong>Gildo Nunes</strong><span>46 anos de profissão</span>
-                </figcaption>
-              </figure>
-            </li>
-            <li>
-              <figure class="voz">
-                <blockquote>
-                  <p>O novo mercado é uma vitória para todos nós.</p>
-                </blockquote>
-                <figcaption>
-                  <strong>Lucinete Melo, a Lôra</strong><span>Feirante há mais de 20 anos</span>
-                </figcaption>
-              </figure>
-            </li>
-          </ul>
-          <p class="fontes">
-            Depoimentos publicados pela
-            <a
-              href="https://www.saoluis.ma.gov.br/portal/noticias/0/3/3405/prefeitura-de-sao-luis-entrega-novo-espaco-para-feirantes-do-mercado-central-que-sera-totalmente-reformado/"
-              rel="noopener"
-              target="_blank"
-              >Prefeitura de São Luís<span class="somente-leitor"> (abre em nova aba)</span></a
-            >
-            na entrega do Mercado da Cidade, em novembro de 2025.
-          </p>
-        </div>
-      </section>
-
-      <!-- Sabores do Mercado -->
-      <div class="faixa-azulejo faixa-azulejo--estrelas" aria-hidden="true"></div>
-      <section class="secao sabores-secao" aria-labelledby="sabores-titulo">
-        <div class="container sabores-grade">
-          <div class="sabores-fotos">
-            <img
-              data-foto="mercado-camarao-seco"
-              width="1100"
-              height="825"
-              loading="lazy"
-              alt="Cesto de palha cheio de camarão seco."
-            />
-            <img
-              data-foto="mercado-garrafas"
-              width="1100"
-              height="825"
-              loading="lazy"
-              alt="Garrafas de aguardente com caranguejo penduradas numa banca."
-            />
-          </div>
-          <div>
-            <header class="titulo-modulo">
-              <h2 id="sabores-titulo">Sabores do Mercado</h2>
-              <span class="titulo-modulo__sub">A cozinha maranhense começa aqui</span>
-            </header>
-            <ul class="sabores" data-sabores></ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- Visite o Mercado -->
-      <section class="secao secao--suave" aria-labelledby="visite-titulo">
-        <div class="container">
-          <header class="titulo-modulo">
-            <h2 id="visite-titulo">Visite o Mercado</h2>
-            <span class="titulo-modulo__sub">Para planejar a sua ida</span>
-          </header>
-          <div class="visite">
-            <div class="visite__info">
-              <article class="info-bloco">
-                <h3>Onde fica</h3>
-                <p>
-                  Prédio histórico: Rua de São João, Centro, ao lado da Fonte das Pedras. Durante a
-                  obra: Mercado da Cidade, Av. Senador Vitorino Freire.
-                </p>
-                <a href="./mapa.html">Ver no mapa e traçar caminho</a>
-              </article>
-              <article class="info-bloco">
-                <h3>Quando ir</h3>
-                <p>
-                  As bancas abrem cedo, por volta das 5h. As primeiras horas da manhã têm mais
-                  variedade de peixes e frutas.
-                </p>
-              </article>
-              <article class="info-bloco">
-                <h3>No Mercado da Cidade</h3>
-                <p>
-                  Quatro galpões com boxes padronizados, corredores largos, banheiros, praça de
-                  alimentação e mais de 300 vagas de estacionamento.
-                </p>
-              </article>
-            </div>
-            <div class="visite__setores">
-              <h3 id="setores-titulo">O que você encontra</h3>
-              <div class="onde-encontro">
-                <label for="busca-produto">Onde encontro? Digite um produto</label>
-                <input
-                  id="busca-produto"
-                  type="search"
-                  data-busca-produto
-                  autocomplete="off"
-                  placeholder="Ex.: juçara, camarão seco, cofo"
-                  aria-describedby="resposta-produto"
-                />
-                <p
-                  id="resposta-produto"
-                  class="onde-encontro__resposta"
-                  data-resposta-produto
-                  aria-live="polite"
-                ></p>
-              </div>
-              <div class="setores" data-setores aria-labelledby="setores-titulo"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Linha do tempo -->
-      <div class="faixa-azulejo faixa-azulejo--rosas" aria-hidden="true"></div>
-      <section class="secao" aria-labelledby="linha-titulo">
-        <div class="container">
-          <header class="titulo-modulo">
-            <h2 id="linha-titulo">Linha do tempo</h2>
-            <span class="titulo-modulo__sub">De 1805 até hoje</span>
-          </header>
-          <div class="linha" data-linha-do-tempo>
-            <p class="linha__instrucao">
-              Escolha um ano. No teclado, use as setas para a esquerda e para a direita.
-            </p>
-            <div class="linha__trilho">
-              <div
-                role="tablist"
-                aria-label="Anos da história do Mercado"
-                class="linha__abas"
-              ></div>
-            </div>
-            <div role="tabpanel" id="painel-linha" class="linha__painel" tabindex="0"></div>
-          </div>
-        </div>
       </section>
     </main>
 

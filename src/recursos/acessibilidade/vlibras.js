@@ -1,8 +1,8 @@
 /**
  * Tradutor de Libras do Governo Federal (VLibras) — ativado por padrão, como
- * nos portais gov.br. O botão azul com as mãos fica no canto direito da tela;
- * ao clicar, o avatar traduz para Libras o texto que a pessoa selecionar.
- * A pessoa pode esconder o botão no painel de acessibilidade.
+ * nos portais gov.br. O botão próprio do VLibras fica escondido para não haver
+ * dois botões flutuantes: ele é aberto pelo "Traduzir para Libras" do nosso
+ * painel de acessibilidade (botão flutuante único).
  * Documentação: https://www.gov.br/governodigital/pt-br/vlibras
  *
  * A marcação oficial (<div vw ...>) está em src/parciais/rodape.html.
@@ -69,7 +69,37 @@ function esconderVLibras() {
   definirVisibilidade(false);
 }
 
+/** Abre o avatar do VLibras (o botão próprio dele fica escondido: usamos o nosso). */
+export function abrirVLibras() {
+  const clicar = () => {
+    const botao =
+      document
+        .getElementById('vlibras-access-wrapper')
+        ?.shadowRoot?.getElementById('vlibras-button') ??
+      document.querySelector('[vw-access-button]');
+    if (!botao) return false;
+    definirVisibilidade(true);
+    botao.click();
+    return true;
+  };
+  if (estado !== 'pronto') mostrarVLibras();
+  if (clicar()) return;
+  // ainda carregando: tenta por alguns segundos
+  let tentativas = 0;
+  const espera = setInterval(() => {
+    tentativas += 1;
+    if (clicar() || tentativas > 40) clearInterval(espera);
+    if (tentativas > 40 && estado !== 'pronto')
+      anunciar('O tradutor VLibras precisa de internet e não pôde ser carregado agora.');
+  }, 250);
+}
+
 export function iniciarVLibras() {
+  document.addEventListener('click', (evento) => {
+    if (!evento.target.closest('[data-abrir-libras]')) return;
+    evento.target.closest('dialog')?.close();
+    abrirVLibras();
+  });
   const aplicar = ({ vlibras }) => (vlibras ? mostrarVLibras() : esconderVLibras());
   aplicar(preferencias.obter());
   preferencias.assinar((novo, mudancas) => mudancas.includes('vlibras') && aplicar(novo));

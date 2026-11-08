@@ -60,7 +60,10 @@ export function ativarZoomDeImagem(area, imagem, { aoMudar } = {}) {
         escala,
         x,
         y,
-        centro: relativo({ clientX: (p1.clientX + p2.clientX) / 2, clientY: (p1.clientY + p2.clientY) / 2 }),
+        centro: relativo({
+          clientX: (p1.clientX + p2.clientX) / 2,
+          clientY: (p1.clientY + p2.clientY) / 2,
+        }),
       };
       arraste = null;
     } else if (ponteiros.size === 1) {

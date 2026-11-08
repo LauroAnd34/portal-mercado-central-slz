@@ -22,6 +22,14 @@
       </svg>
     </button>
   </div>
+  <!-- Libras primeiro: um só botão flutuante na tela (acessibilidade + Libras) -->
+  <button type="button" class="botao-libras" data-abrir-libras>
+    <img src="./img/oficial/maos-libras.svg" alt="" width="40" height="40" />
+    <span
+      ><strong>Traduzir para Libras</strong
+      ><small>Abre o avatar do VLibras (Governo Federal). Requer internet.</small></span
+    >
+  </button>
   <p class="painel-acessibilidade__ajuda">
     Suas escolhas ficam salvas neste navegador e valem para todo o site, inclusive para o livro.
   </p>
@@ -150,24 +158,37 @@
           class="interruptor__trilho"
           aria-hidden="true"
         ></span
-        >Mostrar o botão do VLibras (tradutor de Libras do Governo Federal)</label
+        >Deixar o VLibras pronto ao abrir o site (mais rápido para traduzir)</label
       >
       <p class="opcao-nota">
-        Ativado por padrão. Clique no botão azul com as mãos, no canto direito da tela, e depois
-        selecione um texto para o avatar traduzir para Libras. Requer internet.
+        Use o botão “Traduzir para Libras”, no alto deste painel. Depois, toque num texto para o
+        avatar traduzir. Requer internet.
       </p>
     </fieldset>
 
     <fieldset class="opcao-grupo" data-posicao-botao>
       <legend>Lugar do botão de acessibilidade</legend>
       <p class="opcao-nota">
-        Arraste o botão redondo para cima ou para baixo, na lateral esquerda ou direita da tela, ou escolha um lugar aqui.
+        Arraste o botão redondo para cima ou para baixo, na lateral esquerda ou direita da tela, ou
+        escolha um lugar aqui.
       </p>
       <div class="posicoes-botao">
-        <label><input type="radio" name="posicao-botao" value="inferior-direito" /> Lateral direita, embaixo</label>
-        <label><input type="radio" name="posicao-botao" value="inferior-esquerdo" /> Lateral esquerda, embaixo</label>
-        <label><input type="radio" name="posicao-botao" value="superior-direito" /> Lateral direita, no alto</label>
-        <label><input type="radio" name="posicao-botao" value="superior-esquerdo" /> Lateral esquerda, no alto</label>
+        <label
+          ><input type="radio" name="posicao-botao" value="inferior-direito" /> Lateral direita,
+          embaixo</label
+        >
+        <label
+          ><input type="radio" name="posicao-botao" value="inferior-esquerdo" /> Lateral esquerda,
+          embaixo</label
+        >
+        <label
+          ><input type="radio" name="posicao-botao" value="superior-direito" /> Lateral direita, no
+          alto</label
+        >
+        <label
+          ><input type="radio" name="posicao-botao" value="superior-esquerdo" /> Lateral esquerda,
+          no alto</label
+        >
       </div>
     </fieldset>
 

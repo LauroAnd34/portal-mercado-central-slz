@@ -1248,3 +1248,33 @@
   flex-shrink: 0;
   max-width: none;
 }
+
+:root[data-letras='grandes'] [data-nome-vista] {
+  display: none;
+}
+:root[data-letras='grandes'] .janela-3d__topo h2 {
+  font-size: min(var(--texto-md), 4.5vw);
+}
+:root[data-letras='grandes'] .janela-3d__abas button,
+:root[data-letras='grandes'] .botao-3d {
+  font-size: min(0.875rem, 4vw);
+}
+:root[data-letras='grandes'] .janela-3d__dica {
+  display: none;
+}
+
+/* celular (toque): menos botões na tela. Girar e aproximar já são gestos;
+   os botões equivalentes aparecem no "⋯" (acessibilidade: WCAG 2.5.7). */
+.botao-3d--extras {
+  display: none;
+}
+@media (pointer: coarse) {
+  .botao-3d--extras {
+    display: inline-grid;
+  }
+  .janela-3d:not(.janela-3d--extras) [data-acao-3d='esquerda'],
+  .janela-3d:not(.janela-3d--extras) [data-acao-3d='direita'],
+  .janela-3d:not(.janela-3d--extras) .janela-3d__zoom {
+    display: none;
+  }
+}

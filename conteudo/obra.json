@@ -1,11 +1,17 @@
 {
-  "atualizadoEm": "2026-11-04",
+  "atualizadoEm": "2026-11-08",
   "aviso": "Atualizações oficiais da obra serão publicadas aqui pela Prefeitura.",
   "etapas": [
     {
-      "data": "2025-11",
-      "titulo": "Feirantes vão para o Mercado da Cidade",
-      "texto": "Os feirantes passam a atender em quatro galpões na Avenida Senador Vitorino Freire, enquanto o prédio histórico é reconstruído.",
+      "data": "2025-11-12",
+      "titulo": "Mercado da Cidade entregue",
+      "texto": "Espaço temporário com quatro galpões na Avenida Senador Vitorino Freire, no Aterro do Bacanga.",
+      "situacao": "concluida"
+    },
+    {
+      "data": "2026-03",
+      "titulo": "Feirantes mudam de endereço",
+      "texto": "Entre fevereiro e março de 2026, os comerciantes passam a atender no Mercado da Cidade.",
       "situacao": "concluida"
     },
     {
@@ -15,9 +21,15 @@
       "situacao": "concluida"
     },
     {
+      "data": "2026-09-10",
+      "titulo": "Prédio antigo demolido",
+      "texto": "Depois de audiência na Justiça em 2 de setembro, a estrutura, em risco de desabamento, foi demolida.",
+      "situacao": "concluida"
+    },
+    {
       "data": "",
-      "titulo": "Reconstrução do prédio",
-      "texto": "As quatro fachadas originais serão preservadas.",
+      "titulo": "Construção do novo prédio",
+      "texto": "Obra no mesmo local do Mercado Central.",
       "situacao": "andamento"
     },
     {

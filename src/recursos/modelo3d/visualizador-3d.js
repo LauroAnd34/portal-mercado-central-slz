@@ -15,7 +15,7 @@ const MODELOS = {
   projeto: {
     titulo: 'Projeto do novo Mercado Central',
     descricao:
-      'O térreo mantém as fachadas antigas em vermelho e branco, com toldos laranja. Acima, dois andares novos recuados, com vidro, pilares brancos e cobertura branca; no centro, um painel de azulejos colorido. Na frente, praça com escadaria e árvores. Modelo ilustrativo feito a partir da imagem de divulgação da Prefeitura.',
+      'Como na imagem divulgada pela Prefeitura: o térreo com fachadas no estilo antigo, em vermelho e branco, com toldos laranja. Acima, dois andares novos recuados, com vidro, pilares brancos e cobertura branca; no centro, um painel de azulejos colorido. Na frente, praça com escadaria e árvores. Modelo ilustrativo feito a partir da imagem de divulgação da Prefeitura.',
     arquivo: null, // ex.: './modelos/mercado-projeto.glb'
   },
 };
@@ -364,6 +364,13 @@ export function iniciarVisualizador3D() {
     irParaVista(SEQUENCIA[vista][0]);
     vista = (vista + 1) % SEQUENCIA.length;
     mostrarProximaVista();
+  });
+  // no celular, girar e aproximar com botões ficam num "⋯" (o gesto já faz isso)
+  const botaoExtras = janela.querySelector('[data-mais-controles-3d]');
+  botaoExtras?.addEventListener('click', () => {
+    const aberto = botaoExtras.getAttribute('aria-expanded') !== 'true';
+    botaoExtras.setAttribute('aria-expanded', String(aberto));
+    janela.classList.toggle('janela-3d--extras', aberto);
   });
   // informações sobre o modelo
   const info = janela.querySelector('#info-3d');

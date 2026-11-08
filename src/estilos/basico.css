@@ -287,7 +287,7 @@ button,
 label,
 a {
   overflow-wrap: break-word;
-  hyphens: auto;
+  hyphens: manual; /* não parte palavras no meio ("Mer-cado"); só quebra se não couber */
 }
 .botao,
 button {
@@ -315,4 +315,17 @@ select {
 .visite > *,
 .explorar__guia > * {
   min-width: 0;
+}
+
+/* ---------- Letras grandes (150% ou mais) ----------
+   O texto corrido cresce até 200%. Títulos e rótulos de botões crescem com
+   limite pela largura da tela, para não quebrar palavras nem esconder botões. */
+:root[data-letras='grandes'] h1 {
+  font-size: min(var(--texto-3xl), 12vw);
+}
+:root[data-letras='grandes'] h2 {
+  font-size: min(var(--texto-2xl), 9.5vw);
+}
+:root[data-letras='grandes'] h3 {
+  font-size: min(var(--texto-xl), 8vw);
 }

@@ -2,7 +2,7 @@
 
 No final da década de 1930, São Luís passou por um amplo programa de modernização urbana. Inspiradas nas ideias sanitaristas da época, as autoridades buscavam abrir avenidas, melhorar a circulação e substituir construções consideradas inadequadas aos novos padrões de higiene.
 
-Em 1939, o antigo mercado foi demolido. No mesmo período, foi aberta em diagonal a Avenida Magalhães de Almeida, ligando o tráfego da cidade diretamente ao local onde seria erguido o novo prédio.
+Em 1939, o antigo mercado foi demolido. Logo depois, a partir de 1940, foi aberta em diagonal a avenida que hoje se chama Magalhães de Almeida (primeiro chamada Avenida 10 de Novembro), ligando o tráfego da cidade diretamente ao local onde seria erguido o novo prédio.
 
 ![Fotografia antiga em preto e branco: o Mercado Central em 1940, um prédio térreo comprido com colunas e platibanda escalonada, em terreno ainda sem calçamento. Cartão-postal Foto Berlim, enviado em 12 de julho de 1940.](mercado-1940-cartao-foto-berlim.jpg)
 

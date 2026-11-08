@@ -442,3 +442,81 @@
 .botao-flutuante-acessibilidade--arrastando::after {
   opacity: 0;
 }
+
+/* Um só botão flutuante: o botão próprio do VLibras fica escondido e é aberto
+   pelo "Traduzir para Libras" do painel. A janela do avatar continua normal. */
+#vlibras-access-wrapper,
+[vw] [vw-access-button] {
+  display: none !important;
+}
+.botao-libras {
+  display: flex;
+  align-items: center;
+  gap: var(--e-3);
+  width: 100%;
+  min-height: 64px;
+  margin: var(--e-2) 0 var(--e-3);
+  padding: var(--e-3);
+  border: 2px solid #1351b4;
+  border-radius: 14px;
+  background: #e8f0fb;
+  color: #0c326f;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.botao-libras:hover {
+  background: #d4e3f8;
+}
+.botao-libras:focus-visible {
+  outline: 3px solid #ffbf00;
+  outline-offset: 2px;
+}
+.botao-libras img {
+  flex: 0 0 auto;
+  border-radius: 8px;
+}
+.botao-libras strong {
+  display: block;
+}
+.botao-libras small {
+  display: block;
+  font-size: var(--texto-sm);
+}
+:root[data-contraste='alto'] .botao-libras {
+  background: #000;
+  color: #ff0;
+  border-color: #ff0;
+}
+/* selo das mãos: mostra que o botão também abre o tradutor de Libras */
+.botao-flutuante__libras {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 22px;
+  height: 22px;
+  border: 2px solid #ffffff;
+  border-radius: 7px;
+  pointer-events: none;
+}
+.botao-flutuante-acessibilidade--esquerda .botao-flutuante__libras {
+  right: auto;
+  left: -8px;
+}
+/* celular: a barra do topo (atalhos e A− A A+) some; tudo isso está no botão
+   de acessibilidade. Os atalhos continuam aparecendo para quem usa teclado. */
+@media (max-width: 980px) {
+  .barra-gov:not(:focus-within) {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+:root[data-letras='grandes'] .painel-acessibilidade h2 {
+  font-size: min(var(--texto-xl), 8vw);
+}
