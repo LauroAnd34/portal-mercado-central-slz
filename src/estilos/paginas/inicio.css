@@ -30,8 +30,8 @@
   font-family: var(--fonte-ui);
   font-size: var(--texto-xs);
   font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  text-transform: none;
   color: var(--faixa-3);
 }
 .abertura h1 {
@@ -155,7 +155,7 @@
   color: var(--faixa-1);
   font: 800 var(--texto-xs) var(--fonte-ui);
   letter-spacing: 0.1em;
-  text-transform: uppercase;
+  text-transform: none;
 }
 .aviso-obra p {
   margin: 0;
@@ -229,8 +229,8 @@
 }
 .fatos dt {
   font: 800 var(--texto-xs) var(--fonte-ui);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  text-transform: none;
   color: var(--marca-azul-600);
 }
 :root[data-tema='escuro'] .fatos dt {
@@ -328,8 +328,8 @@
 }
 .caminho__categoria {
   font: 700 var(--texto-xs) var(--fonte-ui);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  text-transform: none;
   color: var(--faixa-3);
 }
 .caminho__nome {
@@ -365,8 +365,16 @@
 }
 .voz {
   margin: 0;
-  padding-left: var(--e-5);
-  border-left: 4px solid var(--faixa-3);
+}
+/* aspas grandes, na fonte dos títulos, em vez de barra lateral */
+.voz blockquote::before {
+  content: '“';
+  display: block;
+  height: 0.55em;
+  font-family: var(--fonte-titulo);
+  font-size: 5rem;
+  line-height: 1;
+  color: var(--faixa-4);
 }
 .voz blockquote {
   margin: 0;
@@ -1178,8 +1186,8 @@
 .obra__situacao {
   font-size: var(--texto-xs) !important;
   font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  text-transform: none;
   color: var(--cor-texto-suave);
 }
 .obra__etapa--concluida .obra__situacao {
@@ -1277,4 +1285,86 @@
   .janela-3d:not(.janela-3d--extras) .janela-3d__zoom {
     display: none;
   }
+}
+
+/* =========================================================================
+   "Acompanhe a obra" — tempo do canteiro (ver DESIGN.md)
+   Prancha de projeto: fundo azul de planta, quadriculado fino, linhas de
+   cota tracejadas. Só este bloco usa essa linguagem.
+   ========================================================================= */
+.obra {
+  --planta: #0f3556;
+  --planta-linha: rgb(159 212 242 / 0.13);
+  color: #e6f1f8;
+  border: 0;
+  border-radius: 6px;
+  background-color: var(--planta);
+  background-image:
+    linear-gradient(var(--planta-linha) 1px, transparent 1px),
+    linear-gradient(90deg, var(--planta-linha) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: -1px -1px;
+  outline: 1px dashed rgb(159 212 242 / 0.45);
+  outline-offset: -10px;
+  padding: var(--e-6) var(--e-6) var(--e-5);
+}
+.obra__titulo {
+  color: #ffffff;
+}
+.obra__etapa h4 {
+  color: #ffffff;
+}
+.obra__etapa p {
+  color: #d3e6f2;
+}
+.obra__nota {
+  color: #b9d3e4;
+}
+.obra__situacao {
+  color: #b9d3e4;
+}
+.obra__etapa--concluida .obra__situacao {
+  color: #9fe0aa;
+}
+.obra__etapa--andamento .obra__situacao {
+  color: #ffd27a;
+}
+/* marcas como linhas de cota: cheia = feito, tracejada = previsto */
+.obra__marca {
+  height: 0;
+  border-radius: 0;
+  background: none;
+  border-top: 2px dashed rgb(185 211 228 / 0.7);
+}
+.obra__marca::before,
+.obra__marca::after {
+  content: '';
+  position: absolute;
+  top: -6px;
+  width: 2px;
+  height: 10px;
+  background: rgb(185 211 228 / 0.85);
+}
+.obra__marca::before {
+  left: 0;
+}
+.obra__marca::after {
+  right: 0;
+}
+.obra__etapa--concluida .obra__marca {
+  background: none;
+  border-top: 3px solid #9fe0aa;
+}
+.obra__etapa--andamento .obra__marca {
+  background: none;
+  border-top: 3px solid #ffd27a;
+  border-image: linear-gradient(90deg, #ffd27a 55%, rgb(185 211 228 / 0.5) 55%) 1;
+}
+.obra a {
+  color: #ffffff;
+}
+:root[data-contraste='alto'] .obra {
+  background: #000;
+  outline-color: #ffff00;
+  color: #ffffff;
 }

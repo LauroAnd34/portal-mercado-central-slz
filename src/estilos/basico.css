@@ -147,8 +147,8 @@ textarea {
   font-family: var(--fonte-ui);
   font-size: var(--texto-sm);
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  text-transform: none;
+  letter-spacing: 0.005em;
   color: var(--cor-texto-suave);
   margin-bottom: var(--e-3);
 }
@@ -328,4 +328,14 @@ select {
 }
 :root[data-letras='grandes'] h3 {
   font-size: min(var(--texto-xl), 8vw);
+}
+
+/* toque: sem a espera do "toque duplo para zoom" em botões e links (o zoom da página continua) */
+a,
+button,
+input,
+select,
+summary,
+label {
+  touch-action: manipulation;
 }

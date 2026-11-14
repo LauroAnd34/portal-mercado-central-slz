@@ -66,7 +66,7 @@
 }
 .ponto__botao {
   display: grid;
-  grid-template-columns: 8px 1fr;
+  grid-template-columns: 22px 1fr;
   gap: var(--e-3);
   width: 100%;
   padding: var(--e-3);
@@ -87,9 +87,18 @@
   border: 2px solid var(--cor-categoria);
   background: var(--cor-fundo-destaque);
 }
+/* marca da lista = mesmo alfinete do mapa, na cor da categoria */
 .ponto__marca {
-  border-radius: 4px;
+  align-self: start;
+  width: 16px;
+  height: 16px;
+  margin: 4px 0 0 3px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
   background: var(--cor-categoria);
+  box-shadow:
+    inset 0 0 0 4px var(--cor-categoria),
+    inset 0 0 0 8px rgb(255 255 255 / 0.85);
 }
 .ponto__textos {
   display: grid;
@@ -102,8 +111,8 @@
 .ponto__categoria {
   font-size: var(--texto-xs);
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  text-transform: none;
+  letter-spacing: 0.005em;
   color: var(--cor-texto-suave);
 }
 .ponto__distancia {
@@ -263,9 +272,18 @@
   box-shadow: var(--sombra-1);
 }
 .detalhes__cabecalho {
-  border-left: 6px solid var(--cor-categoria, var(--cor-primaria));
-  padding-left: var(--e-4);
   margin-bottom: var(--e-4);
+}
+/* categoria com o alfinete colorido do mapa, em vez de barra lateral */
+.detalhes__categoria::before {
+  content: '';
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  margin-right: 8px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: var(--cor-categoria, var(--cor-primaria));
 }
 :root[data-contraste='alto'] .detalhes__cabecalho {
   border-left-color: #ffff00;
@@ -276,8 +294,8 @@
 .detalhes__categoria {
   font-size: var(--texto-xs);
   font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  text-transform: none;
+  letter-spacing: 0.005em;
   color: var(--cor-texto-suave);
 }
 .detalhes__endereco {
@@ -299,8 +317,8 @@
 .detalhes__dados dt {
   font-size: var(--texto-xs);
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  text-transform: none;
+  letter-spacing: 0.005em;
   color: var(--cor-texto-suave);
 }
 .detalhes__dados dd {
@@ -878,8 +896,8 @@
 .perto-de-voce__titulo {
   margin: 0 0 var(--e-2);
   font-size: var(--texto-sm);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  text-transform: none;
+  letter-spacing: 0.005em;
   color: var(--cor-texto-suave);
 }
 .perto-de-voce__lista {
@@ -902,7 +920,6 @@
   max-width: 220px;
   padding: 6px 14px 6px 12px;
   border: 2px solid var(--cor-borda);
-  border-left: 6px solid var(--cor-categoria, var(--cor-primaria));
   border-radius: var(--raio);
   background: var(--cor-superficie);
   color: var(--cor-texto);
@@ -992,8 +1009,8 @@
 .como-chegar__titulo {
   margin: 0;
   font-size: var(--texto-sm);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  text-transform: none;
+  letter-spacing: 0.005em;
   color: var(--cor-texto-suave);
 }
 .segmentos {
@@ -1093,7 +1110,6 @@
 }
 .onibus div {
   padding: var(--e-2) var(--e-3);
-  border-left: 4px solid #8a5a00;
   background: var(--cor-fundo-suave);
   border-radius: var(--raio);
 }

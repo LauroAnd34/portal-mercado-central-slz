@@ -8,7 +8,7 @@
 /* ---------- Curvas e durações ---------- */
 :root {
   --curva-suave: cubic-bezier(0.22, 1, 0.36, 1);
-  --curva-mola: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --curva-mola: cubic-bezier(0.25, 1, 0.5, 1); /* ease-out-quart: desacelera sem quicar */
 }
 
 /* ---------- Aparecer ao rolar (só quando o JavaScript liga) ---------- */

@@ -8,31 +8,9 @@
  */
 import { preferencias } from '../../nucleo/preferencias.js';
 
-const SELETORES_REVELAR = [
-  ['.titulo-modulo', ''],
-  ['.cartoes > li', ''],
-  ['.sabores > li', 'zoom'],
-  ['.setor', 'direita'],
-  ['.info-bloco', 'esquerda'],
-  ['.recursos-grade > li', ''],
-  ['.selos > li', 'zoom'],
-  ['.roteiros > li', ''],
-  ['.downloads > li', 'direita'],
-  ['.linha', ''],
-  ['.chamada-mapa__texto', 'esquerda'],
-  ['.chamada-mapa__arte', 'direita'],
-  ['.glossario-chamada', ''],
-  ['.vozes__lista > li', ''],
-  ['.azulejaria__painel', 'zoom'],
-  ['.azulejaria__galeria > li', ''],
-  ['.comparador', 'esquerda'],
-  ['.novo-mercado__texto', 'direita'],
-  ['.aviso-obra', ''],
-  ['.contato-barreira', ''],
-  ['.tabela-rolagem', ''],
-  ['.capa-livro', 'esquerda'],
-  ['.visite__setores h3, .visite__ajuda', ''],
-];
+// Sem "aparecer ao rolar" em cada seção: o conteúdo já está lá quando a pessoa
+// chega (é mais rápido, mais acessível e não tem cara de site genérico).
+const SELETORES_REVELAR = [];
 
 export const animacoesPermitidas = () =>
   !preferencias.obter().movimento &&

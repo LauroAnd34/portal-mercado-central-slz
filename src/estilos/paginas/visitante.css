@@ -1,7 +1,7 @@
 .visitante__aviso {
   margin-top: var(--e-4);
   padding: var(--e-3) var(--e-4);
-  border-left: 4px solid var(--cor-destaque, #f2b400);
+  border: 1px solid var(--cor-borda);
   background: var(--cor-fundo-suave);
   border-radius: var(--raio);
   font-size: var(--texto-sm);

@@ -68,8 +68,8 @@
 .capa-livro__orgao {
   font-size: var(--texto-xs);
   font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  text-transform: none;
   color: #d6ebf7;
 }
 .capa-livro__titulo {
@@ -141,7 +141,7 @@
   color: #fff;
   font-weight: 800;
   font-size: var(--texto-sm);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.005em;
 }
 .download:nth-child(1) .download__formato,
 li:nth-child(2) .download__formato {
@@ -392,8 +392,8 @@ mark {
 }
 .leitor__sumario-titulo {
   font-size: var(--texto-md);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  text-transform: none;
+  letter-spacing: 0.005em;
 }
 .leitor__sumario ol {
   list-style: none;
@@ -460,8 +460,8 @@ mark {
   font-family: var(--fonte-ui);
   font-size: var(--texto-xs);
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  text-transform: none;
+  letter-spacing: 0.005em;
   opacity: 0.8;
   margin: 0 auto var(--e-2);
   max-width: var(--leitor-largura);
@@ -679,7 +679,6 @@ mark {
   padding: var(--e-3);
   border-radius: var(--raio);
   background: var(--cor-fundo-suave);
-  border-left: 4px solid var(--faixa-3);
 }
 .glossario dt {
   font-weight: 800;
@@ -1115,8 +1114,8 @@ mark {
 }
 .leitor__sumario-titulo {
   font-size: var(--texto-md);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  text-transform: none;
+  letter-spacing: 0.005em;
 }
 .leitor__voz-controles {
   display: flex;

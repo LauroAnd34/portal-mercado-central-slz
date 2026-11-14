@@ -164,8 +164,8 @@ kbd {
   font-size: var(--texto-xs);
   font-weight: 700;
   line-height: 1.25;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  text-transform: none;
+  letter-spacing: 0.005em;
   color: var(--cor-texto-suave);
 }
 @media (max-width: 480px) {

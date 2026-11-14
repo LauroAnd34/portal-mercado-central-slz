@@ -1,0 +1,15 @@
+{
+  "extraKnownMarketplaces": {
+    "impeccable": {
+      "source": { "source": "github", "repo": "pbakaus/impeccable" }
+    },
+    "accesslint": {
+      "source": { "source": "github", "repo": "AccessLint/claude-marketplace" }
+    }
+  },
+  "enabledPlugins": {
+    "impeccable@impeccable": true,
+    "accesslint@accesslint": true
+  },
+  "includeCoAuthoredBy": false
+}

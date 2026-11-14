@@ -7,7 +7,7 @@
 .titulo-modulo {
   position: relative;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   align-items: flex-start;
   gap: var(--e-2);
   margin-bottom: var(--e-7);
@@ -28,22 +28,17 @@
   letter-spacing: -0.02em;
 }
 .titulo-modulo__sub {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--e-2);
+  display: block;
+  max-width: 52ch;
   font-family: var(--fonte-ui);
-  font-size: var(--texto-xs);
-  font-weight: 800;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--marca-azul-600);
+  font-size: var(--texto-md);
+  font-weight: 500;
+  letter-spacing: 0.005em;
+  text-transform: none;
+  color: var(--cor-texto-suave);
 }
 .titulo-modulo__sub::before {
-  content: '';
-  width: 28px;
-  height: 3px;
-  border-radius: 2px;
-  background: currentColor;
+  content: none;
 }
 :root[data-tema='escuro'] .titulo-modulo__sub {
   color: #8fd0f2;
@@ -301,7 +296,7 @@ li:nth-child(4n + 4) > .cartao {
   gap: var(--e-3);
   align-items: flex-start;
   padding: var(--e-3) var(--e-4);
-  border-left: 6px solid var(--ouro-500);
+  border: 1px solid var(--ouro-500);
   background: #fff8db;
   color: #3d3300;
   border-radius: var(--raio);
