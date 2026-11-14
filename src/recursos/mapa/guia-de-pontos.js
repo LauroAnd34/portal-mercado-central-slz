@@ -225,5 +225,9 @@ export function renderizarOnibus(onibus, linkTransporte) {
       <div><dt>Parada ${escaparHtml(onibus.parada.nome)}</dt><dd>${escaparHtml(onibus.parada.endereco)}. Linhas: <strong>${onibus.parada.linhas.join(', ')}</strong></dd></div>
       <div><dt>${escaparHtml(onibus.terminal.nome)}</dt><dd>${escaparHtml(onibus.terminal.endereco)}. ${escaparHtml(onibus.terminal.texto)}</dd></div>
     </dl>
+    <a class="botao botao--secundario botao--pequeno onibus__app" data-abrir-meu-onibus href="${onibus.app.android}" target="_blank" rel="noopener">
+      <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24"><path d="M5 17V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v11M5 13h14M7 17v2h2v-2m6 0v2h2v-2M8 9h8M7.5 15h.1m8.4-.1h.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Ver a chegada no ${escaparHtml(onibus.app.nome)}<span class="somente-leitor"> (abre o aplicativo ou a loja)</span>
+    </a>
     <p class="onibus__fonte">Linhas segundo o <a href="${onibus.fonte.url}" target="_blank" rel="noopener">${onibus.fonte.nome}<span class="somente-leitor"> (abre em nova aba)</span></a>; podem mudar. <a href="${linkTransporte}" target="_blank" rel="noopener">Ver horários e trajeto no Google Maps<span class="somente-leitor"> (abre em nova aba)</span></a></p>`;
 }

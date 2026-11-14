@@ -1345,3 +1345,6 @@
     overscroll-behavior: none;
   }
 }
+.onibus__app {
+  margin: var(--e-2) 0;
+}

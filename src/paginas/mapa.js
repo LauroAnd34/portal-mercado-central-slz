@@ -304,6 +304,12 @@ async function tracarRota(ponto) {
     // ônibus: linhas e paradas perto do Mercado
     const linkOnibus = linkComoChegar(origem, ponto.coordenadas, 'transit');
     area.innerHTML = renderizarOnibus(ONIBUS, linkOnibus);
+    // no iPhone e no iPad, o botão do aplicativo abre a App Store
+    if (
+      /iPhone|iPad|iPod/.test(navigator.userAgent) ||
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+    )
+      area.querySelector('[data-abrir-meu-onibus]')?.setAttribute('href', ONIBUS.app.ios);
     const link = el.detalhes.querySelector('[data-link-google]');
     if (link) link.href = linkOnibus;
     mapa?.desenharRota(

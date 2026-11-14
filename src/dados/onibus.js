@@ -17,4 +17,10 @@ export const ONIBUS = Object.freeze({
     texto: 'Recebe linhas de quase todos os bairros; de lá, o Mercado fica a poucos minutos a pé.',
   },
   fonte: { nome: 'Wikiroutes', url: 'https://wikiroutes.info/pt/stops/1049765' },
+  // Aplicativo oficial de transporte de São Luís (chegada do ônibus no ponto).
+  app: {
+    nome: 'Meu Ônibus SLZ',
+    android: 'https://play.google.com/store/apps/details?id=br.com.m2m.meuonibus.saoluiz',
+    ios: 'https://apps.apple.com/br/app/meu-%C3%B4nibus-s%C3%A3o-luis/id1212505891',
+  },
 });
