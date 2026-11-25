@@ -6,4 +6,4 @@ Este livro nasce do desejo de contar essa história de um jeito que todas as pes
 
 Nas próximas páginas, caminhamos pela cidade portuária que existia antes do Mercado, acompanhamos sua fundação e reconstrução, conhecemos as pessoas que fazem dele um lugar vivo e terminamos com um convite: sair do Mercado e descobrir, a partir dele, outros pontos da nossa ilha.
 
-Boa leitura — ou boa escuta.
+Boa leitura. Ou boa escuta.

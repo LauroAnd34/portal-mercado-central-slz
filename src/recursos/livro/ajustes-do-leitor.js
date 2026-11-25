@@ -1,6 +1,8 @@
 /**
  * Ajustes específicos do leitor (independentes da barra geral do site):
  * tema da página, fonte, tamanho, entrelinha, largura e alinhamento.
+ * O tema e a fonte do painel de acessibilidade valem no livro até a pessoa
+ * escolher outros aqui; a escolha feita no leitor passa a valer só no livro.
  */
 import { ler, gravar } from '../../nucleo/armazenamento.js';
 
@@ -13,6 +15,8 @@ export const AJUSTES_PADRAO = Object.freeze({
   largura: 2,
   alinharEsquerda: true,
   destacarParagrafo: false,
+  temaProprio: false, // a pessoa escolheu o tema dentro do leitor
+  fontePropria: false, // a pessoa escolheu a fonte dentro do leitor
 });
 
 const LARGURAS = { 1: '52ch', 2: '66ch', 3: '82ch' };
@@ -35,6 +39,8 @@ export function salvarAjustes(ajustes) {
 /** Aplica os ajustes como variáveis CSS no elemento do leitor. */
 export function aplicarAjustes(leitor, ajustes) {
   leitor.dataset.temaLeitor = ajustes.tema;
+  leitor.toggleAttribute('data-tema-proprio', Boolean(ajustes.temaProprio));
+  leitor.toggleAttribute('data-fonte-propria', Boolean(ajustes.fontePropria));
   leitor.classList.toggle('leitor--alinhar-esquerda', ajustes.alinharEsquerda);
   leitor.classList.toggle('leitor--destacar-paragrafo', ajustes.destacarParagrafo);
   leitor.style.setProperty('--leitor-fonte', FONTES[ajustes.fonte] ?? FONTES.serifada);
@@ -49,8 +55,17 @@ export function iniciarAjustesDoLeitor(leitor) {
   let ajustes = carregarAjustes();
 
   const refletir = () => {
-    formulario.elements.tema.value = ajustes.tema;
-    formulario.elements.fonte.value = ajustes.fonte;
+    // sem escolha própria, os botões mostram o que está valendo (vindo do painel do site)
+    const raiz = document.documentElement.dataset;
+    const temaDoSite =
+      raiz.contraste === 'alto' ? 'contraste' : raiz.tema === 'escuro' ? 'escuro' : null;
+    const fonteDoSite = raiz.fonte === 'legivel' || raiz.fonte === 'dislexia' ? raiz.fonte : null;
+    formulario.elements.tema.value = ajustes.temaProprio
+      ? ajustes.tema
+      : (temaDoSite ?? ajustes.tema);
+    formulario.elements.fonte.value = ajustes.fontePropria
+      ? ajustes.fonte
+      : (fonteDoSite ?? ajustes.fonte);
     formulario.elements.tamanho.value = ajustes.tamanho;
     formulario.elements.entrelinha.value = ajustes.entrelinha;
     formulario.elements.largura.value = ajustes.largura;
@@ -77,6 +92,8 @@ export function iniciarAjustesDoLeitor(leitor) {
     const numericos = ['tamanho', 'entrelinha', 'largura'];
     atualizar({
       [name]: type === 'checkbox' ? checked : numericos.includes(name) ? Number(value) : value,
+      ...(name === 'tema' && { temaProprio: true }),
+      ...(name === 'fonte' && { fontePropria: true }),
     });
   });
   formulario.addEventListener('submit', (evento) => evento.preventDefault());
@@ -86,4 +103,9 @@ export function iniciarAjustesDoLeitor(leitor) {
 
   aplicarAjustes(leitor, ajustes);
   refletir();
+  // mudou algo no painel de acessibilidade do site: atualiza os botões do leitor
+  new MutationObserver(refletir).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-tema', 'data-contraste', 'data-fonte'],
+  });
 }

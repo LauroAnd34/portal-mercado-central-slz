@@ -4,12 +4,14 @@
  *  - toque duplo / clique duplo aproxima onde tocou (e volta ao normal);
  *  - roda do mouse aproxima no ponto do cursor;
  *  - arrastar (um dedo ou mouse) move a foto quando ela está aproximada;
- *  - teclado: + e − aproximam, 0 volta ao normal, setas movem.
+ *  - arrastar para o lado, sem zoom, troca de foto (aoDeslizar);
+ *  - teclado: + e − aproximam, 0 volta ao normal, setas movem
+ *    (sem zoom, as setas para os lados trocam de foto).
  * Devolve { aproximar(fator), restaurar() } para os botões da tela.
  */
 const MAX = 5;
 
-export function ativarZoomDeImagem(area, imagem, { aoMudar } = {}) {
+export function ativarZoomDeImagem(area, imagem, { aoMudar, aoDeslizar } = {}) {
   let escala = 1;
   let x = 0;
   let y = 0;
@@ -18,11 +20,22 @@ export function ativarZoomDeImagem(area, imagem, { aoMudar } = {}) {
   let arraste = null;
   let ultimoToque = 0;
 
-  const limitar = () => {
+  // tamanho da foto como aparece na tela (sem as faixas vazias do "contain"),
+  // para não deixar arrastar a foto para fora
+  const tamanhoDaFoto = () => {
     const l = area.clientWidth;
     const a = area.clientHeight;
-    const maxX = Math.max(0, (l * escala - l) / 2);
-    const maxY = Math.max(0, (a * escala - a) / 2);
+    const proporcao =
+      imagem.naturalWidth && imagem.naturalHeight
+        ? imagem.naturalWidth / imagem.naturalHeight
+        : l / a;
+    const largura = Math.min(l, a * proporcao);
+    return { l, a, largura, altura: largura / proporcao };
+  };
+  const limitar = () => {
+    const { l, a, largura, altura } = tamanhoDaFoto();
+    const maxX = Math.max(0, (largura * escala - l) / 2);
+    const maxY = Math.max(0, (altura * escala - a) / 2);
     x = Math.min(maxX, Math.max(-maxX, x));
     y = Math.min(maxY, Math.max(-maxY, y));
   };
@@ -67,7 +80,7 @@ export function ativarZoomDeImagem(area, imagem, { aoMudar } = {}) {
       };
       arraste = null;
     } else if (ponteiros.size === 1) {
-      arraste = { cx: evento.clientX, cy: evento.clientY, x, y };
+      arraste = { cx: evento.clientX, cy: evento.clientY, x, y, t: performance.now() };
       // toque duplo
       const agora = performance.now();
       if (evento.pointerType !== 'mouse' && agora - ultimoToque < 300) {
@@ -94,6 +107,17 @@ export function ativarZoomDeImagem(area, imagem, { aoMudar } = {}) {
     }
   });
   const soltar = (evento) => {
+    // sem zoom: deslizar para o lado troca de foto
+    if (arraste && ponteiros.size === 1 && escala <= 1.01 && evento.type === 'pointerup') {
+      const dx = evento.clientX - arraste.cx;
+      const dy = evento.clientY - arraste.cy;
+      if (
+        Math.abs(dx) > 60 &&
+        Math.abs(dx) > Math.abs(dy) * 1.5 &&
+        performance.now() - arraste.t < 700
+      )
+        aoDeslizar?.(dx < 0 ? 1 : -1);
+    }
     ponteiros.delete(evento.pointerId);
     if (ponteiros.size < 2) pinca = null;
     if (ponteiros.size === 0) arraste = null;
@@ -125,8 +149,10 @@ export function ativarZoomDeImagem(area, imagem, { aoMudar } = {}) {
       '=': () => zoomEm(escala * 1.4, 0, 0, true),
       '-': () => zoomEm(escala / 1.4, 0, 0, true),
       0: () => zoomEm(1, 0, 0, true),
-      ArrowLeft: () => ((x += passo), desenhar(true)),
-      ArrowRight: () => ((x -= passo), desenhar(true)),
+      ArrowLeft: () =>
+        escala <= 1.01 && aoDeslizar ? aoDeslizar(-1) : ((x += passo), desenhar(true)),
+      ArrowRight: () =>
+        escala <= 1.01 && aoDeslizar ? aoDeslizar(1) : ((x -= passo), desenhar(true)),
       ArrowUp: () => ((y += passo), desenhar(true)),
       ArrowDown: () => ((y -= passo), desenhar(true)),
     };

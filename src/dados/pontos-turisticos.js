@@ -20,6 +20,7 @@ export const MERCADO_CENTRAL = Object.freeze({
 
 export const CATEGORIAS = Object.freeze({
   'centro-historico': { nome: 'Centro Histórico', cor: '#144670', simbolo: 'casarao' },
+  mercados: { nome: 'Mercados e feiras', cor: '#a33f00', simbolo: 'banca' },
   fe: { nome: 'Igrejas e fé', cor: '#7a3e9d', simbolo: 'igreja' },
   cultura: { nome: 'Museus e cultura', cor: '#c32146', simbolo: 'museu' },
   praias: { nome: 'Praias e orla', cor: '#1a6fa3', simbolo: 'onda' },
@@ -30,17 +31,17 @@ export const CATEGORIAS = Object.freeze({
 export const PONTOS_TURISTICOS = Object.freeze([
   {
     id: 'mercado-da-cidade',
-    nome: 'Mercado da Cidade (feirantes do Mercado Central)',
-    categoria: 'centro-historico',
+    nome: 'Mercado da Cidade (mercado de transição)',
+    categoria: 'mercados',
     coordenadas: [-2.5444427, -44.2984244],
     endereco: 'Avenida Senador Vitorino Freire, Aterro do Bacanga',
     descricao:
-      'Desde o início de 2026, os feirantes do Mercado Central atendem aqui, em quatro galpões, enquanto o prédio histórico é reconstruído. Localização aproximada.',
+      'Mercado de transição, construído no Aterro do Bacanga, fora do Centro Histórico. Desde o início de 2026, os feirantes do Mercado Central atendem aqui, em quatro galpões, enquanto o novo prédio é construído no endereço antigo. Localização aproximada.',
   },
   {
     id: 'casa-das-tulhas',
     nome: 'Casa das Tulhas (Feira da Praia Grande)',
-    categoria: 'centro-historico',
+    categoria: 'mercados',
     coordenadas: [-2.5293126, -44.3056557],
     endereco: 'Rua da Estrela, Praia Grande',
     descricao:
@@ -168,7 +169,7 @@ export const PONTOS_TURISTICOS = Object.freeze([
     coordenadas: [-2.528539, -44.3056151],
     endereco: 'Rua da Estrela, 82',
     descricao:
-      'Conta a história dos ingredientes e pratos típicos — ótimo complemento à visita ao Mercado.',
+      'Conta a história dos ingredientes e pratos típicos. É um ótimo complemento à visita ao Mercado.',
   },
   {
     id: 'casa-de-nhozinho',

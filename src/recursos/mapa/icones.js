@@ -16,6 +16,8 @@ const SIMBOLOS = {
     '<path d="M6 17c0-7 5-11 12-11 0 7-4 12-11 12M6 17l6-6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/>',
   barco:
     '<path d="M4 14h16l-2 4H6zM12 5v9M12 6l5 6h-5" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/>',
+  banca:
+    '<path d="M5 10h14l-1-4H6zM6 10v8h12v-8M10 18v-4h4v4" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>',
   mercado:
     '<path d="M5 10h14l-1-4H6zM6 10v8h12v-8M10 18v-4h4v4" fill="none" stroke="#144670" stroke-width="2" stroke-linejoin="round"/>',
 };

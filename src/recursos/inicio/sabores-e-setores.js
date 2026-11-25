@@ -51,7 +51,7 @@ export function iniciarOndeEncontro(campo, resposta, setoresRaiz, produtosPorSet
         .filter(([, produtos]) => produtos.length);
       if (!achados.length) {
         resposta.textContent =
-          'Não achamos esse produto na lista. Pergunte aos feirantes — o Mercado tem muito mais do que cabe aqui.';
+          'Não achamos esse produto na lista. Pergunte aos feirantes: o Mercado tem muito mais do que cabe aqui.';
         return;
       }
       resposta.textContent = achados

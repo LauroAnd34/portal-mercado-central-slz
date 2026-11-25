@@ -106,7 +106,10 @@ export function renderizarDetalhes(ponto, mercado, foto = null, deMim = null, co
         <button type="button" class="segmento" data-origem="mim" aria-pressed="${origem === 'mim'}">De onde estou</button>
         <button type="button" class="segmento" data-origem="mercado" aria-pressed="${origem === 'mercado'}">Do Mercado</button>
       </div>`
-    : '';
+    : `<button type="button" class="botao botao--contorno botao--pequeno como-chegar__localizar" data-usar-localizacao>
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5" fill="currentColor"/><circle cx="12" cy="12" r="7.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Saindo de onde estou
+      </button>`;
   const meios = MEIOS.map(
     (m) => `<button type="button" class="meio" data-meio="${m.id}" aria-pressed="${m.id === meio}">
         ${m.icone}<span class="meio__nome">${m.nome}</span><span class="meio__tempo" data-tempo-meio="${m.id}">${tempos[m.id] ? formatarDuracao(tempos[m.id]) : m.servico ? '…' : 'linhas'}</span>
@@ -149,7 +152,7 @@ export function renderizarRota(rota, meio, { deMim = false } = {}) {
     ? `<details class="detalhes__passo-a-passo"><summary>Ver o caminho passo a passo</summary><ol class="passos">${rota.passos
         .map(
           (p) =>
-            `<li>${escaparHtml(p.texto)}${p.distanciaM ? ` <span class="passos__distancia">— ${formatarDistancia(p.distanciaM / 1000)}</span>` : ''}</li>`,
+            `<li>${escaparHtml(p.texto)}${p.distanciaM ? ` <span class="passos__distancia">(${formatarDistancia(p.distanciaM / 1000)})</span>` : ''}</li>`,
         )
         .join('')}</ol></details>`
     : '';
@@ -185,7 +188,7 @@ export function renderizarDetalhesRoteiro(roteiro, paradas, rota) {
             (p) =>
               `<li class="${p.parada ? 'passos__parada' : ''}">${escaparHtml(p.texto)}${
                 p.distanciaM
-                  ? ` <span class="passos__distancia">— ${formatarDistancia(p.distanciaM / 1000)}</span>`
+                  ? ` <span class="passos__distancia">(${formatarDistancia(p.distanciaM / 1000)})</span>`
                   : ''
               }</li>`,
           )

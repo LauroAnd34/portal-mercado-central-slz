@@ -30,7 +30,7 @@ pandoc "$TMP/meta.md" $CAPITULOS \
   -o "$DESTINO/$NOME.epub"
 
 # --- TXT
-{ echo "$TITULO — $SUBTITULO"; echo "$AUTORIA"; echo; echo "$EDICAO"; echo;
+{ echo "$TITULO: $SUBTITULO"; echo "$AUTORIA"; echo; echo "$EDICAO"; echo;
   pandoc $CAPITULOS -t plain --wrap=auto --columns=80; } > "$DESTINO/$NOME.txt"
 
 # --- PDF (HTML intermediário + CSS de impressão)

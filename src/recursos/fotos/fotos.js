@@ -25,7 +25,7 @@ export function montarCreditos(raiz = document) {
   lista.innerHTML = Object.values(FOTOS)
     .map(
       (f) =>
-        `<li>${escaparHtml(f.lugar)} — ${escaparHtml(f.autor)}, <a href="${f.fonte}" rel="noopener" target="_blank">${escaparHtml(f.licenca)}<span class="somente-leitor"> (abre em nova aba)</span></a></li>`,
+        `<li>${escaparHtml(f.lugar)}: ${escaparHtml(f.autor)}, <a href="${f.fonte}" rel="noopener" target="_blank">${escaparHtml(f.licenca)}<span class="somente-leitor"> (abre em nova aba)</span></a></li>`,
     )
     .join('');
 }

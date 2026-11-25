@@ -201,7 +201,7 @@ li:nth-child(3) .download__formato {
   --leitor-borda: #2c4356;
 }
 .leitor[data-tema-leitor='contraste'],
-:root[data-contraste='alto'] .leitor {
+:root[data-contraste='alto'] .leitor:not([data-tema-proprio]) {
   --leitor-fundo: #000;
   --leitor-texto: #fff;
   --leitor-titulo: #ffff00;
@@ -209,8 +209,7 @@ li:nth-child(3) .download__formato {
   --leitor-destaque: #00315c;
   --leitor-borda: #fff;
 }
-:root[data-tema='escuro']
-  .leitor:not([data-tema-leitor='sepia']):not([data-tema-leitor='contraste']) {
+:root[data-tema='escuro'] .leitor:not([data-tema-proprio]) {
   --leitor-fundo: #101c27;
   --leitor-texto: #e2e9ef;
   --leitor-titulo: #c9e7f7;
@@ -219,10 +218,10 @@ li:nth-child(3) .download__formato {
   --leitor-borda: #2c4356;
 }
 /* a fonte escolhida na barra geral do site também vale aqui */
-:root[data-fonte='dislexia'] .leitor {
+:root[data-fonte='dislexia'] .leitor:not([data-fonte-propria]) {
   --leitor-fonte: 'OpenDyslexic', sans-serif !important;
 }
-:root[data-fonte='legivel'] .leitor {
+:root[data-fonte='legivel'] .leitor:not([data-fonte-propria]) {
   --leitor-fonte: 'Atkinson Hyperlegible', sans-serif !important;
 }
 

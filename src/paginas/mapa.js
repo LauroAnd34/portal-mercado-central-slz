@@ -44,7 +44,9 @@ const estado = {
   categoriasAtivas: new Set(Object.keys(CATEGORIAS)),
   termo: '',
   selecionadoId: null,
-  minhaPosicao: null, // [lat, lon] — só existe se a pessoa permitir
+  minhaPosicao: null, // [lat, lon]: só existe se a pessoa permitir
+  // ?chegar no endereço: o caminho sai de onde a pessoa está (ela é o centro do mapa)
+  modoChegar: new URLSearchParams(location.search).has('chegar'),
 };
 
 const el = {
@@ -68,7 +70,7 @@ try {
 } catch (erro) {
   console.error(erro);
   el.mapa.innerHTML =
-    '<p class="mapa__erro">Não foi possível carregar o mapa. Use a lista de pontos — ela tem todas as informações.</p>';
+    '<p class="mapa__erro">Não foi possível carregar o mapa. Use a lista de pontos, que tem todas as informações.</p>';
 }
 
 /* ---------- Filtros ---------- */
@@ -206,7 +208,8 @@ function selecionar(id, { origem }) {
   const kmPe = doMercado ? ponto.distanciaKm : deMim.distanciaKm * 1.3;
   const kmCarro = doMercado ? ponto.distanciaCarroKm : deMim.distanciaKm * 1.3;
   if (!estado.meioEscolhido) estado.meio = meioSugerido(kmPe);
-  const tempos = temposPorMeio(kmPe, kmCarro);
+  // "como chego lá" sem a localização: não mostra tempos saindo do Mercado
+  const tempos = estado.modoChegar && !deMim ? {} : temposPorMeio(kmPe, kmCarro);
   el.detalhes.innerHTML = gaveta(
     renderizarDetalhes(ponto, MERCADO_CENTRAL, foto, deMim, {
       origem: estado.origemRota,
@@ -239,6 +242,12 @@ function selecionar(id, { origem }) {
 }
 
 el.detalhes.addEventListener('click', async (evento) => {
+  if (evento.target.closest('[data-usar-localizacao]')) {
+    estado.origemRota = 'mim';
+    estado.origemEscolhida = false;
+    localizar();
+    return;
+  }
   if (evento.target.closest('[data-fechar-detalhes]')) {
     fecharDetalhes();
     return;
@@ -317,6 +326,13 @@ async function tracarRota(ponto) {
       '#8a5a00',
       'Parada de ônibus',
     );
+    return;
+  }
+  // modo "como chego lá": sem a localização, não faz sentido sair do Mercado
+  if (estado.modoChegar && !estado.minhaPosicao) {
+    area.innerHTML =
+      '<p class="detalhes__resumo-rota">Para ver o caminho até aqui, toque em “Saindo de onde estou” e permita o uso da localização.</p>';
+    mapa?.limparRota?.();
     return;
   }
   area.innerHTML = '<p class="detalhes__carregando">Calculando o caminho…</p>';
@@ -475,6 +491,8 @@ function localizar() {
   );
 }
 botaoPerto?.addEventListener('click', localizar);
+// veio de "Como chegar" (ex.: página inicial): pede a localização para traçar o caminho
+if (estado.modoChegar) localizar();
 if ('geolocation' in navigator) mapa?.adicionarBotaoLocalizar(localizar);
 
 /* ---------- Roteiros prontos ---------- */

@@ -1348,3 +1348,15 @@
 .onibus__app {
   margin: var(--e-2) 0;
 }
+/* celular: o mapa vem primeiro; avisos de localização e "perto de você" ficam embaixo dele */
+@media (max-width: 980px) {
+  .explorar__mapa {
+    display: flex;
+    flex-direction: column;
+  }
+  .explorar__mapa > .perto-de-mim__nota,
+  .explorar__mapa > .perto-de-voce {
+    order: 2;
+    margin-top: var(--e-3);
+  }
+}

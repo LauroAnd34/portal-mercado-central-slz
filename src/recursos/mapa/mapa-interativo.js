@@ -119,7 +119,7 @@ export function criarMapaInterativo(elemento, { mercado, pontos, categorias, aoS
     title: mercado.nome,
   })
     .addTo(mapa)
-    .bindTooltip('Mercado Central — ponto de partida', { direction: 'top', offset: [0, -30] });
+    .bindTooltip('Mercado Central, ponto de partida', { direction: 'top', offset: [0, -30] });
   marcadorMercado.on('add', () =>
     rotularMarcador(marcadorMercado, `${mercado.nome}, ponto de partida`),
   );
@@ -137,7 +137,7 @@ export function criarMapaInterativo(elemento, { mercado, pontos, categorias, aoS
       riseOnHover: true,
     }).bindTooltip(ponto.nome, { direction: 'top', offset: [0, -40] });
     marcador.on('click', () => aoSelecionar?.(ponto.id));
-    marcador.on('add', () => rotularMarcador(marcador, `${ponto.nome} — ${categoria.nome}`));
+    marcador.on('add', () => rotularMarcador(marcador, `${ponto.nome} (${categoria.nome})`));
     marcadores.set(ponto.id, { marcador, ponto, categoria });
   }
 
@@ -178,7 +178,7 @@ export function criarMapaInterativo(elemento, { mercado, pontos, categorias, aoS
       if (selecionadoId && marcadores.has(selecionadoId)) {
         const anterior = marcadores.get(selecionadoId);
         anterior.marcador.setIcon(criarIconeDeCategoria(anterior.categoria));
-        rotularMarcador(anterior.marcador, `${anterior.ponto.nome} — ${anterior.categoria.nome}`);
+        rotularMarcador(anterior.marcador, `${anterior.ponto.nome} (${anterior.categoria.nome})`);
       }
       selecionadoId = id;
       camadaRota.clearLayers();
@@ -193,7 +193,7 @@ export function criarMapaInterativo(elemento, { mercado, pontos, categorias, aoS
       }
       const { marcador, ponto, categoria } = marcadores.get(id);
       marcador.setIcon(criarIconeDeCategoria(categoria, { selecionado: true }));
-      rotularMarcador(marcador, `${ponto.nome} — ${categoria.nome}, selecionado`);
+      rotularMarcador(marcador, `${ponto.nome} (${categoria.nome}), selecionado`);
       desenharRaios();
       // linha destacada Mercado → ponto, até a rota real chegar
       const caminho = caminhoAte(mercado, ponto);
@@ -337,6 +337,10 @@ export function criarMapaInterativo(elemento, { mercado, pontos, categorias, aoS
         numero.addTo(camadaRoteiro);
       });
       mapa.fitBounds(L.latLngBounds(coordenadas), margens());
+    },
+    /** Apaga o caminho desenhado (ex.: enquanto espera a localização da pessoa). */
+    limparRota() {
+      camadaRota.clearLayers();
     },
     limparRoteiro() {
       camadaRoteiro.clearLayers();

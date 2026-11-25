@@ -2,7 +2,7 @@
 <html lang="pt-BR">
   <head>
     <!-- @include cabeca.html -->
-    <title>Mercado Central de São Luís — Livro e Mapa Turístico | Prefeitura de São Luís</title>
+    <title>Mercado Central de São Luís: livro e mapa turístico | Prefeitura de São Luís</title>
     <meta
       name="description"
       content="Portal do Mercado Central de São Luís: leia ou ouça o livro, acompanhe a reconstrução e descubra os caminhos da ilha a partir do Mercado."
@@ -10,7 +10,7 @@
     <link rel="canonical" href="%VITE_ENDERECO_SITE%" />
     <meta
       property="og:title"
-      content="Mercado Central de São Luís — Livro e Mapa Turístico | Prefeitura de São Luís"
+      content="Mercado Central de São Luís: livro e mapa turístico | Prefeitura de São Luís"
     />
     <meta
       property="og:description"
@@ -48,9 +48,7 @@
       <!-- Abertura -->
       <section class="abertura" aria-labelledby="abertura-titulo">
         <div class="abertura__texto">
-          <h1 id="abertura-titulo">
-            Mercado Central de São Luís
-          </h1>
+          <h1 id="abertura-titulo">Mercado Central de São Luís</h1>
           <p class="abertura__lead">
             Há mais de 150 anos, o lugar onde a ilha se encontra: peixe fresco, juçara, camarão
             seco, ervas, conversa e tradição. Leia a história, acompanhe a reconstrução e descubra
@@ -88,12 +86,16 @@
         <div class="abertura__mosaico">
           <figure class="mosaico__item mosaico__item--grande">
             <img
-              data-foto="rua-portugal-azulejos"
-              data-tamanhos="(max-width: 980px) 60vw, 50vw"
+              src="./src/imagens/historia/mercado-1941-cartao-foto-londres.jpg"
+              srcset="
+                ./src/imagens/historia/mercado-1941-cartao-foto-londres-480.webp 480w,
+                ./src/imagens/historia/mercado-1941-cartao-foto-londres.jpg      682w
+              "
+              sizes="(max-width: 980px) 60vw, 50vw"
               fetchpriority="high"
-              width="1600"
-              height="1067"
-              alt="Fachada de casarão coberta de azulejos portugueses azuis e brancos, com três portas de madeira azul, na Rua Portugal."
+              width="682"
+              height="424"
+              alt="Cartão-postal de 1941 em preto e branco: a fachada do Mercado Central recém-inaugurado, com pessoas reunidas na entrada."
             />
           </figure>
           <figure class="mosaico__item">
@@ -122,10 +124,11 @@
         <div class="container aviso-obra__conteudo">
           <span class="aviso-obra__selo">Em obra</span>
           <p>
-            O prédio de 1941 foi demolido em setembro de 2026 e um novo está sendo construído. Os
-            feirantes atendem no <strong>Mercado da Cidade</strong>, Av. Senador Vitorino Freire
-            (Aterro do Bacanga).
-            <a href="./mapa.html#mercado-da-cidade">Ver o caminho</a>
+            O prédio de 1941 foi demolido em setembro de 2026 e um novo está sendo construído no
+            mesmo lugar. Enquanto isso, os feirantes atendem no <strong>Mercado da Cidade</strong>,
+            um mercado de transição construído em outro endereço: Av. Senador Vitorino Freire,
+            Aterro do Bacanga.
+            <a href="./mapa.html?chegar#mercado-da-cidade">Como chegar</a>
           </p>
         </div>
       </div>
@@ -142,11 +145,15 @@
               <article class="info-bloco">
                 <h3>Onde fica</h3>
                 <p>
-                  <strong>Durante a obra:</strong> Mercado da Cidade, Av. Senador Vitorino Freire
-                  (Aterro do Bacanga). O novo prédio está sendo construído no endereço histórico,
-                  Rua de São João, Centro.
+                  <strong>Durante a obra:</strong> no Mercado da Cidade, o mercado de transição, na
+                  Av. Senador Vitorino Freire (Aterro do Bacanga). Ele fica em outro lugar, fora do
+                  Centro Histórico.
                 </p>
-                <a href="./mapa.html#mercado-da-cidade">Ver no mapa e traçar caminho</a>
+                <p>
+                  <strong>Depois da obra:</strong> no novo Mercado Central, que está sendo
+                  construído no endereço histórico, na Rua de São João, Centro.
+                </p>
+                <a href="./mapa.html?chegar#mercado-da-cidade">Como chegar ao Mercado da Cidade</a>
               </article>
               <article class="info-bloco">
                 <h3>Quando ir</h3>
@@ -510,7 +517,6 @@
       </dialog>
 
       <!-- Linha do tempo -->
-      <div class="faixa-azulejo faixa-azulejo--rosas" aria-hidden="true"></div>
       <section class="secao" aria-labelledby="linha-titulo">
         <div class="container">
           <header class="titulo-modulo">
@@ -533,7 +539,6 @@
         </div>
       </section>
       <!-- Vozes do Mercado -->
-      <div class="faixa-azulejo faixa-azulejo--rosas" aria-hidden="true"></div>
       <section class="secao vozes" aria-labelledby="vozes-titulo">
         <div class="container">
           <header class="titulo-modulo">
@@ -587,7 +592,6 @@
       </section>
 
       <!-- Sabores do Mercado -->
-      <div class="faixa-azulejo faixa-azulejo--estrelas" aria-hidden="true"></div>
       <section class="secao sabores-secao" aria-labelledby="sabores-titulo">
         <div class="container sabores-grade">
           <div class="sabores-fotos">
@@ -648,8 +652,8 @@
           <p class="lead azulejaria__texto">
             Os casarões do Centro Histórico guardam um dos maiores conjuntos de azulejos portugueses
             do Brasil. Eles protegem as paredes do sol e da chuva e deixam as ruas coloridas. Cada
-            padrão é de uma época — e artistas maranhenses continuam essa história em painéis com as
-            nossas festas e tradições.
+            padrão é de uma época. Hoje, artistas maranhenses continuam essa história em painéis com
+            as nossas festas e tradições.
           </p>
           <figure class="azulejaria__painel">
             <button
@@ -684,59 +688,118 @@
           <ul class="azulejaria__galeria" data-galeria-azulejos></ul>
         </div>
         <dialog class="visualizador" data-visualizador aria-labelledby="visualizador-titulo">
-          <div class="visualizador__caixa">
+          <div
+            class="visualizador__area"
+            data-area-zoom
+            tabindex="0"
+            role="group"
+            aria-label="Foto ampliada. Use + e − para aproximar, setas para mover ou trocar de foto e 0 para voltar."
+          >
+            <img data-visualizador-foto alt="" draggable="false" />
+          </div>
+
+          <div class="visualizador__topo">
             <button
               type="button"
-              class="botao-icone visualizador__fechar"
+              class="botao-3d"
               data-fechar-visualizador
               aria-label="Fechar foto"
             >
-              <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22">
+              <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
                 <path
-                  d="M6 6l12 12M18 6L6 18"
+                  d="M6 6l12 12M18 6 6 18"
+                  fill="none"
                   stroke="currentColor"
-                  stroke-width="2.5"
+                  stroke-width="2.2"
                   stroke-linecap="round"
+                  stroke-linejoin="round"
                 />
               </svg>
             </button>
-            <div
-              class="visualizador__area"
-              data-area-zoom
-              tabindex="0"
-              role="group"
-              aria-label="Foto ampliada. Use + e − para aproximar, setas para mover e 0 para voltar."
-            >
-              <img data-visualizador-foto alt="" draggable="false" />
-            </div>
+            <h2 id="visualizador-titulo" class="visualizador__titulo" data-visualizador-titulo></h2>
+            <span class="visualizador__contador" data-visualizador-contador></span>
+          </div>
+
+          <button
+            type="button"
+            class="botao-3d visualizador__seta visualizador__seta--anterior"
+            data-foto-anterior
+            aria-label="Foto anterior"
+          >
+            <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+              <path
+                d="M15 5l-7 7 7 7"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+          <button
+            type="button"
+            class="botao-3d visualizador__seta visualizador__seta--proxima"
+            data-foto-proxima
+            aria-label="Próxima foto"
+          >
+            <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+              <path
+                d="M9 5l7 7-7 7"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+
+          <div class="visualizador__baixo">
             <div class="visualizador__zoom" role="group" aria-label="Zoom da foto">
-              <button
-                type="button"
-                class="botao botao--pequeno"
-                data-zoom-foto="mais"
-                aria-label="Aproximar"
-              >
-                +
+              <button type="button" class="botao-3d" data-zoom-foto="menos" aria-label="Afastar">
+                <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+                  <path
+                    d="M5 12h14"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+              <button type="button" class="botao-3d" data-zoom-foto="mais" aria-label="Aproximar">
+                <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+                  <path
+                    d="M12 5v14M5 12h14"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
               </button>
               <button
                 type="button"
-                class="botao botao--pequeno"
-                data-zoom-foto="menos"
-                aria-label="Afastar"
+                class="botao-3d"
+                data-zoom-foto="normal"
+                aria-label="Voltar ao tamanho normal"
               >
-                −
+                <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+                  <path
+                    d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
               </button>
-              <button type="button" class="botao botao--pequeno" data-zoom-foto="normal">
-                Tamanho normal
-              </button>
-              <span class="visualizador__dica" aria-hidden="true"
-                >Pinça com dois dedos ou toque duplo para dar zoom</span
-              >
             </div>
-            <p class="visualizador__legenda">
-              <strong id="visualizador-titulo" data-visualizador-titulo></strong>
-              <span data-visualizador-credito></span>
-            </p>
+            <p class="visualizador__credito" data-visualizador-credito></p>
           </div>
         </dialog>
       </section>

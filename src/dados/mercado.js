@@ -41,7 +41,7 @@ export const SABORES = Object.freeze([
   {
     nome: 'Cuxá',
     icone: 'folha',
-    texto: 'Molho de vinagreira, gergelim e camarão seco — símbolo da cozinha maranhense.',
+    texto: 'Molho de vinagreira, gergelim e camarão seco. É um símbolo da cozinha maranhense.',
   },
   {
     nome: 'Farinha d’água',
