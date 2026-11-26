@@ -20,7 +20,7 @@ export default defineConfig({
       pastaPublica: resolve(raiz, 'publico'),
       modelo: resolve(raiz, 'ferramentas/modelo-sw.js'),
     }),
-    sitemap({ paginas: ['', 'livro.html', 'mapa.html', 'en.html', 'es.html'] }),
+    sitemap({ paginas: ['', 'livro.html', 'mapa.html'] }),
   ],
   build: {
     outDir: 'site-pronto',

@@ -30,6 +30,7 @@ import { iniciarAtalhosDeTeclado } from '../recursos/acessibilidade/atalhos-de-t
 import { iniciarMenuMovel } from '../recursos/navegacao/menu-movel.js';
 import { iniciarAnimacoes } from '../recursos/animacoes/animacoes.js';
 import { preencherFotos, montarCreditos } from '../recursos/fotos/fotos.js';
+import { iniciarIdioma } from '../nucleo/idioma.js';
 
 /**
  * Proteção contra páginas falsas que tentam mostrar o portal "dentro" delas
@@ -59,6 +60,7 @@ export function iniciarPaginaComum() {
   registrarModoOffline();
   // depois que cada página montou seu conteúdo dinâmico (cartões, sabores…)
   queueMicrotask(iniciarAnimacoes);
+  queueMicrotask(iniciarIdioma);
 }
 
 /** "Voltar ao topo": rola até o início e leva o foco para o primeiro atalho. */

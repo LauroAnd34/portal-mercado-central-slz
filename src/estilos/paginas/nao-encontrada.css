@@ -45,7 +45,7 @@
   background-clip: text;
 }
 :root[data-contraste='alto'] .erro-404__codigo {
-  color: #ffff00;
+  color: #ff5252;
 }
 .erro-404 h1 {
   font-size: var(--texto-2xl);

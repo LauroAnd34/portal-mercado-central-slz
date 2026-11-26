@@ -31,7 +31,7 @@ export const CATEGORIAS = Object.freeze({
 export const PONTOS_TURISTICOS = Object.freeze([
   {
     id: 'mercado-da-cidade',
-    nome: 'Mercado da Cidade (mercado de transição)',
+    nome: 'Mercado da Cidade',
     categoria: 'mercados',
     coordenadas: [-2.5444427, -44.2984244],
     endereco: 'Avenida Senador Vitorino Freire, Aterro do Bacanga',

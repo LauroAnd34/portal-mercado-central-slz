@@ -86,16 +86,16 @@
         <div class="abertura__mosaico">
           <figure class="mosaico__item mosaico__item--grande">
             <img
-              src="./src/imagens/historia/mercado-1941-cartao-foto-londres.jpg"
+              src="./src/imagens/fotos/mercado-banca-jucara.jpg"
               srcset="
-                ./src/imagens/historia/mercado-1941-cartao-foto-londres-480.webp 480w,
-                ./src/imagens/historia/mercado-1941-cartao-foto-londres.jpg      682w
+                ./src/imagens/fotos/mercado-banca-jucara-480.webp 480w,
+                ./src/imagens/fotos/mercado-banca-jucara.jpg      900w
               "
               sizes="(max-width: 980px) 60vw, 50vw"
               fetchpriority="high"
-              width="682"
-              height="424"
-              alt="Cartão-postal de 1941 em preto e branco: a fachada do Mercado Central recém-inaugurado, com pessoas reunidas na entrada."
+              width="900"
+              height="603"
+              alt="Banca de alvenaria no Mercado Central: duas feirantes de avental branco entre sacos de camarão seco e farinha, com a placa “Vende-se juçara” e um restaurante ao fundo."
             />
           </figure>
           <figure class="mosaico__item">
@@ -153,6 +153,7 @@
                   <strong>Depois da obra:</strong> no novo Mercado Central, que está sendo
                   construído no endereço histórico, na Rua de São João, Centro.
                 </p>
+                <a href="./mapa.html?chegar#mercado-central">Como chegar ao Mercado Central</a>
                 <a href="./mapa.html?chegar#mercado-da-cidade">Como chegar ao Mercado da Cidade</a>
               </article>
               <article class="info-bloco">
@@ -204,20 +205,30 @@
           </header>
           <div class="ontem-amanha">
             <figure class="ontem-amanha__foto">
-              <button
-                type="button"
-                class="ontem-amanha__3d"
-                data-abrir-3d="1940"
-                aria-haspopup="dialog"
-              >
-                <img
-                  src="./src/imagens/historia/mercado-1940-cartao-foto-berlim.jpg"
-                  width="628"
-                  height="426"
-                  loading="lazy"
-                  alt="Foto antiga em preto e branco, de 1940: o Mercado recém-construído, prédio térreo comprido com colunas e platibanda escalonada, em terreno ainda sem calçamento."
-                /><span class="ontem-amanha__selo" aria-hidden="true"
-                  ><svg viewBox="0 0 24 24" width="18" height="18">
+              <div class="ontem-amanha__midia">
+                <button
+                  type="button"
+                  class="ontem-amanha__ampliar"
+                  data-ampliar-foto
+                  data-titulo="O Mercado em 1940"
+                  data-credito="Cartão-postal Foto Berlim."
+                  aria-haspopup="dialog"
+                >
+                  <img
+                    src="./src/imagens/historia/mercado-1940-cartao-foto-berlim.jpg"
+                    width="628"
+                    height="426"
+                    loading="lazy"
+                    alt="Foto antiga em preto e branco, de 1940: o Mercado recém-construído, prédio térreo comprido com colunas e platibanda escalonada, em terreno ainda sem calçamento."
+                  /><span class="somente-leitor">Ampliar a foto de 1940</span>
+                </button>
+                <button
+                  type="button"
+                  class="ontem-amanha__selo"
+                  data-abrir-3d="1940"
+                  aria-haspopup="dialog"
+                >
+                  <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18">
                     <path
                       d="M12 2 3 7v10l9 5 9-5V7z M3 7l9 5 9-5 M12 12v10"
                       fill="none"
@@ -225,35 +236,45 @@
                       stroke-width="2"
                       stroke-linejoin="round"
                     /></svg
-                  >Ver em 3D</span
-                ><span class="somente-leitor">Ver o Mercado de 1940 em 3D</span>
-              </button>
+                  >Ver em 3D<span class="somente-leitor">: o Mercado de 1940</span>
+                </button>
+              </div>
               <figcaption>
                 <strong>1940</strong> O “Mercado Novo” recém-construído, em estilo Art Déco.
                 <span>Cartão-postal Foto Berlim.</span>
               </figcaption>
             </figure>
             <figure class="ontem-amanha__foto">
-              <button
-                type="button"
-                class="ontem-amanha__3d"
-                data-abrir-3d="projeto"
-                aria-haspopup="dialog"
-              >
-                <img
-                  src="./src/imagens/novo-mercado-central-projeto.jpg"
-                  srcset="
-                    ./src/imagens/novo-mercado-central-projeto-480.webp  480w,
-                    ./src/imagens/novo-mercado-central-projeto-960.webp  960w,
-                    ./src/imagens/novo-mercado-central-projeto.jpg      1280w
-                  "
-                  sizes="(max-width: 760px) 100vw, 50vw"
-                  width="1280"
-                  height="720"
-                  loading="lazy"
-                  alt="Imagem em 3D do projeto do novo Mercado Central divulgado pela Prefeitura: prédio de três andares com fachadas no estilo antigo na frente, calçada larga com árvores e faixa de pedestres."
-                /><span class="ontem-amanha__selo" aria-hidden="true"
-                  ><svg viewBox="0 0 24 24" width="18" height="18">
+              <div class="ontem-amanha__midia">
+                <button
+                  type="button"
+                  class="ontem-amanha__ampliar"
+                  data-ampliar-foto
+                  data-titulo="Projeto do novo Mercado Central"
+                  data-credito="Imagem: Prefeitura de São Luís (divulgação)."
+                  aria-haspopup="dialog"
+                >
+                  <img
+                    src="./src/imagens/novo-mercado-central-projeto.jpg"
+                    srcset="
+                      ./src/imagens/novo-mercado-central-projeto-480.webp  480w,
+                      ./src/imagens/novo-mercado-central-projeto-960.webp  960w,
+                      ./src/imagens/novo-mercado-central-projeto.jpg      1280w
+                    "
+                    sizes="(max-width: 760px) 100vw, 50vw"
+                    width="1280"
+                    height="720"
+                    loading="lazy"
+                    alt="Imagem em 3D do projeto do novo Mercado Central divulgado pela Prefeitura: prédio de três andares com fachadas no estilo antigo na frente, calçada larga com árvores e faixa de pedestres."
+                  /><span class="somente-leitor">Ampliar a imagem do projeto</span>
+                </button>
+                <button
+                  type="button"
+                  class="ontem-amanha__selo"
+                  data-abrir-3d="projeto"
+                  aria-haspopup="dialog"
+                >
+                  <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18">
                     <path
                       d="M12 2 3 7v10l9 5 9-5V7z M3 7l9 5 9-5 M12 12v10"
                       fill="none"
@@ -261,9 +282,9 @@
                       stroke-width="2"
                       stroke-linejoin="round"
                     /></svg
-                  >Ver em 3D</span
-                ><span class="somente-leitor">Ver o projeto do novo Mercado em 3D</span>
-              </button>
+                  >Ver em 3D<span class="somente-leitor">: o projeto do novo Mercado</span>
+                </button>
+              </div>
               <figcaption>
                 <strong>Projeto</strong> O novo Mercado Central, como divulgado pela Prefeitura.
                 <span>Imagem: Prefeitura de São Luís (divulgação).</span>
@@ -594,22 +615,27 @@
       <!-- Sabores do Mercado -->
       <section class="secao sabores-secao" aria-labelledby="sabores-titulo">
         <div class="container sabores-grade">
-          <div class="sabores-fotos">
+          <figure class="sabores-fotos" id="sabores-fotos">
             <img
-              data-foto="mercado-camarao-seco"
               width="1100"
               height="825"
               loading="lazy"
-              alt="Cesto de palha cheio de camarão seco."
+              sizes="(max-width: 900px) 50vw, 25vw"
+              alt=""
             />
             <img
-              data-foto="mercado-garrafas"
               width="1100"
               height="825"
               loading="lazy"
-              alt="Garrafas de aguardente com caranguejo penduradas numa banca."
+              sizes="(max-width: 900px) 50vw, 25vw"
+              alt=""
             />
-          </div>
+            <figcaption
+              class="sabores-fotos__legenda"
+              data-sabores-legenda
+              aria-live="polite"
+            ></figcaption>
+          </figure>
           <div>
             <header class="titulo-modulo">
               <h2 id="sabores-titulo">Sabores do Mercado</h2>
@@ -685,6 +711,10 @@
             </figcaption>
           </figure>
           <h3 class="azulejaria__subtitulo">Padrões pelas ruas do Centro</h3>
+          <p class="azulejaria__fonte">
+            Azulejos registrados no <cite>Inventário do Patrimônio Azulejar do Maranhão</cite>
+            (org. Zelinda Machado de Castro e Lima, Santa Marta, 2012).
+          </p>
           <ul class="azulejaria__galeria" data-galeria-azulejos></ul>
         </div>
         <dialog class="visualizador" data-visualizador aria-labelledby="visualizador-titulo">

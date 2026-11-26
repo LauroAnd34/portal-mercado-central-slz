@@ -12,7 +12,7 @@ export const ESCALA_MAXIMA = 2;
 export const PASSO_ESCALA = 0.15;
 
 /** @typedef {{
- *  escala: number, cores: 'padrao'|'escuro'|'alto', fonte: 'padrao'|'legivel'|'dislexia',
+ *  escala: number, cores: 'padrao'|'sepia'|'escuro'|'alto', fonte: 'padrao'|'legivel'|'dislexia',
  *  espacamento: boolean, links: boolean, regua: boolean, movimento: boolean,
  *  cursor: boolean, leitorSelecao: boolean, vlibras: boolean }} Preferencias */
 
@@ -45,7 +45,7 @@ export function normalizar(bruto) {
     const valor = bruto[chave];
     if (typeof valor === typeof base[chave]) base[chave] = valor;
   }
-  if (!['padrao', 'escuro', 'alto'].includes(base.cores)) base.cores = 'padrao';
+  if (!['padrao', 'sepia', 'escuro', 'alto'].includes(base.cores)) base.cores = 'padrao';
   if (!['padrao', 'legivel', 'dislexia'].includes(base.fonte)) base.fonte = 'padrao';
   base.escala = limitarEscala(base.escala);
   return base;
@@ -107,7 +107,7 @@ export function aplicarNoDocumento(estado, raiz = document.documentElement) {
     ativo ? raiz.setAttribute(atributo, valor) : raiz.removeAttribute(atributo);
 
   alternar('data-letras', estado.escala >= 1.5, 'grandes');
-  alternar('data-tema', estado.cores === 'escuro', 'escuro');
+  alternar('data-tema', estado.cores === 'escuro' || estado.cores === 'sepia', estado.cores);
   alternar('data-contraste', estado.cores === 'alto', 'alto');
   alternar('data-fonte', estado.fonte !== 'padrao', estado.fonte);
   alternar('data-espacamento', estado.espacamento, 'amplo');

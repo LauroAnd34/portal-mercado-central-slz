@@ -105,6 +105,11 @@
   --alvo-min: 2.75rem; /* área mínima de toque */
   --altura-cabecalho: 4.75rem;
 }
+@media (min-width: 1600px) {
+  :root {
+    --largura-max: 84rem;
+  }
+}
 
 /* ---------- Tema escuro (preferência do sistema ou escolha do usuário) ---------- */
 :root[data-tema='escuro'] {
@@ -128,7 +133,24 @@
   color-scheme: dark;
 }
 
-/* ---------- Alto contraste (padrão eMAG: preto, branco e amarelo) ---------- */
+/* ---------- Sépia (papel envelhecido, menos brilho que o branco) ---------- */
+:root[data-tema='sepia'] {
+  --cor-fundo: #f6ecd6;
+  --cor-fundo-suave: #efe2c4;
+  --cor-fundo-destaque: #ead9b3;
+  --cor-superficie: #fbf4e4;
+  --cor-borda: #d6c29b;
+  --cor-borda-forte: #7a6643;
+  --cor-texto: #3b2f1e;
+  --cor-texto-suave: #5c4a30;
+  --cor-titulo: #5a3d12;
+  --cor-link: #7a4b0c;
+  --cor-link-hover: #3b2f1e;
+  --cor-primaria: #5a3d12;
+  --cor-primaria-texto: #fbf4e4;
+}
+
+/* ---------- Alto contraste: preto, branco e vermelho (vermelho #ff5252 tem 6,6:1 sobre o preto) ---------- */
 :root[data-contraste='alto'] {
   --cor-fundo: #000000;
   --cor-fundo-suave: #000000;
@@ -138,14 +160,14 @@
   --cor-borda-forte: #ffffff;
   --cor-texto: #ffffff;
   --cor-texto-suave: #ffffff;
-  --cor-titulo: #ffff00;
-  --cor-link: #ffff00;
+  --cor-titulo: #ff5252;
+  --cor-link: #ff5252;
   --cor-link-hover: #00ffff;
   --cor-foco: #00ffff;
   --cor-foco-halo: #000000;
-  --cor-primaria: #ffff00;
+  --cor-primaria: #ff5252;
   --cor-primaria-texto: #000000;
-  --cor-secundaria: #ffff00;
+  --cor-secundaria: #ff5252;
   --cor-secundaria-texto: #000000;
   --sombra-1: none;
   --sombra-2: none;

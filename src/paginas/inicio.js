@@ -13,6 +13,7 @@ import { montarCaminhos } from '../recursos/inicio/caminhos.js';
 import { montarGaleriaDeAzulejos } from '../recursos/inicio/galeria-azulejos.js';
 import { iniciarVisualizador3D } from '../recursos/modelo3d/visualizador-3d.js';
 import { montarAcompanhamentoDaObra } from '../recursos/inicio/acompanhar-obra.js';
+import { FOTOS, urlDaFoto, srcsetDaFoto } from '../dados/fotos.js';
 
 const linha = document.querySelector('[data-linha-do-tempo]');
 if (linha) iniciarLinhaDoTempo(linha, LINHA_DO_TEMPO);
@@ -27,7 +28,7 @@ if (buscaProduto && setores)
     PRODUTOS_POR_SETOR,
   );
 const sabores = document.querySelector('[data-sabores]');
-if (sabores) montarSabores(sabores, SABORES);
+if (sabores) montarSabores(sabores, SABORES, { urlDaFoto, srcsetDaFoto, FOTOS });
 const caminhos = document.querySelector('[data-caminhos]');
 if (caminhos) montarCaminhos(caminhos);
 montarGaleriaDeAzulejos();

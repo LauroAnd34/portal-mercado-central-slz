@@ -15,14 +15,14 @@ As skills de design do projeto (`.claude/skills/`) leem este arquivo antes de cr
 
 Use estes elementos — e não enfeites genéricos — para dar caráter:
 
-| Material                                                    | Como aparece no site                                                                                              |
-| ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| **Azulejos portugueses** dos casarões                       | Faixas de azulejo entre seções e fotos reais (Wikimedia Commons, creditadas). Nunca azulejo "desenhado" genérico. |
-| **Faixa de 7 cores** da Prefeitura (amarelo → verde → azul) | Assinatura: linha fina sob o cabeçalho, progresso, bordas de destaque. Não usar como degradê de fundo.            |
-| **Azul-marinho institucional**                              | Cor de títulos, botões principais e áreas de destaque.                                                            |
-| **Fotos reais** do Mercado e do Centro                      | Peixe, camarão seco, garrafadas, casarões. Sempre com crédito e texto alternativo descritivo.                     |
-| **Cartões-postais antigos** (1940, 1941)                    | História; com legenda de origem.                                                                                  |
-| **Linguagem do Mercado**                                    | Palavras como banca, boxe, freguês, cofo, juçara, no texto e no glossário.                                        |
+| Material                                                    | Como aparece no site                                                                                                                                                                |
+| ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Azulejos portugueses** dos casarões                       | Frisos e padrões reais do _Inventário do Patrimônio Azulejar do Maranhão_ (2012), creditados. A faixa usa frisos; a galeria usa outros padrões. Nunca azulejo "desenhado" genérico. |
+| **Faixa de 7 cores** da Prefeitura (amarelo → verde → azul) | Assinatura: linha fina sob o cabeçalho, progresso, bordas de destaque. Não usar como degradê de fundo.                                                                              |
+| **Azul-marinho institucional**                              | Cor de títulos, botões principais e áreas de destaque.                                                                                                                              |
+| **Fotos reais** do Mercado e do Centro                      | Peixe, camarão seco, garrafadas, casarões. Sempre com crédito e texto alternativo descritivo.                                                                                       |
+| **Cartões-postais antigos** (1940, 1941)                    | História; com legenda de origem.                                                                                                                                                    |
+| **Linguagem do Mercado**                                    | Palavras como banca, boxe, freguês, cofo, juçara, no texto e no glossário.                                                                                                          |
 
 ## 3. Cores (tokens em `src/estilos/tokens.css`)
 
@@ -40,7 +40,7 @@ Regras:
 
 - Usar **sempre os tokens**; não criar cores soltas no CSS.
 - Todo par texto/fundo precisa de **4,5:1** (texto normal) ou **3:1** (texto grande e ícones). Conferir com o axe (`node ferramentas/auditar-acessibilidade.mjs`).
-- Três esquemas obrigatórios: padrão, escuro (`data-tema="escuro"`) e alto contraste (`data-contraste="alto"`). Toda tela nova precisa funcionar nos três.
+- Quatro temas (os mesmos do leitor do livro): claro, sépia (`data-tema="sepia"`), escuro (`data-tema="escuro"`) e alto contraste (`data-contraste="alto"`, fundo preto com destaque vermelho `#ff5252`). Toda tela nova precisa funcionar em todos.
 
 ## 4. Tipografia
 
@@ -62,6 +62,7 @@ Regras:
 
 - **Celular primeiro.** Testar em 320, 360, 390 px, dobráveis (~717 e 884 px) e com letras a 200%. Nunca rolagem lateral.
 - **Celular:** navegação fixa embaixo (Início · Visitar · Livro · Mapa); cabeçalho só com logo e Menu; sem a barra A− A A+ (fica no painel de acessibilidade).
+- **Idiomas:** PT, EN e ES traduzem a página no lugar (`src/nucleo/idioma.js` + `src/dados/traducoes.js`). Texto novo na interface precisa entrar no dicionário.
 - **Página inicial:** primeiro o que é útil (aviso da obra, Visite, Onde encontro?), depois a história.
 - **Ferramentas em tela cheia (livro, mapa, 3D):** o conteúdo ocupa a tela; os controles flutuam. Painéis abrem como **gaveta que sobe de baixo, com título e botão X**, fecham com Esc, toque fora ou no X, e a página de trás não rola.
 - **Poucos botões.** Mostrar só o essencial; o resto vai para "Mais" (⋯). Alvos de toque com no mínimo 44×44 px.

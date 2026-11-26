@@ -19,7 +19,7 @@
   }
 }
 
-/* Capa do livro em CSS (sem imagem: se adapta ao alto contraste) */
+/* Capa do livro: foto de uma banca do Mercado em cima, título embaixo */
 .capa-livro {
   perspective: 75rem;
 }
@@ -35,28 +35,27 @@
   background-image:
     linear-gradient(
       90deg,
-      rgb(0 0 0 / 0.25) 0 0.625rem,
-      rgb(255 255 255 / 0.08) 0.625rem 0.8125rem,
+      rgb(0 0 0 / 0.3) 0 0.625rem,
+      rgb(255 255 255 / 0.1) 0.625rem 0.8125rem,
       transparent 0.8125rem
     ),
-    /* painel de azulejos no meio da capa, faixas azuis para o texto */
     linear-gradient(
-        180deg,
-        var(--marca-marinho-700) 0 13%,
-        rgb(255 255 255 / 0.9) 13% calc(13% + 3px),
-        transparent calc(13% + 3px) calc(36% - 3px),
-        rgb(255 255 255 / 0.9) calc(36% - 3px) 36%,
-        var(--marca-marinho-700) 36%
-      ),
-    url('../../imagens/azulejos/faixa-estrelas.webp');
+      180deg,
+      rgb(11 42 69 / 0.75) 0,
+      transparent 22%,
+      transparent 46%,
+      var(--marca-marinho-700) 60%
+    ),
+    url('../../imagens/fotos/mercado-banca-jucara.jpg');
   background-size:
     auto,
     auto,
-    50% auto;
+    auto 62%;
   background-position:
     0 0,
     0 0,
-    center 24%;
+    38% 0;
+  background-repeat: no-repeat;
   color: #fff;
   box-shadow: var(--sombra-3);
   transform: rotateY(-12deg);
@@ -89,8 +88,8 @@
   background: var(--faixa);
 }
 :root[data-contraste='alto'] .capa-livro__frente {
-  background: #000;
-  border: 3px solid #ffff00;
+  background-color: #000;
+  border: 3px solid #ff5252;
   transform: none;
 }
 
@@ -167,7 +166,7 @@ li:nth-child(3) .download__formato {
   border: 2px solid #fff;
 }
 :root[data-contraste='alto'] .download__formato {
-  background: #ffff00 !important;
+  background: #ff5252 !important;
   color: #000;
 }
 
@@ -204,10 +203,18 @@ li:nth-child(3) .download__formato {
 :root[data-contraste='alto'] .leitor:not([data-tema-proprio]) {
   --leitor-fundo: #000;
   --leitor-texto: #fff;
-  --leitor-titulo: #ffff00;
-  --leitor-link: #ffff00;
+  --leitor-titulo: #ff5252;
+  --leitor-link: #ff5252;
   --leitor-destaque: #00315c;
   --leitor-borda: #fff;
+}
+:root[data-tema='sepia'] .leitor:not([data-tema-proprio]) {
+  --leitor-fundo: #f6ecd6;
+  --leitor-texto: #3b2f1e;
+  --leitor-titulo: #5a3d12;
+  --leitor-link: #7a4b0c;
+  --leitor-destaque: #f0d58a;
+  --leitor-borda: #dcc9a3;
 }
 :root[data-tema='escuro'] .leitor:not([data-tema-proprio]) {
   --leitor-fundo: #101c27;
@@ -309,7 +316,7 @@ li:nth-child(3) .download__formato {
 }
 .tema-leitor--contraste {
   background: #000;
-  color: #ff0;
+  color: #ff5252;
 }
 .tema-leitor:has(input:checked) {
   box-shadow:
@@ -649,7 +656,7 @@ mark {
 }
 :root[data-contraste='alto'] .balao-termo {
   background: #000;
-  border: 2px solid #ffff00;
+  border: 2px solid #ff5252;
 }
 
 /* ---------- Painéis extras (glossário, marcadores) ---------- */

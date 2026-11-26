@@ -76,13 +76,13 @@
 }
 :root[data-contraste='alto'] .botao--secundario,
 :root[data-contraste='alto'] .botao--claro {
-  background: #ffff00;
-  border-color: #ffff00;
+  background: #ff5252;
+  border-color: #ff5252;
   color: #000;
 }
 :root[data-contraste='alto'] .botao--contorno {
-  border-color: #ffff00;
-  color: #ffff00;
+  border-color: #ff5252;
+  color: #ff5252;
 }
 
 .botao-icone {
@@ -145,8 +145,19 @@
 .interruptor input:checked + .interruptor__trilho::after {
   transform: translateX(1.25rem);
 }
-:root[data-contraste='alto'] .interruptor input:checked + .interruptor__trilho::after {
+/* alto contraste: trilho branco (desligado) ou vermelho (ligado), sempre com a bolinha preta */
+:root[data-contraste='alto'] .interruptor__trilho {
+  background: #fff;
+  border: 2px solid #fff;
+}
+:root[data-contraste='alto'] .interruptor__trilho::after {
+  top: 1px;
+  left: 1px;
   background: #000;
+}
+:root[data-contraste='alto'] .interruptor input:checked + .interruptor__trilho {
+  background: #ff5252;
+  border-color: #ff5252;
 }
 .interruptor input:focus-visible + .interruptor__trilho {
   outline: 3px solid var(--cor-foco);

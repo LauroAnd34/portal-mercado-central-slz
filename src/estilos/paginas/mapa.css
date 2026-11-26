@@ -123,10 +123,10 @@
   color: var(--cor-texto-suave);
 }
 :root[data-contraste='alto'] .ponto__marca {
-  background: #ffff00;
+  background: #ff5252;
 }
 :root[data-contraste='alto'] .ponto__botao[aria-pressed='true'] {
-  border-color: #ffff00;
+  border-color: #ff5252;
 }
 
 .vistas {
@@ -147,7 +147,7 @@
 }
 .mapa--sem-fundo {
   background-color: #dcecf5;
-  background-image: url('../../imagens/azulejos/faixa-nazare.webp');
+  background-image: url('../../imagens/azulejos/faixa-grega.webp');
 }
 .mapa .leaflet-tile-pane {
   filter: saturate(0.75) brightness(1.03);
@@ -286,7 +286,7 @@
   background: var(--cor-categoria, var(--cor-primaria));
 }
 :root[data-contraste='alto'] .detalhes__cabecalho {
-  border-left-color: #ffff00;
+  border-left-color: #ff5252;
 }
 .detalhes__cabecalho h3 {
   margin: var(--e-1) 0;
@@ -400,7 +400,7 @@
 }
 :root[data-contraste='alto'] .roteiro {
   border: 2px solid #fff;
-  border-top: 8px solid #ffff00;
+  border-top: 8px solid #ff5252;
 }
 .roteiro__nome {
   margin: 0;
@@ -602,8 +602,8 @@
 :root[data-contraste='alto'] .minha-posicao__ponto,
 :root[data-contraste='alto'] .minha-posicao__rotulo {
   background: #000000;
-  color: #ffff00;
-  border-color: #ffff00;
+  color: #ff5252;
+  border-color: #ff5252;
 }
 
 /* botão "onde estou" dentro do mapa */
@@ -645,8 +645,8 @@
 :root[data-contraste='alto'] .botao--localizar,
 :root[data-contraste='alto'] .botao--de-mim {
   background: #000000;
-  border-color: #ffff00;
-  color: #ffff00;
+  border-color: #ff5252;
+  color: #ff5252;
 }
 .detalhes__de-mim dd {
   color: #1557b0;

@@ -131,13 +131,17 @@
   color: var(--marca-marinho-700);
   border: 1px solid #c9d1da;
 }
+.amostra--sepia {
+  background: #f6ecd6;
+  color: #5a3d12;
+}
 .amostra--escuro {
   background: #0c1824;
   color: #c9e7f7;
 }
 .amostra--alto {
   background: #000;
-  color: #ff0;
+  color: #ff5252;
 }
 .opcao-nota {
   font-size: var(--texto-xs);
@@ -182,11 +186,11 @@
   color: var(--faixa-1);
 }
 :root[data-contraste='alto'] .rodape a {
-  color: #ffff00;
+  color: #ff5252;
 }
 .rodape__grade {
   display: grid;
-  grid-template-columns: 1.4fr repeat(3, 1fr);
+  grid-template-columns: 1.3fr 1fr 1.3fr;
   gap: var(--e-6);
   padding-block: var(--e-7);
 }
@@ -209,19 +213,31 @@
 }
 .rodape address {
   font-style: normal;
+  line-height: 1.6;
+}
+.rodape address + address {
+  margin-top: var(--e-4);
+}
+.rodape__base {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--e-2) var(--e-5);
+}
+.rodape__base p {
+  margin: 0;
 }
 .rodape__nota {
   font-size: var(--texto-xs);
   color: #c4d2de;
 }
-.rodape__topo {
-  display: inline-block;
-  margin-top: var(--e-2);
-  font-weight: 700;
-}
 @media (max-width: 900px) {
   .rodape__grade {
     grid-template-columns: 1fr 1fr;
+  }
+  .rodape__marca {
+    grid-column: 1 / -1;
   }
 }
 @media (max-width: 560px) {
@@ -296,7 +312,6 @@
   cursor: pointer;
 }
 .rodape__topo {
-  margin-top: var(--e-3);
   min-height: var(--alvo-min);
   font-weight: 700;
 }
@@ -306,7 +321,7 @@
 }
 :root[data-contraste='alto'] .rodape__link-botao,
 :root[data-contraste='alto'] .rodape__topo {
-  color: #ffff00;
+  color: #ff5252;
 }
 .rodape__creditos {
   padding-block: var(--e-4) var(--e-6);
@@ -485,8 +500,8 @@
 }
 :root[data-contraste='alto'] .botao-libras {
   background: #000;
-  color: #ff0;
-  border-color: #ff0;
+  color: #ff5252;
+  border-color: #ff5252;
 }
 /* selo das mãos: mostra que o botão também abre o tradutor de Libras */
 .botao-flutuante__libras {

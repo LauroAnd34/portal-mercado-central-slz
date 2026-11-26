@@ -58,7 +58,11 @@ export function iniciarAjustesDoLeitor(leitor) {
     // sem escolha própria, os botões mostram o que está valendo (vindo do painel do site)
     const raiz = document.documentElement.dataset;
     const temaDoSite =
-      raiz.contraste === 'alto' ? 'contraste' : raiz.tema === 'escuro' ? 'escuro' : null;
+      raiz.contraste === 'alto'
+        ? 'contraste'
+        : ['escuro', 'sepia'].includes(raiz.tema)
+          ? raiz.tema
+          : null;
     const fonteDoSite = raiz.fonte === 'legivel' || raiz.fonte === 'dislexia' ? raiz.fonte : null;
     formulario.elements.tema.value = ajustes.temaProprio
       ? ajustes.tema

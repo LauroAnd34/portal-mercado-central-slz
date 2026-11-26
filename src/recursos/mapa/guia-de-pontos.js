@@ -60,6 +60,7 @@ export function filtrarPontos(pontos, { categoriasAtivas, termo = '' }) {
 }
 
 export function textoDeResumo(ponto) {
+  if (!ponto.tempos) return ponto.endereco ?? ''; // o próprio Mercado, como destino
   const modo =
     ponto.modoSugerido === 'a-pe'
       ? `cerca de ${formatarDuracao(ponto.tempos.aPeMinutos)} a pé`
@@ -90,19 +91,23 @@ export function renderizarItem(ponto, selecionado) {
 
 /** HTML do painel de detalhes: o lugar e o "Como chegar" (origem + meio de transporte). */
 export function renderizarDetalhes(ponto, mercado, foto = null, deMim = null, comoChegar = {}) {
-  const { origem = 'mercado', meio = 'a-pe', tempos = {} } = comoChegar;
+  const { origem = 'mercado', meio = 'a-pe', tempos = {}, destinoEhMercado = false } = comoChegar;
   const figura = foto
     ? `<figure class="detalhes__foto"><img src="${foto.url}"${foto.srcset ? ` srcset="${foto.srcset}" sizes="380px"` : ''} alt="${escaparHtml(foto.lugar)}" width="900" height="600" />
         <figcaption>Foto: ${escaparHtml(foto.autor)} · ${escaparHtml(foto.licenca)}</figcaption></figure>`
     : '';
   const distancias = [
     deMim ? `<strong>${formatarDistancia(deMim.distanciaKm)} de você</strong> (em linha reta)` : '',
-    `${formatarDistancia(ponto.distanciaKm)} do Mercado`,
+    destinoEhMercado
+      ? escaparHtml(ponto.endereco)
+      : `${formatarDistancia(ponto.distanciaKm)} do Mercado`,
   ]
     .filter(Boolean)
     .join(' · ');
   const origens = deMim
-    ? `<div class="segmentos segmentos--origem" role="group" aria-label="Saindo de">
+    ? destinoEhMercado
+      ? ''
+      : `<div class="segmentos segmentos--origem" role="group" aria-label="Saindo de">
         <button type="button" class="segmento" data-origem="mim" aria-pressed="${origem === 'mim'}">De onde estou</button>
         <button type="button" class="segmento" data-origem="mercado" aria-pressed="${origem === 'mercado'}">Do Mercado</button>
       </div>`

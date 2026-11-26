@@ -45,34 +45,34 @@
 }
 :root[data-contraste='alto'] .titulo-modulo h1,
 :root[data-contraste='alto'] .titulo-modulo h2 {
-  color: #ffff00;
+  color: #ff5252;
 }
 :root[data-contraste='alto'] .titulo-modulo__sub {
   color: #fff;
 }
 :root[data-contraste='alto'] .titulo-modulo::after {
-  background: #ffff00;
+  background: #ff5252;
 }
 
-/* faixa de azulejos (separador decorativo): cada parte do site usa um padrão diferente */
+/* faixa de azulejos (separador decorativo): frisos reais do Inventário do
+   Patrimônio Azulejar do Maranhão. Os padrões da galeria são outros. */
 .faixa-azulejo {
   height: 3.5rem;
-  background: url('../../imagens/azulejos/faixa-azul.webp') 0 0 / auto 100% repeat-x;
+  background: url('../../imagens/azulejos/faixa-friso-flor.webp') 0 0 / auto 100% repeat-x;
   border-top: 3px solid var(--faixa-3);
   border-bottom: 3px solid var(--marca-marinho-800);
-  box-shadow: inset 0 0.375rem 0.5rem -6px rgb(0 0 0 / 0.35);
 }
 .faixa-azulejo--nazare {
-  background-image: url('../../imagens/azulejos/faixa-nazare.webp');
+  background-image: url('../../imagens/azulejos/faixa-friso-azul.webp');
 }
-.faixa-azulejo--estrelas {
-  background-image: url('../../imagens/azulejos/faixa-estrelas.webp');
+.faixa-azulejo--voluta {
+  background-image: url('../../imagens/azulejos/faixa-friso-voluta.webp');
 }
-.faixa-azulejo--rosas {
-  background-image: url('../../imagens/azulejos/faixa-rosas.webp');
+.faixa-azulejo--grega {
+  background-image: url('../../imagens/azulejos/faixa-grega.webp');
 }
 :root[data-contraste='alto'] .faixa-azulejo {
-  background: #ffff00;
+  background: #ff5252;
   height: 4px;
   border: 0;
   box-shadow: none;
@@ -144,8 +144,8 @@ li:nth-child(4n + 4) > .cartao {
 }
 :root[data-contraste='alto'] .cartao__icone {
   background: #000;
-  color: #ffff00;
-  box-shadow: 0 0 0 2px #ffff00;
+  color: #ff5252;
+  box-shadow: 0 0 0 2px #ff5252;
 }
 .cartao h3 {
   margin: 0;
@@ -184,7 +184,7 @@ li:nth-child(4n + 4) > .cartao {
   border: 2px solid #fff;
 }
 :root[data-contraste='alto'] .cartao::before {
-  background: #ffff00;
+  background: #ff5252;
 }
 
 /* Cabeçalho interno de página (páginas Livro, Mapa, Acessibilidade) */
@@ -260,7 +260,7 @@ li:nth-child(4n + 4) > .cartao {
   border-bottom: 2px solid #fff;
 }
 :root[data-contraste='alto'] .cabecalho-pagina h1 {
-  color: #ffff00;
+  color: #ff5252;
 }
 :root[data-contraste='alto'] .cabecalho-pagina p {
   color: #fff;
@@ -288,7 +288,7 @@ li:nth-child(4n + 4) > .cartao {
   color: #d6ebf7;
 }
 :root[data-contraste='alto'] .trilha a {
-  color: #ffff00;
+  color: #ff5252;
 }
 
 .aviso-provisorio {
@@ -309,7 +309,7 @@ li:nth-child(4n + 4) > .cartao {
 :root[data-contraste='alto'] .aviso-provisorio {
   background: #000;
   color: #fff;
-  border: 2px solid #ffff00;
+  border: 2px solid #ff5252;
 }
 
 .marcador-pendente {

@@ -173,10 +173,26 @@ function fecharDetalhes() {
 }
 
 /* ---------- Seleção e detalhes ---------- */
+// "Como chegar ao Mercado Central" (?chegar#mercado-central): o Mercado vira o destino
+const MERCADO_COMO_DESTINO = {
+  ...MERCADO_CENTRAL,
+  categoriaInfo: { nome: 'Mercado Central', cor: '#144670' },
+  distanciaKm: 0,
+  distanciaCarroKm: 0,
+  descricao:
+    'Endereço histórico do Mercado, na Rua de São João, Centro. O prédio novo está em obra no mesmo lugar; durante a obra, os feirantes atendem no Mercado da Cidade.',
+};
+const pontoOuMercado = (id) =>
+  id === MERCADO_CENTRAL.id
+    ? estado.modoChegar
+      ? MERCADO_COMO_DESTINO
+      : null
+    : pontos.find((p) => p.id === id);
+
 function selecionar(id, { origem }) {
   pararFala();
   estado.selecionadoId = id;
-  if (id === MERCADO_CENTRAL.id) {
+  if (id === MERCADO_CENTRAL.id && !estado.modoChegar) {
     el.detalhes.innerHTML = gaveta(`
       <div class="detalhes__cabecalho" style="--cor-categoria:#144670">
         <span class="detalhes__categoria">Ponto de partida</span>
@@ -190,8 +206,10 @@ function selecionar(id, { origem }) {
     atualizarLista();
     return;
   }
-  const ponto = pontos.find((p) => p.id === id);
+  const ponto = pontoOuMercado(id);
   if (!ponto) return;
+  const ehMercado = ponto.id === MERCADO_CENTRAL.id;
+  if (ehMercado) estado.origemRota = 'mim';
   const chaveFoto = FOTO_DO_PONTO[ponto.id];
   const foto = chaveFoto
     ? { ...FOTOS[chaveFoto], url: urlDaFoto(chaveFoto), srcset: srcsetDaFoto(chaveFoto) }
@@ -215,6 +233,7 @@ function selecionar(id, { origem }) {
       origem: estado.origemRota,
       meio: estado.meio,
       tempos,
+      destinoEhMercado: ehMercado,
     }),
   );
   el.detalhes.classList.remove('detalhes--vazio');
@@ -252,7 +271,7 @@ el.detalhes.addEventListener('click', async (evento) => {
     fecharDetalhes();
     return;
   }
-  const ponto = pontos.find((p) => p.id === estado.selecionadoId);
+  const ponto = pontoOuMercado(estado.selecionadoId);
   if (!ponto) return;
 
   const copiar = evento.target.closest('[data-copiar-link]');
@@ -433,7 +452,7 @@ function receberPosicao({ coords }, primeiraVez) {
   botaoPerto.querySelector('[data-texto-perto]')?.replaceChildren('Ver onde estou no mapa');
   atualizarLista();
   // se um ponto está aberto, mostra também a distância e a rota a partir da pessoa
-  if (estado.selecionadoId && estado.selecionadoId !== MERCADO_CENTRAL.id)
+  if (estado.selecionadoId && (estado.modoChegar || estado.selecionadoId !== MERCADO_CENTRAL.id))
     selecionar(estado.selecionadoId, { origem: 'mapa' });
   anunciar(`Sua localização aparece no mapa. O ponto mais perto é ${maisPerto.nome}.`);
 }

@@ -9,9 +9,12 @@ import { selecionar, selecionarTodos } from '../../nucleo/dom.js';
 const MENSAGENS = {
   escala: (e) => `Tamanho do texto: ${Math.round(e.escala * 100)}%`,
   cores: (e) =>
-    ({ padrao: 'Cores padrão', escuro: 'Modo escuro ativado', alto: 'Alto contraste ativado' })[
-      e.cores
-    ],
+    ({
+      padrao: 'Tema claro',
+      sepia: 'Tema sépia',
+      escuro: 'Tema escuro',
+      alto: 'Alto contraste ativado',
+    })[e.cores],
   fonte: (e) =>
     ({
       padrao: 'Fonte padrão',

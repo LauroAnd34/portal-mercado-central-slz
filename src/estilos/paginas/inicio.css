@@ -130,7 +130,7 @@
 }
 :root[data-contraste='alto'] .abertura h1 em,
 :root[data-contraste='alto'] .abertura__lugar {
-  color: #ffff00;
+  color: #ff5252;
 }
 :root[data-contraste='alto'] .abertura__lead {
   color: #fff;
@@ -168,13 +168,13 @@
 :root[data-contraste='alto'] .aviso-obra {
   background: #000;
   color: #fff;
-  border-block: 2px solid #ffff00;
+  border-block: 2px solid #ff5252;
 }
 :root[data-contraste='alto'] .aviso-obra a {
-  color: #ffff00;
+  color: #ff5252;
 }
 :root[data-contraste='alto'] .aviso-obra__selo {
-  background: #ffff00;
+  background: #ff5252;
   color: #000;
 }
 
@@ -395,7 +395,7 @@
   color: var(--cor-texto-suave);
 }
 :root[data-contraste='alto'] .voz {
-  border-left-color: #ffff00;
+  border-left-color: #ff5252;
 }
 
 /* ---------- Sabores ---------- */
@@ -417,15 +417,22 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--e-3);
+  margin: 0;
 }
 .sabores-fotos img {
   width: 100%;
   aspect-ratio: 3 / 4;
   object-fit: cover;
   border-radius: var(--raio-lg);
+  background: var(--cor-fundo-destaque);
 }
-.sabores-fotos img:last-child {
+.sabores-fotos img:nth-child(2) {
   margin-top: var(--e-7);
+}
+.sabores-fotos__legenda {
+  grid-column: 1 / -1;
+  font-size: var(--texto-xs);
+  color: var(--cor-texto-suave);
 }
 .sabores {
   display: grid;
@@ -445,6 +452,34 @@
   font-family: var(--fonte-titulo);
   font-size: var(--texto-lg);
   font-weight: 600;
+}
+.sabor__botao {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-2);
+  min-height: 2.75rem;
+  margin-left: calc(var(--e-2) * -1);
+  padding: var(--e-1) var(--e-2);
+  border: 2px solid transparent;
+  border-radius: var(--raio-md);
+  background: none;
+  color: var(--cor-titulo);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.sabor__botao:hover {
+  border-color: var(--cor-borda-forte);
+}
+.sabor__botao[aria-pressed='true'] {
+  border-color: var(--cor-primaria);
+  background: var(--cor-primaria);
+  color: var(--cor-primaria-texto);
+}
+:root[data-contraste='alto'] .sabor__botao[aria-pressed='true'] {
+  background: #ff5252;
+  border-color: #ff5252;
+  color: #000;
 }
 .sabor p {
   margin: 0;
@@ -476,6 +511,11 @@
 }
 .info-bloco p {
   margin: 0 0 var(--e-2);
+}
+.info-bloco > a {
+  display: block;
+  width: fit-content;
+  padding-block: var(--e-1);
 }
 .info-bloco {
   padding-bottom: var(--e-5);
@@ -590,7 +630,7 @@
   transform: scale(1.3);
 }
 :root[data-contraste='alto'] .linha__aba[aria-selected='true'] .linha__ponto {
-  background: #ffff00;
+  background: #ff5252;
   border-color: #fff;
 }
 .linha__painel {
@@ -642,7 +682,7 @@
 
 :root[data-contraste='alto'] .fatos dt,
 :root[data-contraste='alto'] .titulo-modulo__sub {
-  color: #ffff00;
+  color: #ff5252;
 }
 
 /* ---------- A cidade dos azulejos ---------- */
@@ -668,6 +708,12 @@
 .azulejaria__painel figcaption span {
   display: block;
   font-size: var(--texto-xs);
+}
+.azulejaria__fonte {
+  margin: calc(var(--e-2) * -1) 0 var(--e-4);
+  max-width: var(--largura-texto);
+  font-size: var(--texto-sm);
+  color: var(--cor-texto-suave);
 }
 .azulejaria__subtitulo {
   margin: 0 0 var(--e-4);
@@ -723,7 +769,7 @@
 }
 :root[data-contraste='alto'] .azulejaria__nome {
   background: #000000;
-  color: #ffff00;
+  color: #ff5252;
 }
 
 /* janela da foto ampliada */
@@ -749,25 +795,21 @@
 }
 
 /* ---------- Fotos que abrem o 3D ---------- */
-.ontem-amanha__3d {
+.ontem-amanha__midia {
   position: relative;
+}
+.ontem-amanha__ampliar {
   display: block;
   width: 100%;
   padding: 0;
   border: 0;
   border-radius: var(--raio-lg);
   background: none;
-  cursor: pointer;
+  cursor: zoom-in;
   overflow: hidden;
 }
-.ontem-amanha__3d img {
-  transition: transform 0.5s var(--curva-suave, ease);
-}
-.ontem-amanha__3d:hover img,
-.ontem-amanha__3d:focus-visible img {
-  transform: scale(1.04);
-}
-.ontem-amanha__3d:focus-visible {
+.ontem-amanha__ampliar:focus-visible,
+.ontem-amanha__selo:focus-visible {
   outline: 4px solid #ffbf00;
   outline-offset: 4px;
 }
@@ -784,9 +826,13 @@
   color: #ffffff;
   font-weight: 700;
   font-size: var(--texto-sm);
+  font-family: inherit;
+  min-height: 2.75rem;
+  border: 2px solid #ffffff;
+  cursor: pointer;
   box-shadow: 0 0.375rem 1rem rgb(0 0 0 / 0.35);
 }
-.ontem-amanha__3d:hover .ontem-amanha__selo {
+.ontem-amanha__selo:hover {
   background: var(--marca-azul-600);
 }
 
@@ -1289,7 +1335,7 @@
 }
 :root[data-contraste='alto'] .obra {
   background: #000;
-  outline-color: #ffff00;
+  outline-color: #ff5252;
   color: #ffffff;
 }
 

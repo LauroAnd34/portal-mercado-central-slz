@@ -18,5 +18,15 @@ export function iniciarMenuMovel() {
       botao.focus();
     }
   });
+  // atalho "Ir para o menu": abre o menu (no celular) e leva o foco ao primeiro link
+  document.querySelectorAll('a[href="#menu-principal"]').forEach((atalho) =>
+    atalho.addEventListener('click', (evento) => {
+      evento.preventDefault();
+      if (getComputedStyle(botao).display !== 'none') definirAberto(true);
+      const primeiro = menu.querySelector('a, button');
+      (primeiro || menu).focus();
+      (primeiro || menu).scrollIntoView({ block: 'nearest' });
+    }),
+  );
   window.matchMedia('(min-width: 861px)').addEventListener('change', () => definirAberto(false));
 }

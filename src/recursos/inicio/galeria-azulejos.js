@@ -1,5 +1,6 @@
 /**
- * Galeria "A cidade dos azulejos": fotos reais (Wikimedia Commons) que abrem
+ * Galeria "A cidade dos azulejos": padrões do Inventário do Patrimônio Azulejar
+ * do Maranhão, que abrem
  * ampliadas numa janela (dialog nativo: prende o foco e fecha com Esc).
  */
 import { FOTOS, GALERIA_AZULEJOS, urlDaFoto, srcsetDaFoto } from '../../dados/fotos.js';
@@ -43,7 +44,9 @@ export function montarGaleriaDeAzulejos() {
     imagem.alt = foto.lugar;
     titulo.textContent = foto.lugar;
     contador.textContent = `${atual + 1} de ${chaves.length}`;
-    credito.innerHTML = `Foto: ${escaparHtml(foto.autor)}, <a href="${foto.fonte}" target="_blank" rel="noopener">${escaparHtml(foto.licenca)}<span class="somente-leitor"> (abre em nova aba)</span></a>`;
+    credito.innerHTML = foto.fonte
+      ? `Foto: ${escaparHtml(foto.autor)}, <a href="${foto.fonte}" target="_blank" rel="noopener">${escaparHtml(foto.licenca)}<span class="somente-leitor"> (abre em nova aba)</span></a>`
+      : `Foto: ${escaparHtml(foto.autor)}, ${escaparHtml(foto.licenca)}.`;
     setas.forEach((seta) => (seta.hidden = false));
     anunciar(`${foto.lugar}. Foto ${atual + 1} de ${chaves.length}.`);
   };
@@ -75,18 +78,23 @@ export function montarGaleriaDeAzulejos() {
     mostrarFoto(chaves.indexOf(botao.dataset.chave));
     abrir();
   });
-  document.querySelector('[data-ampliar-painel]')?.addEventListener('click', (evento) => {
-    const foto = evento.currentTarget.querySelector('img');
-    atual = -1;
-    imagem.removeAttribute('srcset');
-    imagem.src = foto.currentSrc || foto.src;
-    imagem.alt = foto.alt;
-    titulo.textContent = 'Painel de azulejos no Fórum Eleitoral de São Luís (TRE-MA)';
-    contador.textContent = '';
-    credito.textContent = 'Assinatura no painel: “Santos, 09”. Foto: Lauro Andrade.';
-    setas.forEach((seta) => (seta.hidden = true));
-    abrir();
-  });
+  // fotos avulsas (painel do TRE, Mercado de 1940, projeto): abrem sem setas
+  document.querySelectorAll('[data-ampliar-painel], [data-ampliar-foto]').forEach((botao) =>
+    botao.addEventListener('click', () => {
+      const foto = botao.querySelector('img');
+      atual = -1;
+      imagem.removeAttribute('srcset');
+      imagem.src = foto.currentSrc || foto.src;
+      imagem.alt = foto.alt;
+      titulo.textContent =
+        botao.dataset.titulo ?? 'Painel de azulejos no Fórum Eleitoral de São Luís (TRE-MA)';
+      contador.textContent = '';
+      credito.textContent =
+        botao.dataset.credito ?? 'Assinatura no painel: “Santos, 09”. Foto: Lauro Andrade.';
+      setas.forEach((seta) => (seta.hidden = true));
+      abrir();
+    }),
+  );
   janela
     .querySelector('[data-fechar-visualizador]')
     .addEventListener('click', () => janela.close());
