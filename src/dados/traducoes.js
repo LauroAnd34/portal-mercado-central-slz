@@ -556,7 +556,10 @@ export const TEXTOS = {
     'Patterns in the streets of the Center',
     'Diseños por las calles del Centro',
   ],
-  'Azulejos registrados no': ['Tiles recorded in the', 'Azulejos registrados en el'],
+  'Azulejos de casarões de São Luís registrados no': [
+    'Tiles from São Luís mansions recorded in the',
+    'Azulejos de casonas de São Luís registrados en el',
+  ],
   '(org. Zelinda Machado de Castro e Lima, Santa Marta, 2012).': [
     '(ed. Zelinda Machado de Castro e Lima, Santa Marta, 2012).',
     '(org. Zelinda Machado de Castro e Lima, Santa Marta, 2012).',
@@ -672,6 +675,60 @@ export const TEXTOS = {
   'Banca do Mercado Central com sacos de temperos e farinha.': [
     'Central Market stall with bags of spices and flour.',
     'Puesto del Mercado Central con bolsas de especias y harina.',
+  ],
+
+  'Banca de frutas no Mercado da Cidade, onde os feirantes do Mercado Central atendem durante a obra: bananas, abacaxis, melancias e bandeirinhas coloridas de São João.':
+    [
+      'Fruit stall at the Mercado da Cidade, where the Central Market vendors work during the rebuilding: bananas, pineapples, watermelons and colorful São João flags.',
+      'Puesto de frutas en el Mercado da Cidade, donde los feriantes del Mercado Central atienden durante las obras: plátanos, piñas, sandías y banderitas de colores de San Juan.',
+    ],
+  'Cesto de palha cheio de camarão seco numa banca do Mercado Central.': [
+    'Straw basket full of dried shrimp at a Central Market stall.',
+    'Cesta de paja llena de camarón seco en un puesto del Mercado Central.',
+  ],
+  'Banca de frutas com bananas, abacaxis e bandeirinhas de São João, no Mercado da Cidade.': [
+    'Fruit stall with bananas, pineapples and São João flags, at the Mercado da Cidade.',
+    'Puesto de frutas con plátanos, piñas y banderitas de San Juan, en el Mercado da Cidade.',
+  ],
+  'Cesto de palha cheio de camarão seco, no Mercado Central.': [
+    'Straw basket full of dried shrimp, at the Central Market.',
+    'Cesta de paja llena de camarón seco, en el Mercado Central.',
+  ],
+  'Banca do Mercado Central com sacos de camarão seco e farinha.': [
+    'Central Market stall with bags of dried shrimp and flour.',
+    'Puesto del Mercado Central con bolsas de camarón seco y harina.',
+  ],
+  'Folha de vinagreira, a base do cuxá, num prato de borda azul.': [
+    'Roselle leaf, the base of cuxá, on a plate with a blue rim.',
+    'Hoja de vinagreira, la base del cuxá, en un plato de borde azul.',
+  ],
+  'Pacotes de gergelim, temperos e ervas empilhados numa banca do Mercado da Cidade.': [
+    'Packs of sesame, spices and herbs stacked at a Mercado da Cidade stall.',
+    'Paquetes de sésamo, especias y hierbas apilados en un puesto del Mercado da Cidade.',
+  ],
+  'Sacos de farinha e grãos no balcão de uma banca do Mercado da Cidade.': [
+    'Bags of flour and grains on the counter of a Mercado da Cidade stall.',
+    'Bolsas de harina y granos en el mostrador de un puesto del Mercado da Cidade.',
+  ],
+  'Banca do Mercado da Cidade com farinhas, grãos e garrafas.': [
+    'Mercado da Cidade stall with flours, grains and bottles.',
+    'Puesto del Mercado da Cidade con harinas, granos y botellas.',
+  ],
+  'Garrafas de aguardente com caranguejo penduradas numa banca do Mercado Central.': [
+    'Bottles of cane spirit with crab hanging at a Central Market stall.',
+    'Botellas de aguardiente con cangrejo colgadas en un puesto del Mercado Central.',
+  ],
+  'Garrafas de licor e molhos numa banca do Mercado da Cidade.': [
+    'Bottles of liqueur and sauces at a Mercado da Cidade stall.',
+    'Botellas de licor y salsas en un puesto del Mercado da Cidade.',
+  ],
+  'Saquinhos de ervas secas pendurados numa banca do Mercado da Cidade.': [
+    'Small bags of dried herbs hanging at a Mercado da Cidade stall.',
+    'Bolsitas de hierbas secas colgadas en un puesto del Mercado da Cidade.',
+  ],
+  'Pacotes de temperos e ervas empilhados numa banca do Mercado da Cidade.': [
+    'Packs of spices and herbs stacked at a Mercado da Cidade stall.',
+    'Paquetes de especias y hierbas apilados en un puesto del Mercado da Cidade.',
   ],
 
   // ---------- rodapé ----------
