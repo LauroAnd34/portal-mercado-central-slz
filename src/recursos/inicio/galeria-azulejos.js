@@ -63,33 +63,9 @@ export function montarGaleriaDeAzulejos() {
     if (acao === 'mais') zoom.aproximar(1.5);
     if (acao === 'menos') zoom.aproximar(1 / 1.5);
     if (acao === 'normal') zoom.restaurar();
-    if (evento.target.closest('[data-tela-cheia-foto]')) alternarTelaCheia();
     if (evento.target.closest('[data-foto-anterior]')) trocar(-1);
     if (evento.target.closest('[data-foto-proxima]')) trocar(1);
   });
-  // tela cheia de verdade (esconde as barras do navegador); Safari usa o prefixo webkit
-  const botaoTelaCheia = janela.querySelector('[data-tela-cheia-foto]');
-  // <dialog> não pode ir sozinho para tela cheia: a página inteira vai, e a foto continua por cima
-  const raizDoc = document.documentElement;
-  const pedir = raizDoc.requestFullscreen ?? raizDoc.webkitRequestFullscreen;
-  const emTelaCheia = () => Boolean(document.fullscreenElement ?? document.webkitFullscreenElement);
-  if (!pedir) botaoTelaCheia?.setAttribute('hidden', '');
-  const alternarTelaCheia = () => {
-    if (emTelaCheia()) (document.exitFullscreen ?? document.webkitExitFullscreen)?.call(document);
-    else pedir?.call(raizDoc)?.catch?.(() => {});
-  };
-  const aoMudarTelaCheia = () => {
-    const ativa = emTelaCheia();
-    botaoTelaCheia?.setAttribute('aria-pressed', String(ativa));
-    botaoTelaCheia?.setAttribute('aria-label', ativa ? 'Sair da tela cheia' : 'Ver em tela cheia');
-    zoom.restaurar();
-  };
-  document.addEventListener('fullscreenchange', aoMudarTelaCheia);
-  document.addEventListener('webkitfullscreenchange', aoMudarTelaCheia);
-  janela.addEventListener('close', () => {
-    if (emTelaCheia()) (document.exitFullscreen ?? document.webkitExitFullscreen)?.call(document);
-  });
-
   const abrir = () => {
     zoom.restaurar();
     janela.showModal();

@@ -25,10 +25,13 @@ export function ativarZoomDeImagem(area, imagem, { aoMudar, aoDeslizar } = {}) {
   const tamanhoDaFoto = () => {
     const l = area.clientWidth;
     const a = area.clientHeight;
+    // antes de a foto carregar (ou com a janela fechada) não há tamanho: usa 1
     const proporcao =
       imagem.naturalWidth && imagem.naturalHeight
         ? imagem.naturalWidth / imagem.naturalHeight
-        : l / a;
+        : l && a
+          ? l / a
+          : 1;
     const largura = Math.min(l, a * proporcao);
     return { l, a, largura, altura: largura / proporcao };
   };
@@ -36,8 +39,8 @@ export function ativarZoomDeImagem(area, imagem, { aoMudar, aoDeslizar } = {}) {
     const { l, a, largura, altura } = tamanhoDaFoto();
     const maxX = Math.max(0, (largura * escala - l) / 2);
     const maxY = Math.max(0, (altura * escala - a) / 2);
-    x = Math.min(maxX, Math.max(-maxX, x));
-    y = Math.min(maxY, Math.max(-maxY, y));
+    x = Number.isFinite(x) ? Math.min(maxX || 0, Math.max(-(maxX || 0), x)) : 0;
+    y = Number.isFinite(y) ? Math.min(maxY || 0, Math.max(-(maxY || 0), y)) : 0;
   };
   const desenhar = (suave = false) => {
     limitar();

@@ -1432,6 +1432,7 @@
 }
 .visualizador__topo {
   position: absolute;
+  z-index: 2;
   top: 0;
   left: 0;
   right: 0;
@@ -1461,10 +1462,11 @@
   color: #d4e3ee;
   font-variant-numeric: tabular-nums;
 }
+/* sem transform aqui: o efeito de "apertar" (scale) do botão não pode tirá-lo do lugar */
 .visualizador__seta {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  top: calc(50% - 1.5rem);
+  z-index: 2;
 }
 .visualizador__seta[hidden] {
   display: none;
@@ -1477,6 +1479,7 @@
 }
 .visualizador__baixo {
   position: absolute;
+  z-index: 2;
   left: 0;
   right: 0;
   bottom: 0;

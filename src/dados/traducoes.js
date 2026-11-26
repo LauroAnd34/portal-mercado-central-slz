@@ -605,8 +605,6 @@ export const TEXTOS = {
   'Foto anterior': ['Previous photo', 'Foto anterior'],
   'Próxima foto': ['Next photo', 'Foto siguiente'],
   'Zoom da foto': ['Photo zoom', 'Zoom de la foto'],
-  'Ver em tela cheia': ['View full screen', 'Ver en pantalla completa'],
-  'Sair da tela cheia': ['Exit full screen', 'Salir de pantalla completa'],
   'Voltar ao tamanho normal': ['Back to normal size', 'Volver al tamaño normal'],
 
   // ---------- textos alternativos da página inicial ----------
