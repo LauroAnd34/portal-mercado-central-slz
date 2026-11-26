@@ -111,6 +111,9 @@ export async function aplicarIdioma(idioma) {
   document
     .querySelectorAll('[data-idioma]')
     .forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.idioma === idioma)));
+  document
+    .querySelectorAll('[data-idioma-atual]')
+    .forEach((el) => (el.textContent = idioma.toUpperCase()));
   if (idioma === 'pt') return;
 
   dicionario ??= await import('../dados/traducoes.js');
@@ -128,11 +131,39 @@ export async function aplicarIdioma(idioma) {
   observador.observe(document.body, { childList: true, subtree: true, characterData: true });
 }
 
+function iniciarListaDeIdiomas() {
+  const botao = document.querySelector('[data-abrir-idiomas]');
+  const lista = document.getElementById('lista-idiomas');
+  if (!botao || !lista) return;
+  const abrir = (aberta) => {
+    botao.setAttribute('aria-expanded', String(aberta));
+    lista.hidden = !aberta;
+    if (aberta) lista.querySelector('[aria-pressed="true"]')?.focus();
+  };
+  botao.addEventListener('click', () => abrir(lista.hidden));
+  document.addEventListener('click', (evento) => {
+    if (!lista.hidden && !evento.target.closest('.idioma')) abrir(false);
+  });
+  lista.addEventListener('keydown', (evento) => {
+    if (evento.key === 'Escape') {
+      abrir(false);
+      botao.focus();
+    }
+  });
+  lista.addEventListener('click', (evento) => {
+    if (evento.target.closest('[data-idioma]')) {
+      abrir(false);
+      botao.focus();
+    }
+  });
+}
+
 export function iniciarIdioma() {
   document.addEventListener('click', (evento) => {
     const botao = evento.target.closest('[data-idioma]');
     if (botao) aplicarIdioma(botao.dataset.idioma);
   });
+  iniciarListaDeIdiomas();
   const idioma = idiomaSalvo();
   if (idioma !== 'pt') aplicarIdioma(idioma);
   else

@@ -55,7 +55,7 @@ export const LINHA_DO_TEMPO = Object.freeze([
     ano: '2025',
     titulo: 'Mercado da Cidade',
     texto:
-      'Em 12 de novembro, a Prefeitura entrega o espaço temporário no Aterro do Bacanga. A mudança dos feirantes acontece entre fevereiro e março de 2026.',
+      'Em 12 de novembro, a Prefeitura entrega o espaço temporário na Avenida Senador Vitorino Freire. A mudança dos feirantes acontece entre fevereiro e março de 2026.',
   },
   {
     ano: '2026',

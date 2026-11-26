@@ -132,10 +132,10 @@ export const TEXTOS = {
       'The 1941 building was demolished in September 2026 and a new one is being built on the same site. Meanwhile, the vendors work at the',
       'El edificio de 1941 fue demolido en septiembre de 2026 y se está construyendo uno nuevo en el mismo lugar. Mientras tanto, los feriantes atienden en el',
     ],
-  ', um mercado de transição construído em outro endereço: Av. Senador Vitorino Freire, Aterro do Bacanga.':
+  ', um mercado de transição na Av. Senador Vitorino Freire, Centro, a cerca de 500 metros do prédio antigo.':
     [
-      ', a temporary market built at another address: Av. Senador Vitorino Freire, Aterro do Bacanga.',
-      ', un mercado provisional construido en otra dirección: Av. Senador Vitorino Freire, Aterro do Bacanga.',
+      ', a temporary market on Av. Senador Vitorino Freire, Centro, about 500 meters from the old building.',
+      ', un mercado provisional en la Av. Senador Vitorino Freire, Centro, a unos 500 metros del edificio antiguo.',
     ],
   'Como chegar': ['How to get there', 'Cómo llegar'],
 
@@ -144,10 +144,10 @@ export const TEXTOS = {
   'Para planejar a sua ida': ['Plan your visit', 'Para planear tu visita'],
   'Onde fica': ['Where it is', 'Dónde está'],
   'Durante a obra:': ['During the works:', 'Durante las obras:'],
-  'no Mercado da Cidade, o mercado de transição, na Av. Senador Vitorino Freire (Aterro do Bacanga). Ele fica em outro lugar, fora do Centro Histórico.':
+  'no Mercado da Cidade, o mercado de transição, na Av. Senador Vitorino Freire, Centro, a cerca de 500 metros do prédio antigo.':
     [
-      'at the Mercado da Cidade, the temporary market on Av. Senador Vitorino Freire (Aterro do Bacanga). It is in another place, outside the Historic Center.',
-      'en el Mercado da Cidade, el mercado provisional, en la Av. Senador Vitorino Freire (Aterro do Bacanga). Está en otro lugar, fuera del Centro Histórico.',
+      'at the Mercado da Cidade, the temporary market on Av. Senador Vitorino Freire, Centro, about 500 meters from the old building.',
+      'en el Mercado da Cidade, el mercado provisional, en la Av. Senador Vitorino Freire, Centro, a unos 500 metros del edificio antiguo.',
     ],
   'Depois da obra:': ['After the works:', 'Después de las obras:'],
   'no novo Mercado Central, que está sendo construído no endereço histórico, na Rua de São João, Centro.':
@@ -246,11 +246,10 @@ export const TEXTOS = {
   'Acompanhe a obra': ['Follow the works', 'Sigue las obras'],
   'Concluída ·': ['Done ·', 'Concluida ·'],
   'Mercado da Cidade entregue': ['Mercado da Cidade opens', 'Se entrega el Mercado da Cidade'],
-  'Espaço temporário com quatro galpões na Avenida Senador Vitorino Freire, no Aterro do Bacanga.':
-    [
-      'Temporary space with four halls on Avenida Senador Vitorino Freire, in Aterro do Bacanga.',
-      'Espacio provisional con cuatro naves en la Avenida Senador Vitorino Freire, en el Aterro do Bacanga.',
-    ],
+  'Espaço temporário com quatro galpões na Avenida Senador Vitorino Freire, Centro.': [
+    'Temporary space with four halls on Avenida Senador Vitorino Freire, Centro.',
+    'Espacio provisional con cuatro naves en la Avenida Senador Vitorino Freire, Centro.',
+  ],
   'Feirantes mudam de endereço': ['Vendors move', 'Los feriantes se mudan'],
   'Entre fevereiro e março de 2026, os comerciantes passam a atender no Mercado da Cidade.': [
     'Between February and March 2026, the vendors start working at the Mercado da Cidade.',
@@ -454,10 +453,10 @@ export const TEXTOS = {
       'On August 18, the court for collective interests orders the City to restore the Central Market.',
       'El 18 de agosto, el juzgado de intereses difusos y colectivos condena al Municipio a restaurar el Mercado Central.',
     ],
-  'Em 12 de novembro, a Prefeitura entrega o espaço temporário no Aterro do Bacanga. A mudança dos feirantes acontece entre fevereiro e março de 2026.':
+  'Em 12 de novembro, a Prefeitura entrega o espaço temporário na Avenida Senador Vitorino Freire. A mudança dos feirantes acontece entre fevereiro e março de 2026.':
     [
-      'On November 12, City Hall opens the temporary space in Aterro do Bacanga. The vendors move between February and March 2026.',
-      'El 12 de noviembre, la Alcaldía entrega el espacio provisional en el Aterro do Bacanga. La mudanza de los feriantes ocurre entre febrero y marzo de 2026.',
+      'On November 12, City Hall opens the temporary space on Avenida Senador Vitorino Freire. The vendors move between February and March 2026.',
+      'El 12 de noviembre, la Alcaldía entrega el espacio provisional en la Avenida Senador Vitorino Freire. La mudanza de los feriantes ocurre entre febrero y marzo de 2026.',
     ],
   'Demolição e reconstrução': ['Demolition and rebuilding', 'Demolición y reconstrucción'],
   'Em 4 de julho é assinada a ordem de serviço (R$ 44,9 milhões, três andares, 285 feirantes). Com a estrutura em risco de desabamento, o prédio é demolido em 10 de setembro.':
@@ -729,6 +728,40 @@ export const TEXTOS = {
   'Pacotes de temperos e ervas empilhados numa banca do Mercado da Cidade.': [
     'Packs of spices and herbs stacked at a Mercado da Cidade stall.',
     'Paquetes de especias y hierbas apilados en un puesto del Mercado da Cidade.',
+  ],
+
+  'Frutaria no Mercado Central: bancas cheias de laranjas, mangas, abacaxis, bananas, tomates e alface.':
+    [
+      'Fruit stall at the Central Market: counters full of oranges, mangoes, pineapples, bananas, tomatoes and lettuce.',
+      'Frutería en el Mercado Central: puestos llenos de naranjas, mangos, piñas, plátanos, tomates y lechuga.',
+    ],
+  'Pacotes coloridos de temperos empilhados numa banca do Mercado da Cidade.': [
+    'Colorful packs of spices stacked at a Mercado da Cidade stall.',
+    'Paquetes coloridos de especias apilados en un puesto del Mercado da Cidade.',
+  ],
+  'Cachos de juçara roxa, recém-colhidos, sobre uma lona azul.': [
+    'Freshly picked bunches of purple juçara on a blue tarp.',
+    'Racimos de juçara morada, recién cosechados, sobre una lona azul.',
+  ],
+  'Xícara de juçara grossa, roxo-escura, com um saquinho de farinha ao lado.': [
+    'Cup of thick, dark purple juçara with a small bag of flour beside it.',
+    'Taza de juçara espesa, morada oscura, con una bolsita de harina al lado.',
+  ],
+  'Camarão espalhado para secar ao sol na Raposa, na ilha de São Luís.': [
+    'Shrimp spread out to dry in the sun in Raposa, on São Luís island.',
+    'Camarón extendido para secar al sol en Raposa, en la isla de São Luís.',
+  ],
+  'Banca do Mercado da Cidade com sacos de farinha, grãos e garrafas.': [
+    'Mercado da Cidade stall with bags of flour, grains and bottles.',
+    'Puesto del Mercado da Cidade con bolsas de harina, granos y botellas.',
+  ],
+  'Banca do Mercado Central com garrafas de licor, doces em pote e pimentas.': [
+    'Central Market stall with bottles of liqueur, jarred sweets and peppers.',
+    'Puesto del Mercado Central con botellas de licor, dulces en frasco y pimientas.',
+  ],
+  'Banca de ervas, folhas e garrafadas no Mercado Central.': [
+    'Stall of herbs, leaves and garrafadas at the Central Market.',
+    'Puesto de hierbas, hojas y garrafadas en el Mercado Central.',
   ],
 
   // ---------- rodapé ----------

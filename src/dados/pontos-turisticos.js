@@ -33,10 +33,10 @@ export const PONTOS_TURISTICOS = Object.freeze([
     id: 'mercado-da-cidade',
     nome: 'Mercado da Cidade',
     categoria: 'mercados',
-    coordenadas: [-2.5444427, -44.2984244],
-    endereco: 'Avenida Senador Vitorino Freire, Aterro do Bacanga',
+    coordenadas: [-2.5382172, -44.3027514],
+    endereco: 'Avenida Senador Vitorino Freire, Centro',
     descricao:
-      'Mercado de transição, construído no Aterro do Bacanga, fora do Centro Histórico. Desde o início de 2026, os feirantes do Mercado Central atendem aqui, em quatro galpões, enquanto o novo prédio é construído no endereço antigo. Localização aproximada.',
+      'Mercado de transição, na Avenida Senador Vitorino Freire, a cerca de 500 metros do prédio antigo. Desde o início de 2026, os feirantes do Mercado Central atendem aqui, em quatro galpões, enquanto o novo prédio é construído no endereço antigo.',
   },
   {
     id: 'casa-das-tulhas',

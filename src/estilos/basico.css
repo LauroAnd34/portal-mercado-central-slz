@@ -9,14 +9,24 @@
 }
 
 html {
-  /* Telas grandes: as letras crescem só um pouco (1920 px: 105%; máximo 115%)
-     e o conteúdo fica mais largo (ver --largura-max), para a página não parecer
-     pequena num monitor externo. Nunca fica menor que o tamanho do navegador. */
-  font-size: calc(var(--escala-fonte) * min(115%, max(100%, 0.875vw)));
+  /* Letras 5% maiores que o padrão do navegador. Em telas grandes, um pouco mais
+     (por faixas de largura, sem usar vw: assim o zoom do navegador funciona igual
+     no Safari, no Chrome e no Firefox). */
+  font-size: calc(var(--escala-fonte) * 105%);
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--altura-cabecalho) + var(--e-4)); /* WCAG 2.4.11 */
+}
+@media (min-width: 1600px) {
+  html {
+    font-size: calc(var(--escala-fonte) * 110%);
+  }
+}
+@media (min-width: 2200px) {
+  html {
+    font-size: calc(var(--escala-fonte) * 118%);
+  }
 }
 
 body {

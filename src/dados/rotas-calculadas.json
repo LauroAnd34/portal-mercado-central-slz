@@ -1,40 +1,25 @@
 {
-  "gerado_em": "2026-11-03",
+  "gerado_em": "2026-11-26",
   "pontos": {
     "mercado-da-cidade": {
       "a-pe": {
-        "distancia": 1344.4,
-        "duracao": 1075.2,
+        "distancia": 540.2,
+        "duracao": 432.4,
         "coordenadas": [
           [-2.53448, -44.30111],
           [-2.53448, -44.30132],
           [-2.53627, -44.3013],
-          [-2.53646, -44.30125],
-          [-2.53652, -44.3012],
-          [-2.53658, -44.30109],
-          [-2.53661, -44.30092],
-          [-2.53662, -44.30101],
-          [-2.53671, -44.30115],
-          [-2.53687, -44.30123],
-          [-2.53697, -44.30122],
-          [-2.53731, -44.30164],
-          [-2.53738, -44.30161],
-          [-2.53746, -44.30166],
-          [-2.53753, -44.30166],
-          [-2.53838, -44.30124],
-          [-2.53967, -44.30087],
-          [-2.54134, -44.30063],
-          [-2.54156, -44.30054],
-          [-2.54171, -44.30071],
-          [-2.54186, -44.30071],
-          [-2.54232, -44.30058],
-          [-2.54271, -44.30041],
-          [-2.543, -44.30018],
-          [-2.54359, -44.2996],
-          [-2.54379, -44.29936],
-          [-2.54415, -44.29878],
-          [-2.54423, -44.29882],
-          [-2.54444, -44.29842]
+          [-2.53648, -44.30134],
+          [-2.53657, -44.30141],
+          [-2.53663, -44.30158],
+          [-2.53666, -44.30157],
+          [-2.53684, -44.30218],
+          [-2.53696, -44.30208],
+          [-2.5372, -44.30229],
+          [-2.53729, -44.30221],
+          [-2.53749, -44.30244],
+          [-2.53759, -44.30264],
+          [-2.53815, -44.30249]
         ],
         "trechos": [
           [
@@ -50,45 +35,27 @@
               "lado": "left",
               "saida": null,
               "rua": "Avenida Magalhães de Almeida",
-              "distancia": 199
+              "distancia": 255
             },
-            { "tipo": "turn", "lado": "slight left", "saida": null, "rua": "", "distancia": 63 },
+            { "tipo": "turn", "lado": "left", "saida": null, "rua": "", "distancia": 4 },
             {
               "tipo": "turn",
-              "lado": "sharp right",
+              "lado": "right",
               "saida": null,
-              "rua": "Rua das Cajazeiras",
-              "distancia": 4
+              "rua": "Praça Dr. Miguel Vieira",
+              "distancia": 86
             },
-            {
-              "tipo": "turn",
-              "lado": "slight left",
-              "saida": null,
-              "rua": "Rua Fonte do Bispo",
-              "distancia": 56
-            },
-            { "tipo": "turn", "lado": "slight right", "saida": null, "rua": "", "distancia": 59 },
-            { "tipo": "turn", "lado": "left", "saida": null, "rua": "", "distancia": 890 },
-            {
-              "tipo": "turn",
-              "lado": "left",
-              "saida": null,
-              "rua": "Avenida Senador Vitorino Freire",
-              "distancia": 50
-            },
-            {
-              "tipo": "arrive",
-              "lado": null,
-              "saida": null,
-              "rua": "Avenida Senador Vitorino Freire",
-              "distancia": 0
-            }
+            { "tipo": "turn", "lado": "right", "saida": null, "rua": "", "distancia": 1 },
+            { "tipo": "turn", "lado": "right", "saida": null, "rua": "", "distancia": 49 },
+            { "tipo": "turn", "lado": "right", "saida": null, "rua": "Rua Dez", "distancia": 59 },
+            { "tipo": "turn", "lado": "left", "saida": null, "rua": "", "distancia": 63 },
+            { "tipo": "arrive", "lado": "right", "saida": null, "rua": "", "distancia": 0 }
           ]
         ]
       },
       "carro": {
-        "distancia": 2545.4,
-        "duracao": 207.9,
+        "distancia": 1669.7,
+        "duracao": 169.9,
         "coordenadas": [
           [-2.53448, -44.30111],
           [-2.53448, -44.30132],
@@ -111,28 +78,14 @@
           [-2.53548, -44.30546],
           [-2.53583, -44.30508],
           [-2.53616, -44.30449],
-          [-2.53661, -44.30298],
+          [-2.5367, -44.30275],
           [-2.53679, -44.30256],
           [-2.53709, -44.30222],
-          [-2.53736, -44.30199],
-          [-2.5377, -44.30176],
-          [-2.53801, -44.3016],
-          [-2.5386, -44.30135],
-          [-2.5391, -44.30118],
-          [-2.53923, -44.30117],
-          [-2.53944, -44.30122],
-          [-2.53998, -44.3015],
-          [-2.54017, -44.30152],
-          [-2.54063, -44.30137],
-          [-2.5408, -44.30118],
-          [-2.54096, -44.30107],
-          [-2.54236, -44.30072],
-          [-2.5429, -44.30042],
-          [-2.54346, -44.30037],
-          [-2.54357, -44.30033],
-          [-2.54374, -44.30015],
-          [-2.54384, -44.29955],
-          [-2.54444, -44.29842]
+          [-2.53717, -44.30215],
+          [-2.53732, -44.30223],
+          [-2.53749, -44.30244],
+          [-2.53759, -44.30264],
+          [-2.53815, -44.30249]
         ],
         "trechos": [
           [
@@ -162,22 +115,11 @@
               "lado": "uturn",
               "saida": null,
               "rua": "Avenida Senador Vitorino Freire",
-              "distancia": 1376
+              "distancia": 651
             },
-            {
-              "tipo": "fork",
-              "lado": "slight left",
-              "saida": null,
-              "rua": "Avenida Senador Vitorino Freire",
-              "distancia": 288
-            },
-            {
-              "tipo": "arrive",
-              "lado": null,
-              "saida": null,
-              "rua": "Avenida Senador Vitorino Freire",
-              "distancia": 0
-            }
+            { "tipo": "turn", "lado": "right", "saida": null, "rua": "Rua Dez", "distancia": 74 },
+            { "tipo": "turn", "lado": "left", "saida": null, "rua": "", "distancia": 63 },
+            { "tipo": "arrive", "lado": "right", "saida": null, "rua": "", "distancia": 0 }
           ]
         ]
       }
@@ -2819,8 +2761,8 @@
     },
     "forte-santo-antonio": {
       "a-pe": {
-        "distancia": 6084.1,
-        "duracao": 4868.1,
+        "distancia": 6083.6,
+        "duracao": 4867.7,
         "coordenadas": [
           [-2.53448, -44.30111],
           [-2.53448, -44.30132],
@@ -2926,7 +2868,7 @@
             },
             { "tipo": "turn", "lado": "right", "saida": null, "rua": "", "distancia": 43 },
             { "tipo": "end of road", "lado": "left", "saida": null, "rua": "", "distancia": 1155 },
-            { "tipo": "turn", "lado": "right", "saida": null, "rua": "", "distancia": 796 },
+            { "tipo": "turn", "lado": "right", "saida": null, "rua": "", "distancia": 795 },
             { "tipo": "turn", "lado": "right", "saida": null, "rua": "", "distancia": 47 },
             { "tipo": "end of road", "lado": "left", "saida": null, "rua": "", "distancia": 87 },
             { "tipo": "turn", "lado": "left", "saida": null, "rua": "", "distancia": 5 },
@@ -3260,8 +3202,8 @@
     },
     "espigao-costeiro": {
       "a-pe": {
-        "distancia": 6509.9,
-        "duracao": 5210.8,
+        "distancia": 6509.3,
+        "duracao": 5208.4,
         "coordenadas": [
           [-2.53448, -44.30111],
           [-2.53448, -44.30132],
@@ -3365,7 +3307,7 @@
             },
             { "tipo": "turn", "lado": "right", "saida": null, "rua": "", "distancia": 43 },
             { "tipo": "end of road", "lado": "left", "saida": null, "rua": "", "distancia": 1155 },
-            { "tipo": "turn", "lado": "right", "saida": null, "rua": "", "distancia": 796 },
+            { "tipo": "turn", "lado": "right", "saida": null, "rua": "", "distancia": 795 },
             { "tipo": "turn", "lado": "right", "saida": null, "rua": "", "distancia": 47 },
             { "tipo": "end of road", "lado": "left", "saida": null, "rua": "", "distancia": 87 },
             { "tipo": "turn", "lado": "left", "saida": null, "rua": "", "distancia": 5 },
@@ -4157,8 +4099,8 @@
     },
     "praia-ponta-dareia": {
       "a-pe": {
-        "distancia": 4709.5,
-        "duracao": 3770,
+        "distancia": 4709,
+        "duracao": 3769.6,
         "coordenadas": [
           [-2.53448, -44.30111],
           [-2.53448, -44.30132],
@@ -4245,7 +4187,7 @@
             },
             { "tipo": "turn", "lado": "right", "saida": null, "rua": "", "distancia": 43 },
             { "tipo": "end of road", "lado": "left", "saida": null, "rua": "", "distancia": 1155 },
-            { "tipo": "turn", "lado": "right", "saida": null, "rua": "", "distancia": 796 },
+            { "tipo": "turn", "lado": "right", "saida": null, "rua": "", "distancia": 795 },
             { "tipo": "turn", "lado": "right", "saida": null, "rua": "", "distancia": 47 },
             { "tipo": "end of road", "lado": "left", "saida": null, "rua": "", "distancia": 87 },
             { "tipo": "turn", "lado": "left", "saida": null, "rua": "", "distancia": 5 },
@@ -8520,8 +8462,8 @@
     },
     "sao-jose-de-ribamar": {
       "a-pe": {
-        "distancia": 33118.6,
-        "duracao": 26501.1,
+        "distancia": 33110.8,
+        "duracao": 26494.9,
         "coordenadas": [
           [-2.53448, -44.30111],
           [-2.53447, -44.30036],
@@ -8783,9 +8725,9 @@
           [-2.53792, -44.14057],
           [-2.53789, -44.13938],
           [-2.53795, -44.13861],
-          [-2.53846, -44.13749],
-          [-2.53858, -44.13709],
-          [-2.53853, -44.1369],
+          [-2.53844, -44.13751],
+          [-2.53856, -44.13711],
+          [-2.53855, -44.13694],
           [-2.53881, -44.13697],
           [-2.53923, -44.13609],
           [-2.53949, -44.13573],
@@ -9626,8 +9568,8 @@
               "distancia": 657
             },
             { "tipo": "turn", "lado": "right", "saida": null, "rua": "", "distancia": 80 },
-            { "tipo": "turn", "lado": "left", "saida": null, "rua": "", "distancia": 614 },
-            { "tipo": "turn", "lado": "right", "saida": null, "rua": "", "distancia": 31 },
+            { "tipo": "turn", "lado": "left", "saida": null, "rua": "", "distancia": 608 },
+            { "tipo": "end of road", "lado": "right", "saida": null, "rua": "", "distancia": 29 },
             { "tipo": "turn", "lado": "left", "saida": null, "rua": "", "distancia": 157 },
             { "tipo": "turn", "lado": "right", "saida": null, "rua": "", "distancia": 53 },
             { "tipo": "turn", "lado": "left", "saida": null, "rua": "", "distancia": 290 },

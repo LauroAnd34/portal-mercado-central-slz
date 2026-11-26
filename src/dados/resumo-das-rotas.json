@@ -1,8 +1,5 @@
 {
-  "mercado-da-cidade": {
-    "a-pe": { "km": 1.344, "min": 17.9 },
-    "carro": { "km": 2.545, "min": 3.5 }
-  },
+  "mercado-da-cidade": { "a-pe": { "km": 0.54, "min": 7.2 }, "carro": { "km": 1.67, "min": 2.8 } },
   "casa-das-tulhas": { "a-pe": { "km": 0.874, "min": 11.7 }, "carro": { "km": 1.533, "min": 2.7 } },
   "rua-portugal": { "a-pe": { "km": 1.014, "min": 13.6 }, "carro": { "km": 1.45, "min": 2.4 } },
   "palacio-dos-leoes": {
@@ -52,7 +49,7 @@
     "carro": { "km": 8.149, "min": 12.6 }
   },
   "espigao-costeiro": {
-    "a-pe": { "km": 6.51, "min": 86.8 },
+    "a-pe": { "km": 6.509, "min": 86.8 },
     "carro": { "km": 8.026, "min": 12.3 }
   },
   "lagoa-da-jansen": {
@@ -60,7 +57,7 @@
     "carro": { "km": 7.782, "min": 11.8 }
   },
   "praia-ponta-dareia": {
-    "a-pe": { "km": 4.71, "min": 62.8 },
+    "a-pe": { "km": 4.709, "min": 62.8 },
     "carro": { "km": 6.846, "min": 9.4 }
   },
   "praia-sao-marcos": {
@@ -88,7 +85,7 @@
     "carro": { "km": 10.707, "min": 18.5 }
   },
   "sao-jose-de-ribamar": {
-    "a-pe": { "km": 33.119, "min": 441.7 },
+    "a-pe": { "km": 33.111, "min": 441.6 },
     "carro": { "km": 30.727, "min": 36.4 }
   },
   "raposa": { "a-pe": { "km": 29.192, "min": 389.4 }, "carro": { "km": 27.647, "min": 36.2 } }

@@ -86,26 +86,26 @@
         <div class="abertura__mosaico">
           <figure class="mosaico__item mosaico__item--grande">
             <img
-              src="./src/imagens/fotos/mercado-cidade-frutas.jpg"
+              src="./src/imagens/fotos/mercado-central-frutaria.jpg"
               srcset="
-                ./src/imagens/fotos/mercado-cidade-frutas-480.webp   480w,
-                ./src/imagens/fotos/mercado-cidade-frutas-960.webp   960w,
-                ./src/imagens/fotos/mercado-cidade-frutas-1600.webp 1600w
+                ./src/imagens/fotos/mercado-central-frutaria-480.webp   480w,
+                ./src/imagens/fotos/mercado-central-frutaria-960.webp   960w,
+                ./src/imagens/fotos/mercado-central-frutaria-1600.webp 1600w
               "
               sizes="(max-width: 980px) 60vw, 50vw"
               fetchpriority="high"
               width="1600"
-              height="1067"
-              alt="Banca de frutas no Mercado da Cidade, onde os feirantes do Mercado Central atendem durante a obra: bananas, abacaxis, melancias e bandeirinhas coloridas de São João."
+              height="804"
+              alt="Frutaria no Mercado Central: bancas cheias de laranjas, mangas, abacaxis, bananas, tomates e alface."
             />
           </figure>
           <figure class="mosaico__item">
             <img
-              data-foto="mercado-camarao-seco"
-              width="1100"
-              height="825"
+              data-foto="mercado-cidade-temperos"
+              width="1600"
+              height="1067"
               loading="lazy"
-              alt="Cesto de palha cheio de camarão seco numa banca do Mercado Central."
+              alt="Pacotes coloridos de temperos empilhados numa banca do Mercado da Cidade."
             />
           </figure>
           <figure class="mosaico__item">
@@ -127,8 +127,8 @@
           <p>
             O prédio de 1941 foi demolido em setembro de 2026 e um novo está sendo construído no
             mesmo lugar. Enquanto isso, os feirantes atendem no <strong>Mercado da Cidade</strong>,
-            um mercado de transição construído em outro endereço: Av. Senador Vitorino Freire,
-            Aterro do Bacanga.
+            um mercado de transição na Av. Senador Vitorino Freire, Centro, a cerca de 500 metros do
+            prédio antigo.
             <a href="./mapa.html?chegar#mercado-da-cidade">Como chegar</a>
           </p>
         </div>
@@ -147,15 +147,13 @@
                 <h3>Onde fica</h3>
                 <p>
                   <strong>Durante a obra:</strong> no Mercado da Cidade, o mercado de transição, na
-                  Av. Senador Vitorino Freire (Aterro do Bacanga). Ele fica em outro lugar, fora do
-                  Centro Histórico.
+                  Av. Senador Vitorino Freire, Centro, a cerca de 500 metros do prédio antigo.
                 </p>
                 <p>
                   <strong>Depois da obra:</strong> no novo Mercado Central, que está sendo
                   construído no endereço histórico, na Rua de São João, Centro.
                 </p>
                 <a href="./mapa.html?chegar#mercado-central">Como chegar ao Mercado Central</a>
-                <a href="./mapa.html?chegar#mercado-da-cidade">Como chegar ao Mercado da Cidade</a>
               </article>
               <article class="info-bloco">
                 <h3>Quando ir</h3>
@@ -170,6 +168,7 @@
                   Quatro galpões com boxes padronizados, corredores largos, banheiros, praça de
                   alimentação e mais de 300 vagas de estacionamento.
                 </p>
+                <a href="./mapa.html?chegar#mercado-da-cidade">Como chegar ao Mercado da Cidade</a>
               </article>
             </div>
             <div class="visite__setores">
@@ -672,16 +671,18 @@
       <!-- A cidade dos azulejos -->
       <section class="secao azulejaria" aria-labelledby="azulejos-titulo">
         <div class="container">
-          <header class="titulo-modulo">
-            <h2 id="azulejos-titulo">A cidade dos azulejos</h2>
-            <span class="titulo-modulo__sub">Arte que veste São Luís</span>
-          </header>
-          <p class="lead azulejaria__texto">
-            Os casarões do Centro Histórico guardam um dos maiores conjuntos de azulejos portugueses
-            do Brasil. Eles protegem as paredes do sol e da chuva e deixam as ruas coloridas. Cada
-            padrão é de uma época. Hoje, artistas maranhenses continuam essa história em painéis com
-            as nossas festas e tradições.
-          </p>
+          <div class="azulejaria__topo">
+            <header class="titulo-modulo">
+              <h2 id="azulejos-titulo">A cidade dos azulejos</h2>
+              <span class="titulo-modulo__sub">Arte que veste São Luís</span>
+            </header>
+            <p class="lead azulejaria__texto">
+              Os casarões do Centro Histórico guardam um dos maiores conjuntos de azulejos
+              portugueses do Brasil. Eles protegem as paredes do sol e da chuva e deixam as ruas
+              coloridas. Cada padrão é de uma época. Hoje, artistas maranhenses continuam essa
+              história em painéis com as nossas festas e tradições.
+            </p>
+          </div>
           <figure class="azulejaria__painel">
             <button
               type="button"
@@ -705,18 +706,25 @@
               /><span class="somente-leitor">Ampliar o painel</span>
             </button>
             <figcaption>
-              Painel de azulejos pintados à mão com cenas da cultura maranhense: festas juninas,
-              danças, brincantes, barcos à vela e o casario. Fica na recepção do Fórum Eleitoral de
-              São Luís (TRE-MA), na Madre Deus.
-              <span>Assinatura no painel: “Santos, 09”. Foto: Lauro Andrade.</span>
+              <p class="azulejaria__legenda">
+                Painel de azulejos pintados à mão com cenas da cultura maranhense: festas juninas,
+                danças, brincantes, barcos à vela e o casario. Fica na recepção do Fórum Eleitoral
+                de São Luís (TRE-MA), na Madre Deus.
+              </p>
+              <p class="azulejaria__credito">
+                Assinatura no painel: “Santos, 09”. Foto: Lauro Andrade.
+              </p>
             </figcaption>
           </figure>
-          <h3 class="azulejaria__subtitulo">Padrões pelas ruas do Centro</h3>
-          <p class="azulejaria__fonte">
-            Azulejos de casarões de São Luís registrados no
-            <cite>Inventário do Patrimônio Azulejar do Maranhão</cite>
-            (org. Zelinda Machado de Castro e Lima, Santa Marta, 2012).
-          </p>
+          <div class="azulejaria__cabecalho">
+            <h3 class="azulejaria__subtitulo">Padrões pelas ruas do Centro</h3>
+            <p class="azulejaria__fonte">
+              Azulejos de casarões de São Luís registrados no
+              <cite>Inventário do Patrimônio Azulejar do Maranhão</cite>
+              (org. Zelinda Machado de Castro e Lima, Santa Marta, 2012).
+            </p>
+          </div>
+
           <ul class="azulejaria__galeria" data-galeria-azulejos></ul>
         </div>
         <dialog class="visualizador" data-visualizador aria-labelledby="visualizador-titulo">

@@ -34,12 +34,12 @@ export const SABORES = Object.freeze([
     texto: 'Servida grossa, com farinha d’água e, para muitos, com camarão seco ou peixe frito.',
     fotos: [
       {
-        chave: 'mercado-banca-jucara',
-        alt: 'Banca do Mercado Central com a placa “Vende-se juçara”.',
+        chave: 'sabor-jucara-cachos',
+        alt: 'Cachos de juçara roxa, recém-colhidos, sobre uma lona azul.',
       },
       {
-        chave: 'mercado-cidade-frutas',
-        alt: 'Banca de frutas com bananas, abacaxis e bandeirinhas de São João, no Mercado da Cidade.',
+        chave: 'sabor-jucara-tigela',
+        alt: 'Xícara de juçara grossa, roxo-escura, com um saquinho de farinha ao lado.',
       },
     ],
   },
@@ -53,8 +53,8 @@ export const SABORES = Object.freeze([
         alt: 'Cesto de palha cheio de camarão seco, no Mercado Central.',
       },
       {
-        chave: 'mercado-banca-jucara',
-        alt: 'Banca do Mercado Central com sacos de camarão seco e farinha.',
+        chave: 'sabor-camarao-raposa',
+        alt: 'Camarão espalhado para secar ao sol na Raposa, na ilha de São Luís.',
       },
     ],
   },
@@ -63,13 +63,10 @@ export const SABORES = Object.freeze([
     icone: 'folha',
     texto: 'Molho de vinagreira, gergelim e camarão seco. É um símbolo da cozinha maranhense.',
     fotos: [
+      { chave: 'sabor-arroz-de-cuxa', alt: 'Panela de arroz de cuxá, verde-escuro, sobre a mesa.' },
       {
-        chave: 'sabor-vinagreira',
-        alt: 'Folha de vinagreira, a base do cuxá, num prato de borda azul.',
-      },
-      {
-        chave: 'mercado-cidade-temperos',
-        alt: 'Pacotes de gergelim, temperos e ervas empilhados numa banca do Mercado da Cidade.',
+        chave: 'sabor-cuxa',
+        alt: 'Cuxá, molho verde-escuro de vinagreira, num prato de borda azul.',
       },
     ],
   },
@@ -84,7 +81,7 @@ export const SABORES = Object.freeze([
       },
       {
         chave: 'mercado-cidade-farinha-banca',
-        alt: 'Banca do Mercado da Cidade com farinhas, grãos e garrafas.',
+        alt: 'Banca do Mercado da Cidade com sacos de farinha, grãos e garrafas.',
       },
     ],
   },
@@ -94,8 +91,8 @@ export const SABORES = Object.freeze([
     texto: 'De bacuri, cupuaçu, buriti, murici e outras frutas da região.',
     fotos: [
       {
-        chave: 'mercado-garrafas',
-        alt: 'Garrafas de aguardente com caranguejo penduradas numa banca do Mercado Central.',
+        chave: 'mercado-central-licores',
+        alt: 'Banca do Mercado Central com garrafas de licor, doces em pote e pimentas.',
       },
       {
         chave: 'mercado-cidade-garrafas',
@@ -109,12 +106,12 @@ export const SABORES = Object.freeze([
     texto: 'Para chás e temperos; os vendedores explicam o uso de cada folha.',
     fotos: [
       {
-        chave: 'mercado-cidade-ervas',
-        alt: 'Saquinhos de ervas secas pendurados numa banca do Mercado da Cidade.',
+        chave: 'mercado-central-ervas',
+        alt: 'Banca de ervas, folhas e garrafadas no Mercado Central.',
       },
       {
-        chave: 'mercado-cidade-temperos',
-        alt: 'Pacotes de temperos e ervas empilhados numa banca do Mercado da Cidade.',
+        chave: 'mercado-cidade-ervas',
+        alt: 'Saquinhos de ervas secas pendurados numa banca do Mercado da Cidade.',
       },
     ],
   },

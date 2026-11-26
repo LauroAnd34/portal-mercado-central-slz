@@ -46,7 +46,7 @@
       transparent 46%,
       var(--marca-marinho-700) 60%
     ),
-    url('../../imagens/fotos/mercado-banca-jucara.jpg');
+    url('../../imagens/fotos/mercado-central-bancas-frutas-960.webp');
   background-size:
     auto,
     auto,
@@ -560,8 +560,15 @@ mark {
   padding-top: var(--e-5);
   border-top: 1px solid var(--leitor-borda);
 }
-.leitor__navegacao .botao {
+.leitor .leitor__navegacao .botao.botao {
   max-width: 100%;
+  border-color: var(--leitor-titulo);
+  background: var(--leitor-fundo);
+  color: var(--leitor-titulo);
+}
+.leitor .leitor__navegacao .botao.botao:hover:not(:disabled) {
+  background: var(--leitor-titulo);
+  color: var(--leitor-fundo);
 }
 .leitor__navegacao .botao:disabled {
   opacity: 0.45;
@@ -599,7 +606,19 @@ mark {
   overflow-y: auto;
   overscroll-behavior: contain;
   padding: 0 0 var(--e-8);
-  background: var(--leitor-fundo-pagina, var(--cor-fundo));
+  background: var(--cor-fundo);
+}
+/* em tela cheia, a tela toda pega a cor do tema escolhido em "Letras e cores"
+   (as cores do leitor moram em .leitor, dentro de #leitor) */
+.modo-foco .leitor::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--leitor-fundo);
+}
+.modo-foco #leitor .leitor {
+  color: var(--leitor-texto);
 }
 .modo-foco #leitor > .container {
   max-width: 68.75rem;
