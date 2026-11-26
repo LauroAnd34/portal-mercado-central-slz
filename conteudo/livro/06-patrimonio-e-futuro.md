@@ -6,7 +6,7 @@ O Mercado Central está no coração do Centro Histórico de São Luís, cujo co
 
 Em 20 de abril de 2016, um incêndio num box de artesanato mostrou a precariedade das instalações. Depois de anos de impasse, a Justiça condenou o Município, em 18 de agosto de 2023, a restaurar o Mercado.
 
-Em 12 de novembro de 2025, a Prefeitura entregou o Mercado da Cidade, no Aterro do Bacanga, com quatro galpões e espaço para cerca de 450 comerciantes. A mudança dos feirantes aconteceu entre fevereiro e março de 2026.
+Em 12 de novembro de 2025, a Prefeitura entregou o Mercado da Cidade, na Avenida Senador Vitorino Freire, perto do prédio antigo, com quatro galpões e espaço para cerca de 450 comerciantes. A mudança dos feirantes aconteceu entre fevereiro e março de 2026.
 
 Em 4 de julho de 2026, foi assinada a ordem de serviço da obra: R$ 44,9 milhões, um prédio de três andares e espaço para 285 feirantes. O projeto divulgado previa preservar as fachadas antigas. Mas a estrutura estava em risco de desabamento: depois de uma audiência na Justiça em 2 de setembro, o prédio foi demolido em 10 de setembro de 2026. No mesmo lugar será construído o novo Mercado Central.
 

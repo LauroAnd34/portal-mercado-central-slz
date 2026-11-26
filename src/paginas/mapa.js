@@ -180,7 +180,7 @@ const MERCADO_COMO_DESTINO = {
   distanciaKm: 0,
   distanciaCarroKm: 0,
   descricao:
-    'Endereço histórico do Mercado, na Rua de São João, Centro. O prédio novo está em obra no mesmo lugar; durante a obra, os feirantes atendem no Mercado da Cidade.',
+    'Endereço histórico do Mercado, na Praça do Mercado Central, Centro. O prédio novo está em obra no mesmo lugar; durante a obra, os feirantes atendem no Mercado da Cidade.',
 };
 const pontoOuMercado = (id) =>
   id === MERCADO_CENTRAL.id

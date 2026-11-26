@@ -44,8 +44,20 @@ export function montarSabores(raiz, sabores, { urlDaFoto, srcsetDaFoto, FOTOS } 
       img.src = urlDaFoto(foto.chave);
       img.alt = foto.alt;
     });
-    const autores = [...new Set(sabor.fotos.map((f) => FOTOS[f.chave]?.autor).filter(Boolean))];
-    legenda.textContent = `${sabor.nome}. Fotos: ${autores.join(' e ')}.`;
+    // quem fez cada foto e onde (quando a fonte informa o lugar); mesmo autor aparece uma vez
+    const porAutor = new Map();
+    sabor.fotos
+      .map((f) => FOTOS[f.chave])
+      .filter(Boolean)
+      .forEach((foto) => {
+        const lugares = porAutor.get(foto.autor) ?? [];
+        if (foto.origem && !lugares.includes(foto.origem)) lugares.push(foto.origem);
+        porAutor.set(foto.autor, lugares);
+      });
+    const creditos = [...porAutor].map(([autor, lugares]) =>
+      lugares.length ? `${autor} (${lugares.join(' e ')})` : autor,
+    );
+    legenda.textContent = `${sabor.nome}. Fotos: ${creditos.join(' e ')}.`;
     raiz
       .querySelectorAll('[data-sabor]')
       .forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.sabor) === indice)));

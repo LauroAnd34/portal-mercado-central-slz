@@ -150,10 +150,10 @@ export const TEXTOS = {
       'en el Mercado da Cidade, el mercado provisional, en la Av. Senador Vitorino Freire, Centro, a unos 500 metros del edificio antiguo.',
     ],
   'Depois da obra:': ['After the works:', 'Después de las obras:'],
-  'no novo Mercado Central, que está sendo construído no endereço histórico, na Rua de São João, Centro.':
+  'no novo Mercado Central, que está sendo construído no endereço histórico, na Praça do Mercado Central, Centro.':
     [
-      'at the new Central Market, being built at the historic address, Rua de São João, Centro.',
-      'en el nuevo Mercado Central, que se construye en la dirección histórica, Rua de São João, Centro.',
+      'at the new Central Market, being built at the historic address, Praça do Mercado Central, Centro.',
+      'en el nuevo Mercado Central, que se construye en la dirección histórica, Praça do Mercado Central, Centro.',
     ],
   'Como chegar ao Mercado Central': [
     'How to get to the Central Market',
@@ -764,6 +764,11 @@ export const TEXTOS = {
     'Puesto de hierbas, hojas y garrafadas en el Mercado Central.',
   ],
 
+  'Fotos do Mercado Central (2023) e do Mercado da Cidade: equipe do projeto. Outras fotos: Wikimedia Commons e Agência Brasil, conforme as licenças indicadas. Padrões de azulejo: Inventário do Patrimônio Azulejar do Maranhão (Santa Marta, 2012). Cartões-postais de 1940 e 1941: acervo histórico reunido pela pesquisa do projeto. Projeto do novo Mercado: Prefeitura de São Luís (divulgação). Mapa: © colaboradores do OpenStreetMap.':
+    [
+      'Photos of the Central Market (2023) and the Mercado da Cidade: project team. Other photos: Wikimedia Commons and Agência Brasil, under the licenses shown. Tile patterns: Inventário do Patrimônio Azulejar do Maranhão (Santa Marta, 2012). 1940 and 1941 postcards: historical collection gathered by the project research. New Market project: São Luís City Hall (press release). Map: © OpenStreetMap contributors.',
+      'Fotos del Mercado Central (2023) y del Mercado da Cidade: equipo del proyecto. Otras fotos: Wikimedia Commons y Agência Brasil, según las licencias indicadas. Diseños de azulejos: Inventário do Patrimônio Azulejar do Maranhão (Santa Marta, 2012). Postales de 1940 y 1941: acervo histórico reunido por la investigación del proyecto. Proyecto del nuevo Mercado: Alcaldía de São Luís (divulgación). Mapa: © colaboradores de OpenStreetMap.',
+    ],
   // ---------- rodapé ----------
   'Portal do Mercado Central': ['Central Market Portal', 'Portal del Mercado Central'],
   'Memória, sabores e gente da nossa ilha.': [

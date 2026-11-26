@@ -50,6 +50,7 @@ export const FOTOS = Object.freeze({
   'mercado-camarao-seco': {
     arquivo: 'mercado-camarao-seco.jpg',
     lugar: 'Cesto de camarão seco no Mercado Central',
+    origem: 'Mercado Central',
     autor: 'MPMrocha',
     licenca: 'CC BY-SA 4.0',
     fonte: 'https://commons.wikimedia.org/wiki/File:Cesto_de_camar%C3%B5es.jpg',
@@ -59,6 +60,7 @@ export const FOTOS = Object.freeze({
   'mercado-garrafas': {
     arquivo: 'mercado-garrafas.jpg',
     lugar: 'Garrafas de aguardente com caranguejo no Mercado Central',
+    origem: 'Mercado Central',
     autor: 'MPMrocha',
     licenca: 'CC BY-SA 4.0',
     fonte: 'https://commons.wikimedia.org/wiki/File:Garrafa_de_aguardente_com_caranguejo.jpg',
@@ -68,6 +70,7 @@ export const FOTOS = Object.freeze({
   'mercado-cidade-temperos': {
     arquivo: 'mercado-cidade-temperos.jpg',
     lugar: 'Pacotes de temperos empilhados no Mercado da Cidade',
+    origem: 'Mercado da Cidade',
     autor: 'Equipe do projeto Portal do Mercado Central',
     licenca: 'acervo do projeto',
     largura: 1600,
@@ -76,6 +79,7 @@ export const FOTOS = Object.freeze({
   'mercado-cidade-garrafas': {
     arquivo: 'mercado-cidade-garrafas.jpg',
     lugar: 'Garrafas de licor e molhos numa banca do Mercado da Cidade',
+    origem: 'Mercado da Cidade',
     autor: 'Equipe do projeto Portal do Mercado Central',
     licenca: 'acervo do projeto',
     largura: 1100,
@@ -84,6 +88,7 @@ export const FOTOS = Object.freeze({
   'mercado-cidade-farinha-banca': {
     arquivo: 'mercado-cidade-farinha-banca.jpg',
     lugar: 'Banca de farinhas, grãos e garrafas no Mercado da Cidade',
+    origem: 'Mercado da Cidade',
     autor: 'Equipe do projeto Portal do Mercado Central',
     licenca: 'acervo do projeto',
     largura: 1100,
@@ -92,6 +97,7 @@ export const FOTOS = Object.freeze({
   'mercado-cidade-farinha': {
     arquivo: 'mercado-cidade-farinha.jpg',
     lugar: 'Sacos de farinha e grãos numa banca do Mercado da Cidade',
+    origem: 'Mercado da Cidade',
     autor: 'Equipe do projeto Portal do Mercado Central',
     licenca: 'acervo do projeto',
     largura: 1100,
@@ -100,6 +106,7 @@ export const FOTOS = Object.freeze({
   'mercado-cidade-ervas': {
     arquivo: 'mercado-cidade-ervas.jpg',
     lugar: 'Saquinhos de ervas pendurados numa banca do Mercado da Cidade',
+    origem: 'Mercado da Cidade',
     autor: 'Equipe do projeto Portal do Mercado Central',
     licenca: 'acervo do projeto',
     largura: 1600,
@@ -108,6 +115,7 @@ export const FOTOS = Object.freeze({
   'mercado-central-frutaria': {
     arquivo: 'mercado-central-frutaria.jpg',
     lugar: 'Frutaria no Mercado Central (2023)',
+    origem: 'Mercado Central',
     autor: 'Equipe do projeto Portal do Mercado Central',
     licenca: 'levantamento fotográfico do projeto',
     largura: 1600,
@@ -116,6 +124,7 @@ export const FOTOS = Object.freeze({
   'mercado-central-bancas-frutas': {
     arquivo: 'mercado-central-bancas-frutas.jpg',
     lugar: 'Bancas de frutas no Mercado Central (2023)',
+    origem: 'Mercado Central',
     autor: 'Equipe do projeto Portal do Mercado Central',
     licenca: 'levantamento fotográfico do projeto',
     largura: 1600,
@@ -124,6 +133,7 @@ export const FOTOS = Object.freeze({
   'mercado-central-licores': {
     arquivo: 'mercado-central-licores.jpg',
     lugar: 'Banca de licores, doces e pimentas no Mercado Central (2023)',
+    origem: 'Mercado Central',
     autor: 'Equipe do projeto Portal do Mercado Central',
     licenca: 'levantamento fotográfico do projeto',
     largura: 1600,
@@ -132,6 +142,7 @@ export const FOTOS = Object.freeze({
   'mercado-central-ervas': {
     arquivo: 'mercado-central-ervas.jpg',
     lugar: 'Banca de ervas e garrafadas no Mercado Central (2023)',
+    origem: 'Mercado Central',
     autor: 'Equipe do projeto Portal do Mercado Central',
     licenca: 'levantamento fotográfico do projeto',
     largura: 1600,
@@ -139,7 +150,8 @@ export const FOTOS = Object.freeze({
   },
   'sabor-jucara-cachos': {
     arquivo: 'sabor-jucara-cachos.jpg',
-    lugar: 'Cachos de juçara (açaí) recém-colhidos',
+    lugar: 'Cachos de juçara (açaí) recém-colhidos, no Amazonas',
+    origem: 'Amazonas',
     autor: 'Jéssica Karoline Alves Portugal',
     licenca: 'CC BY-SA 4.0',
     fonte: 'https://commons.wikimedia.org/wiki/File:Fruto_do_a%C3%A7a%C3%AD.jpg',
@@ -158,6 +170,7 @@ export const FOTOS = Object.freeze({
   'sabor-camarao-raposa': {
     arquivo: 'sabor-camarao-raposa.jpg',
     lugar: 'Camarão secando ao sol na Raposa, ilha de São Luís',
+    origem: 'Raposa, ilha de São Luís',
     autor: 'João Maria Bezerra',
     licenca: 'CC BY-SA 4.0',
     fonte: 'https://commons.wikimedia.org/wiki/File:O_camar%C3%A3o_seco_da_Raposa_(MA).jpg',
@@ -166,7 +179,8 @@ export const FOTOS = Object.freeze({
   },
   'sabor-arroz-de-cuxa': {
     arquivo: 'sabor-arroz-de-cuxa.jpg',
-    lugar: 'Arroz de cuxá servido na panela',
+    lugar: 'Arroz de cuxá servido na panela, em Alcântara (MA)',
+    origem: 'Alcântara, MA',
     autor: 'Ciriice',
     licenca: 'CC BY-SA 4.0',
     fonte: 'https://commons.wikimedia.org/wiki/File:Arroz_de_cux%C3%A1.jpg',

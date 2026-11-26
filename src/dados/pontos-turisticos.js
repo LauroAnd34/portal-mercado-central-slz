@@ -13,7 +13,7 @@ export const MERCADO_CENTRAL = Object.freeze({
   nome: 'Mercado Central de São Luís',
   categoria: 'mercado',
   coordenadas: [-2.5344761, -44.3011069],
-  endereco: 'Rua de São João, Centro',
+  endereco: 'Praça do Mercado Central, Centro',
   descricao:
     'Ponto de partida de todos os roteiros. Mercado público fundado em 1864. O prédio Art Déco de 1941 foi demolido em 2026 e um novo está sendo construído; enquanto isso, os feirantes atendem no Mercado da Cidade.',
 });
