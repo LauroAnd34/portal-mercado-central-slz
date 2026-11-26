@@ -66,7 +66,7 @@
   color: var(--cor-link-hover);
 }
 .botao--pequeno {
-  min-height: 36px;
+  min-height: 2.25rem;
   padding: 0 var(--e-3);
   font-size: var(--texto-xs);
 }
@@ -113,16 +113,16 @@
 .interruptor input {
   position: absolute;
   opacity: 0;
-  width: 46px;
-  height: 26px;
+  width: 2.875rem;
+  height: 1.625rem;
   margin: 0;
   cursor: pointer;
 }
 .interruptor__trilho {
   flex-shrink: 0;
   position: relative;
-  width: 46px;
-  height: 26px;
+  width: 2.875rem;
+  height: 1.625rem;
   border-radius: var(--raio-pilula);
   background: var(--cor-borda-forte);
   transition: background var(--transicao);
@@ -132,8 +132,8 @@
   position: absolute;
   top: 3px;
   left: 3px;
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
   border-radius: 50%;
   background: #fff;
   box-shadow: var(--sombra-1);
@@ -143,7 +143,7 @@
   background: var(--cor-primaria);
 }
 .interruptor input:checked + .interruptor__trilho::after {
-  transform: translateX(20px);
+  transform: translateX(1.25rem);
 }
 :root[data-contraste='alto'] .interruptor input:checked + .interruptor__trilho::after {
   background: #000;
@@ -173,7 +173,7 @@
 input[type='range'] {
   width: 100%;
   accent-color: var(--cor-primaria);
-  min-height: 32px;
+  min-height: 2rem;
 }
 
 /* ---------- Chips (filtros) ---------- */
@@ -189,7 +189,7 @@ input[type='range'] {
   display: inline-flex;
   align-items: center;
   gap: var(--e-2);
-  min-height: 40px;
+  min-height: 2.5rem;
   padding: 0 var(--e-4);
   border-radius: var(--raio-pilula);
   border: 2px solid var(--cor-borda);
@@ -208,8 +208,8 @@ input[type='range'] {
   color: var(--cor-primaria-texto);
 }
 .chip__ponto {
-  width: 12px;
-  height: 12px;
+  width: 0.75rem;
+  height: 0.75rem;
   border-radius: 50%;
   border: 2px solid #fff;
   box-shadow: 0 0 0 1px rgb(0 0 0 / 0.3);

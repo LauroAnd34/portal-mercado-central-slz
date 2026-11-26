@@ -18,7 +18,7 @@
   }
   .erro-404__ilustracao {
     order: -1;
-    max-width: 420px;
+    max-width: 26.25rem;
   }
 }
 .erro-404__codigo {
@@ -67,8 +67,8 @@
 .erro-404__dica::before {
   content: '';
   flex-shrink: 0;
-  width: 10px;
-  height: 10px;
+  width: 0.625rem;
+  height: 0.625rem;
   border-radius: 50%;
   background: var(--faixa-3);
   box-shadow: 0 0 0 4px rgb(187 208 80 / 0.3);
@@ -76,12 +76,12 @@
 .erro-404__ilustracao {
   margin: 0;
   width: 100%;
-  max-width: 540px;
+  max-width: 33.75rem;
   justify-self: center;
 }
 .erro-404__ilustracao img {
   width: 100%;
-  filter: drop-shadow(0 24px 40px rgb(11 42 69 / 0.25));
+  filter: drop-shadow(0 1.5rem 2.5rem rgb(11 42 69 / 0.25));
   animation: flutuar-404 6s ease-in-out infinite;
 }
 @keyframes flutuar-404 {

@@ -9,7 +9,10 @@
 }
 
 html {
-  font-size: calc(100% * var(--escala-fonte));
+  /* Telas grandes (monitores 16:9 de 1920 px ou mais): o site cresce junto,
+     como no notebook. Até ~1536 px fica no tamanho normal; em 1920 px fica 125%;
+     o máximo é 150%. Nunca fica menor que o tamanho escolhido no navegador. */
+  font-size: calc(var(--escala-fonte) * min(150%, max(100%, 1.0417vw)));
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   scroll-behavior: smooth;
@@ -100,7 +103,7 @@ textarea {
 :focus-visible {
   outline: 3px solid var(--cor-foco);
   outline-offset: 3px;
-  box-shadow: 0 0 0 6px var(--cor-foco-halo);
+  box-shadow: 0 0 0 0.375rem var(--cor-foco-halo);
   border-radius: 2px;
 }
 
@@ -127,7 +130,7 @@ textarea {
 }
 
 .faixa-marca {
-  height: 6px;
+  height: 0.375rem;
   background: var(--faixa);
   border: 0;
   margin: 0;
@@ -154,7 +157,7 @@ textarea {
 }
 .sobretitulo::before {
   content: '';
-  width: 28px;
+  width: 1.75rem;
   height: 4px;
   border-radius: 2px;
   background: var(--degrade-marca);
@@ -267,7 +270,7 @@ body {
   .ontem-amanha,
   .explorar {
     grid-template-columns: var(--tela-esquerda) 1fr !important;
-    column-gap: calc(var(--dobra) + 24px) !important;
+    column-gap: calc(var(--dobra) + 1.5rem) !important;
   }
 }
 

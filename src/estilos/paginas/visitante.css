@@ -9,7 +9,7 @@
 .visitante__grade {
   display: grid;
   gap: var(--e-4);
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16.25rem), 1fr));
 }
 .visitante__grade article {
   padding: var(--e-4);

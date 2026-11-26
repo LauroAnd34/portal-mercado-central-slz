@@ -2,7 +2,7 @@
 .painel-acessibilidade {
   position: fixed;
   inset: 0 0 0 auto;
-  width: min(420px, 100vw);
+  width: min(26.25rem, 100vw);
   max-width: 100vw;
   height: 100dvh;
   max-height: 100dvh;
@@ -33,7 +33,7 @@
 }
 @keyframes painel-entra {
   from {
-    transform: translateX(40px);
+    transform: translateX(2.5rem);
     opacity: 0;
   }
 }
@@ -87,7 +87,7 @@
 }
 .opcao-cartoes {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(96px, 100%), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(6rem, 100%), 1fr));
   gap: var(--e-2);
 }
 .opcao-cartao {
@@ -122,8 +122,8 @@
 .amostra {
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
+  width: 2.75rem;
+  height: 2.75rem;
   border-radius: var(--raio);
   font-size: 1.2rem;
   font-weight: 800;
@@ -192,7 +192,7 @@
 }
 .rodape__logo {
   width: 100%;
-  max-width: 240px;
+  max-width: 15rem;
   height: auto;
 }
 .rodape__titulo {
@@ -271,8 +271,8 @@
 }
 .painel-acessibilidade kbd {
   display: inline-block;
-  min-width: 26px;
-  padding: 1px 7px;
+  min-width: 1.625rem;
+  padding: 1px 0.4375rem;
   border: 1px solid var(--cor-borda-forte);
   border-bottom-width: 3px;
   border-radius: 6px;
@@ -324,7 +324,7 @@
 }
 .rodape__creditos ul {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(17.5rem, 100%), 1fr));
   gap: var(--e-1) var(--e-5);
   margin: var(--e-2) 0 var(--e-4);
 }
@@ -336,19 +336,19 @@
 .botao-flutuante-acessibilidade {
   /* ícone quadrado arredondado, no mesmo formato do botão do VLibras */
   position: fixed;
-  right: 16px;
-  bottom: 16px;
+  right: 1rem;
+  bottom: 1rem;
   z-index: 100000; /* acima de tudo: cabeçalho, mapa e menus */
   display: grid;
   place-items: center;
-  width: 56px;
-  height: 56px;
+  width: 3.5rem;
+  height: 3.5rem;
   padding: 0;
   border: 2px solid #ffffff;
   border-radius: 14px;
   background: #144670;
   color: #ffffff;
-  box-shadow: 0 4px 14px rgb(7 29 49 / 0.4);
+  box-shadow: 0 4px 0.875rem rgb(7 29 49 / 0.4);
   cursor: grab;
   touch-action: none; /* permite arrastar com o dedo sem rolar a página */
   user-select: none;
@@ -371,7 +371,7 @@
 .botao-flutuante-acessibilidade--arrastando {
   cursor: grabbing;
   transform: scale(1.12);
-  box-shadow: 0 12px 28px rgb(7 29 49 / 0.5);
+  box-shadow: 0 0.75rem 1.75rem rgb(7 29 49 / 0.5);
   transition: none;
 }
 /* O ícone é sempre igual, em todas as páginas e com qualquer escolha
@@ -391,22 +391,22 @@
 }
 .posicoes-botao {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
-  gap: var(--e-2, 8px);
+  grid-template-columns: repeat(auto-fit, minmax(min(9.375rem, 100%), 1fr));
+  gap: var(--e-2, 0.5rem);
 }
 .posicoes-botao label {
   display: flex;
   align-items: center;
-  gap: 8px;
-  min-height: 44px;
-  padding: 6px 10px;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.375rem 0.625rem;
   border: 1px solid var(--cor-borda-forte);
   border-radius: 8px;
   cursor: pointer;
 }
 .posicoes-botao input {
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
   accent-color: var(--marca-azul-600, #1a6fa3);
 }
 .botao-flutuante-acessibilidade--assentando {
@@ -419,9 +419,9 @@
   content: 'Acessibilidade';
   position: absolute;
   top: 50%;
-  right: calc(100% + 10px);
+  right: calc(100% + 0.625rem);
   transform: translateY(-50%);
-  padding: 6px 12px;
+  padding: 0.375rem 0.75rem;
   border-radius: 999px;
   background: var(--marca-marinho-800);
   color: #ffffff;
@@ -433,7 +433,7 @@
 }
 .botao-flutuante-acessibilidade--esquerda::after {
   right: auto;
-  left: calc(100% + 10px);
+  left: calc(100% + 0.625rem);
 }
 .botao-flutuante-acessibilidade:hover::after,
 .botao-flutuante-acessibilidade:focus-visible::after {
@@ -454,7 +454,7 @@
   align-items: center;
   gap: var(--e-3);
   width: 100%;
-  min-height: 64px;
+  min-height: 4rem;
   margin: var(--e-2) 0 var(--e-3);
   padding: var(--e-3);
   border: 2px solid #1351b4;
@@ -493,8 +493,8 @@
   position: absolute;
   top: -8px;
   right: -8px;
-  width: 22px;
-  height: 22px;
+  width: 1.375rem;
+  height: 1.375rem;
   border: 2px solid #ffffff;
   border-radius: 7px;
   pointer-events: none;

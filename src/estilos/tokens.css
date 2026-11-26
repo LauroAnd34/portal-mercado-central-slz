@@ -93,17 +93,17 @@
 
   /* — Forma — (raio de 4px é o padrão do portal oficial) */
   --raio: 4px;
-  --raio-md: 8px;
-  --raio-lg: 14px;
-  --raio-pilula: 999px;
-  --sombra-1: 0 1px 2px rgb(11 42 69 / 0.08), 0 2px 6px rgb(11 42 69 / 0.06);
-  --sombra-2: 0 10px 24px -12px rgb(11 42 69 / 0.35);
-  --sombra-3: 0 24px 48px -20px rgb(11 42 69 / 0.45);
+  --raio-md: 0.5rem;
+  --raio-lg: 0.875rem;
+  --raio-pilula: 62.44rem;
+  --sombra-1: 0 1px 2px rgb(11 42 69 / 0.08), 0 2px 0.375rem rgb(11 42 69 / 0.06);
+  --sombra-2: 0 0.625rem 1.5rem -12px rgb(11 42 69 / 0.35);
+  --sombra-3: 0 1.5rem 3rem -20px rgb(11 42 69 / 0.45);
   --transicao: 0.25s ease;
-  --largura-max: 1200px;
+  --largura-max: 75rem;
   --largura-texto: 68ch;
-  --alvo-min: 44px; /* área mínima de toque */
-  --altura-cabecalho: 76px;
+  --alvo-min: 2.75rem; /* área mínima de toque */
+  --altura-cabecalho: 4.75rem;
 }
 
 /* ---------- Tema escuro (preferência do sistema ou escolha do usuário) ---------- */
@@ -123,8 +123,8 @@
   --cor-foco-halo: #0c1824;
   --cor-primaria: #8fd0f2;
   --cor-primaria-texto: #0b2a45;
-  --sombra-2: 0 10px 24px -12px rgb(0 0 0 / 0.7);
-  --sombra-3: 0 24px 48px -20px rgb(0 0 0 / 0.8);
+  --sombra-2: 0 0.625rem 1.5rem -12px rgb(0 0 0 / 0.7);
+  --sombra-3: 0 1.5rem 3rem -20px rgb(0 0 0 / 0.8);
   color-scheme: dark;
 }
 
