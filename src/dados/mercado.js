@@ -76,12 +76,12 @@ export const SABORES = Object.freeze([
     texto: 'Grão grosso e sabor levemente ácido; acompanha peixes, caldos e a juçara.',
     fotos: [
       {
-        chave: 'mercado-cidade-farinha',
-        alt: 'Sacos de farinha e grãos no balcão de uma banca do Mercado da Cidade.',
+        chave: 'sabor-farinha',
+        alt: 'Saco aberto de farinha de mandioca, de grão grosso, com uma concha de metal para servir.',
       },
       {
-        chave: 'mercado-cidade-farinha-banca',
-        alt: 'Banca do Mercado da Cidade com sacos de farinha, grãos e garrafas.',
+        chave: 'mercado-cidade-farinha',
+        alt: 'Sacos de farinha e grãos no balcão de uma banca do Mercado da Cidade.',
       },
     ],
   },
@@ -91,8 +91,8 @@ export const SABORES = Object.freeze([
     texto: 'De bacuri, cupuaçu, buriti, murici e outras frutas da região.',
     fotos: [
       {
-        chave: 'mercado-central-licores',
-        alt: 'Banca do Mercado Central com garrafas de licor, doces em pote e pimentas.',
+        chave: 'sabor-bombom-bacuri',
+        alt: 'Bombons de bacuri: um embrulhado em papel dourado e outro partido, mostrando o recheio.',
       },
       {
         chave: 'mercado-cidade-garrafas',

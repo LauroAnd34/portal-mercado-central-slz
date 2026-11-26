@@ -605,6 +605,8 @@ export const TEXTOS = {
   'Foto anterior': ['Previous photo', 'Foto anterior'],
   'Próxima foto': ['Next photo', 'Foto siguiente'],
   'Zoom da foto': ['Photo zoom', 'Zoom de la foto'],
+  'Ver em tela cheia': ['View full screen', 'Ver en pantalla completa'],
+  'Sair da tela cheia': ['Exit full screen', 'Salir de pantalla completa'],
   'Voltar ao tamanho normal': ['Back to normal size', 'Volver al tamaño normal'],
 
   // ---------- textos alternativos da página inicial ----------
@@ -769,6 +771,14 @@ export const TEXTOS = {
       'Photos of the Central Market (2023) and the Mercado da Cidade: project team. Other photos: Wikimedia Commons and Agência Brasil, under the licenses shown. Tile patterns: Inventário do Patrimônio Azulejar do Maranhão (Santa Marta, 2012). 1940 and 1941 postcards: historical collection gathered by the project research. New Market project: São Luís City Hall (press release). Map: © OpenStreetMap contributors.',
       'Fotos del Mercado Central (2023) y del Mercado da Cidade: equipo del proyecto. Otras fotos: Wikimedia Commons y Agência Brasil, según las licencias indicadas. Diseños de azulejos: Inventário do Patrimônio Azulejar do Maranhão (Santa Marta, 2012). Postales de 1940 y 1941: acervo histórico reunido por la investigación del proyecto. Proyecto del nuevo Mercado: Alcaldía de São Luís (divulgación). Mapa: © colaboradores de OpenStreetMap.',
     ],
+  'Saco aberto de farinha de mandioca, de grão grosso, com uma concha de metal para servir.': [
+    'Open bag of coarse cassava flour with a metal scoop for serving.',
+    'Saco abierto de harina de yuca de grano grueso, con un cucharón de metal para servir.',
+  ],
+  'Bombons de bacuri: um embrulhado em papel dourado e outro partido, mostrando o recheio.': [
+    'Bacuri chocolates: one wrapped in gold paper and another cut open to show the filling.',
+    'Bombones de bacuri: uno envuelto en papel dorado y otro partido, mostrando el relleno.',
+  ],
   // ---------- rodapé ----------
   'Portal do Mercado Central': ['Central Market Portal', 'Portal del Mercado Central'],
   'Memória, sabores e gente da nossa ilha.': [
